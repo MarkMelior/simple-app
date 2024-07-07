@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--color-background-rgb: 255, 255, 255;
+	--color-background-dots-rgb: 226, 232, 240;
+	--color-border: rgba(0, 0, 0, .06);
+
+	--height-navbar: 64px;
+	--z-index-navbar: 40;
+	--bg-noise: url('/images/noise.png') repeat;
+}
+
+[class="dark"] {
+	--color-background-rgb: 2, 6, 23;
+	--color-background-dots-rgb: 30, 41, 59;
+	--color-border: rgba(255, 255, 255, .1);
+}
+
+body {
+	background: linear-gradient(90deg, rgb(var(--color-background-rgb)) 15px, transparent 1%) 50%, linear-gradient(rgb(var(--color-background-rgb)) 15px, rgb(var(--color-background-dots-rgb)) 1%) 0, hsla(0deg, 0%, 100%, 16%);
+	background-size: 16px 16px;
+}

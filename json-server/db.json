@@ -1,0 +1,25 @@
+{
+	"users": [
+		{
+			"id": "1",
+			"username": "admin",
+			"password": "123",
+			"roles": ["admin"],
+			"avatar": "https://i.pinimg.com/564x/14/a1/bf/14a1bff6a733ed80422e0fea55603a34.jpg"
+		},
+		{
+			"id": "2",
+			"username": "manager",
+			"password": "123",
+			"roles": ["manager"],
+			"avatar": "https://i.pinimg.com/564x/b6/8d/33/b68d333887a7ec52354bef0385a75e2d.jpg"
+		},
+		{
+			"id": "3",
+			"username": "user",
+			"password": "123",
+			"roles": ["user"],
+			"avatar": "https://i.pinimg.com/564x/3b/7b/02/3b7b0235cdbe90bb52c6e63d435ac56c.jpg"
+		}
+	]
+}
