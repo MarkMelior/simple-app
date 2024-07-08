@@ -5,7 +5,7 @@ export const Logo = ({ ...props }) => (
 		viewBox='0 0 48 48'
 		fill='none'
 		xmlns='http://www.w3.org/2000/svg'
-		className='text-slate-900 dark:text-slate-50'
+		className='text-main-900 dark:text-main-50'
 		{...props}
 	>
 		<path

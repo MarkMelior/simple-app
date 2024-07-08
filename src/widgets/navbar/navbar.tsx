@@ -1,5 +1,6 @@
 import { ThemeSwitcher } from '@/features';
 import { Logo } from '@/shared/assets/icon/Logo';
+import { Button } from '@nextui-org/button';
 import Link from 'next/link';
 import { BsGithub } from 'react-icons/bs';
 import cls from './navbar.module.scss';
@@ -15,9 +16,10 @@ export const Navbar = () => {
 					<span className='sr-only'>Simple App home page</span>
 					<Logo />
 				</Link>
-				<Link
+				<Button
+					as={Link}
 					href='/'
-					className='ml-3 text-xs leading-5 font-medium text-blue-600 dark:text-blue-400 bg-blue-400/10 rounded-full py-1 px-3 flex items-center hover:bg-blue-400/20'
+					className='gap-0 h-auto ml-3 text-xs leading-5 font-medium text-blue-600 dark:text-blue-400 bg-blue-400/10 rounded-full py-1 px-3 flex items-center hover:bg-blue-400/20'
 				>
 					<strong className='font-semibold'>Simple App</strong>
 					<svg
@@ -45,17 +47,20 @@ export const Navbar = () => {
 							stroke-linejoin='round'
 						/>
 					</svg> */}
-				</Link>
-				<div className='gap-4 relative flex items-center ml-auto'>
+				</Button>
+				<div className='gap-2 relative flex items-center ml-auto'>
 					<ThemeSwitcher />
-					<Link
+					<Button
+						as={Link}
 						target='_blank'
 						href='https://github.com/MarkMelior'
-						className='text-slate-400 hover:text-slate-500 dark:hover:text-slate-300'
+						className='text-main-500 hover:text-main-500 dark:hover:text-main-400'
+						isIconOnly
+						variant='light'
 					>
 						<span className='sr-only'>Simple App on GitHub</span>
 						<BsGithub size={20} />
-					</Link>
+					</Button>
 				</div>
 			</div>
 		</div>

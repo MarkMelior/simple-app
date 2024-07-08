@@ -5,9 +5,8 @@
 	top: 0;
 	z-index: var(--z-index-navbar);
 	width: 100%;
-	flex: none;
 	height: var(--height-navbar);
 	border-bottom: 1px solid var(--color-border);
 
-	@include background(.8, false);
+	@include background(.2, false, 24px);
 }

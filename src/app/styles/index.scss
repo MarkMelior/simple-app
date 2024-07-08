@@ -3,22 +3,42 @@
 @tailwind utilities;
 
 :root {
-	--color-background-rgb: 255, 255, 255;
-	--color-background-dots-rgb: 226, 232, 240;
+	--color-text-rgb: 0, 0, 0;
 	--color-border: rgba(0, 0, 0, .06);
+	--color-background-rgb: 248, 250, 252;
+	--color-background: theme('colors.main.50');
+	--color-background-dots: theme('colors.main.200');
 
 	--height-navbar: 64px;
+	--height-screen: 100vh;
+	// --height-screen: calc(100vh - var(--height-navbar));
 	--z-index-navbar: 40;
+	--z-index-light: 30;
 	--bg-noise: url('/images/noise.png') repeat;
 }
 
 [class="dark"] {
-	--color-background-rgb: 2, 6, 23;
-	--color-background-dots-rgb: 30, 41, 59;
+	--color-text-rgb: 255, 255, 255;
 	--color-border: rgba(255, 255, 255, .1);
+	--color-background-rgb: 2, 6, 23;
+	--color-background: theme('colors.main.950');
+	--color-background-dots: theme('colors.main.800');
+}
+
+html {
+	html {
+		font-size: 16px;
+		color: rgb(var(--color-text-rbg));
+
+		@media (max-width: theme('screens.sm')) {
+			font-size: 14px;
+		}
+	}
 }
 
 body {
-	background: linear-gradient(90deg, rgb(var(--color-background-rgb)) 15px, transparent 1%) 50%, linear-gradient(rgb(var(--color-background-rgb)) 15px, rgb(var(--color-background-dots-rgb)) 1%) 0, hsla(0deg, 0%, 100%, 16%);
+	background: linear-gradient(90deg, var(--color-background) 15px, transparent 1%) 50%, linear-gradient(var(--color-background) 15px, var(--color-background-dots) 1%) 0, hsla(0deg, 0%, 100%, 16%);
 	background-size: 16px 16px;
+	min-height: 100vh;
+	overflow: hidden;
 }

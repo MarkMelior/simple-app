@@ -5,13 +5,13 @@
 		// "react/display-name": "off",
 		// "@next/next/no-img-element": "off",
 		// "jsx-a11y/alt-text": "off",
-		// "react/self-closing-comp": [
-		// 	"error",
-		// 	{
-		// 		"component": true,
-		// 		"html": true
-		// 	}
-		// ],
+		"react/self-closing-comp": [
+			"error",
+			{
+				"component": true,
+				"html": true
+			}
+		],
 		"ulbi-tv-plugin/path-checker": [
 			"error",
 			{
