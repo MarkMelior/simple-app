@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--color-text-rgb: 0, 0, 0;
+	--color-border: rgba(0, 0, 0, .06);
+	--color-background-rgb: 248, 250, 252;
+	--color-background: theme('colors.main.50');
+	--color-background-dots: theme('colors.main.200');
+
+	--height-navbar: 64px;
+	--height-screen: 100vh;
+	// --height-screen: calc(100vh - var(--height-navbar));
+	--z-index-navbar: 40;
+	--z-index-light: 30;
+	--bg-noise: url('/images/noise.png') repeat;
+}
+
+[class="dark"] {
+	--color-text-rgb: 255, 255, 255;
+	--color-border: rgba(255, 255, 255, .1);
+	--color-background-rgb: 2, 6, 23;
+	--color-background: theme('colors.main.950');
+	--color-background-dots: theme('colors.main.800');
+}
+
+html {
+	font-size: 16px;
+
+	@media (max-width: theme('screens.sm')) {
+		font-size: 14px;
+	}
+}
+
+body {
+	background: linear-gradient(90deg, var(--color-background) 15px, transparent 1%) 50%, linear-gradient(var(--color-background) 15px, var(--color-background-dots) 1%) 0, hsla(0deg, 0%, 100%, 16%);
+	background-size: 16px 16px;
+	min-height: 100vh;
+}
+
+::-webkit-scrollbar {
+	width: 6px;
+}
+
+::-webkit-scrollbar-track {
+	@apply bg-main-50 dark:bg-main-900;
+}
+
+::-webkit-scrollbar-thumb {
+	@apply bg-main-800 dark:bg-main-700;
+
+	&:hover {
+		@apply bg-main-900 dark:bg-main-500;
+	}
+}

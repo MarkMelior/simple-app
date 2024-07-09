@@ -1,0 +1,23 @@
+.wrapper {
+	&::-webkit-scrollbar {
+		width: 3px;
+	}
+
+	&::-webkit-scrollbar-track {
+		@apply bg-main-50 dark:bg-main-900;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		@apply bg-main-300 dark:bg-main-700;
+
+		&:hover {
+			@apply bg-main-400 dark:bg-main-400;
+		}
+	}
+
+	&:hover {
+		&::-webkit-scrollbar {
+			width: 6px;
+		}
+	}
+}
