@@ -18,10 +18,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: install modules
-        run: npm ci --force
+        run: pnpm ci --force
       - name: build production project
-        run: npm run build
+        run: pnpm run build
         if: always()
       - name: start project
-        run: npm run start
+        run: pnpm run start
         if: always()
