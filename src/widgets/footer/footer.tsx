@@ -38,10 +38,10 @@ export const Footer = () => {
 
 	return (
 		<footer className='text-sm leading-6 mt-12'>
-			<div className='mb-10 text-main-700 font-semibold flex items-center dark:text-main-200'>
+			<div className='mb-10 font-semibold flex items-center'>
 				<Button
 					as={Link}
-					className='group flex items-center hover:text-main-900 dark:hover:text-white'
+					className='group flex items-center text-black dark:text-white'
 					href={prevPage}
 					isDisabled={pathname === '/'}
 					size='sm'
@@ -55,16 +55,16 @@ export const Footer = () => {
 							d='M3 0L0 3L3 6'
 							fill='none'
 							stroke='currentColor'
-							stroke-width='2'
-							stroke-linecap='round'
-							stroke-linejoin='round'
-						></path>
+							strokeWidth='2'
+							strokeLinecap='round'
+							strokeLinejoin='round'
+						/>
 					</svg>
 					Previous
 				</Button>
 				<Button
 					as={Link}
-					className='group ml-auto flex items-center hover:text-main-900 dark:hover:text-white'
+					className='group ml-auto flex items-center text-black dark:text-white'
 					href={nextPage}
 					size='sm'
 					variant='flat'
@@ -78,10 +78,10 @@ export const Footer = () => {
 							d='M0 0L3 3L0 6'
 							fill='none'
 							stroke='currentColor'
-							stroke-width='2'
-							stroke-linecap='round'
-							stroke-linejoin='round'
-						></path>
+							strokeWidth='2'
+							strokeLinecap='round'
+							strokeLinejoin='round'
+						/>
 					</svg>
 				</Button>
 			</div>

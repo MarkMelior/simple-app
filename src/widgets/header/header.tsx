@@ -23,7 +23,7 @@ export const Header: React.FC<HeaderProps> = ({
 	return (
 		<header className={cn('relative z-20 mb-10', className)}>
 			<div>
-				<p className='mb-2 text-sm leading-6 font-semibold text-blue-500 dark:text-blue-400'>
+				<p className='mb-2 text-sm leading-6 font-semibold text-primary-500 dark:text-primary-400'>
 					{note}
 				</p>
 				<div className='flex items-center'>

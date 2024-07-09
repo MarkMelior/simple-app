@@ -14,7 +14,9 @@ export const ThemeSwitcher = () => {
 		setMounted(true);
 	}, []);
 
-	if (!mounted) return null;
+	if (!mounted) {
+		return <Button variant='light' isIconOnly color='primary' isLoading />;
+	}
 
 	return (
 		<Button
@@ -24,9 +26,9 @@ export const ThemeSwitcher = () => {
 			color='primary'
 		>
 			{theme === Theme.DARK ? (
-				<CiLight size={24} className='text-sky-600' />
+				<CiLight size={24} className='text-primary-600' />
 			) : (
-				<CiDark size={24} className='text-sky-600' />
+				<CiDark size={24} className='text-primary-600' />
 			)}
 		</Button>
 	);

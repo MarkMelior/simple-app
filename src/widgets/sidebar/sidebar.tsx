@@ -66,7 +66,7 @@ export const Sidebar = () => {
 											className={cn(
 												'block border-l pl-4 -ml-px border-transparent',
 												{
-													['text-blue-500 border-current font-semibold dark:text-blue-400']:
+													['text-primary-500 border-current font-semibold dark:text-primary-400']:
 														pathname === link,
 													['hover:border-main-400 dark:hover:border-main-500 text-main-700 hover:text-main-900 dark:text-main-400 dark:hover:text-main-300']:
 														pathname !== link,

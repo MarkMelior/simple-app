@@ -1,35 +1,29 @@
 import { nextui } from '@nextui-org/theme';
 import type { Config } from 'tailwindcss';
+import { ExtendColors } from './config/extend-colors';
+import { nextuiThemes } from './config/nextui-themes';
 
 const config: Config = {
-  content: [
-    "./src/**/*.{js,ts,jsx,tsx}",
-    "./app/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/@nextui-org/theme/dist/components/(button|checkbox|radio|skeleton|toggle|ripple|spinner).js"
-  ],
+	content: [
+		'./src/**/*.{js,ts,jsx,tsx}',
+		'./app/**/*.{js,ts,jsx,tsx}',
+		'./node_modules/@nextui-org/theme/dist/components/(button|checkbox|input|radio|skeleton|spinner|toggle|ripple).js',
+	],
 	darkMode: 'class',
 	theme: {
 		extend: {
 			maxWidth: {
 				'8xl': '90rem',
 			},
-			colors: {
-				main: {
-					950: '#020617',
-					900: '#0E1625',
-					800: '#1E293B',
-					700: '#32445F',
-					600: '#3F4E65',
-					500: '#576B88',
-					400: '#90A3BB',
-					300: '#B9C8DB',
-					200: '#D4DDE9',
-					100: '#F1F4F8',
-					50: '#F8FAFC',
-				},
-			},
+			colors: ExtendColors,
 		},
 	},
-	plugins: [nextui()],
+	plugins: [
+		nextui({
+			addCommonColors: true,
+			prefix: 'simple',
+			themes: nextuiThemes,
+		}),
+	],
 };
 export default config;

@@ -19,7 +19,7 @@ export const Navbar = () => {
 				<Button
 					as={Link}
 					href='/'
-					className='gap-0 h-auto ml-3 text-xs leading-5 font-medium text-blue-600 dark:text-blue-400 bg-blue-400/10 rounded-full py-1 px-3 flex items-center hover:bg-blue-400/20'
+					className='gap-0 h-auto ml-3 text-xs leading-5 font-medium text-primary-500 dark:text-primary-400 bg-primary-400/10 rounded-full py-1 px-3 flex items-center hover:bg-primary-400/20'
 				>
 					<strong className='font-semibold'>Simple App</strong>
 					<svg
@@ -27,7 +27,7 @@ export const Navbar = () => {
 						height='2'
 						fill='currentColor'
 						aria-hidden='true'
-						className='ml-2 text-blue-600 dark:text-blue-400/70'
+						className='ml-2 text-primary-600 dark:text-primary-400/70'
 					>
 						<circle cx='1' cy='1' r='1' />
 					</svg>
@@ -35,16 +35,16 @@ export const Navbar = () => {
 					{/* <svg
 						width='3'
 						height='6'
-						className='ml-3 overflow-visible text-blue-300 dark:text-blue-400'
+						className='ml-3 overflow-visible text-primary-300 dark:text-primary-400'
 						aria-hidden='true'
 					>
 						<path
 							d='M0 0L3 3L0 6'
 							fill='none'
 							stroke='currentColor'
-							stroke-width='1.5'
-							stroke-linecap='round'
-							stroke-linejoin='round'
+							strokeWidth='1.5'
+							strokeLinecap='round'
+							strokeLinejoin='round'
 						/>
 					</svg> */}
 				</Button>

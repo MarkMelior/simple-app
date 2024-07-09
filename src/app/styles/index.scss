@@ -26,13 +26,10 @@
 }
 
 html {
-	html {
-		font-size: 16px;
-		color: rgb(var(--color-text-rbg));
+	font-size: 16px;
 
-		@media (max-width: theme('screens.sm')) {
-			font-size: 14px;
-		}
+	@media (max-width: theme('screens.sm')) {
+		font-size: 14px;
 	}
 }
 
@@ -40,5 +37,20 @@ body {
 	background: linear-gradient(90deg, var(--color-background) 15px, transparent 1%) 50%, linear-gradient(var(--color-background) 15px, var(--color-background-dots) 1%) 0, hsla(0deg, 0%, 100%, 16%);
 	background-size: 16px 16px;
 	min-height: 100vh;
-	overflow: hidden;
+}
+
+::-webkit-scrollbar {
+	width: 6px;
+}
+
+::-webkit-scrollbar-track {
+	@apply bg-main-50 dark:bg-main-900;
+}
+
+::-webkit-scrollbar-thumb {
+	@apply bg-main-800 dark:bg-main-700;
+
+	&:hover {
+		@apply bg-main-900 dark:bg-main-500;
+	}
 }
