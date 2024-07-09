@@ -34,15 +34,10 @@
 	display: inline-block;
 	width: $spinner-size;
 	height: $spinner-size;
-	border: 3px solid theme('colors.main.900');
+	border: 3px solid theme('colors.default-50');
 	border-bottom-color: transparent;
 	border-radius: 50%;
 	animation: rotation 1s linear infinite;
-
-	[class="dark"] & {
-		border: 3px solid theme('colors.main.50');
-		border-bottom-color: transparent;
-	}
 }
 
 @keyframes rotation {

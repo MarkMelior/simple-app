@@ -4,14 +4,14 @@
 	}
 
 	&::-webkit-scrollbar-track {
-		@apply bg-main-50 dark:bg-main-900;
+		@apply bg-default-100;
 	}
 
 	&::-webkit-scrollbar-thumb {
-		@apply bg-main-300 dark:bg-main-700;
+		@apply bg-default-300;
 
 		&:hover {
-			@apply bg-main-400 dark:bg-main-400;
+			@apply bg-default-600;
 		}
 	}
 

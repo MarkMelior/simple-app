@@ -26,9 +26,9 @@ export const ThemeSwitcher = () => {
 			color='primary'
 		>
 			{theme === Theme.DARK ? (
-				<CiLight size={24} className='text-primary-600' />
+				<CiLight size={24} className='text-primary' />
 			) : (
-				<CiDark size={24} className='text-primary-600' />
+				<CiDark size={24} className='text-primary' />
 			)}
 		</Button>
 	);

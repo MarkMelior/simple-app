@@ -41,7 +41,7 @@ export const Footer = () => {
 			<div className='mb-10 font-semibold flex items-center'>
 				<Button
 					as={Link}
-					className='group flex items-center text-black dark:text-white'
+					className='bg-default-100 group flex items-center text-default-900'
 					href={prevPage}
 					isDisabled={pathname === '/'}
 					size='sm'
@@ -49,7 +49,7 @@ export const Footer = () => {
 				>
 					<svg
 						viewBox='0 0 3 6'
-						className='mr-3 w-auto h-1.5 text-main-400 overflow-visible group-hover:text-main-600 dark:group-hover:text-main-300'
+						className='mr-3 w-auto h-1.5 text-default-500 overflow-visible group-hover:text-default-500'
 					>
 						<path
 							d='M3 0L0 3L3 6'
@@ -64,7 +64,7 @@ export const Footer = () => {
 				</Button>
 				<Button
 					as={Link}
-					className='group ml-auto flex items-center text-black dark:text-white'
+					className='bg-default-100 group ml-auto flex items-center text-default-900'
 					href={nextPage}
 					size='sm'
 					variant='flat'
@@ -72,7 +72,7 @@ export const Footer = () => {
 					Next
 					<svg
 						viewBox='0 0 3 6'
-						className='ml-3 w-auto h-1.5 text-main-400 overflow-visible group-hover:text-main-600 dark:group-hover:text-main-300'
+						className='ml-3 w-auto h-1.5 text-default-500 overflow-visible group-hover:text-default-500'
 					>
 						<path
 							d='M0 0L3 3L0 6'
@@ -85,20 +85,17 @@ export const Footer = () => {
 					</svg>
 				</Button>
 			</div>
-			<div className='pt-10 pb-28 border-t border-main-200 sm:flex justify-between text-main-500 dark:border-main-200/5'>
+			<div className='pt-10 pb-28 border-t border-default-200 dark:border-default-100 sm:flex justify-between text-default-500'>
 				<div className='mb-6 sm:mb-0 sm:flex'>
 					<p>Copyright © 2024 Mark Melior.</p>
-					<p className='sm:ml-4 sm:pl-4 sm:border-l sm:border-main-200 dark:sm:border-main-200/5'>
-						<a
-							className='hover:text-main-900 dark:hover:text-main-400'
-							href='/brand'
-						>
+					<p className='sm:ml-4 sm:pl-4 sm:border-l sm:border-default-200 dark:border-default-100'>
+						<a className='hover:text-default-600' href='/brand'>
 							Made with ❤️
 						</a>
 					</p>
 				</div>
 				<a
-					className='hover:text-main-900 dark:hover:text-main-400'
+					className='hover:text-default-600'
 					href='https://github.com/tailwindlabs/tailwindcss.com/edit/master/src/pages/docs/customizing-colors.mdx'
 				>
 					Edit this page on GitHub

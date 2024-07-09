@@ -1,6 +1,5 @@
 import { nextui } from '@nextui-org/theme';
 import type { Config } from 'tailwindcss';
-import { ExtendColors } from './config/extend-colors';
 import { nextuiThemes } from './config/nextui-themes';
 
 const config: Config = {
@@ -15,7 +14,6 @@ const config: Config = {
 			maxWidth: {
 				'8xl': '90rem',
 			},
-			colors: ExtendColors,
 		},
 	},
 	plugins: [

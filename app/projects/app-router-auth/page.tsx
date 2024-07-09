@@ -1,4 +1,5 @@
 import { FormLogin, FormRegister, getUser } from '@/features';
+import { CodeBlock } from '@/shared/ui';
 import { Header } from '@/widgets';
 
 export default async function AppRouterAuthPage() {
@@ -12,8 +13,9 @@ export default async function AppRouterAuthPage() {
 				description='Best practices for Server Components, Actions, Middleware'
 			/>
 
-			<div id='content-wrapper' className='prose prose-main dark:prose-dark'>
+			<div id='content-wrapper' className=''>
 				<p>Prisma ORM</p>
+				<CodeBlock text='(num) => num + 1' />
 			</div>
 
 			{user && <p>Hi, {user.name}!</p>}
