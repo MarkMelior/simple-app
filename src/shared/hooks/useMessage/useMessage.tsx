@@ -141,44 +141,43 @@ export const MessageProvider: React.FC<{ children: ReactNode }> = ({
 						type = 'info',
 						onCancel,
 					}) => (
-						<article key={id} className='relative'>
-							<div
-								className={cn(cls.message, {
-									[cls.closing]: closing,
-								})}
-								style={
-									{
-										'--animation-duration-notification': `${duration}ms`,
-										'--animation-close-duration-notification': `${animationCloseDuration}ms`,
-									} as CSSProperties
-								}
-								onClick={() => removeMessage(id, animationCloseDuration)}
-							>
-								<Progress
-									className={cls.progress}
-									size='sm'
-									aria-label='Loading...'
-									color='success'
-								/>
-								<div className={cls.content}>
-									<div className={cls.startContent}>
-										{startContent ? startContent : getTypeIcon(type)}
-									</div>
-									<p>{content}</p>
+						<article
+							key={id}
+							className={cn(cls.message, {
+								[cls.closing]: closing,
+							})}
+							style={
+								{
+									'--animation-duration-notification': `${duration}ms`,
+									'--animation-close-duration-notification': `${animationCloseDuration}ms`,
+								} as CSSProperties
+							}
+							onClick={() => removeMessage(id, animationCloseDuration)}
+						>
+							<Progress
+								className={cls.progress}
+								size='sm'
+								aria-label='Loading...'
+								color='success'
+							/>
+							<div className={cls.content}>
+								<div className={cls.startContent}>
+									{startContent ? startContent : getTypeIcon(type)}
 								</div>
-								{onCancel && (
-									<button
-										className={cls.cancel}
-										onClick={(e) => {
-											e.stopPropagation();
-											onCancel();
-											removeMessage(id, animationCloseDuration);
-										}}
-									>
-										Отменить
-									</button>
-								)}
+								<p>{content}</p>
 							</div>
+							{onCancel && (
+								<button
+									className={cls.cancel}
+									onClick={(e) => {
+										e.stopPropagation();
+										onCancel();
+										removeMessage(id, animationCloseDuration);
+									}}
+								>
+									Отменить
+								</button>
+							)}
 						</article>
 					),
 				)}

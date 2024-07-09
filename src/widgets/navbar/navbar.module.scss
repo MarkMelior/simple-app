@@ -9,4 +9,5 @@
 	border-bottom: 1px solid var(--color-border);
 
 	@include background(.2, false, 24px);
+	@apply border-b-1 border-default-900/10;
 }

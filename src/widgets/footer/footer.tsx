@@ -4,7 +4,7 @@ import { Button } from '@nextui-org/button';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { SidebarItems } from '../sidebar/model/data';
+import { SidebarItems } from '../../shared/ui/sidebar-navigation/model/data';
 
 export const Footer = () => {
 	const pathname = usePathname();

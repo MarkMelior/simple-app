@@ -2,11 +2,14 @@
 
 .wrapper {
 	position: fixed;
-	top: calc(var(--height-navbar) + 10px);
-	left: 50%;
+	top: calc(var(--height-navbar) + 6px);
 	z-index: var(--z-index-notification);
 	display: flex;
 	flex-direction: column;
+	width: 100%;
+	align-items: center;
+
+	@apply mx-auto px-4 sm:px-6 md:px-8;
 }
 
 .message {
@@ -15,33 +18,25 @@
 	gap: 20px;
 	align-items: center;
 	justify-content: space-between;
-	width: max-content;
-	max-width: 1320px;
 	padding: 15px 20px;
-	margin-bottom: 10px;
+	width: fit-content;
+	margin-bottom: 6px;
 	overflow: hidden;
 	user-select: none;
 	backdrop-filter: var(--blur-md);
-	border: solid 1px var(--color-border);
-	transform: translateX(-50%);
 	animation: fadeInFromTop .3s ease-out forwards;
 
 	@include background(.3);
-	@apply rounded-md text-sm cursor-pointer;
+	@apply rounded-lg text-sm cursor-pointer border-b border-default-900/10 sm:max-w-xl max-w-none;
 
 	[class="light"] & {
 		@include background(1);
-
 		backdrop-filter: none;
 	}
 
-	@media (max-width: theme('screens.md')) {
-		@include background(1);
-	}
-
-	@media (max-width: theme('screens.sm')) {
-		width: calc(100% - 10px * 2);
-	}
+	// @media (max-width: theme('screens.sm')) {
+	// 	width: calc(100% - 10px * 2);
+	// }
 
 	button {
 		min-width: 37px;
