@@ -6,7 +6,7 @@ const config: Config = {
 	content: [
 		'./src/**/*.{js,ts,jsx,tsx}',
 		'./app/**/*.{js,ts,jsx,tsx}',
-		'./node_modules/@nextui-org/theme/dist/components/(button|checkbox|input|radio|skeleton|spinner|toggle|ripple).js',
+		'./node_modules/@nextui-org/theme/dist/components/(button|checkbox|input|progress|radio|skeleton|spinner|toggle|ripple).js',
 	],
 	darkMode: 'class',
 	theme: {

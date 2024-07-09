@@ -83,7 +83,7 @@ export const SidebarLinks: SidebarLinksProps[] = [
 
 interface SidebarItemsProps {
 	title: string;
-	item: { name: string; link: string }[];
+	item: { name: string; link: string; gitPath?: string }[];
 }
 
 export const SidebarItems: SidebarItemsProps[] = [
@@ -93,10 +93,17 @@ export const SidebarItems: SidebarItemsProps[] = [
 			{
 				name: 'Next.js: Authentication (Server Components, Actions, Middleware)',
 				link: '/projects/app-router-auth',
+				gitPath: '/app/projects/app-router-auth/page.tsx',
 			},
 			{
 				name: 'Infinity scroll + Virtualization',
 				link: '/projects/infinity-scroll-virtualization',
+				gitPath: '/app/projects/infinity-scroll-virtualization/page.tsx',
+			},
+			{
+				name: 'Hook useMessage',
+				link: '/projects/use-message',
+				gitPath: '/src/shared/hooks/useMessage/useMessage.tsx',
 			},
 		],
 	},

@@ -10,10 +10,10 @@
 		"server": "node ./json-server/index.js"
 	},
 	"dependencies": {
-		"@ant-design/nextjs-registry": "^1.0.0",
 		"@nextui-org/button": "^2.0.34",
 		"@nextui-org/checkbox": "^2.1.2",
 		"@nextui-org/input": "^2.2.2",
+		"@nextui-org/progress": "^2.0.31",
 		"@nextui-org/radio": "^2.1.2",
 		"@nextui-org/skeleton": "^2.0.29",
 		"@nextui-org/spinner": "^2.0.30",
@@ -21,7 +21,6 @@
 		"@nextui-org/system": "^2.2.2",
 		"@nextui-org/theme": "^2.2.6",
 		"@prisma/client": "^5.16.1",
-		"antd": "^5.19.1",
 		"bcryptjs": "^2.4.3",
 		"clsx": "^2.1.1",
 		"framer-motion": "^11.2.13",

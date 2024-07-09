@@ -1,5 +1,6 @@
 'use client';
 
+import { MessageProvider } from '@/shared/hooks';
 import { Theme } from '@/shared/types/theme';
 import { ThemeProvider } from 'next-themes';
 
@@ -10,7 +11,7 @@ export function ClientProviders({ children }: { children: React.ReactNode }) {
 			defaultTheme={Theme.DARK}
 			disableTransitionOnChange
 		>
-			{children}
+			<MessageProvider>{children}</MessageProvider>
 		</ThemeProvider>
 	);
 }

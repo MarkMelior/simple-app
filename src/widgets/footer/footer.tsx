@@ -10,6 +10,7 @@ export const Footer = () => {
 	const pathname = usePathname();
 	const [prevPage, setPrevPage] = useState('/');
 	const [nextPage, setNextPage] = useState('/');
+	const [gitPath, setGitPath] = useState<string | undefined>();
 
 	useEffect(() => {
 		if (pathname) {
@@ -25,12 +26,14 @@ export const Footer = () => {
 
 		if (currentIndex > 0) {
 			setPrevPage(allPages[currentIndex - 1].link);
+			setGitPath(allPages[currentIndex]?.gitPath);
 		} else {
 			setPrevPage('/');
 		}
 
 		if (currentIndex < allPages.length - 1) {
 			setNextPage(allPages[currentIndex + 1].link);
+			setGitPath(allPages[currentIndex]?.gitPath);
 		} else {
 			setNextPage('/');
 		}
@@ -41,7 +44,7 @@ export const Footer = () => {
 			<div className='mb-10 font-semibold flex items-center'>
 				<Button
 					as={Link}
-					className='bg-default-100 group flex items-center text-default-900'
+					className='bg-default-200/50 group flex items-center text-default-900'
 					href={prevPage}
 					isDisabled={pathname === '/'}
 					size='sm'
@@ -64,7 +67,7 @@ export const Footer = () => {
 				</Button>
 				<Button
 					as={Link}
-					className='bg-default-100 group ml-auto flex items-center text-default-900'
+					className='bg-default-200/50 group ml-auto flex items-center text-default-900'
 					href={nextPage}
 					size='sm'
 					variant='flat'
@@ -89,17 +92,20 @@ export const Footer = () => {
 				<div className='mb-6 sm:mb-0 sm:flex'>
 					<p>Copyright © 2024 Mark Melior.</p>
 					<p className='sm:ml-4 sm:pl-4 sm:border-l sm:border-default-200 dark:border-default-100'>
-						<a className='hover:text-default-600' href='/brand'>
+						<Link className='hover:text-default-600' href='/'>
 							Made with ❤️
-						</a>
+						</Link>
 					</p>
 				</div>
-				<a
-					className='hover:text-default-600'
-					href='https://github.com/tailwindlabs/tailwindcss.com/edit/master/src/pages/docs/customizing-colors.mdx'
-				>
-					Edit this page on GitHub
-				</a>
+				{gitPath && (
+					<Link
+						className='hover:text-default-600'
+						href={`https://github.com/MarkMelior/simple-app/blob/master${gitPath}`}
+						target='_blank'
+					>
+						Edit this page on GitHub
+					</Link>
+				)}
 			</div>
 		</footer>
 	);

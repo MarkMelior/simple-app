@@ -1,6 +1,7 @@
 import { FormLogin, FormRegister, getUser } from '@/features';
 import { CodeBlock } from '@/shared/ui';
 import { Header } from '@/widgets';
+import { code1 } from './test';
 
 export default async function AppRouterAuthPage() {
 	const user = await getUser();
@@ -15,7 +16,7 @@ export default async function AppRouterAuthPage() {
 
 			<div id='content-wrapper' className=''>
 				<p>Prisma ORM</p>
-				<CodeBlock text='(num) => num + 1' />
+				<CodeBlock text={code1} fileName='features/auth/services/login.ts' />
 			</div>
 
 			{user && <p>Hi, {user.name}!</p>}
