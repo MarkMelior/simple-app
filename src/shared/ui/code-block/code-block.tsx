@@ -1,7 +1,7 @@
 'use client';
 
 import { Theme } from '@/shared/types/theme';
-import { Skeleton } from '@nextui-org/react';
+import { Button, Skeleton } from '@nextui-org/react';
 import { useTheme } from 'next-themes';
 import { FC, useEffect, useMemo, useState } from 'react';
 import { BiLogoJavascript, BiLogoTypescript } from 'react-icons/bi';
@@ -12,18 +12,25 @@ import {
 	atomOneLight,
 } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import { CopyButton } from '../copy-button/copy-button';
+import cls from './code-block.module.scss';
 
 interface CodeBlockProps {
 	text: string;
 	fileName?: string;
 	language?: 'TypeScript' | 'JavaScript';
+	linesLength?: number;
 }
 
 export const CodeBlock: FC<CodeBlockProps> = ({
 	text,
 	fileName,
 	language = 'TypeScript',
+	linesLength = 15,
 }) => {
+	const [isExpanded, setIsExpanded] = useState(false);
+	const lines = text.split('\n');
+	const isLong = lines.length > linesLength;
+
 	const [mounted, setMounted] = useState(false);
 	const { theme } = useTheme();
 
@@ -55,14 +62,28 @@ export const CodeBlock: FC<CodeBlockProps> = ({
 				{fileName ? fileName : language}
 				<CopyButton text={text} />
 			</div>
+
 			<SyntaxHighlighter
 				language={language}
 				showLineNumbers
 				style={theme === Theme.DARK ? atomOneDark : atomOneLight}
 				className='!bg-default-100 border-t-1 border-default-200'
 			>
-				{text}
+				{isExpanded || !isLong ? text : lines.slice(0, linesLength).join('\n')}
 			</SyntaxHighlighter>
+
+			{isLong && (
+				<div className={cls.showWrapper}>
+					{!isExpanded && <div className={cls.gradient} />}
+					<Button
+						radius='none'
+						onClick={() => setIsExpanded(!isExpanded)}
+						className={cls.showButton}
+					>
+						{isExpanded ? 'Hide' : 'Show more'}
+					</Button>
+				</div>
+			)}
 		</div>
 	);
 };

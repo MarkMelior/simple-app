@@ -12,13 +12,21 @@ export const CopyButton: FC<CopyButtonProps> = ({ text }) => {
 	const [copied, setCopied] = useState(false);
 
 	const handleCopy = () => {
-		navigator.clipboard.writeText(text);
-		showMessage({
-			content: 'Copied to clipboard!',
-			type: 'success',
-		});
+		try {
+			navigator.clipboard.writeText(text);
+			showMessage({
+				content: 'Copied to clipboard!',
+				type: 'success',
+			});
+		} catch (err) {
+			showMessage({
+				content: 'Failed to copy!',
+				type: 'error',
+			});
+		}
 
 		setCopied(true);
+
 		setTimeout(() => {
 			setCopied(false);
 		}, 2500);
