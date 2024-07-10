@@ -3,7 +3,7 @@ import { Button } from '@nextui-org/react';
 import { StackButtonData, StackVariants } from './model/data';
 
 interface StackButtonsProps {
-	tags: StackVariants[];
+	tags?: StackVariants[];
 	isColored?: boolean;
 	className?: string;
 }
@@ -13,6 +13,10 @@ export const StackButtons = ({
 	isColored = true,
 	className,
 }: StackButtonsProps) => {
+	if (!tags) {
+		return null;
+	}
+
 	return (
 		<div className={cn('flex gap-2 flex-wrap', className)}>
 			{tags.map((tag) => (

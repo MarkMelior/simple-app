@@ -2,6 +2,7 @@
 
 import { gitHubRepoLink } from '@/shared/lib';
 import { GitHubPath } from '@/shared/types/github-path';
+import { ProgrammingLanguage } from '@/shared/types/programming-language';
 import { Theme } from '@/shared/types/theme';
 import { Button, Skeleton, Tooltip } from '@nextui-org/react';
 import { useTheme } from 'next-themes';
@@ -21,7 +22,7 @@ import './code-block.scss';
 interface CodeBlockProps {
 	text: string;
 	fileName?: string;
-	language?: 'TypeScript' | 'JavaScript';
+	language?: ProgrammingLanguage;
 	linesLength?: number;
 	github?: GitHubPath;
 }

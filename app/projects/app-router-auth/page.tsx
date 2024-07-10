@@ -1,6 +1,6 @@
 import { FormLogin, FormRegister, getUser } from '@/features';
 import { fetchGitHubFileContent } from '@/shared/lib';
-import { CodeBlock } from '@/shared/ui';
+import { Code, CodeBlock } from '@/shared/ui';
 import { Header } from '@/widgets';
 
 export default async function AppRouterAuthPage() {
@@ -17,8 +17,11 @@ export default async function AppRouterAuthPage() {
 				tags={['TypeScript', 'Cookie', 'SSR']}
 			/>
 
-			<div id='content-wrapper' className=''>
-				<p>Prisma ORM</p>
+			<div className='relative z-20'>
+				<p>
+					Получение данных пользователя:{' '}
+					<Code text='const user = await getUser();' />
+				</p>
 				<CodeBlock
 					text={code1}
 					fileName={codePath1.slice(4)}

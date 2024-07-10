@@ -32,7 +32,7 @@ export const nextuiThemes: ConfigThemes = {
 			default: {
 				...swapColorValues(ExtendColors.main),
 				DEFAULT: ExtendColors.main[700],
-				foreground: '#000000',
+				foreground: '#FFFFFF',
 			},
 			content1: ExtendColors.main[900],
 			content2: ExtendColors.main[800],

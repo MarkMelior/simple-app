@@ -1,6 +1,6 @@
-import { useMessage } from '@/shared/hooks';
+import { useCopy } from '@/shared/hooks';
 import { Button, Tooltip } from '@nextui-org/react';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { LuCheck, LuCopy } from 'react-icons/lu';
 
 interface CopyButtonProps {
@@ -8,36 +8,14 @@ interface CopyButtonProps {
 }
 
 export const CopyButton: FC<CopyButtonProps> = ({ text }) => {
-	const { showMessage } = useMessage();
-	const [copied, setCopied] = useState(false);
-
-	const handleCopy = () => {
-		try {
-			navigator.clipboard.writeText(text);
-			showMessage({
-				content: 'Copied to clipboard!',
-				type: 'success',
-			});
-		} catch (err) {
-			showMessage({
-				content: 'Failed to copy!',
-				type: 'error',
-			});
-		}
-
-		setCopied(true);
-
-		setTimeout(() => {
-			setCopied(false);
-		}, 2500);
-	};
+	const { handleCopy, copied } = useCopy();
 
 	return (
 		<Tooltip content='Copy code'>
 			<Button
 				aria-label='Copy to clipboard'
 				isDisabled={copied}
-				onClick={handleCopy}
+				onClick={() => handleCopy(text)}
 				data-copied={copied}
 				variant='light'
 				isIconOnly
