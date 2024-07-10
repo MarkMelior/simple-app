@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/shared/lib';
-import { Progress } from '@nextui-org/progress';
+import { Progress } from '@nextui-org/react';
 import {
 	CSSProperties,
 	ReactNode,

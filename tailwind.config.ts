@@ -1,4 +1,4 @@
-import { nextui } from '@nextui-org/theme';
+import { nextui } from '@nextui-org/react';
 import type { Config } from 'tailwindcss';
 import { nextuiThemes } from './config/nextui-themes';
 
@@ -6,7 +6,7 @@ const config: Config = {
 	content: [
 		'./src/**/*.{js,ts,jsx,tsx}',
 		'./app/**/*.{js,ts,jsx,tsx}',
-		'./node_modules/@nextui-org/theme/dist/components/(button|checkbox|input|progress|radio|skeleton|spinner|toggle|ripple).js',
+		'./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
 	],
 	darkMode: 'class',
 	theme: {

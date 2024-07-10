@@ -1,7 +1,7 @@
 'use client';
 
 import { Theme } from '@/shared/types/theme';
-import { Button } from '@nextui-org/button';
+import { Button } from '@nextui-org/react';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 import { CiDark, CiLight } from 'react-icons/ci';

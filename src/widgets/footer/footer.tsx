@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@nextui-org/button';
+import { Button } from '@nextui-org/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -88,7 +88,7 @@ export const Footer = () => {
 					</svg>
 				</Button>
 			</div>
-			<div className='pt-10 pb-28 border-t border-default-200 dark:border-default-100 sm:flex justify-between text-default-500'>
+			<div className='pt-10 pb-10 sm:pb-24 border-t border-default-200 dark:border-default-100 sm:flex text-center justify-between text-default-500'>
 				<div className='mb-6 sm:mb-0 sm:flex'>
 					<p>Copyright © 2024 Mark Melior.</p>
 					<p className='sm:ml-4 sm:pl-4 sm:border-l sm:border-default-200 dark:border-default-100'>

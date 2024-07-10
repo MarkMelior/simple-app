@@ -1,6 +1,6 @@
 import { Burger, ThemeSwitcher } from '@/features';
 import { Logo } from '@/shared/assets/icon/Logo';
-import { Button } from '@nextui-org/button';
+import { Button } from '@nextui-org/react';
 import Link from 'next/link';
 import { BsGithub } from 'react-icons/bs';
 import cls from './navbar.module.scss';

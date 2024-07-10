@@ -1,5 +1,4 @@
-import { Skeleton } from '@nextui-org/skeleton';
-import { cn } from '@nextui-org/theme';
+import { cn, Skeleton } from '@nextui-org/react';
 
 interface HeaderProps {
 	className?: string;

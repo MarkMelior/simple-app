@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@nextui-org/theme';
+import { cn } from '@nextui-org/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { SidebarItems, SidebarLinks } from './model/data';

@@ -1,17 +1,17 @@
 'use client';
 
-import { useMessage } from '@/shared/hooks';
 import { Theme } from '@/shared/types/theme';
-import { Button } from '@nextui-org/button';
-import { Skeleton } from '@nextui-org/skeleton';
+import { Skeleton } from '@nextui-org/react';
 import { useTheme } from 'next-themes';
-import { FC, useEffect, useState } from 'react';
-import { FaRegCopy } from 'react-icons/fa6';
+import { FC, useEffect, useMemo, useState } from 'react';
+import { BiLogoJavascript, BiLogoTypescript } from 'react-icons/bi';
+import { TbFileUnknown } from 'react-icons/tb';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import {
 	atomOneDark,
 	atomOneLight,
 } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
+import { CopyButton } from '../copy-button/copy-button';
 
 interface CodeBlockProps {
 	text: string;
@@ -26,19 +26,21 @@ export const CodeBlock: FC<CodeBlockProps> = ({
 }) => {
 	const [mounted, setMounted] = useState(false);
 	const { theme } = useTheme();
-	const { showMessage } = useMessage();
 
 	useEffect(() => {
 		setMounted(true);
 	}, []);
 
-	const handleCopy = () => {
-		navigator.clipboard.writeText(text);
-		showMessage({
-			content: 'Copied to clipboard!',
-			type: 'success',
-		});
-	};
+	const renderIcon = useMemo(() => {
+		switch (language) {
+			case 'TypeScript':
+				return <BiLogoTypescript size={20} />;
+			case 'JavaScript':
+				return <BiLogoJavascript size={20} />;
+			default:
+				return <TbFileUnknown size={20} />;
+		}
+	}, [language]);
 
 	if (!mounted) {
 		return <Skeleton className='!bg-default-100 my-4 h-96 w-full rounded-md' />;
@@ -47,20 +49,11 @@ export const CodeBlock: FC<CodeBlockProps> = ({
 	return (
 		<div className='my-4 rounded-md overflow-hidden border border-default-200'>
 			<div className='bg-default-100 text-sm text-default-600 py-2 px-3 flex justify-between items-center'>
+				{/* <Tooltip placement='top' content={language}> */}
+				{renderIcon}
+				{/* </Tooltip> */}
 				{fileName ? fileName : language}
-				<Button
-					variant='light'
-					isIconOnly
-					onClick={handleCopy}
-					radius='sm'
-					size='sm'
-					className='text-default-400 hover:text-default-200'
-				>
-					<FaRegCopy
-						size={18}
-						className='text-default-400 group-hover:text-default-600'
-					/>
-				</Button>
+				<CopyButton text={text} />
 			</div>
 			<SyntaxHighlighter
 				language={language}

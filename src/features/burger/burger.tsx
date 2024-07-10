@@ -1,7 +1,7 @@
 'use client';
 
 import { SidebarNavigation } from '@/shared/ui';
-import { Button } from '@nextui-org/button';
+import { Button } from '@nextui-org/react';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { Drawer } from 'vaul';
 
@@ -20,8 +20,10 @@ export const Burger = () => {
 			<Drawer.Portal>
 				<Drawer.Overlay className='fixed inset-0 bg-black/40 z-40' />
 				<Drawer.Content className='bg-default-100 flex flex-col rounded-t-[10px] h-[90%] mt-24 fixed bottom-0 left-0 right-0 z-40 outline-none'>
-					<div className='overflow-auto p-4 bg-default-100 flex-1 h-full '>
-						<div className='mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-default-300 mb-6' />
+					<div className='w-full bg-default-100 h-32 flex justify-center items-center'>
+						<div className='w-12 h-1.5 rounded-full bg-default-300' />
+					</div>
+					<div className='overflow-auto'>
 						<div className='max-w-md mx-auto'>
 							<SidebarNavigation />
 						</div>

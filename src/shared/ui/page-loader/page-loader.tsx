@@ -19,11 +19,13 @@ export const PageLoader: FC<PageLoaderProps> = ({ className, fullScreen }) => {
 				className,
 			)}
 		>
-			<div className={cls.loader}>
-				<span className={cls.spinner} />
-				<Logo />
+			<div className='transform scale-[1.75]'>
+				<div className={cls.loader}>
+					<span className={cls.spinner} />
+					<Logo />
+				</div>
+				<p>Loading...</p>
 			</div>
-			<p>Loading...</p>
 		</section>
 	);
 };

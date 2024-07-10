@@ -2,6 +2,7 @@
 
 import { MessageProvider } from '@/shared/hooks';
 import { Theme } from '@/shared/types/theme';
+import { NextUIProvider } from '@nextui-org/react';
 import { ThemeProvider } from 'next-themes';
 
 export function ClientProviders({ children }: { children: React.ReactNode }) {
@@ -11,7 +12,9 @@ export function ClientProviders({ children }: { children: React.ReactNode }) {
 			defaultTheme={Theme.DARK}
 			disableTransitionOnChange
 		>
-			<MessageProvider>{children}</MessageProvider>
+			<NextUIProvider>
+				<MessageProvider>{children}</MessageProvider>
+			</NextUIProvider>
 		</ThemeProvider>
 	);
 }
