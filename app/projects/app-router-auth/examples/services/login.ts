@@ -1,18 +1,15 @@
 'use server';
 
-import { PrismaClient } from '@prisma/client';
-import bcrypt from 'bcryptjs';
-import { createSession } from '../api/session';
-import { FormState, LoginFormSchema } from '../types/definitions';
-
-const prisma = new PrismaClient();
+import { createSession } from '@/features';
+import { usersExample } from './data';
+import { FormState, LoginFormExampleSchema } from './definitions';
 
 export async function login(
 	state: FormState,
 	formData: FormData,
 ): Promise<FormState> {
 	// 1. Validate form fields
-	const validatedFields = LoginFormSchema.safeParse({
+	const validatedFields = LoginFormExampleSchema.safeParse({
 		username: formData.get('username'),
 		password: formData.get('password'),
 	});
@@ -28,21 +25,21 @@ export async function login(
 	// 2. Query the database for the user with the given email
 	const { username, password } = validatedFields.data;
 
-	const user = await prisma.user.findFirst({
-		where: { username },
-	});
+	const user = usersExample.find(
+		(user) => user.username === username && user.password === password,
+	);
 
 	if (!user) {
 		return errorMessage;
 	}
 
-	// 3. Compare the user's password with the hashed password in the database
-	const passwordMatch = await bcrypt.compare(password, user.password);
+	// // 3. Compare the user's password with the hashed password in the database
+	// const passwordMatch = await bcrypt.compare(password, user.password);
 
-	// If the password does not match, return early
-	if (!passwordMatch) {
-		return errorMessage;
-	}
+	// // If the password does not match, return early
+	// if (!passwordMatch) {
+	// 	return errorMessage;
+	// }
 
 	// 4. If login successful, create a session for the user and redirect
 	const userId = user.id.toString();

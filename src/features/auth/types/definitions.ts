@@ -5,7 +5,10 @@ export const SignupFormSchema = z.object({
 		.string()
 		.min(2, { message: 'Name must be at least 2 characters long.' })
 		.trim(),
-	email: z.string().email({ message: 'Please enter a valid email.' }).trim(),
+	username: z
+		.string()
+		.min(4, { message: 'Be at least 4 characters long' })
+		.trim(),
 	password: z
 		.string()
 		.min(8, { message: 'Be at least 8 characters long' })
@@ -18,16 +21,16 @@ export const SignupFormSchema = z.object({
 });
 
 export const LoginFormSchema = z.object({
-	email: z.string().email({ message: 'Please enter a valid email.' }),
+	username: z.string().min(1, { message: 'Username field must not be empty.' }),
 	password: z.string().min(1, { message: 'Password field must not be empty.' }),
 });
 
 export type FormState =
 	| {
 			errors?: {
-				name?: string[];
-				email?: string[];
+				username?: string[];
 				password?: string[];
+				name?: string[];
 			};
 			message?: string;
 	  }

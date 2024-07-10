@@ -20,7 +20,7 @@ export const Burger = () => {
 			<Drawer.Portal>
 				<Drawer.Overlay className='fixed inset-0 bg-black/40 z-40' />
 				<Drawer.Content className='bg-default-100 flex flex-col rounded-t-[10px] h-[90%] mt-24 fixed bottom-0 left-0 right-0 z-40 outline-none'>
-					<div className='w-full bg-default-100 h-12 flex justify-center items-center'>
+					<div className='w-full bg-default-100 h-10 flex justify-center items-center'>
 						<div className='w-12 h-1.5 rounded-full bg-default-300' />
 					</div>
 					<div className='overflow-auto'>

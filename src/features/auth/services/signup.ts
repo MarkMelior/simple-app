@@ -2,8 +2,8 @@
 
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
-import { FormState, SignupFormSchema } from './definitions';
-import { createSession } from './session';
+import { createSession } from '../api/session';
+import { FormState, SignupFormSchema } from '../types/definitions';
 
 const prisma = new PrismaClient();
 
@@ -14,7 +14,7 @@ export async function signup(
 	// 1. Validate form fields
 	const validatedFields = SignupFormSchema.safeParse({
 		name: formData.get('name'),
-		email: formData.get('email'),
+		username: formData.get('username'),
 		password: formData.get('password'),
 	});
 
@@ -26,14 +26,14 @@ export async function signup(
 	}
 
 	// 2. Prepare data for insertion into database
-	const { name, email, password } = validatedFields.data;
+	const { name, username, password } = validatedFields.data;
 
-	// 3. Check if the user's email already exists
-	const existingUser = await prisma.user.findFirst({ where: { email } });
+	// 3. Check if the user's username already exists
+	const existingUser = await prisma.user.findFirst({ where: { username } });
 
 	if (existingUser) {
 		return {
-			message: 'Email already exists, please use a different email or login.',
+			message: 'Username already exists, please use a different username.',
 		};
 	}
 
@@ -44,7 +44,7 @@ export async function signup(
 	const user = await prisma.user.create({
 		data: {
 			name,
-			email,
+			username,
 			password: hashedPassword,
 		},
 		select: { id: true },

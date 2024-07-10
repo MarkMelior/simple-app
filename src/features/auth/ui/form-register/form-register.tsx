@@ -9,7 +9,7 @@ export const FormRegister = () => {
 	const { pending } = useFormStatus();
 
 	return (
-		<form action={action} className='max-w-sm mx-auto grid gap-2'>
+		<form action={action} className='grid gap-2 h-fit'>
 			<Input
 				name='name'
 				placeholder='Name'

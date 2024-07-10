@@ -1,6 +1,7 @@
 import { BiLogoJavascript, BiLogoTypescript } from 'react-icons/bi';
 import { MdOutlineCookie } from 'react-icons/md';
 import { RiNextjsFill } from 'react-icons/ri';
+import { SiPrisma } from 'react-icons/si';
 import { TbServerBolt } from 'react-icons/tb';
 
 export type StackVariants =
@@ -9,7 +10,8 @@ export type StackVariants =
 	| 'JavaScript'
 	| 'Cookie'
 	| 'Next.js'
-	| 'SSR';
+	| 'SSR'
+	| 'Prisma';
 
 interface ButtonProps {
 	icon: JSX.Element;
@@ -43,5 +45,8 @@ export const StackButtonData: Record<StackVariants[number], ButtonProps> = {
 	},
 	SSR: {
 		icon: <TbServerBolt size={18} />,
+	},
+	Prisma: {
+		icon: <SiPrisma size={18} />,
 	},
 };

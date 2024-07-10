@@ -1,1 +1,5 @@
-export type ProgrammingLanguage = 'TypeScript' | 'JavaScript';
+export type ProgrammingLanguage =
+	| 'TypeScript'
+	| 'JavaScript'
+	| 'Markdown'
+	| 'Prisma';

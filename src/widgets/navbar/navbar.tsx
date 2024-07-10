@@ -37,7 +37,7 @@ export const Navbar = () => {
 					<Button
 						as={Link}
 						target='_blank'
-						href='https://github.com/MarkMelior'
+						href='https://github.com/MarkMelior/simple-app'
 						className='text-default-500 hover:text-default-600'
 						isIconOnly
 						variant='light'

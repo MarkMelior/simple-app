@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
-import { decrypt } from './features/auth/services/session';
+import { decrypt } from './features/auth/api/jwt';
 
 // 1. Specify protected and public routes
 const protectedRoutes = ['/dashboard'];

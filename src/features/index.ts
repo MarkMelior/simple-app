@@ -1,7 +1,20 @@
+import { createSession, verifySession } from './auth/api/session';
+import { logout } from './auth/services/logout';
 import { getUser } from './auth/services/user';
 import { FormLogin } from './auth/ui/form-login/form-login';
 import { FormRegister } from './auth/ui/form-register/form-register';
+import { LogoutButton } from './auth/ui/logout-button/logout-button';
 import { Burger } from './burger/burger';
 import { ThemeSwitcher } from './theme-switcher/theme-switcher';
 
-export { Burger, FormLogin, FormRegister, getUser, ThemeSwitcher };
+export {
+	Burger,
+	createSession,
+	FormLogin,
+	FormRegister,
+	getUser,
+	logout,
+	LogoutButton,
+	ThemeSwitcher,
+	verifySession,
+};

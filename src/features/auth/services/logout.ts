@@ -1,6 +1,6 @@
 'use server';
 
-import { deleteSession } from './session';
+import { deleteSession } from '../api/session';
 
 export async function logout() {
 	deleteSession();

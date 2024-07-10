@@ -1,15 +1,16 @@
 'use client';
 
-import { gitHubRepoLink } from '@/shared/lib';
+import { cn, gitHubRepoLink } from '@/shared/lib';
 import { GitHubPath } from '@/shared/types/github-path';
 import { ProgrammingLanguage } from '@/shared/types/programming-language';
 import { Theme } from '@/shared/types/theme';
-import { Button, Skeleton, Tooltip } from '@nextui-org/react';
+import { Button, Link, Skeleton, Tooltip } from '@nextui-org/react';
 import { useTheme } from 'next-themes';
-import Link from 'next/link';
 import { FC, useEffect, useMemo, useState } from 'react';
 import { BiLogoJavascript, BiLogoTypescript } from 'react-icons/bi';
 import { LuEye } from 'react-icons/lu';
+import { PiMarkdownLogo } from 'react-icons/pi';
+import { SiPrisma } from 'react-icons/si';
 import { TbFileUnknown } from 'react-icons/tb';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import {
@@ -25,6 +26,9 @@ interface CodeBlockProps {
 	language?: ProgrammingLanguage;
 	linesLength?: number;
 	github?: GitHubPath;
+	variant?: 'small';
+	className?: string;
+	disableLineNumbers?: boolean;
 }
 
 export const CodeBlock: FC<CodeBlockProps> = ({
@@ -32,7 +36,10 @@ export const CodeBlock: FC<CodeBlockProps> = ({
 	fileName,
 	github,
 	language = 'TypeScript',
-	linesLength = 15,
+	linesLength = 10,
+	variant,
+	className,
+	disableLineNumbers,
 }) => {
 	const [isExpanded, setIsExpanded] = useState(false);
 	const lines = text.split('\n');
@@ -51,21 +58,32 @@ export const CodeBlock: FC<CodeBlockProps> = ({
 				return <BiLogoTypescript size={20} />;
 			case 'JavaScript':
 				return <BiLogoJavascript size={20} />;
+			case 'Markdown':
+				return <PiMarkdownLogo size={20} />;
+			case 'Prisma':
+				return <SiPrisma size={20} />;
 			default:
 				return <TbFileUnknown size={20} />;
 		}
 	}, [language]);
 
 	if (!mounted) {
-		return <Skeleton className='!bg-default-100 my-4 h-96 w-full rounded-md' />;
+		return (
+			<Skeleton
+				className={cn('!bg-default-100 my-4 h-96 w-full rounded-md', className)}
+			/>
+		);
 	}
 
 	return (
-		<div className='my-4 rounded-md overflow-hidden border border-default-200 code-block__wrapper'>
-			<div className='bg-default-100 text-sm text-default-600 py-2 px-3 flex justify-between items-center'>
-				{/* <Tooltip placement='top' content={language}> */}
+		<div
+			className={cn(
+				'my-4 rounded-md overflow-hidden border border-default-200 h-fit code-block__wrapper',
+				className,
+			)}
+		>
+			<div className='bg-default-100 text-sm text-default-600 py-1 px-3 flex justify-between items-center'>
 				{renderIcon}
-				{/* </Tooltip> */}
 				{fileName ? fileName : language}
 				<div className='flex gap-1 items-center'>
 					{github?.path && (
@@ -92,7 +110,7 @@ export const CodeBlock: FC<CodeBlockProps> = ({
 
 			<SyntaxHighlighter
 				language={language}
-				showLineNumbers
+				showLineNumbers={!disableLineNumbers}
 				style={theme === Theme.DARK ? atomOneDark : atomOneLight}
 				className='!bg-default-100 border-t-1 border-default-200 text-sm'
 			>
@@ -102,7 +120,7 @@ export const CodeBlock: FC<CodeBlockProps> = ({
 			{isLong && (
 				<div className='relative'>
 					{!isExpanded && (
-						<div className='absolute pointer-events-none w-full -top-32 h-32 bg-gradient-to-t from-default-100' />
+						<div className='absolute pointer-events-none w-full -top-24 h-24 bg-gradient-to-t from-default-100' />
 					)}
 					<Button
 						radius='none'

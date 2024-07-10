@@ -2,7 +2,7 @@ import 'server-only';
 
 import { PrismaClient } from '@prisma/client';
 import { cache } from 'react';
-import { verifySession } from './session';
+import { verifySession } from '../api/session';
 
 const prisma = new PrismaClient();
 
@@ -17,8 +17,8 @@ export const getUser = cache(async () => {
 			},
 			select: {
 				id: true,
+				username: true,
 				name: true,
-				email: true,
 			},
 		});
 

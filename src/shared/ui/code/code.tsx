@@ -35,7 +35,7 @@ export const Code: FC<CodeProps> = ({ text, language = 'TypeScript' }) => {
 	return (
 		<Tooltip content='Copy code' size='sm'>
 			<Button
-				className='bg-default-100 py-0.5 px-1 h-fit rounded-md -top-0.5'
+				className='bg-default-100 py-0.5 px-1 h-fit rounded-md -top-0.5 select-text'
 				onClick={() => handleCopy(text)}
 				disableRipple
 			>
