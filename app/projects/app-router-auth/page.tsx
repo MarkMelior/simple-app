@@ -14,11 +14,16 @@ export default async function AppRouterAuthPage() {
 				note='Auth'
 				title='Next.js: Authentication'
 				description='Best practices for Server Components, Actions, Middleware'
+				tags={['TypeScript', 'Cookie', 'SSR']}
 			/>
 
 			<div id='content-wrapper' className=''>
 				<p>Prisma ORM</p>
-				<CodeBlock text={code1} fileName={codePath1.slice(4)} />
+				<CodeBlock
+					text={code1}
+					fileName={codePath1.slice(4)}
+					github={{ path: codePath1 }}
+				/>
 			</div>
 
 			{user && <p>Hi, {user.name}!</p>}

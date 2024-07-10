@@ -1,3 +1,4 @@
+import { StackButtons, StackVariants } from '@/shared/ui';
 import { cn, Skeleton } from '@nextui-org/react';
 
 interface HeaderProps {
@@ -6,6 +7,7 @@ interface HeaderProps {
 	title: string;
 	description: string;
 	isLoading?: boolean;
+	tags?: StackVariants[];
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -14,6 +16,7 @@ export const Header: React.FC<HeaderProps> = ({
 	description,
 	note,
 	isLoading,
+	tags,
 }) => {
 	if (isLoading) {
 		return <HeaderSkeleton />;
@@ -32,6 +35,8 @@ export const Header: React.FC<HeaderProps> = ({
 				</div>
 			</div>
 			<p className='mt-2 text-lg text-default-600'>{description}</p>
+
+			<StackButtons tags={tags} isColored={false} className='mt-6' />
 		</header>
 	);
 };

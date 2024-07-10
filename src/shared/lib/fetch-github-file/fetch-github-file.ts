@@ -1,17 +1,12 @@
+import { GitHubPath } from '@/shared/types/github-path';
 import { cache } from 'react';
-
-interface GitHubFileContent {
-	owner?: string;
-	repo?: string;
-	path: string;
-}
 
 export const fetchGitHubFileContent = cache(
 	async ({
 		owner = 'MarkMelior',
 		repo = 'simple-app',
 		path,
-	}: GitHubFileContent): Promise<string> => {
+	}: GitHubPath): Promise<string> => {
 		const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
 
 		try {

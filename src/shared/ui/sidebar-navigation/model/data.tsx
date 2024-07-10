@@ -96,24 +96,33 @@ export const SidebarItems: SidebarItemsProps[] = [
 				gitPath: '/app/projects/app-router-auth/page.tsx',
 			},
 			{
-				name: 'Infinity scroll + Virtualization',
-				link: '/projects/infinity-scroll-virtualization',
-				gitPath: '/app/projects/infinity-scroll-virtualization/page.tsx',
-			},
-			{
 				name: 'Hook useMessage',
 				link: '/projects/use-message',
 				gitPath: '/src/shared/hooks/useMessage/useMessage.tsx',
 			},
+			// {
+			// 	name: 'Infinity scroll + Virtualization',
+			// 	link: '/projects/infinity-scroll-virtualization',
+			// 	gitPath: '/app/projects/infinity-scroll-virtualization/page.tsx',
+			// },
 		],
 	},
 	{
-		title: '3D Graphics',
+		title: 'UI Components',
 		item: [
 			{
-				name: 'RTX 3070 Ti',
-				link: '/projects/video-card',
+				name: 'Card 180° Rotating',
+				link: '/projects/card-rotating',
 			},
 		],
 	},
+	// {
+	// 	title: '3D Graphics',
+	// 	item: [
+	// 		{
+	// 			name: 'RTX 3070 Ti',
+	// 			link: '/projects/video-card',
+	// 		},
+	// 	],
+	// },
 ];
