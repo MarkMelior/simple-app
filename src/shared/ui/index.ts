@@ -5,6 +5,7 @@ import { PageLoader } from './page-loader/page-loader';
 import { SidebarNavigation } from './sidebar-navigation/sidebar-navigation';
 import { StackVariants } from './stack-buttons/model/data';
 import { StackButtons } from './stack-buttons/stack-buttons';
+import { Text } from './text/text';
 
 export {
 	Code,
@@ -13,6 +14,7 @@ export {
 	PageLoader,
 	SidebarNavigation,
 	StackButtons,
+	Text,
 };
 
 export type { StackVariants };

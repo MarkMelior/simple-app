@@ -4,7 +4,7 @@ import { cookies } from 'next/headers';
 import { decrypt, encrypt } from './jwt';
 
 export async function createSession(userId: string) {
-	const expiresAt = new Date(Date.now() + 7 * 60 * 60 * 1000);
+	const expiresAt = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000);
 	const session = await encrypt({ userId, expiresAt });
 
 	cookies().set('session', session, {

@@ -35,6 +35,7 @@ export const Code: FC<CodeProps> = ({ text, language = 'TypeScript' }) => {
 	return (
 		<Tooltip content='Copy code' size='sm'>
 			<Button
+				as={'code'}
 				className='bg-default-100 py-0.5 px-1 h-fit rounded-md -top-0.5 select-text'
 				onClick={() => handleCopy(text)}
 				disableRipple
@@ -43,6 +44,7 @@ export const Code: FC<CodeProps> = ({ text, language = 'TypeScript' }) => {
 					language={language}
 					style={theme === Theme.DARK ? atomOneDark : atomOneLight}
 					PreTag={React.Fragment}
+					CodeTag={React.Fragment}
 				>
 					{text}
 				</SyntaxHighlighter>

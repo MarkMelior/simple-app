@@ -216,8 +216,7 @@ interface FormLoginProps {
 }
 
 export const FormLogin = ({ className }: FormLoginProps) => {
-	const [state, action] = useFormState(login, undefined);
-	const { pending } = useFormStatus();
+	const [state, action, pending] = useFormState(login, undefined);
 
 	return (
 		<form action={action} className={cn('grid gap-2 h-fit', className)}>
@@ -234,11 +233,14 @@ export const FormLogin = ({ className }: FormLoginProps) => {
 				errorMessage={state?.errors?.password}
 				isInvalid={Boolean(state?.errors?.password)}
 			/>
+			{state?.message && (
+				<p className='text-sm text-danger'>{state?.message}</p>
+			)}
 			<Button
 				color='primary'
-				aria-disabled={pending}
 				type='submit'
 				className='mt-2 w-full'
+				isLoading={pending}
 			>
 				{pending ? 'Submitting...' : 'Login'}
 			</Button>

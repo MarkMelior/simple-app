@@ -26,9 +26,9 @@ interface CodeBlockProps {
 	language?: ProgrammingLanguage;
 	linesLength?: number;
 	github?: GitHubPath;
-	variant?: 'small';
 	className?: string;
 	disableLineNumbers?: boolean;
+	showHeader?: boolean;
 }
 
 export const CodeBlock: FC<CodeBlockProps> = ({
@@ -37,7 +37,7 @@ export const CodeBlock: FC<CodeBlockProps> = ({
 	github,
 	language = 'TypeScript',
 	linesLength = 10,
-	variant,
+	showHeader = true,
 	className,
 	disableLineNumbers,
 }) => {
@@ -70,7 +70,7 @@ export const CodeBlock: FC<CodeBlockProps> = ({
 	if (!mounted) {
 		return (
 			<Skeleton
-				className={cn('!bg-default-100 my-4 h-96 w-full rounded-md', className)}
+				className={cn('!bg-default-100 my-4 h-64 w-full rounded-md', className)}
 			/>
 		);
 	}
@@ -82,31 +82,34 @@ export const CodeBlock: FC<CodeBlockProps> = ({
 				className,
 			)}
 		>
-			<div className='bg-default-100 text-sm text-default-600 py-1 px-3 flex justify-between items-center'>
-				{renderIcon}
-				{fileName ? fileName : language}
-				<div className='flex gap-1 items-center'>
-					{github?.path && (
-						<Tooltip content='View code on GitHub'>
-							<Button
-								as={Link}
-								href={gitHubRepoLink(github)}
-								target='_blank'
-								variant='light'
-								isIconOnly
-								radius='sm'
-								size='sm'
-							>
-								<LuEye
-									size={20}
-									className='text-default-400 group-hover:text-default-600'
-								/>
-							</Button>
-						</Tooltip>
-					)}
-					<CopyButton text={text} />
-				</div>
-			</div>
+			{showHeader ||
+				(fileName && (
+					<div className='bg-default-100 text-sm text-default-600 py-1 px-3 flex justify-between items-center'>
+						{renderIcon}
+						{fileName ? fileName : language}
+						<div className='flex gap-1 items-center'>
+							{github?.path && (
+								<Tooltip content='View code on GitHub'>
+									<Button
+										as={Link}
+										href={gitHubRepoLink(github)}
+										target='_blank'
+										variant='light'
+										isIconOnly
+										radius='sm'
+										size='sm'
+									>
+										<LuEye
+											size={20}
+											className='text-default-400 group-hover:text-default-600'
+										/>
+									</Button>
+								</Tooltip>
+							)}
+							<CopyButton text={text} />
+						</div>
+					</div>
+				))}
 
 			<SyntaxHighlighter
 				language={language}

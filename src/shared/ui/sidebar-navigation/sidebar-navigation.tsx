@@ -7,6 +7,14 @@ import { SidebarItems, SidebarLinks } from './model/data';
 
 export const SidebarNavigation = () => {
 	const pathname = usePathname();
+	// todo
+	// const [items, setItems] = useState<ProjectData[]>([]);
+
+	// useEffect(() => {
+	// 	getProjectsData().then((data) => {
+	// 		setItems(data);
+	// 	});
+	// });
 
 	return (
 		<ul>

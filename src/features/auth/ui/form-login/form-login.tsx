@@ -2,6 +2,7 @@
 
 import { cn } from '@/shared/lib';
 import { Button, Input } from '@nextui-org/react';
+import { FC } from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
 import { login } from '../../services/login';
 
@@ -9,7 +10,7 @@ interface FormLoginProps {
 	className?: string;
 }
 
-export const FormLogin = ({ className }: FormLoginProps) => {
+export const FormLogin: FC<FormLoginProps> = ({ className }) => {
 	const [state, action] = useFormState(login, undefined);
 	const { pending } = useFormStatus();
 
