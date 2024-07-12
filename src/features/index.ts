@@ -5,6 +5,7 @@ import { FormLogin } from './auth/ui/form-login/form-login';
 import { FormSignup } from './auth/ui/form-signup/form-signup';
 import { LogoutButton } from './auth/ui/logout-button/logout-button';
 import { Burger } from './burger/burger';
+import { LocaleSwitcher } from './locale-switcher/locale-switcher';
 import { ThemeSwitcher } from './theme-switcher/theme-switcher';
 
 export {
@@ -13,6 +14,7 @@ export {
 	FormLogin,
 	FormSignup,
 	getUser,
+	LocaleSwitcher,
 	logout,
 	LogoutButton,
 	ThemeSwitcher,

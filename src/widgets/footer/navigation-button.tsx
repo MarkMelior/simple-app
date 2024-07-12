@@ -1,13 +1,15 @@
 'use client';
 
+import { Dictionary } from '@/shared/config';
+
 import { Button } from '@nextui-org/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SidebarItems } from '../../shared/ui/sidebar-navigation/model/data';
 
 export const Footer = {
-	NavigationButton: () => {
+	NavigationButton: ({ dict }: { dict: Dictionary['ui'] }) => {
 		const pathname = usePathname();
 		const [prevPage, setPrevPage] = useState('/');
 		const [nextPage, setNextPage] = useState('/');
@@ -60,7 +62,7 @@ export const Footer = {
 							strokeLinejoin='round'
 						/>
 					</svg>
-					Previous
+					{dict['footer-prev']}
 				</Button>
 				<Button
 					as={Link}
@@ -69,7 +71,7 @@ export const Footer = {
 					size='sm'
 					variant='flat'
 				>
-					Next
+					{dict['footer-next']}
 					<svg
 						viewBox='0 0 3 6'
 						className='ml-3 w-auto h-1.5 text-default-500 overflow-visible group-hover:text-default-500'

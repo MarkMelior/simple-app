@@ -1,11 +1,12 @@
-import { Burger, ThemeSwitcher } from '@/features';
+import { Burger, LocaleSwitcher, ThemeSwitcher } from '@/features';
 import { Logo } from '@/shared/assets/icon/Logo';
+import { Dictionary } from '@/shared/config';
 import { Button } from '@nextui-org/react';
 import Link from 'next/link';
 import { BsGithub } from 'react-icons/bs';
 import cls from './navbar.module.scss';
 
-export const Navbar = () => {
+export const Navbar = ({ dict }: { dict: Dictionary['ui'] }) => {
 	return (
 		<div className={cls.wrapper}>
 			<div className='max-w-8xl mx-auto px-4 sm:px-6 md:px-8 flex items-center h-full'>
@@ -18,7 +19,7 @@ export const Navbar = () => {
 					href='/'
 					className='gap-0 h-auto ml-3 text-xs leading-5 font-medium text-primary-400 bg-primary-400/10 rounded-full py-1 px-3 flex items-center hover:bg-primary-400/20'
 				>
-					<span>Simple App</span>
+					<span>{dict['navbar-title']}</span>
 					<svg
 						width='2'
 						height='2'
@@ -28,12 +29,11 @@ export const Navbar = () => {
 					>
 						<circle cx='1' cy='1' r='1' />
 					</svg>
-					<span className='hidden md:inline'>
-						Small and modern pet-projects
-					</span>
+					<span className='hidden md:inline'>{dict['navbar-desc']}</span>
 				</Button>
 				<div className='gap-2 relative flex items-center ml-auto'>
 					<ThemeSwitcher />
+					<LocaleSwitcher dict={dict} />
 					<Button
 						as={Link}
 						target='_blank'
@@ -45,7 +45,7 @@ export const Navbar = () => {
 						<span className='sr-only'>Simple App on GitHub</span>
 						<BsGithub size={20} />
 					</Button>
-					<Burger />
+					<Burger dict={dict} />
 				</div>
 			</div>
 		</div>

@@ -1,5 +1,6 @@
 import { ClientProviders } from '@/app/providers/client-providers';
 import '@/app/styles/index.scss';
+import { getDictionary, i18n, Locale } from '@/shared/config';
 import { PageLoader } from '@/shared/ui';
 import { Footer, Light, Navbar, Sidebar } from '@/widgets';
 import type { Metadata } from 'next';
@@ -13,13 +14,23 @@ export const metadata: Metadata = {
 	description: `Small and modern pet-projects. Hi, I'am Mark Melior - Frontend developer.`,
 };
 
-export default function RootLayout({
-	children,
-}: Readonly<{
+export async function generateStaticParams() {
+	return i18n.locales.map((locale) => ({ lang: locale }));
+}
+
+type Props = {
 	children: React.ReactNode;
-}>) {
+	params: { lang: Locale };
+};
+
+export default async function RootLayout({
+	children,
+	params,
+}: Readonly<Props>) {
+	const dict = await getDictionary(params.lang);
+
 	return (
-		<html lang='en'>
+		<html lang={params.lang}>
 			<body className={inter.className}>
 				<ClientProviders>
 					<Suspense
@@ -31,14 +42,14 @@ export default function RootLayout({
 						}
 					>
 						<Light />
-						<Navbar />
+						<Navbar dict={dict.ui} />
 						<div className='overflow-hidden'>
 							<div className='max-w-8xl mx-auto px-4 sm:px-6 md:px-8 relative z-20'>
-								<Sidebar />
+								<Sidebar dict={dict.ui} />
 								<div className='lg:pl-[19.5rem]'>
 									<div className='max-w-3xl mx-auto pt-10 xl:max-w-none xl:ml-0'>
 										{children}
-										<Footer />
+										<Footer dict={dict.ui} />
 									</div>
 								</div>
 							</div>

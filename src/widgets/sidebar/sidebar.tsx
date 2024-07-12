@@ -1,8 +1,9 @@
+import { Dictionary } from '@/shared/config';
 import { cn } from '@/shared/lib';
 import { DownloadCvButton, SidebarNavigation } from '@/shared/ui';
 import cls from './sidebar.module.scss';
 
-export const Sidebar = () => {
+export const Sidebar = ({ dict }: { dict: Dictionary['ui'] }) => {
 	return (
 		<div
 			className={cn(
@@ -14,7 +15,7 @@ export const Sidebar = () => {
 				<div className='sticky top-0 -ml-0.5 pointer-events-none'>
 					<div className='h-10 bg-default-50' />
 					<div className='relative pointer-events-auto'>
-						<DownloadCvButton />
+						<DownloadCvButton dict={dict} />
 					</div>
 					<div className='h-8 bg-gradient-to-b from-default-50' />
 				</div>

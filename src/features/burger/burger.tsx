@@ -1,11 +1,12 @@
 'use client';
 
+import { Dictionary } from '@/shared/config';
 import { DownloadCvButton, SidebarNavigation } from '@/shared/ui';
 import { Button } from '@nextui-org/react';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { Drawer } from 'vaul';
 
-export const Burger = () => {
+export const Burger = ({ dict }: { dict: Dictionary['ui'] }) => {
 	return (
 		<Drawer.Root direction='bottom'>
 			<Drawer.Trigger asChild>
@@ -25,7 +26,7 @@ export const Burger = () => {
 					</div>
 					<div className='overflow-auto'>
 						<div className='max-w-md mx-auto px-4'>
-							<DownloadCvButton className='mb-8' />
+							<DownloadCvButton className='mb-8' dict={dict} />
 							<SidebarNavigation />
 						</div>
 					</div>

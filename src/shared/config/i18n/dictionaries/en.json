@@ -1,0 +1,23 @@
+{
+	"home-page": {
+		"note": "Home Page",
+		"title": "👋 Hi, I'm Mark Melior",
+		"description": "I am learning very fast and a lot, and my communication skills are at a high level. I am looking for a company where I will improve my skills to a strong Frontend developer. I will be glad to meet new people (:"
+	},
+	"ui": {
+		"download-cv": "Download CV",
+		"page-loader": "Loading...",
+		"page-not-found": "Page not found",
+		"copy-code": "Copy code",
+		"copy-success": "Copied to clipboard",
+		"copy-error": "Failed to copy",
+		"footer-copyright": "Copyright © 2024 Mark Melior.",
+		"footer-made": "Made with ❤️",
+		"footer-edit": "Edit this page on GitHub",
+		"footer-prev": "Previous",
+		"footer-next": "Next",
+		"navbar-title": "Simple App",
+		"navbar-desc": "Small and modern pet-projects",
+		"change-lang": "Change language"
+	}
+}

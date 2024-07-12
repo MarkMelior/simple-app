@@ -1,9 +1,16 @@
+import { Dictionary } from '@/shared/config';
 import { cn } from '@/shared/lib';
 import { Button } from '@nextui-org/react';
 import Link from 'next/link';
 import { FaDownload } from 'react-icons/fa6';
 
-export const DownloadCvButton = ({ className }: { className?: string }) => {
+export const DownloadCvButton = ({
+	className,
+	dict,
+}: {
+	className?: string;
+	dict: Dictionary['ui'];
+}) => {
 	return (
 		<Button
 			as={Link}
@@ -18,7 +25,7 @@ export const DownloadCvButton = ({ className }: { className?: string }) => {
 			)}
 			radius='sm'
 		>
-			Download CV
+			{dict['download-cv']}
 		</Button>
 	);
 };

@@ -1,9 +1,10 @@
 'use client';
 
+import { SidebarLinks } from '@/shared/const/sidebar-links';
 import { cn } from '@nextui-org/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { SidebarItems, SidebarLinks } from './model/data';
+import { SidebarItems } from './model/data';
 
 export const SidebarNavigation = () => {
 	const pathname = usePathname();
@@ -47,9 +48,9 @@ export const SidebarNavigation = () => {
 										'block border-l pl-4 -ml-px border-transparent',
 										{
 											['text-primary-400 border-current font-semibold']:
-												pathname === link,
+												pathname.endsWith(link),
 											['hover:border-default-400 text-default-600 hover:text-default-700']:
-												pathname !== link,
+												!pathname.endsWith(link),
 										},
 									)}
 									href={link}
