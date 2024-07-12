@@ -93,13 +93,13 @@ export const SidebarItems: SidebarItemsProps[] = [
 			{
 				name: 'Next.js: Authentication (Server Components, Actions, Middleware)',
 				link: '/projects/app-router-auth',
-				gitPath: '/app/projects/app-router-auth/page.tsx',
+				gitPath: '/projects/app-router-auth/page.mdx',
 			},
-			{
-				name: 'Hook useMessage',
-				link: '/projects/use-message',
-				gitPath: '/src/shared/hooks/useMessage/useMessage.tsx',
-			},
+			// {
+			// 	name: 'Hook useMessage',
+			// 	link: '/projects/use-message',
+			// 	gitPath: '/src/shared/hooks/useMessage/useMessage.mdx',
+			// },
 			// {
 			// 	name: 'Infinity scroll + Virtualization',
 			// 	link: '/projects/infinity-scroll-virtualization',
@@ -107,15 +107,15 @@ export const SidebarItems: SidebarItemsProps[] = [
 			// },
 		],
 	},
-	{
-		title: 'UI Components',
-		item: [
-			{
-				name: 'Card 180° Rotating',
-				link: '/projects/card-rotating',
-			},
-		],
-	},
+	// {
+	// 	title: 'UI Components',
+	// 	item: [
+	// 		{
+	// 			name: 'Card 180° Rotating',
+	// 			link: '/projects/card-rotating',
+	// 		},
+	// 	],
+	// },
 	// {
 	// 	title: '3D Graphics',
 	// 	item: [

@@ -1,4 +1,4 @@
-import { Code, CodeBlock, Text } from '@/shared/ui';
+import { Code, CodeBlock, StackVariants, Text } from '@/shared/ui';
 import type { MDXComponents } from 'mdx/types';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
@@ -12,19 +12,17 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 			}
 
 			return (
-				<CodeBlock text={String(children)} language={match[1]} {...rest} />
+				<CodeBlock
+					text={String(children)}
+					language={match[1] as StackVariants}
+					{...rest}
+				/>
 			);
 		},
-		h2: (props) => {
-			return (
-				<Text variant='h2' {...props}>
-					{props.children}
-				</Text>
-			);
-		},
-		p: (props) => {
-			return <Text>{props.children}</Text>;
-		},
+		h2: Text.h2,
+		p: Text.p,
+		hr: Text.hr,
+		ul: Text.ul,
 		...components,
 	};
 }

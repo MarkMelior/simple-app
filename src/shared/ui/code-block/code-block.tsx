@@ -2,15 +2,11 @@
 
 import { cn, gitHubRepoLink } from '@/shared/lib';
 import { GitHubPath } from '@/shared/types/github-path';
-import { ProgrammingLanguage } from '@/shared/types/programming-language';
 import { Theme } from '@/shared/types/theme';
-import { Button, Link, Skeleton, Tooltip } from '@nextui-org/react';
+import { Button, Link, Tooltip } from '@nextui-org/react';
 import { useTheme } from 'next-themes';
-import { FC, useEffect, useMemo, useState } from 'react';
-import { BiLogoJavascript, BiLogoTypescript } from 'react-icons/bi';
+import { FC, useEffect, useState } from 'react';
 import { LuEye } from 'react-icons/lu';
-import { PiMarkdownLogo } from 'react-icons/pi';
-import { SiPrisma } from 'react-icons/si';
 import { TbFileUnknown } from 'react-icons/tb';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import {
@@ -18,12 +14,13 @@ import {
 	atomOneLight,
 } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import { CopyButton } from '../copy-button/copy-button';
+import { StackButtonData, StackVariants } from '../stack-buttons/model/data';
 import './code-block.scss';
 
 interface CodeBlockProps {
 	text: string;
 	fileName?: string;
-	language?: ProgrammingLanguage;
+	language?: StackVariants;
 	linesLength?: number;
 	github?: GitHubPath;
 	className?: string;
@@ -52,29 +49,6 @@ export const CodeBlock: FC<CodeBlockProps> = ({
 		setMounted(true);
 	}, []);
 
-	const renderIcon = useMemo(() => {
-		switch (language) {
-			case 'TypeScript':
-				return <BiLogoTypescript size={20} />;
-			case 'JavaScript':
-				return <BiLogoJavascript size={20} />;
-			case 'Markdown':
-				return <PiMarkdownLogo size={20} />;
-			case 'Prisma':
-				return <SiPrisma size={20} />;
-			default:
-				return <TbFileUnknown size={20} />;
-		}
-	}, [language]);
-
-	if (!mounted) {
-		return (
-			<Skeleton
-				className={cn('!bg-default-100 my-4 h-64 w-full rounded-md', className)}
-			/>
-		);
-	}
-
 	return (
 		<div
 			className={cn(
@@ -82,39 +56,42 @@ export const CodeBlock: FC<CodeBlockProps> = ({
 				className,
 			)}
 		>
-			{showHeader ||
-				(fileName && (
-					<div className='bg-default-100 text-sm text-default-600 py-1 px-3 flex justify-between items-center'>
-						{renderIcon}
-						{fileName ? fileName : language}
-						<div className='flex gap-1 items-center'>
-							{github?.path && (
-								<Tooltip content='View code on GitHub'>
-									<Button
-										as={Link}
-										href={gitHubRepoLink(github)}
-										target='_blank'
-										variant='light'
-										isIconOnly
-										radius='sm'
-										size='sm'
-									>
-										<LuEye
-											size={20}
-											className='text-default-400 group-hover:text-default-600'
-										/>
-									</Button>
-								</Tooltip>
-							)}
-							<CopyButton text={text} />
-						</div>
-					</div>
-				))}
+			<div className='bg-default-100 text-sm text-default-600 py-1 px-3 flex justify-between items-center'>
+				{StackButtonData[language]?.icon || <TbFileUnknown size={20} />}
+				{fileName ? fileName : language}
+				<div className='flex gap-1 items-center'>
+					{github?.path && (
+						<Tooltip content='View code on GitHub'>
+							<Button
+								as={Link}
+								href={gitHubRepoLink(github)}
+								target='_blank'
+								variant='light'
+								isIconOnly
+								radius='sm'
+								size='sm'
+							>
+								<LuEye
+									size={20}
+									className='text-default-400 group-hover:text-default-600'
+								/>
+							</Button>
+						</Tooltip>
+					)}
+					<CopyButton text={text} />
+				</div>
+			</div>
 
 			<SyntaxHighlighter
 				language={language}
 				showLineNumbers={!disableLineNumbers}
-				style={theme === Theme.DARK ? atomOneDark : atomOneLight}
+				style={
+					mounted
+						? theme === Theme.DARK
+							? atomOneDark
+							: atomOneLight
+						: atomOneDark
+				}
 				className='!bg-default-100 border-t-1 border-default-200 text-sm'
 			>
 				{isExpanded || !isLong ? text : lines.slice(0, linesLength).join('\n')}

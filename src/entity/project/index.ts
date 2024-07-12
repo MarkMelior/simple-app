@@ -1,5 +1,6 @@
-import { getProjectData, ProjectData } from './model/services/get-project-data';
-import { getProjectsData } from './model/services/get-projects-data';
+import { getProject, Project } from './model/services/get-project';
+import { getProjects } from './model/services/get-projects';
+import { getProjectsByCategory } from './model/services/get-projects-by-category';
 
-export { getProjectData, getProjectsData };
-export type { ProjectData };
+export { getProject, getProjects, getProjectsByCategory };
+export type { Project };

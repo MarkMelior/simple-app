@@ -28,7 +28,7 @@ export const Light = () => {
 			</div>
 			<div className={cls.light}>
 				<span className={cls.ellipse1} />
-				{/* <span className={cls.ellipse2} /> */}
+				<span className={cls.ellipse2} />
 				<span className={cls.ellipse3} />
 			</div>
 		</>

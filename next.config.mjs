@@ -4,7 +4,6 @@ import remarkGfm from 'remark-gfm';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
-	transpilePackages: ['next-mdx-remote'],
 };
 
 const withMDX = createMDX({
