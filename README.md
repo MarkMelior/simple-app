@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Реализованный функционал
 
-## Getting Started
+### Интернационализация (i18n)
 
-First, run the development server:
+> Реализован i18n без использования сторонних библиотек
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+#### Файлы:
+
+- [middleware.ts](/middleware.ts) - основной функционал работы i18n
+- [getLang()](src/shared/config/i18n/get-lang.ts) - возвращает выбранный язык `en | ru`
+- [getDictionary()](src/shared/config/i18n/dictionaries.ts) - возвращает объект с переводами `ключ-значение`
+- [type Dictionary](src/shared/config/i18n/dictionaries.ts)
+- [/dictionary](src/shared/config/i18n/dictionaries/) - директория с json файлами переводов
+
+#### Особенности:
+
+Не нужно прокидывать props в каждый компонент, где используется перевод:
+
+```diff-ts
+-	export const Navbar = ({ dict }: { dict: Dictionary['ui'] }) => {...}
+
++	export const Navbar = async () => {
++		const dictionary = await getDictionary();
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Не нужно передавать язык в `getDictionary(lang)`, как это реализовано в [документации Next.js](https://nextjs.org/docs/app/building-your-application/routing/internationalization#localization):
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```diff
+- getDictionary(lang)
++ getDictionary()
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Просто используем в любом серверном компоненте `const dict = await getDictionary();` или прокидываем в клиентский компонент как props `{ dict }: { dict: Dictionary['ui'] }`
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## MDX
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+> MDX синхронизирован с i18n
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+#### Реализация MDX:
 
-## Deploy on Vercel
+- [`app/[lang]/projects/[category]/[name]/page.tsx`](/app/[lang]/projects//[category]/[name]/page.tsx) - layout для mdx файлов
+- [`app/[lang]/projects/[category]/page.tsx`](/app/[lang]/projects/[category]/page.tsx) - страница отображения проектов из категории
+- [getMetadata()](/src/entity/project/model/services/get-metadata.ts) - получение metadata из mdx
+- [getProject(category, name)](/src/entity/project/model/services/get-project.ts) - получение проекта по категории и имени
+- [getProjectsByCategory(category)](/src/entity/project/model/services/get-projects-by-category.ts) - получение всех проектов в выбранной категории
+- [getProjects()](/src/entity/project/model/services/get-projects.ts) - получение всех категорий и проектов
+- [mdx-components.tsx](/src/mdx-components.tsx) - настройка отображения mdx
+- [rehypeExtractCodeProps](/src/shared/lib/rehype-extract-code-props/rehype-extract-code-props.ts) - самописный rehype-плагин для чтения пар ключ-значение в коде
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Вывод mdx страниц и метаданных происходит за счёт преобразования его через [gray-matter](https://www.npmjs.com/package/gray-matter). Рендер mdx через MDXRemote `next-mdx-remote/rsc` для серверного рендеринга (смотреть [`app/[lang]/projects/[category]/[name]/page.tsx`](/app/[lang]/projects//[category]/[name]/page.tsx))
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+---
+
+## Архитектура проекта
+
+Проект написан в соответствии с методологией [Feature-Sliced Design](https://feature-sliced.design/docs/get-started/tutorial).
+
+- [shared](/src/shared/) - функциональность многократного использования;
+- [entity](/src/entity/) - бизнес сущности;
+- [features](/src/features/) - повторно используемые реализации целых функций продукта;
+- [widgets](/src/widgets/) - большие автономные блоки функциональности или пользовательского интерфейса;
+- [app](/src/app/) - все, что обеспечивает работу приложения.

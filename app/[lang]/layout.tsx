@@ -1,6 +1,6 @@
 import { ClientProviders } from '@/app/providers/client-providers';
 import '@/app/styles/index.scss';
-import { getDictionary, i18n, Locale } from '@/shared/config';
+import { i18n, Locale } from '@/shared/config';
 import { PageLoader } from '@/shared/ui';
 import { Footer, Light, Navbar, Sidebar } from '@/widgets';
 import type { Metadata } from 'next';
@@ -27,8 +27,6 @@ export default async function RootLayout({
 	children,
 	params,
 }: Readonly<Props>) {
-	const dict = await getDictionary(params.lang);
-
 	return (
 		<html lang={params.lang}>
 			<body className={inter.className}>

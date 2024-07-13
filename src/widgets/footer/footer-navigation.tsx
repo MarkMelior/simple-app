@@ -1,13 +1,19 @@
 'use client';
 
+import { ProjectsResponse } from '@/entity/project';
 import { Dictionary } from '@/shared/config';
 import { Button } from '@nextui-org/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { SidebarItems } from '../../shared/ui/sidebar-navigation/model/data';
 
-export const FooterNavigation = ({ dict }: { dict: Dictionary['ui'] }) => {
+export const FooterNavigation = ({
+	dict,
+	projects,
+}: {
+	dict: Dictionary['ui'];
+	projects: ProjectsResponse[];
+}) => {
 	const pathname = usePathname();
 	const [prevPage, setPrevPage] = useState('/');
 	const [nextPage, setNextPage] = useState('/');
@@ -16,10 +22,17 @@ export const FooterNavigation = ({ dict }: { dict: Dictionary['ui'] }) => {
 		if (pathname) {
 			determineNavigationLinks(pathname);
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [pathname]);
 
 	const determineNavigationLinks = (currentPath: string) => {
-		const allPages = SidebarItems.flatMap((category) => category.item);
+		const allPages = projects.flatMap((category) =>
+			category.projects.map((project) => ({
+				link: project.link,
+				title: project.title,
+			})),
+		);
+
 		const currentIndex = allPages.findIndex(
 			(page) => page.link === currentPath,
 		);

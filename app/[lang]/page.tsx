@@ -7,12 +7,16 @@ export default async function Home({
 }: {
 	params: { lang: Locale };
 }) {
+	// const lang = await getLang();
+	// const HomePage = dynamic(() => import(`./home-${lang}.mdx`));
+
 	const dictionary = await getDictionary(lang);
 	const { description, note, title } = dictionary['home-page'];
 
 	return (
 		<>
 			<Header note={note} title={title} description={description} />
+			{/* <HomePage /> */}
 		</>
 	);
 }
