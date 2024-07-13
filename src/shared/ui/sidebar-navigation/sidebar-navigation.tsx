@@ -1,21 +1,13 @@
 'use client';
 
+import { ProjectsResponse } from '@/entity/project';
 import { SidebarLinks } from '@/shared/const/sidebar-links';
 import { cn } from '@nextui-org/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { SidebarItems } from './model/data';
 
-export const SidebarNavigation = () => {
+export const SidebarNavigation = ({ items }: { items: ProjectsResponse[] }) => {
 	const pathname = usePathname();
-	// todo
-	// const [items, setItems] = useState<ProjectData[]>([]);
-
-	// useEffect(() => {
-	// 	getProjectsData().then((data) => {
-	// 		setItems(data);
-	// 	});
-	// });
 
 	return (
 		<ul>
@@ -35,14 +27,17 @@ export const SidebarNavigation = () => {
 					</Link>
 				</li>
 			))}
-			{SidebarItems.map(({ item, title }) => (
+			{items.map(({ title, link, projects }) => (
 				<li className='mt-12 lg:mt-8' key={title}>
-					<h5 className='mb-8 lg:mb-3 font-semibold text-default-900'>
+					<Link
+						href={link}
+						className='block mb-8 lg:mb-3 font-semibold text-default-900'
+					>
 						{title}
-					</h5>
+					</Link>
 					<ul className='space-y-6 lg:space-y-2 border-l border-default-200'>
-						{item.map(({ link, name }) => (
-							<li key={name}>
+						{projects.map(({ title, link }) => (
+							<li key={title}>
 								<Link
 									className={cn(
 										'block border-l pl-4 -ml-px border-transparent',
@@ -55,7 +50,7 @@ export const SidebarNavigation = () => {
 									)}
 									href={link}
 								>
-									{name}
+									{title}
 								</Link>
 							</li>
 						))}

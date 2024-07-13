@@ -1,9 +1,15 @@
-import { Dictionary } from '@/shared/config';
+import { getProjects } from '@/entity/project';
+import { getDictionary } from '@/shared/config';
 import { cn } from '@/shared/lib';
 import { DownloadCvButton, SidebarNavigation } from '@/shared/ui';
 import cls from './sidebar.module.scss';
 
-export const Sidebar = ({ dict }: { dict: Dictionary['ui'] }) => {
+export const Sidebar = async () => {
+	const dictionary = await getDictionary();
+	const dict = dictionary.ui;
+
+	const items = await getProjects();
+
 	return (
 		<div
 			className={cn(
@@ -19,7 +25,7 @@ export const Sidebar = ({ dict }: { dict: Dictionary['ui'] }) => {
 					</div>
 					<div className='h-8 bg-gradient-to-b from-default-50' />
 				</div>
-				<SidebarNavigation />
+				<SidebarNavigation items={items} />
 			</nav>
 		</div>
 	);

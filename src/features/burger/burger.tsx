@@ -1,12 +1,10 @@
 'use client';
 
-import { Dictionary } from '@/shared/config';
-import { DownloadCvButton, SidebarNavigation } from '@/shared/ui';
 import { Button } from '@nextui-org/react';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { Drawer } from 'vaul';
 
-export const Burger = ({ dict }: { dict: Dictionary['ui'] }) => {
+export const Burger = async ({ children }: { children: React.ReactNode }) => {
 	return (
 		<Drawer.Root direction='bottom'>
 			<Drawer.Trigger asChild>
@@ -25,10 +23,7 @@ export const Burger = ({ dict }: { dict: Dictionary['ui'] }) => {
 						<div className='w-12 h-1.5 rounded-full bg-default-300' />
 					</div>
 					<div className='overflow-auto'>
-						<div className='max-w-md mx-auto px-4'>
-							<DownloadCvButton className='mb-8' dict={dict} />
-							<SidebarNavigation />
-						</div>
+						<div className='max-w-md mx-auto px-4'>{children}</div>
 					</div>
 				</Drawer.Content>
 			</Drawer.Portal>

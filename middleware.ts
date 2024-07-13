@@ -1,8 +1,11 @@
-import { i18n, Locale } from '@/shared/config';
+import { i18n } from '@/shared/config';
 import { NextRequest, NextResponse } from 'next/server';
 
 export function middleware(request: NextRequest) {
 	const { pathname } = request.nextUrl;
+
+	const requestHeaders = new Headers(request.headers);
+	requestHeaders.set('x-url', request.url);
 
 	// `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually
 	if (
@@ -29,6 +32,9 @@ export function middleware(request: NextRequest) {
 				),
 				request.url,
 			),
+			{
+				headers: requestHeaders,
+			},
 		);
 	}
 
@@ -45,17 +51,13 @@ export function middleware(request: NextRequest) {
 				`/${i18n.defaultLocale}${pathname}${request.nextUrl.search}`,
 				request.nextUrl.href,
 			),
+			{
+				request: {
+					headers: requestHeaders,
+				},
+			},
 		);
 	}
-
-	const requestHeaders = new Headers(request.headers);
-	requestHeaders.set('x-url', request.url);
-
-	const segments = request.url.split('/')[3];
-	const lang = i18n.locales.includes(segments as Locale)
-		? segments
-		: i18n.defaultLocale;
-	requestHeaders.set('x-lang', lang);
 
 	return NextResponse.next({
 		request: {

@@ -1,12 +1,19 @@
+import { getProjects } from '@/entity/project';
 import { Burger, LocaleSwitcher, ThemeSwitcher } from '@/features';
 import { Logo } from '@/shared/assets/icon/Logo';
-import { Dictionary } from '@/shared/config';
+import { getDictionary } from '@/shared/config';
+import { DownloadCvButton, SidebarNavigation } from '@/shared/ui';
 import { Button } from '@nextui-org/react';
 import Link from 'next/link';
 import { BsGithub } from 'react-icons/bs';
 import cls from './navbar.module.scss';
 
-export const Navbar = ({ dict }: { dict: Dictionary['ui'] }) => {
+export const Navbar = async () => {
+	const dictionary = await getDictionary();
+	const dict = dictionary.ui;
+
+	const items = await getProjects();
+
 	return (
 		<div className={cls.wrapper}>
 			<div className='max-w-8xl mx-auto px-4 sm:px-6 md:px-8 flex items-center h-full'>
@@ -38,14 +45,17 @@ export const Navbar = ({ dict }: { dict: Dictionary['ui'] }) => {
 						as={Link}
 						target='_blank'
 						href='https://github.com/MarkMelior/simple-app'
-						className='text-default-500 hover:text-default-600'
+						className='hidden md:flex text-default-500 hover:text-default-600'
 						isIconOnly
 						variant='light'
 					>
 						<span className='sr-only'>Simple App on GitHub</span>
 						<BsGithub size={20} />
 					</Button>
-					<Burger dict={dict} />
+					<Burger>
+						<DownloadCvButton className='mb-8' dict={dict} />
+						<SidebarNavigation items={items} />
+					</Burger>
 				</div>
 			</div>
 		</div>

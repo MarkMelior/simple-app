@@ -1,23 +1,23 @@
-import { AuthExample } from './examples/auth';
+---
+note: 'Auth'
+title: 'Next.js: Аутентификация'
+description: 'Рекомендации по использованию серверных компонентов, Actions, Middleware'
+tags: ['TypeScript', 'Cookie', 'SSR', 'Prisma']
+---
 
-export const metadata = {
-	note: 'Auth',
-	title: 'Next.js: Authentication',
-	description: 'Best practices for Server Components, Actions, Middleware',
-	tags: ['TypeScript', 'Cookie', 'SSR', 'Prisma'],
-};
+import { AuthExample } from './examples/auth';
 
 <AuthExample />
 
-## About this approach
+## Об этом подходе
 
-Getting user data: `const user = await getUser();`. It's very simple :)
+Получение пользовательских данных: `const user = await getUser();`. Это очень просто :)
 
-- hi
-- man `test` good!
-- i'm good
+- привет
+- парень, "тест` хорош!
+- у меня все хорошо
 
-test))
+тест))
 
 ```TypeScript filename="src/features/auth/api/jwt.ts"
 import { SignJWT, jwtVerify } from 'jose';
@@ -41,7 +41,7 @@ export async function decrypt(session: string | undefined = '') {
 		});
 		return payload;
 	} catch (error) {
-		// console.log('Failed to verify session');
+		// console.log('Не удалось подтвердить сеанс');
 		return null;
 	}
 }

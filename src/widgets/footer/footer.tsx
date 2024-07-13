@@ -1,17 +1,17 @@
-'use client';
-
-import { Dictionary } from '@/shared/config';
+import { getDictionary } from '@/shared/config';
+import { getPathname } from '@/shared/lib';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Footer as MyFooter } from './navigation-button';
+import { FooterNavigation } from './navigation-button';
 
-export const Footer = ({ dict }: { dict: Dictionary['ui'] }) => {
-	// const {path} = await getProjectData()
-	const pathname = usePathname();
+export const Footer = async () => {
+	const dictionary = await getDictionary();
+	const dict = dictionary.ui;
+
+	const pathname = await getPathname();
 
 	return (
 		<footer className='text-sm leading-6 mt-12'>
-			<MyFooter.NavigationButton dict={dict} />
+			<FooterNavigation dict={dict} />
 			<div className='pt-10 pb-10 sm:pb-24 border-t border-default-200 dark:border-default-100 sm:flex text-center justify-between text-default-500'>
 				<div className='mb-6 sm:mb-0 sm:flex'>
 					<p>{dict['footer-copyright']}</p>
