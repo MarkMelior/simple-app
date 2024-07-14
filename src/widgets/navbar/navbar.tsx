@@ -44,7 +44,7 @@ export const Navbar = async () => {
 						as={Link}
 						target='_blank'
 						href='https://github.com/MarkMelior/simple-app'
-						className='hidden md:flex text-default-500 hover:text-default-600'
+						className='hidden lg:flex text-default-500 hover:text-default-600'
 						isIconOnly
 						variant='light'
 					>
@@ -52,7 +52,19 @@ export const Navbar = async () => {
 						<BsGithub size={20} />
 					</Button>
 					<Burger>
-						<DownloadCvButton className='mb-8' dict={dict} />
+						<Button
+							as={Link}
+							target='_blank'
+							href='https://github.com/MarkMelior/simple-app'
+							color='default'
+							fullWidth
+							radius='sm'
+							className='mb-3'
+							startContent={<BsGithub size={20} />}
+						>
+							GitHub
+						</Button>
+						<DownloadCvButton color='primary' className='mb-8' dict={dict} />
 						<SidebarNavigation items={items} />
 					</Burger>
 				</div>

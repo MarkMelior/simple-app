@@ -1,4 +1,5 @@
 import { Logo } from '@/shared/assets/icon/Logo';
+import { getDictionary } from '@/shared/config';
 import cn from 'clsx';
 import { FC } from 'react';
 import cls from './page-loader.module.scss';
@@ -8,7 +9,12 @@ interface PageLoaderProps {
 	fullScreen?: boolean;
 }
 
-export const PageLoader: FC<PageLoaderProps> = ({ className, fullScreen }) => {
+export const PageLoader: FC<PageLoaderProps> = async ({
+	className,
+	fullScreen,
+}) => {
+	const dict = await getDictionary();
+
 	return (
 		<section
 			className={cn(
@@ -24,7 +30,7 @@ export const PageLoader: FC<PageLoaderProps> = ({ className, fullScreen }) => {
 					<span className={cls.spinner} />
 					<Logo />
 				</div>
-				<p>Loading...</p>
+				<p>{dict.ui['page-loader']}</p>
 			</div>
 		</section>
 	);

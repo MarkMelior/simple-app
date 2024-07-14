@@ -14,7 +14,7 @@ export const SidebarNavigation = ({ items }: { items: ProjectsResponse[] }) => {
 			{SidebarLinks.map(({ name, link, icon, color }) => (
 				<li key={name}>
 					<Link
-						className={`group flex items-center lg:text-sm lg:leading-6 mb-4 font-semibold text-default-600 hover:text-default-700`}
+						className={`group flex items-center lg:text-sm lg:leading-6 mb-4 font-semibold text-default-600 hover:text-default-700 transition`}
 						href={link}
 						target='_blank'
 					>
@@ -40,7 +40,7 @@ export const SidebarNavigation = ({ items }: { items: ProjectsResponse[] }) => {
 							<li key={title}>
 								<Link
 									className={cn(
-										'block border-l pl-4 -ml-px border-transparent',
+										'block border-l pl-4 -ml-px border-transparent transition',
 										{
 											['text-primary-400 border-current font-semibold']:
 												pathname.endsWith(link),

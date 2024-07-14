@@ -23,6 +23,8 @@
 		"navbar-desc": "Small and modern pet-projects",
 		"change-lang": "Change language",
 		"auth-logged": "You have successfully logged in as an",
-		"auth-logout": "Logout"
+		"auth-logout": "Logout",
+		"category-note": "Category",
+		"category-description": "All projects from this category are located here"
 	}
 }

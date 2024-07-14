@@ -1,9 +1,6 @@
 .light {
 	overflow: hidden;
 	pointer-events: none;
-	height: 100vh;
-	position: absolute;
-	width: 100%;
 }
 
 .ellipse1,
@@ -11,22 +8,22 @@
 .ellipse3 {
 	// * Light ellipse
 	--light-color-ellipse-1: rgb(90, 186, 255, 10%);
-	--light-blur-ellipse-1: blur(300px);
+	--light-blur-ellipse-1: blur(35vh);
 	--light-color-ellipse-2: rgb(255, 90, 209, 10%);
-	--light-blur-ellipse-2: blur(400px);
+	--light-blur-ellipse-2: blur(45vh);
 	--light-color-ellipse-3: rgb(255, 90, 209, 10%);
-	--light-blur-ellipse-3: blur(200px);
+	--light-blur-ellipse-3: blur(25vh);
 
 	z-index: var(--z-index-light);
-	transition: all 1s ease;
+	// transition: all 1s ease;
 }
 
 .ellipse1 {
 	position: absolute;
-	top: 3.61vh;
-	left: -22.66vw;
-	width: 45.36vw;
-	height: 80.65vh;
+	top: 3vh;
+	left: -22vw;
+	width: 45vw;
+	height: 80vh;
 	background: var(--light-color-ellipse-1);
 	filter: var(--light-blur-ellipse-1);
 }
@@ -35,7 +32,7 @@
 	position: absolute;
 	top: 40vh;
 	right: 0;
-	width: 38.13vw;
+	width: 38vw;
 	height: 60vh;
 	background: var(--light-color-ellipse-2);
 	filter: var(--light-blur-ellipse-2);
@@ -43,10 +40,10 @@
 
 .ellipse3 {
 	position: absolute;
-	top: -17.69vh;
-	left: 15.47vw;
-	width: 25.10vw;
-	height: 44.63vh;
+	top: -17vh;
+	left: 15vw;
+	width: 25vw;
+	height: 44vh;
 	background: var(--light-color-ellipse-3);
 	filter: var(--light-blur-ellipse-3);
 }

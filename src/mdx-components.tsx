@@ -5,6 +5,7 @@ import { getDictionary } from './shared/config';
 interface ExtendedCodeProps extends React.HTMLAttributes<HTMLElement> {
 	filename?: string;
 	githubPath?: string;
+	hideHeader?: boolean;
 }
 
 export const MDXComponentsFormat: MDXComponents = {
@@ -22,6 +23,7 @@ export const MDXComponentsFormat: MDXComponents = {
 				text={String(children)}
 				language={match[1] as StackVariants}
 				fileName={props?.filename}
+				hideHeader={props?.hideHeader}
 				dict={dict.ui}
 				github={{
 					path: props?.githubPath,

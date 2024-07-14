@@ -8,8 +8,7 @@
 	--color-background-rgb: 248, 250, 252;
 
 	--height-navbar: 64px;
-	--height-screen: 100vh;
-	// --height-screen: calc(100vh - var(--height-navbar));
+	--height-screen: calc(100vh - var(--height-navbar));
 	--z-index-navbar: 40;
 	--z-index-notification: 30;
 	--z-index-light: 30;

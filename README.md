@@ -13,12 +13,13 @@
 - [useDictionary()](src/shared/config/i18n/use-dictionary.ts) - как `getDictionary()`, только для клиентского компонента
 - [type Dictionary](src/shared/config/i18n/dictionaries.ts)
 - [/dictionary](src/shared/config/i18n/dictionaries/) - директория с json файлами переводов
+- [<Link />](src/shared/config/i18n/link.tsx) - компонент Link для i18n
 
 #### Особенности:
 
 Не нужно прокидывать props в каждый компонент, где используется перевод:
 
-```diff-ts
+```diff-js
 -	export const Navbar = ({ dict }: { dict: Dictionary['ui'] }) => {...}
 
 +	export const Navbar = async () => {
@@ -32,7 +33,7 @@
 + getDictionary()
 ```
 
-Просто используем в любом серверном компоненте `const dict = await getDictionary();` или прокидываем в клиентский компонент как props `{ dict }: { dict: Dictionary['ui'] }`
+Просто используем в любом серверном компоненте `const dict = await getDictionary();`, прокидываем в клиентский компонент как props `{ dict }: { dict: Dictionary['ui'] }` или используем `useDictionary()`
 
 ---
 

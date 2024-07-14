@@ -1,5 +1,5 @@
 import { getProjectsByCategory } from '@/entity/project';
-import { Link } from '@/shared/config';
+import { getDictionary, Link } from '@/shared/config';
 import { Header } from '@/widgets';
 import { Metadata } from 'next';
 
@@ -11,13 +11,14 @@ export default async function ProjectCategoryPage({
 	params,
 }: ProjectCategoryPageProps) {
 	const { projects, category } = await getProjectsByCategory(params.category);
+	const dict = await getDictionary();
 
 	return (
 		<>
 			<Header
-				note='Категория'
+				note={dict.ui['category-note']}
 				title={category.title}
-				description='Здесь находятся все проекты из данной категории'
+				description={dict.ui['category-description']}
 			/>
 
 			<div className='grid grid-cols-2 gap-4'>

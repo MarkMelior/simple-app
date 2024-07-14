@@ -6,7 +6,8 @@ import { GitHubPath } from '@/shared/types/github-path';
 import { Theme } from '@/shared/types/theme';
 import { Button, Link, Tooltip } from '@nextui-org/react';
 import { useTheme } from 'next-themes';
-import { FC, useEffect, useState } from 'react';
+import { Inter, JetBrains_Mono } from 'next/font/google';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { LuEye } from 'react-icons/lu';
 import { TbFileUnknown } from 'react-icons/tb';
 import SyntaxHighlighter from 'react-syntax-highlighter';
@@ -26,9 +27,12 @@ interface CodeBlockProps {
 	github?: GitHubPath;
 	className?: string;
 	disableLineNumbers?: boolean;
-	showHeader?: boolean;
+	hideHeader?: boolean;
 	dict: Dictionary['ui'];
 }
+
+const inter = Inter({ subsets: ['latin'] });
+const jetBrains_Mono = JetBrains_Mono({ subsets: ['latin'] });
 
 export const CodeBlock: FC<CodeBlockProps> = ({
 	text,
@@ -36,7 +40,7 @@ export const CodeBlock: FC<CodeBlockProps> = ({
 	github,
 	language = 'TypeScript',
 	linesLength = 10,
-	showHeader = true,
+	hideHeader,
 	className,
 	disableLineNumbers,
 	dict,
@@ -52,53 +56,85 @@ export const CodeBlock: FC<CodeBlockProps> = ({
 		setMounted(true);
 	}, []);
 
+	const buttons = useCallback(
+		({ hoverButton }: { hoverButton?: boolean } = {}) => (
+			<div
+				className={cn('flex gap-1 items-center', {
+					'absolute flex-col-reverse right-2 top-2 opacity-0 group-hover/buttons:opacity-100 transition-opacity':
+						hoverButton,
+				})}
+			>
+				{github?.path && (
+					<Tooltip
+						content={dict['code-view-github']}
+						placement={hoverButton ? 'left' : 'top'}
+					>
+						<Button
+							as={Link}
+							href={gitHubRepoLink(github)}
+							target='_blank'
+							variant='light'
+							isIconOnly
+							radius='sm'
+							size='sm'
+						>
+							<LuEye
+								size={20}
+								className='text-default-400 group-hover:text-default-600 transition-colors'
+							/>
+						</Button>
+					</Tooltip>
+				)}
+				<CopyButton
+					text={text}
+					dict={dict}
+					tooltipPlaceman={hoverButton ? 'left' : 'top'}
+				/>
+			</div>
+		),
+		[dict, github, text],
+	);
+
 	return (
 		<div
 			className={cn(
-				'my-4 rounded-md overflow-hidden border border-default-200 h-fit code-block__wrapper',
+				'my-4 rounded-md overflow-hidden border border-default-200 h-fit relative group/buttons code-block__wrapper',
+				inter.className,
 				className,
 			)}
 		>
-			<div className='bg-default-100 text-sm text-default-600 py-1 px-3 flex justify-between items-center'>
-				{StackButtonData[language]?.icon || <TbFileUnknown size={20} />}
-				{fileName ? fileName : language}
-				<div className='flex gap-1 items-center'>
-					{github?.path && (
-						<Tooltip content={dict['code-view-github']}>
-							<Button
-								as={Link}
-								href={gitHubRepoLink(github)}
-								target='_blank'
-								variant='light'
-								isIconOnly
-								radius='sm'
-								size='sm'
-							>
-								<LuEye
-									size={20}
-									className='text-default-400 group-hover:text-default-600'
-								/>
-							</Button>
-						</Tooltip>
-					)}
-					<CopyButton text={text} dict={dict} />
+			{!hideHeader && (
+				<div className='bg-default-100 text-sm text-default-600 py-1 px-3 flex justify-between items-center'>
+					{StackButtonData[language]?.icon || <TbFileUnknown size={20} />}
+					{fileName ? fileName : language}
+					{buttons()}
 				</div>
-			</div>
+			)}
 
-			<SyntaxHighlighter
-				language={language}
-				showLineNumbers={!disableLineNumbers}
-				style={
-					mounted
-						? theme === Theme.DARK
-							? atomOneDark
-							: atomOneLight
-						: atomOneDark
-				}
-				className='!bg-default-100 border-t-1 border-default-200 text-sm'
-			>
-				{isExpanded || !isLong ? text : lines.slice(0, linesLength).join('\n')}
-			</SyntaxHighlighter>
+			<>
+				{hideHeader && buttons({ hoverButton: true })}
+				<SyntaxHighlighter
+					language={language}
+					showLineNumbers={!disableLineNumbers}
+					style={
+						mounted
+							? theme === Theme.DARK
+								? atomOneDark
+								: atomOneLight
+							: atomOneDark
+					}
+					className={cn('!bg-default-100 border-t-1 border-default-200', {
+						'border-0': hideHeader,
+					})}
+					codeTagProps={{
+						className: cn('text-[0.85rem]', jetBrains_Mono.className),
+					}}
+				>
+					{isExpanded || !isLong
+						? text
+						: lines.slice(0, linesLength).join('\n')}
+				</SyntaxHighlighter>
+			</>
 
 			{isLong && (
 				<div className='relative'>

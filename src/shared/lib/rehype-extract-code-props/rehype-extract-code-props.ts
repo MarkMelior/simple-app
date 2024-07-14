@@ -4,25 +4,20 @@ export function rehypeExtractCodeProps() {
 	return (tree: any) => {
 		visit(tree, 'element', (node) => {
 			if (node.tagName === 'code' && node.data && node.data.meta) {
-				const metaString = node.data.meta;
-
-				// Извлечение filename
-				// const filenameMatch = metaString.match(/filename="([^"]+)"/);
-				// if (filenameMatch) {
-				// 	const filename = filenameMatch[1];
-				// 	node.properties = {
-				// 		...node.properties,
-				// 		filename,
-				// 	};
-				// }
+				const metaString = node.data.meta.trim();
 
 				// Извлечение всех пар ключ="значение"
-				const props = {};
-				const regex = /(\w+)="([^"]*)"/g;
+				const props: { [key: string]: string | boolean } = {};
+				const regex = /(\w+)="([^"]*)"|(\w+)/g;
 				let match;
 				while ((match = regex.exec(metaString)) !== null) {
-					// @ts-ignore
-					props[match[1]] = match[2];
+					if (match[2] !== undefined) {
+						// Для ключ="значение"
+						props[match[1]] = match[2];
+					} else {
+						// Для просто ключа (без значения)
+						props[match[3]] = true; // Присваиваем значение true
+					}
 				}
 
 				// Добавление извлеченных атрибутов в свойства узла
