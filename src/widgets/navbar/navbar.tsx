@@ -1,10 +1,9 @@
 import { getProjects } from '@/entity/project';
 import { Burger, LocaleSwitcher, ThemeSwitcher } from '@/features';
 import { Logo } from '@/shared/assets/icon/Logo';
-import { getDictionary } from '@/shared/config';
+import { getDictionary, Link } from '@/shared/config';
 import { DownloadCvButton, SidebarNavigation } from '@/shared/ui';
 import { Button } from '@nextui-org/react';
-import Link from 'next/link';
 import { BsGithub } from 'react-icons/bs';
 import cls from './navbar.module.scss';
 

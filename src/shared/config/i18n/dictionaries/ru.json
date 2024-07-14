@@ -11,6 +11,9 @@
 		"copy-code": "Скопировать код",
 		"copy-success": "Скопировано в буфер обмена",
 		"copy-error": "Не удалось скопировать",
+		"code-show": "Показать код",
+		"code-hide": "Скрыть",
+		"code-view-github": "Посмотреть код на GitHub",
 		"footer-copyright": "Копирайт © 2024 Mark Melior.",
 		"footer-made": "Сделано с ❤️",
 		"footer-edit": "Редактировать страницу на GitHub",
@@ -18,6 +21,8 @@
 		"footer-next": "Далее",
 		"navbar-title": "Simple App",
 		"navbar-desc": "Небольшие и современные пет-проекты",
-		"change-lang": "Сменить язык"
+		"change-lang": "Сменить язык",
+		"auth-logged": "Вы успешно вошли в систему как",
+		"auth-logout": "Выйти"
 	}
 }

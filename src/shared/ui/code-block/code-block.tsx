@@ -1,5 +1,6 @@
 'use client';
 
+import { Dictionary } from '@/shared/config';
 import { cn, gitHubRepoLink } from '@/shared/lib';
 import { GitHubPath } from '@/shared/types/github-path';
 import { Theme } from '@/shared/types/theme';
@@ -26,6 +27,7 @@ interface CodeBlockProps {
 	className?: string;
 	disableLineNumbers?: boolean;
 	showHeader?: boolean;
+	dict: Dictionary['ui'];
 }
 
 export const CodeBlock: FC<CodeBlockProps> = ({
@@ -37,6 +39,7 @@ export const CodeBlock: FC<CodeBlockProps> = ({
 	showHeader = true,
 	className,
 	disableLineNumbers,
+	dict,
 }) => {
 	const [isExpanded, setIsExpanded] = useState(false);
 	const lines = text.split('\n');
@@ -61,7 +64,7 @@ export const CodeBlock: FC<CodeBlockProps> = ({
 				{fileName ? fileName : language}
 				<div className='flex gap-1 items-center'>
 					{github?.path && (
-						<Tooltip content='View code on GitHub'>
+						<Tooltip content={dict['code-view-github']}>
 							<Button
 								as={Link}
 								href={gitHubRepoLink(github)}
@@ -78,7 +81,7 @@ export const CodeBlock: FC<CodeBlockProps> = ({
 							</Button>
 						</Tooltip>
 					)}
-					<CopyButton text={text} />
+					<CopyButton text={text} dict={dict} />
 				</div>
 			</div>
 
@@ -107,7 +110,7 @@ export const CodeBlock: FC<CodeBlockProps> = ({
 						onClick={() => setIsExpanded(!isExpanded)}
 						className='bg-default-100 text-default-600 py-2 px-3 w-full text-left data-[pressed=true]:scale-100 hover:bg-default-200'
 					>
-						{isExpanded ? 'Hide' : 'Show more'}
+						{isExpanded ? dict['code-hide'] : dict['code-show']}
 					</Button>
 				</div>
 			)}

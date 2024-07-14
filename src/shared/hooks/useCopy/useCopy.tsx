@@ -1,9 +1,11 @@
+import { useDictionary } from '@/shared/config';
 import { useState } from 'react';
 import { useMessage } from '../useMessage/useMessage';
 
 export const useCopy = () => {
 	const { showMessage } = useMessage();
 	const [copied, setCopied] = useState(false);
+	const dict = useDictionary();
 
 	const handleCopy = (text: string) => {
 		if (copied) {
@@ -12,15 +14,18 @@ export const useCopy = () => {
 
 		try {
 			navigator.clipboard.writeText(text);
-			showMessage({
-				content: 'Copied to clipboard!',
-				type: 'success',
-			});
+
+			dict?.ui &&
+				showMessage({
+					content: dict.ui['copy-success'],
+					type: 'success',
+				});
 		} catch (err) {
-			showMessage({
-				content: 'Failed to copy!',
-				type: 'error',
-			});
+			dict?.ui &&
+				showMessage({
+					content: dict.ui['copy-error'],
+					type: 'error',
+				});
 		}
 
 		setCopied(true);

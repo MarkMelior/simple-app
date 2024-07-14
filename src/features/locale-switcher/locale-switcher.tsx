@@ -64,17 +64,5 @@ export const LocaleSwitcher = ({ dict }: { dict: Dictionary['ui'] }) => {
 				</DropdownSection>
 			</DropdownMenu>
 		</Dropdown>
-		// <Tooltip content='Change language' placement='bottom' offset={15}>
-		// 	<Button
-		// 		as={Link}
-		// 		href={isDefaultLang ? '/en' : '/ru'}
-		// 		variant='light'
-		// 		isIconOnly
-		// 		color='primary'
-		// 	>
-		// 		<HiOutlineLanguage size={18} />
-		// 		{/* {isDefaultLang ? '🇷🇺' : '🇬🇧'} */}
-		// 	</Button>
-		// </Tooltip>
 	);
 };

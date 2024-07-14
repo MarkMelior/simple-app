@@ -1,7 +1,6 @@
 import { getProjects } from '@/entity/project';
-import { getDictionary, getLang } from '@/shared/config';
+import { getDictionary, getLang, Link } from '@/shared/config';
 import { getPathname } from '@/shared/lib';
-import Link from 'next/link';
 import { FooterNavigation } from './footer-navigation';
 
 export const Footer = async () => {
@@ -25,13 +24,15 @@ export const Footer = async () => {
 						</Link>
 					</p>
 				</div>
-				<Link
-					className='hover:text-default-600'
-					href={`https://github.com/MarkMelior/simple-app/blob/master${pathname}/${lang}.mdx`}
-					target='_blank'
-				>
-					{dict['footer-edit']}
-				</Link>
+				{pathname !== '/' && (
+					<Link
+						className='hover:text-default-600'
+						href={`https://github.com/MarkMelior/simple-app/blob/master${pathname}/${lang}.mdx`}
+						target='_blank'
+					>
+						{dict['footer-edit']}
+					</Link>
+				)}
 			</div>
 		</footer>
 	);

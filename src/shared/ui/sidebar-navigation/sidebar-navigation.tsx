@@ -1,9 +1,9 @@
 'use client';
 
 import { ProjectsResponse } from '@/entity/project';
+import { Link } from '@/shared/config';
 import { SidebarLinks } from '@/shared/const/sidebar-links';
 import { cn } from '@nextui-org/react';
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 export const SidebarNavigation = ({ items }: { items: ProjectsResponse[] }) => {

@@ -1,9 +1,9 @@
 .light {
 	overflow: hidden;
 	pointer-events: none;
-	// height: 100vh;
-	// position: absolute;
-	// width: 100%;
+	height: 100vh;
+	position: absolute;
+	width: 100%;
 }
 
 .ellipse1,
@@ -33,10 +33,10 @@
 
 .ellipse2 {
 	position: absolute;
-	top: 46.30vh;
+	top: 40vh;
 	right: 0;
 	width: 38.13vw;
-	height: 67.78vh;
+	height: 60vh;
 	background: var(--light-color-ellipse-2);
 	filter: var(--light-blur-ellipse-2);
 }

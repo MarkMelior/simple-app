@@ -11,6 +11,9 @@
 		"copy-code": "Copy code",
 		"copy-success": "Copied to clipboard",
 		"copy-error": "Failed to copy",
+		"code-show": "Show code",
+		"code-hide": "Hide",
+		"code-view-github": "View code on GitHub",
 		"footer-copyright": "Copyright © 2024 Mark Melior.",
 		"footer-made": "Made with ❤️",
 		"footer-edit": "Edit this page on GitHub",
@@ -18,6 +21,8 @@
 		"footer-next": "Next",
 		"navbar-title": "Simple App",
 		"navbar-desc": "Small and modern pet-projects",
-		"change-lang": "Change language"
+		"change-lang": "Change language",
+		"auth-logged": "You have successfully logged in as an",
+		"auth-logout": "Logout"
 	}
 }

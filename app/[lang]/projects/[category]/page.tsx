@@ -1,6 +1,7 @@
 import { getProjectsByCategory } from '@/entity/project';
+import { Link } from '@/shared/config';
+import { Header } from '@/widgets';
 import { Metadata } from 'next';
-import Link from 'next/link';
 
 export type ProjectCategoryPageProps = {
 	params: { category: string };
@@ -13,16 +14,26 @@ export default async function ProjectCategoryPage({
 
 	return (
 		<>
-			<h1>{category.title}</h1>
+			<Header
+				note='Категория'
+				title={category.title}
+				description='Здесь находятся все проекты из данной категории'
+			/>
 
-			<p>Projects:</p>
-			{projects.map((project) => (
-				<>
-					<Link href={project.link} key={project.title}>
-						{project.title} - {project.description}
+			<div className='grid grid-cols-2 gap-4'>
+				{projects.map((project) => (
+					<Link
+						href={project.link}
+						key={project.title}
+						className='px-6 py-4 bg-default-100 hover:bg-default-100/50 border border-default-200 hover:border-default-300 rounded-md flex flex-col gap-2 transition active:scale-[0.98]'
+					>
+						{project.title}
+						<span className='text-default-600 text-sm'>
+							{project.description}
+						</span>
 					</Link>
-				</>
-			))}
+				))}
+			</div>
 		</>
 	);
 }

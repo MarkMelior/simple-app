@@ -1,3 +1,6 @@
+'use client';
+
+import { Dictionary } from '@/shared/config';
 import { useCopy } from '@/shared/hooks';
 import { Button, Tooltip } from '@nextui-org/react';
 import { FC } from 'react';
@@ -5,15 +8,16 @@ import { LuCheck, LuCopy } from 'react-icons/lu';
 
 interface CopyButtonProps {
 	text: string;
+	dict: Dictionary['ui'];
 }
 
-export const CopyButton: FC<CopyButtonProps> = ({ text }) => {
+export const CopyButton: FC<CopyButtonProps> = ({ text, dict }) => {
 	const { handleCopy, copied } = useCopy();
 
 	return (
-		<Tooltip content='Copy code'>
+		<Tooltip content={dict['copy-code']}>
 			<Button
-				aria-label='Copy to clipboard'
+				aria-label={dict['copy-success']}
 				isDisabled={copied}
 				onClick={() => handleCopy(text)}
 				data-copied={copied}

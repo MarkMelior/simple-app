@@ -8,7 +8,9 @@
 
 - [middleware.ts](/middleware.ts) - основной функционал работы i18n
 - [getLang()](src/shared/config/i18n/get-lang.ts) - возвращает выбранный язык `en | ru`
+- [useLang()](src/shared/config/i18n/use-lang.ts) - как `getLang()`, только для клиентского компонента
 - [getDictionary()](src/shared/config/i18n/dictionaries.ts) - возвращает объект с переводами `ключ-значение`
+- [useDictionary()](src/shared/config/i18n/use-dictionary.ts) - как `getDictionary()`, только для клиентского компонента
 - [type Dictionary](src/shared/config/i18n/dictionaries.ts)
 - [/dictionary](src/shared/config/i18n/dictionaries/) - директория с json файлами переводов
 

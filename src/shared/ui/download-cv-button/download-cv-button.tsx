@@ -1,7 +1,6 @@
-import { Dictionary } from '@/shared/config';
+import { Dictionary, Link } from '@/shared/config';
 import { cn } from '@/shared/lib';
 import { Button } from '@nextui-org/react';
-import Link from 'next/link';
 import { FaDownload } from 'react-icons/fa6';
 
 export const DownloadCvButton = ({

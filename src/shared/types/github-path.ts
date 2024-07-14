@@ -1,5 +1,5 @@
 export interface GitHubPath {
-	path: string;
+	path?: string;
 	owner?: string;
 	repo?: string;
 }

@@ -1,5 +1,5 @@
+import { Link } from '@/shared/config';
 import { cn, toKebabCase, toLatin } from '@/shared/lib';
-import Link from 'next/link';
 import { ComponentPropsWithoutRef } from 'react';
 import { FiLink } from 'react-icons/fi';
 

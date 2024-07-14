@@ -1,18 +1,20 @@
 import { Code, CodeBlock, StackVariants, Text } from '@/shared/ui';
 import type { MDXComponents } from 'mdx/types';
+import { getDictionary } from './shared/config';
 
 interface ExtendedCodeProps extends React.HTMLAttributes<HTMLElement> {
 	filename?: string;
-	// [key: string]: any; // Для поддержки любых других пользовательских атрибутов
+	githubPath?: string;
 }
 
 export const MDXComponentsFormat: MDXComponents = {
-	code: (props: ExtendedCodeProps) => {
+	code: async (props: ExtendedCodeProps) => {
 		const { children, className, ...rest } = props;
 		const match = /language-(\w+)/.exec(className || '');
+		const dict = await getDictionary();
 
 		if (!match) {
-			return <Code text={String(children)} {...rest} />;
+			return <Code dict={dict.ui} text={String(children)} {...rest} />;
 		}
 
 		return (
@@ -20,6 +22,10 @@ export const MDXComponentsFormat: MDXComponents = {
 				text={String(children)}
 				language={match[1] as StackVariants}
 				fileName={props?.filename}
+				dict={dict.ui}
+				github={{
+					path: props?.githubPath,
+				}}
 				{...rest}
 			/>
 		);
