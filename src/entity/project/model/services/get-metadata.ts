@@ -15,6 +15,7 @@ export interface ProjectMetadata {
 
 export interface CategoryMetadata {
 	title: string;
+	link: string;
 }
 
 export async function getMetadata(filePath: string): Promise<Metadata> {

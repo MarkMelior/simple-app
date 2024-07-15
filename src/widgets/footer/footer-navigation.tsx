@@ -14,8 +14,15 @@ export const FooterNavigation = ({
 	projects: ProjectsResponse[];
 }) => {
 	const pathname = usePathname();
-	const [prevPage, setPrevPage] = useState('/');
-	const [nextPage, setNextPage] = useState('/');
+
+	const [prevPage, setPrevPage] = useState<{
+		link: string;
+		title: string;
+	}>({ link: '/', title: dict['footer-nav-home'] });
+	const [nextPage, setNextPage] = useState<{
+		link: string;
+		title: string;
+	}>({ link: '/', title: dict['footer-nav-home'] });
 
 	useEffect(() => {
 		if (pathname) {
@@ -32,20 +39,20 @@ export const FooterNavigation = ({
 			})),
 		);
 
-		const currentIndex = allPages.findIndex(
-			(page) => page.link === currentPath,
+		const currentIndex = allPages.findIndex((page) =>
+			currentPath.endsWith(page.link),
 		);
 
 		if (currentIndex > 0) {
-			setPrevPage(allPages[currentIndex - 1].link);
+			setPrevPage(allPages[currentIndex - 1]);
 		} else {
-			setPrevPage('/');
+			setPrevPage({ ...prevPage, link: '/', title: dict['footer-nav-home'] });
 		}
 
 		if (currentIndex < allPages.length - 1) {
-			setNextPage(allPages[currentIndex + 1].link);
+			setNextPage(allPages[currentIndex + 1]);
 		} else {
-			setNextPage('/');
+			setNextPage({ ...nextPage, link: '/', title: dict['footer-nav-home'] });
 		}
 	};
 
@@ -54,7 +61,7 @@ export const FooterNavigation = ({
 			<Button
 				as={Link}
 				className='bg-default-200/50 group flex items-center text-default-900'
-				href={prevPage}
+				href={prevPage.link}
 				isDisabled={pathname === '/'}
 				size='sm'
 				variant='flat'
@@ -72,16 +79,18 @@ export const FooterNavigation = ({
 						strokeLinejoin='round'
 					/>
 				</svg>
-				{dict['footer-prev']}
+				<span className='text-default-600'>{dict['footer-prev']}:</span>
+				{prevPage.title}
 			</Button>
 			<Button
 				as={Link}
 				className='bg-default-200/50 group ml-auto flex items-center text-default-900'
-				href={nextPage}
+				href={nextPage.link}
 				size='sm'
 				variant='flat'
 			>
-				{dict['footer-next']}
+				<span className='text-default-600'>{dict['footer-next']}:</span>
+				{nextPage.title}
 				<svg
 					viewBox='0 0 3 6'
 					className='ml-3 w-auto h-1.5 text-default-500 overflow-visible group-hover:text-default-500'

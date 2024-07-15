@@ -1,8 +1,8 @@
 import { ClientProviders } from '@/app/providers/client-providers';
 import '@/app/styles/index.scss';
 import { i18n, Locale } from '@/shared/config';
-import { PageLoader } from '@/shared/ui';
-import { Footer, Light, Navbar, Sidebar } from '@/widgets';
+import { Light, PageLoader } from '@/shared/ui';
+import { Footer, Navbar, Sidebar } from '@/widgets';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Suspense } from 'react';

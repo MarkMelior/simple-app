@@ -21,7 +21,7 @@ export default async function ProjectCategoryPage({
 				description={dict.ui['category-description']}
 			/>
 
-			<div className='grid grid-cols-2 gap-4'>
+			<div className='grid sm:grid-cols-2 gap-4'>
 				{projects.map((project) => (
 					<Link
 						href={project.link}

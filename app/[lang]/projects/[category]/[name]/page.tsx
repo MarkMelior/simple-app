@@ -13,7 +13,10 @@ export type ProjectPageProps = {
 };
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
-	const { metadata, content } = await getProject(params.category, params.name);
+	const { metadata, content, metadataCategory } = await getProject(
+		params.category,
+		params.name,
+	);
 
 	const customComponents: MDXComponents = {
 		AuthExample: dynamic(() =>
@@ -26,7 +29,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 	return (
 		<>
 			<Header
-				note={metadata?.note}
+				note={metadataCategory?.title}
+				noteLink={metadataCategory?.link}
 				title={metadata?.title}
 				description={metadata?.description}
 				tags={metadata?.tags}

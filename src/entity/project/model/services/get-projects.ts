@@ -22,7 +22,7 @@ export async function getProjects(): Promise<ProjectsResponse[]> {
 	for (const dirent of categoryDirs) {
 		if (dirent.isDirectory()) {
 			const categoryDir = path.join(rootDir, dirent.name);
-			const indexFile = path.join(categoryDir, `index-${lang}.mdx`);
+			const indexFile = path.join(categoryDir, `${lang}.mdx`);
 			const categoryMetadata = (await getMetadata(
 				indexFile,
 			)) as CategoryMetadata;

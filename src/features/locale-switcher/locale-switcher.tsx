@@ -31,7 +31,7 @@ export const LocaleSwitcher = ({ dict }: { dict: Dictionary['ui'] }) => {
 	};
 
 	return (
-		<Dropdown offset={15}>
+		<Dropdown offset={20} backdrop='opaque'>
 			<DropdownTrigger>
 				<Button variant='light' isIconOnly color='primary'>
 					<HiOutlineLanguage size={18} />
@@ -51,7 +51,7 @@ export const LocaleSwitcher = ({ dict }: { dict: Dictionary['ui'] }) => {
 						as={Link}
 						href={redirectedPathName('ru')}
 					>
-						Russia
+						{dict['lang-rus']}
 					</DropdownItem>
 					<DropdownItem
 						startContent={'en'}
@@ -59,7 +59,7 @@ export const LocaleSwitcher = ({ dict }: { dict: Dictionary['ui'] }) => {
 						as={Link}
 						href={redirectedPathName('en')}
 					>
-						English
+						{dict['lang-eng']}
 					</DropdownItem>
 				</DropdownSection>
 			</DropdownMenu>

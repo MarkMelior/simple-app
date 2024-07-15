@@ -25,7 +25,7 @@ export const Navbar = async () => {
 					href='/'
 					className='gap-0 h-auto ml-3 text-xs leading-5 font-medium text-primary-400 bg-primary-400/10 rounded-full py-1 px-3 flex items-center hover:bg-primary-400/20'
 				>
-					<span>{dict['navbar-title']}</span>
+					<span>🚀 {dict['navbar-title']}</span>
 					<svg
 						width='2'
 						height='2'
@@ -59,7 +59,7 @@ export const Navbar = async () => {
 							color='default'
 							fullWidth
 							radius='sm'
-							className='mb-3'
+							className='mb-3 py-6 md:py-4'
 							startContent={<BsGithub size={20} />}
 						>
 							GitHub

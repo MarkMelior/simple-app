@@ -4,11 +4,12 @@ import { getLang } from '@/shared/config';
 import fs from 'fs';
 import matter from 'gray-matter';
 import path from 'path';
-import { ProjectMetadata } from './get-metadata';
+import { CategoryMetadata, ProjectMetadata } from './get-metadata';
 
 export interface ProjectResponse {
 	metadata: ProjectMetadata;
 	content: string;
+	metadataCategory: CategoryMetadata;
 }
 
 export async function getProject(
@@ -33,6 +34,16 @@ export async function getProject(
 	const matterData = matter(mdxFile);
 	const matterMetadata = matterData.data as ProjectMetadata;
 
+	const dirCategory = path.join(
+		process.cwd(),
+		'projects',
+		category,
+		`${lang}.mdx`,
+	);
+	const mdxFileCategory = fs.readFileSync(dirCategory);
+	const matterMetadataCategory = matter(mdxFileCategory)
+		.data as CategoryMetadata;
+
 	// if (!exportedMetadata && !matterMetadata)
 	if (!matterMetadata)
 		throw new Error(
@@ -42,6 +53,10 @@ export async function getProject(
 	return {
 		// metadata: exportedMetadata || matterMetadata,
 		metadata: matterMetadata,
+		metadataCategory: {
+			...matterMetadataCategory,
+			link: `/projects/${category}`,
+		},
 		content: matterData.content,
 	};
 }

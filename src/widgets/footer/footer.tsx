@@ -1,12 +1,11 @@
 import { getProjects } from '@/entity/project';
 import { getDictionary, getLang, Link } from '@/shared/config';
-import { getPathname } from '@/shared/lib';
+import { FooterGithubLink } from './footer-github-link';
 import { FooterNavigation } from './footer-navigation';
 import cls from './footer.module.scss';
 
 export const Footer = async () => {
 	const lang = await getLang();
-	const pathname = await getPathname({ withoutLang: true });
 
 	const dictionary = await getDictionary();
 	const dict = dictionary.ui;
@@ -25,15 +24,7 @@ export const Footer = async () => {
 						</Link>
 					</p>
 				</div>
-				{pathname !== '/' && (
-					<Link
-						className='hover:text-default-600 transition'
-						href={`https://github.com/MarkMelior/simple-app/blob/master${pathname}/${lang}.mdx`}
-						target='_blank'
-					>
-						{dict['footer-edit']}
-					</Link>
-				)}
+				<FooterGithubLink dict={dict} lang={lang} />
 			</div>
 		</footer>
 	);
