@@ -2,7 +2,7 @@ import { getProjects } from '@/entity/project';
 import { Burger, LocaleSwitcher, ThemeSwitcher } from '@/features';
 import { Logo } from '@/shared/assets/icon/Logo';
 import { getDictionary, Link } from '@/shared/config';
-import { DownloadCvButton, SidebarNavigation } from '@/shared/ui';
+import { DownloadCvButton, GlowingLine, SidebarNavigation } from '@/shared/ui';
 import { Button } from '@nextui-org/react';
 import { BsGithub } from 'react-icons/bs';
 import cls from './navbar.module.scss';
@@ -69,6 +69,7 @@ export const Navbar = async () => {
 					</Burger>
 				</div>
 			</div>
+			<GlowingLine />
 		</div>
 	);
 };

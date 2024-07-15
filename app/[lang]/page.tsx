@@ -1,22 +1,15 @@
-import { Locale } from '@/shared/config';
+import { getDictionary } from '@/shared/config';
+import { StackButtons } from '@/shared/ui';
 import { Header } from '@/widgets';
-import { getDictionary } from '../../src/shared/config/i18n/dictionaries';
 
-export default async function Home({
-	params: { lang },
-}: {
-	params: { lang: Locale };
-}) {
-	// const lang = await getLang();
-	// const HomePage = dynamic(() => import(`./home-${lang}.mdx`));
-
-	const dictionary = await getDictionary(lang);
+export default async function Home() {
+	const dictionary = await getDictionary();
 	const { description, note, title } = dictionary['home-page'];
 
 	return (
 		<>
 			<Header note={note} title={title} description={description} />
-			{/* <HomePage /> */}
+			<StackButtons tags={['TypeScript', 'Next.js', 'SSR', 'Markdown']} />
 		</>
 	);
 }

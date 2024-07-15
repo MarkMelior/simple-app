@@ -15,13 +15,13 @@ export type StackVariants =
 	| 'Markdown'
 	| 'Prisma';
 
-interface ButtonProps {
+interface StackProps {
 	icon: JSX.Element;
 	colorText?: string;
 	color?: string;
 }
 
-export const StackButtonData: Record<StackVariants[number], ButtonProps> = {
+export const StackData: Record<StackVariants[number], StackProps> = {
 	TypeScript: {
 		icon: <BiLogoTypescript size={20} />,
 		color: 'bg-blue-500/10',

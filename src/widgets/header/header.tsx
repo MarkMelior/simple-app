@@ -39,7 +39,7 @@ export const Header: React.FC<HeaderProps> = ({
 			</div>
 			<p className='mt-2 text-lg text-default-600'>{description}</p>
 
-			<StackButtons tags={tags} isColored={false} className='mt-6' />
+			<StackButtons tags={tags} className='mt-6' />
 		</header>
 	);
 };

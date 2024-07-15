@@ -1,6 +1,6 @@
 'use client';
 
-import { Dictionary, Link, Locale } from '@/shared/config';
+import { Dictionary, i18n, Link, Locale } from '@/shared/config';
 import { usePathname } from 'next/navigation';
 import { FC } from 'react';
 
@@ -9,17 +9,18 @@ interface FooterGithubLinkProps {
 	lang: Locale;
 }
 
-export const FooterGithubLink: FC<FooterGithubLinkProps> = async ({
-	dict,
-	lang,
-}) => {
+export const FooterGithubLink: FC<FooterGithubLinkProps> = ({ dict, lang }) => {
 	const pathname = usePathname();
 
-	if (pathname === '/') return null;
+	if (
+		pathname === '/' ||
+		i18n.locales.includes(pathname.split('/')[1] as Locale)
+	)
+		return null;
 
 	const hrefGithub = `https://github.com/MarkMelior/simple-app/blob/master${pathname}/${lang}.mdx`;
 
-	const hrefHomePage = `https://github.com/MarkMelior`;
+	// const hrefHomePage = `https://github.com/MarkMelior/simple-app/blob/master/app/[lang]/page.tsx`;
 
 	return (
 		<Link

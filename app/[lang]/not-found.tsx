@@ -1,11 +1,7 @@
-export default async function NotFound() {
-// 	{
-// 	params: { lang },
-// }: {
-// 	params: { lang: Locale };
-// }
-	// const dictionary = await getDictionary(lang);
+import { getDictionary } from '@/shared/config';
 
-	return <>Not fount page.</>;
-	// return <>{dictionary['ui']['page-not-found']}</>;
+export default async function NotFound() {
+	const dictionary = await getDictionary();
+
+	return <>{dictionary['ui']['page-not-found']}</>;
 }

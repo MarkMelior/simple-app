@@ -1,13 +1,11 @@
 import { ClientProviders } from '@/app/providers/client-providers';
 import '@/app/styles/index.scss';
 import { i18n, Locale } from '@/shared/config';
+import { FontDefault } from '@/shared/const/fonts';
 import { Light, PageLoader } from '@/shared/ui';
 import { Footer, Navbar, Sidebar } from '@/widgets';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import { Suspense } from 'react';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
 	title: 'Simple App | Mark Melior',
@@ -29,12 +27,12 @@ export default async function RootLayout({
 }: Readonly<Props>) {
 	return (
 		<html lang={params.lang}>
-			<body className={inter.className}>
+			<body className={FontDefault.className}>
 				<ClientProviders>
 					<Suspense
 						fallback={
 							<>
-								<Light variant='first' />
+								<Light />
 								<PageLoader fullScreen />
 							</>
 						}

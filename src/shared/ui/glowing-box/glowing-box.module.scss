@@ -1,0 +1,46 @@
+.glowing-iconbox {
+	position: relative;
+
+	&:hover::after {
+		opacity: var(--spotlight-border-strength-hover);
+	}
+
+	&:hover::before {
+		opacity: var(--spotlight-bg-strength-hover);
+	}
+
+	&::before,
+	&::after {
+		content: "";
+		border-radius: inherit;
+		height: 100%;
+		position: absolute;
+		left: 0;
+		top: 0;
+		transition: opacity .5s;
+		width: 100%;
+		pointer-events: none;
+		will-change: background;
+	}
+
+	&::before {
+		opacity: var(--spotlight-bg-strength);
+		z-index: 3;
+		background: radial-gradient(var(--spotlight-bg-size) circle at var(--mouse-x) var(--mouse-y), #488bff, transparent 40%);
+	}
+
+	&::after {
+		opacity: var(--spotlight-border-strength);
+		z-index: 1;
+		background: radial-gradient(var(--spotlight-border-size) circle at var(--mouse-x) var(--mouse-y),
+				rgba(57, 196, 255, 1) 0%,
+				rgba(227, 57, 255, 1) 50%,
+				rgba(0, 0, 0, 0) 100%, transparent 40%);
+		// background: radial-gradient(var(--spotlight-border-size) circle at var(--mouse-x) var(--mouse-y),
+		// 		rgba(57, 196, 255, 1) 0%,
+		// 		rgba(57, 101, 255, 1) 25%,
+		// 		rgba(227, 57, 255, 1) 50%,
+		// 		rgba(0, 0, 0, 0) 75%,
+		// 		rgba(0, 0, 0, 0) 100%, transparent 40%);
+	}
+}

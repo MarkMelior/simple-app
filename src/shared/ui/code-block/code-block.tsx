@@ -1,12 +1,12 @@
 'use client';
 
 import { Dictionary } from '@/shared/config';
+import { FontCode, FontDefault } from '@/shared/const/fonts';
 import { cn, gitHubRepoLink } from '@/shared/lib';
 import { GitHubPath } from '@/shared/types/github-path';
 import { Theme } from '@/shared/types/theme';
 import { Button, Link, Tooltip } from '@nextui-org/react';
 import { useTheme } from 'next-themes';
-import { Inter, JetBrains_Mono } from 'next/font/google';
 import { FC, useCallback, useEffect, useState } from 'react';
 import { LuEye } from 'react-icons/lu';
 import { TbFileUnknown } from 'react-icons/tb';
@@ -15,8 +15,8 @@ import {
 	atomOneDark,
 	atomOneLight,
 } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
+import { StackData, StackVariants } from '../../const/stack-data';
 import { CopyButton } from '../copy-button/copy-button';
-import { StackButtonData, StackVariants } from '../stack-buttons/model/data';
 import './code-block.scss';
 
 interface CodeBlockProps {
@@ -30,9 +30,6 @@ interface CodeBlockProps {
 	hideHeader?: boolean;
 	dict: Dictionary['ui'];
 }
-
-const inter = Inter({ subsets: ['latin'] });
-const jetBrains_Mono = JetBrains_Mono({ subsets: ['latin'] });
 
 export const CodeBlock: FC<CodeBlockProps> = ({
 	text,
@@ -99,13 +96,13 @@ export const CodeBlock: FC<CodeBlockProps> = ({
 		<div
 			className={cn(
 				'my-4 rounded-md overflow-hidden border border-default-200 h-fit relative group/buttons code-block__wrapper',
-				inter.className,
+				FontDefault.className,
 				className,
 			)}
 		>
 			{!hideHeader && (
 				<div className='bg-default-100 text-sm text-default-600 py-1 px-3 flex justify-between items-center'>
-					{StackButtonData[language]?.icon || <TbFileUnknown size={20} />}
+					{StackData[language]?.icon || <TbFileUnknown size={20} />}
 					{fileName ? fileName : language}
 					{buttons()}
 				</div>
@@ -127,7 +124,7 @@ export const CodeBlock: FC<CodeBlockProps> = ({
 						'border-0': hideHeader,
 					})}
 					codeTagProps={{
-						className: cn('text-[0.85rem]', jetBrains_Mono.className),
+						className: cn('text-[0.85rem]', FontCode.className),
 					}}
 				>
 					{isExpanded || !isLong

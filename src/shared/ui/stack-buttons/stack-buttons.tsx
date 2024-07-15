@@ -1,6 +1,6 @@
 import { cn } from '@/shared/lib';
 import { Button } from '@nextui-org/react';
-import { StackButtonData, StackVariants } from './model/data';
+import { StackData, StackVariants } from '../../const/stack-data';
 
 interface StackButtonsProps {
 	tags?: StackVariants[];
@@ -10,7 +10,7 @@ interface StackButtonsProps {
 
 export const StackButtons = ({
 	tags,
-	isColored = true,
+	isColored,
 	className,
 }: StackButtonsProps) => {
 	if (!tags) {
@@ -25,11 +25,11 @@ export const StackButtons = ({
 					variant='flat'
 					disableRipple
 					size='sm'
-					startContent={StackButtonData[tag]?.icon}
+					startContent={StackData[tag]?.icon}
 					className={`${
-						(isColored && StackButtonData[tag]?.color) || 'bg-default-500/10'
+						(isColored && StackData[tag]?.color) || 'bg-default-500/10'
 					} ${
-						(isColored && StackButtonData[tag]?.colorText) || 'text-default-700'
+						(isColored && StackData[tag]?.colorText) || 'text-default-700'
 					} cursor-default`}
 				>
 					{tag}
