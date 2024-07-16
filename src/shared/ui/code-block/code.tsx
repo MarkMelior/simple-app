@@ -22,7 +22,7 @@ export const Code: FC<CodeProps> = ({ text, dict }) => {
 				onClick={() => handleCopy(text)}
 				disableRipple
 				className={cn(
-					'bg-default-200/50 py-0.5 px-1 h-fit rounded-md -top-0.5 select-text min-w-fit border border-default-200',
+					'bg-default-200/50 py-0.5 px-1 h-fit rounded-md -top-0.5 select-text min-w-fit border border-default-200 text-default-700',
 					FontDefault.className,
 				)}
 			>

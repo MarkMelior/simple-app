@@ -11,4 +11,8 @@
 				theme('colors.primary-400') 0%,
 				rgba(0, 0, 0, 0) 100%, transparent 40%);
 	}
+
+	@media (max-width: theme('screens.lg')) {
+		display: none;
+	}
 }

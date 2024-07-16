@@ -15,7 +15,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 		params.name,
 	);
 
-	const customComponents: MDXComponents = {
+	const components: MDXComponents = {
 		AuthExample: dynamic(() =>
 			import('@/projects/best-practice/app-router-auth/examples/auth').then(
 				(mod) => mod.AuthExample,
@@ -32,7 +32,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 				description={metadata?.description}
 				tags={metadata?.tags}
 			/>
-			<MDXRemote source={content} components={customComponents} />
+			<MDXRemote source={content} components={components} />
 		</>
 	);
 }

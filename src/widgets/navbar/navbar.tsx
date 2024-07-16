@@ -15,6 +15,7 @@ export const Navbar = async () => {
 
 	return (
 		<div className={cls.wrapper}>
+			<GlowingLine />
 			<div className='max-w-8xl mx-auto px-4 sm:px-6 md:px-8 flex items-center h-full'>
 				{/* <Link className='mr-1 sm:mr-3 flex-none' href='/'> */}
 				<span className='sr-only'>Simple App home page</span>
@@ -70,7 +71,6 @@ export const Navbar = async () => {
 					</Burger>
 				</div>
 			</div>
-			<GlowingLine />
 		</div>
 	);
 };

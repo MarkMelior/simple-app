@@ -9,7 +9,6 @@ import { Light } from './light/light';
 import { PageLoader } from './page-loader/page-loader';
 import { SidebarNavigation } from './sidebar-navigation/sidebar-navigation';
 import { StackButtons } from './stack-buttons/stack-buttons';
-import { Text } from './text/text';
 
 export {
 	Blackhole,
@@ -22,7 +21,6 @@ export {
 	PageLoader,
 	SidebarNavigation,
 	StackButtons,
-	Text,
 };
 
 export type { StackVariants };
