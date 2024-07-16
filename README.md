@@ -1,4 +1,4 @@
-## Реализованный функционал
+Link## Реализованный функционал
 
 ### Интернационализация (i18n)
 
@@ -13,13 +13,13 @@
 - [useDictionary()](src/shared/config/i18n/use-dictionary.ts) - как `getDictionary()`, только для клиентского компонента
 - [type Dictionary](src/shared/config/i18n/dictionaries.ts)
 - [/dictionary](src/shared/config/i18n/dictionaries/) - директория с json файлами переводов
-- [<Link />](src/shared/config/i18n/link.tsx) - компонент Link для i18n
+- [Link](src/shared/config/i18n/link.tsx) - компонент Link для i18n
 
 #### Особенности:
 
 Не нужно прокидывать props в каждый компонент, где используется перевод:
 
-```diff-js
+```diff
 -	export const Navbar = ({ dict }: { dict: Dictionary['ui'] }) => {...}
 
 +	export const Navbar = async () => {

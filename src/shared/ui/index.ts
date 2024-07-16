@@ -1,4 +1,5 @@
 import { StackVariants } from '../const/stack-data';
+import { Blackhole } from './blackhole/blackhole';
 import { Code } from './code-block/code';
 import { CodeBlock } from './code-block/code-block';
 import { DownloadCvButton } from './download-cv-button/download-cv-button';
@@ -11,6 +12,7 @@ import { StackButtons } from './stack-buttons/stack-buttons';
 import { Text } from './text/text';
 
 export {
+	Blackhole,
 	Code,
 	CodeBlock,
 	DownloadCvButton,

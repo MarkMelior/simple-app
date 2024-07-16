@@ -16,14 +16,14 @@ export const Navbar = async () => {
 	return (
 		<div className={cls.wrapper}>
 			<div className='max-w-8xl mx-auto px-4 sm:px-6 md:px-8 flex items-center h-full'>
-				<Link className='mr-1 sm:mr-3 flex-none' href='/'>
-					<span className='sr-only'>Simple App home page</span>
-					<Logo className='transform scale-85 sm:scale-100' />
-				</Link>
+				{/* <Link className='mr-1 sm:mr-3 flex-none' href='/'> */}
+				<span className='sr-only'>Simple App home page</span>
+				<Logo className='transform scale-85 sm:scale-100' changeOnClick />
+				{/* </Link> */}
 				<Button
 					as={Link}
 					href='/'
-					className='gap-0 h-auto ml-3 text-xs leading-5 font-medium text-primary-400 bg-primary-400/10 rounded-full py-1 px-3 flex items-center hover:bg-primary-400/20'
+					className='gap-0 h-auto ml-3 sm:ml-5 text-xs leading-5 font-medium text-primary-400 bg-primary-400/10 rounded-full py-1 px-3 flex items-center hover:bg-primary-400/20'
 				>
 					<span>🚀 {dict['navbar-title']}</span>
 					<svg
@@ -37,6 +37,7 @@ export const Navbar = async () => {
 					</svg>
 					<span className='hidden md:inline'>{dict['navbar-desc']}</span>
 				</Button>
+				{/* <NavbarLoader /> */}
 				<div className='gap-2 relative flex items-center ml-auto'>
 					<ThemeSwitcher />
 					<LocaleSwitcher dict={dict} />

@@ -3,8 +3,8 @@
 	"plugins": ["ulbi-tv-plugin"],
 	"rules": {
 		// "react/display-name": "off",
-		// "@next/next/no-img-element": "off",
 		// "jsx-a11y/alt-text": "off",
+		"@next/next/no-img-element": "off",
 		"react/self-closing-comp": [
 			"error",
 			{

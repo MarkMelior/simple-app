@@ -1,12 +1,9 @@
 import { getProject } from '@/entity/project';
-import { MDXComponentsFormat } from '@/mdx-components';
-import { rehypeExtractCodeProps } from '@/shared/lib';
+import { MDXRemote } from '@/shared/config';
 import { Header } from '@/widgets';
 import { MDXComponents } from 'mdx/types';
 import { Metadata } from 'next';
-import { MDXRemote } from 'next-mdx-remote/rsc';
 import dynamic from 'next/dynamic';
-import remarkGfm from 'remark-gfm';
 
 export type ProjectPageProps = {
 	params: { name: string; category: string };
@@ -29,22 +26,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 	return (
 		<>
 			<Header
-				note={metadataCategory?.title}
-				noteLink={metadataCategory?.link}
+				note={metadata?.note || metadataCategory?.title}
+				noteLink={metadata?.note || metadataCategory?.link}
 				title={metadata?.title}
 				description={metadata?.description}
 				tags={metadata?.tags}
 			/>
-			<MDXRemote
-				source={content}
-				components={{ ...MDXComponentsFormat, ...customComponents }}
-				options={{
-					mdxOptions: {
-						rehypePlugins: [rehypeExtractCodeProps],
-						remarkPlugins: [remarkGfm],
-					},
-				}}
-			/>
+			<MDXRemote source={content} components={customComponents} />
 		</>
 	);
 }

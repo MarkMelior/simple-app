@@ -1,27 +1,15 @@
 'use server';
 
 import { getLang } from '@/shared/config';
-import fs from 'fs';
-import matter from 'gray-matter';
+import { CategoryMetadata, getMdx } from '@/shared/lib';
 import path from 'path';
-import { CategoryMetadata, ProjectMetadata } from './get-metadata';
-
-export interface ProjectResponse {
-	metadata: ProjectMetadata;
-	content: string;
-	metadataCategory: CategoryMetadata;
-}
+import { ProjectResponse } from '../types/mdx.type';
 
 export async function getProject(
 	category: string,
 	name: string,
 ): Promise<ProjectResponse> {
 	const lang = await getLang();
-	// const { metadata: exportedMetadata } = (await import(
-	// 	`/projects/${category}/${name}/page.mdx`
-	// )) as Partial<{
-	// 	metadata: ProjectMetadata;
-	// }>;
 
 	const dir = path.join(
 		process.cwd(),
@@ -30,9 +18,9 @@ export async function getProject(
 		name,
 		`${lang}.mdx`,
 	);
-	const mdxFile = fs.readFileSync(dir);
-	const matterData = matter(mdxFile);
-	const matterMetadata = matterData.data as ProjectMetadata;
+	const mdx = await getMdx(dir);
+	const metadata = mdx.metadata;
+	const content = mdx.content;
 
 	const dirCategory = path.join(
 		process.cwd(),
@@ -40,23 +28,19 @@ export async function getProject(
 		category,
 		`${lang}.mdx`,
 	);
-	const mdxFileCategory = fs.readFileSync(dirCategory);
-	const matterMetadataCategory = matter(mdxFileCategory)
-		.data as CategoryMetadata;
+	const mdxCategory = await getMdx<CategoryMetadata>(dirCategory);
+	const metadataCategory = mdxCategory.metadata;
+	const contentCategory = mdxCategory.content;
 
-	// if (!exportedMetadata && !matterMetadata)
-	if (!matterMetadata)
-		throw new Error(
-			`Unable to find metadata in file /projects/${name}/${lang}.mdx`,
-		);
+	if (!metadata) throw new Error(`Unable to find metadata in file "${dir}"`);
 
 	return {
-		// metadata: exportedMetadata || matterMetadata,
-		metadata: matterMetadata,
+		metadata,
 		metadataCategory: {
-			...matterMetadataCategory,
+			...metadataCategory,
 			link: `/projects/${category}`,
 		},
-		content: matterData.content,
+		contentCategory,
+		content,
 	};
 }

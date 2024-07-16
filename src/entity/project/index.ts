@@ -1,9 +1,7 @@
-import { getProject, ProjectResponse } from './model/services/get-project';
-import { getProjects, ProjectsResponse } from './model/services/get-projects';
-import {
-	getProjectsByCategory,
-	ProjectsByCategoryResponse,
-} from './model/services/get-projects-by-category';
+import { getProject } from './model/services/get-project';
+import { getProjects } from './model/services/get-projects';
+import { getProjectsByCategory } from './model/services/get-projects-by-category';
+import { ProjectResponse, ProjectsResponse } from './model/types/mdx.type';
 
 export { getProject, getProjects, getProjectsByCategory };
-export type { ProjectResponse, ProjectsByCategoryResponse, ProjectsResponse };
+export type { ProjectResponse, ProjectsResponse };

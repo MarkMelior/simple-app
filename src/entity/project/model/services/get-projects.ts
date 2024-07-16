@@ -1,15 +1,10 @@
 'use server';
 
 import { getLang } from '@/shared/config';
+import { CategoryMetadata, getMdx, ProjectMetadata } from '@/shared/lib';
 import fs from 'fs/promises';
 import path from 'path';
-import { CategoryMetadata, getMetadata, ProjectMetadata } from './get-metadata';
-
-export interface ProjectsResponse {
-	title: string;
-	link: string;
-	projects: (ProjectMetadata & { link: string })[];
-}
+import { ProjectsResponse } from '../types/mdx.type';
 
 export async function getProjects(): Promise<ProjectsResponse[]> {
 	const lang = await getLang();
@@ -22,10 +17,10 @@ export async function getProjects(): Promise<ProjectsResponse[]> {
 	for (const dirent of categoryDirs) {
 		if (dirent.isDirectory()) {
 			const categoryDir = path.join(rootDir, dirent.name);
-			const indexFile = path.join(categoryDir, `${lang}.mdx`);
-			const categoryMetadata = (await getMetadata(
-				indexFile,
-			)) as CategoryMetadata;
+			const projectFile = path.join(categoryDir, `${lang}.mdx`);
+
+			const mdxCategory = await getMdx<CategoryMetadata>(projectFile);
+			const metadataCategory = mdxCategory.metadata;
 
 			const projectDirs = await fs.readdir(categoryDir, {
 				withFileTypes: true,
@@ -39,7 +34,9 @@ export async function getProjects(): Promise<ProjectsResponse[]> {
 						projectDirent.name,
 						`${lang}.mdx`,
 					);
-					const projectMetadata = await getMetadata(projectFile);
+
+					const mdxProject = await getMdx<CategoryMetadata>(projectFile);
+					const projectMetadata = mdxProject.metadata;
 
 					projects.push({
 						...projectMetadata,
@@ -49,7 +46,7 @@ export async function getProjects(): Promise<ProjectsResponse[]> {
 			}
 
 			projectsByCategory.push({
-				title: categoryMetadata.title,
+				title: metadataCategory.title,
 				link: `/projects/${dirent.name}`,
 				projects,
 			});

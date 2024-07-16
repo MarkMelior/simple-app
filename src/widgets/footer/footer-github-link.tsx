@@ -24,9 +24,9 @@ export const FooterGithubLink: FC<FooterGithubLinkProps> = ({ dict, lang }) => {
 
 	return (
 		<Link
-			className='hover:text-default-600 transition'
-			href={hrefGithub}
 			target='_blank'
+			href={hrefGithub}
+			className='hover:text-default-600 transition'
 		>
 			{dict['footer-edit']}
 		</Link>

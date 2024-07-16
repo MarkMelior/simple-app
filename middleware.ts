@@ -8,14 +8,13 @@ export function middleware(request: NextRequest) {
 	requestHeaders.set('x-url', request.url);
 
 	// `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually
-	if (
-		[
-			'/images/light.avif',
-			'/images/noise.png',
-			'/images/light-dark.avif',
-			'/favicon.ico',
-		].includes(pathname)
-	) {
+	const ignoredPaths = [
+		/^\/images\/.*$/,
+		/^\/videos\/.*$/,
+		/^\/files\/.*$/,
+		/^\/favicon\.ico$/,
+	];
+	if (ignoredPaths.some((regex) => regex.test(pathname))) {
 		return;
 	}
 
