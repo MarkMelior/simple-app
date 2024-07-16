@@ -1,6 +1,6 @@
 'use server';
 
-import { i18n, Locale } from '@/shared/config';
+import { i18n, Locale } from '@/shared/config/i18n';
 import { headers } from 'next/headers';
 
 interface GetPathnameProps {

@@ -2,7 +2,7 @@
 
 import fs from 'fs/promises';
 import matter from 'gray-matter';
-import { ProjectMetadata } from './types/get-mdx.type';
+import { ProjectMetadata } from '../../config/mdx/types/get-mdx.type';
 
 interface MdxResponse<T> {
 	metadata: T;

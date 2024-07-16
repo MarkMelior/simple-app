@@ -1,5 +1,5 @@
 import { Logo } from '@/shared/assets/icon/Logo';
-import { getDictionary } from '@/shared/config';
+import { getDictionary } from '@/shared/config/i18n';
 import cn from 'clsx';
 import { FC } from 'react';
 import cls from './page-loader.module.scss';

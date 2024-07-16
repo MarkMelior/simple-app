@@ -1,6 +1,6 @@
 'use client';
 
-import { Dictionary, i18n, Locale } from '@/shared/config';
+import { Dictionary, i18n, Locale } from '@/shared/config/i18n';
 import {
 	Button,
 	Dropdown,

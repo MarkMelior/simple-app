@@ -1,7 +1,8 @@
 import { getProjectsByCategory } from '@/entity/project';
-import { getDictionary, Link } from '@/shared/config';
+import { getDictionary } from '@/shared/config/i18n';
 import { Header } from '@/widgets';
 import { Metadata } from 'next';
+import Link from 'next/link';
 
 export type ProjectCategoryPageProps = {
 	params: { category: string };

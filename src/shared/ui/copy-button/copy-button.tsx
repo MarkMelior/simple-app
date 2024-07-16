@@ -1,6 +1,6 @@
 'use client';
 
-import { Dictionary } from '@/shared/config';
+import { Dictionary } from '@/shared/config/i18n';
 import { useCopy } from '@/shared/hooks';
 import { Button, Tooltip, TooltipProps } from '@nextui-org/react';
 import { FC } from 'react';

@@ -1,6 +1,6 @@
 'use client';
 
-import { Dictionary } from '@/shared/config';
+import { Dictionary } from '@/shared/config/i18n';
 import { Button } from '@nextui-org/react';
 import { RxExit } from 'react-icons/rx';
 import { logout } from '../../services/logout';

@@ -1,6 +1,6 @@
 'use client';
 
-import { Dictionary } from '@/shared/config';
+import { Dictionary } from '@/shared/config/i18n';
 import { FontDefault } from '@/shared/const/fonts';
 import { useCopy } from '@/shared/hooks';
 import { cn } from '@/shared/lib';

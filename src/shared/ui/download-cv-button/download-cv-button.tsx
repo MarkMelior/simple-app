@@ -1,4 +1,4 @@
-import { Dictionary, Link } from '@/shared/config';
+import { Dictionary, Link } from '@/shared/config/i18n';
 import { cn } from '@/shared/lib';
 import { Button, ButtonProps } from '@nextui-org/react';
 import { FC } from 'react';

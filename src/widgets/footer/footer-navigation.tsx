@@ -1,7 +1,7 @@
 'use client';
 
 import { ProjectsResponse } from '@/entity/project';
-import { Dictionary, Link } from '@/shared/config';
+import { Dictionary, Link } from '@/shared/config/i18n';
 import { Button } from '@nextui-org/react';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';

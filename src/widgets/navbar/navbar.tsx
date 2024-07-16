@@ -1,7 +1,7 @@
 import { getProjects } from '@/entity/project';
 import { Burger, LocaleSwitcher, ThemeSwitcher } from '@/features';
 import { Logo } from '@/shared/assets/icon/Logo';
-import { getDictionary, Link } from '@/shared/config';
+import { getDictionary, Link } from '@/shared/config/i18n';
 import { DownloadCvButton, GlowingLine, SidebarNavigation } from '@/shared/ui';
 import { Button } from '@nextui-org/react';
 import { BsGithub } from 'react-icons/bs';

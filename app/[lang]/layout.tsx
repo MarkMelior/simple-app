@@ -1,6 +1,6 @@
 import { ClientProviders } from '@/app/providers/client-providers';
 import '@/app/styles/index.scss';
-import { i18n, Locale } from '@/shared/config';
+import { i18n, Locale } from '@/shared/config/i18n';
 import { FontDefault } from '@/shared/const/fonts';
 import { Light, PageLoader } from '@/shared/ui';
 import { Footer, Navbar, Sidebar } from '@/widgets';

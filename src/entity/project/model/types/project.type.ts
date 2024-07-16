@@ -1,4 +1,4 @@
-import { CategoryMetadata, ProjectMetadata } from '@/shared/lib';
+import { CategoryMetadata, ProjectMetadata } from '@/shared/config/mdx';
 
 export interface ProjectResponse {
 	metadata: ProjectMetadata;

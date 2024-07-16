@@ -1,7 +1,7 @@
 'use client';
 
 import { ProjectsResponse } from '@/entity/project';
-import { Link } from '@/shared/config';
+import { Link } from '@/shared/config/i18n';
 import { SidebarLinks } from '@/shared/const/sidebar-links';
 import { cn } from '@nextui-org/react';
 import { usePathname } from 'next/navigation';

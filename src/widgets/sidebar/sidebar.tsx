@@ -1,5 +1,5 @@
 import { getProjects } from '@/entity/project';
-import { getDictionary } from '@/shared/config';
+import { getDictionary } from '@/shared/config/i18n';
 import { cn } from '@/shared/lib';
 import { DownloadCvButton, SidebarNavigation } from '@/shared/ui';
 import cls from './sidebar.module.scss';

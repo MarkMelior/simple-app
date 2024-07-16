@@ -1,7 +1,7 @@
 'use server';
 
-import { getLang } from '@/shared/config';
-import { CategoryMetadata, getMdx, ProjectMetadata } from '@/shared/lib';
+import { getLang } from '@/shared/config/i18n';
+import { CategoryMetadata, getMdx, ProjectMetadata } from '@/shared/config/mdx';
 import fs from 'fs/promises';
 import path from 'path';
 

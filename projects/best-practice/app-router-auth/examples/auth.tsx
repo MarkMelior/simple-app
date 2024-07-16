@@ -1,5 +1,5 @@
 import { LogoutButton } from '@/features';
-import { getDictionary } from '@/shared/config';
+import { getDictionary } from '@/shared/config/i18n';
 import { CodeBlock } from '@/shared/ui';
 import { Card } from '@nextui-org/react';
 import { FiUserCheck } from 'react-icons/fi';

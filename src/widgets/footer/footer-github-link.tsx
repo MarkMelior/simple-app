@@ -1,6 +1,6 @@
 'use client';
 
-import { Dictionary, i18n, Link, Locale } from '@/shared/config';
+import { Dictionary, i18n, Link, Locale } from '@/shared/config/i18n';
 import { usePathname } from 'next/navigation';
 import { FC } from 'react';
 

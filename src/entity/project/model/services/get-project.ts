@@ -1,9 +1,9 @@
 'use server';
 
-import { getLang } from '@/shared/config';
-import { CategoryMetadata, getMdx } from '@/shared/lib';
+import { getLang } from '@/shared/config/i18n';
+import { CategoryMetadata, getMdx } from '@/shared/config/mdx';
 import path from 'path';
-import { ProjectResponse } from '../types/mdx.type';
+import { ProjectResponse } from '../types/project.type';
 
 export async function getProject(
 	category: string,

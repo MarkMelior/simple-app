@@ -1,4 +1,4 @@
-import { useDictionary } from '@/shared/config';
+import { useDictionary } from '@/shared/config/i18n';
 import { useState } from 'react';
 import { useMessage } from '../useMessage/useMessage';
 

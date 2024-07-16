@@ -1,4 +1,4 @@
-import { i18n } from '@/shared/config';
+import { i18n } from '@/shared/config/i18n';
 import { NextRequest, NextResponse } from 'next/server';
 
 export function middleware(request: NextRequest) {

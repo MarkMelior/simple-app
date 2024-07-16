@@ -1,4 +1,4 @@
-import { Link } from '@/shared/config';
+import { Link } from '@/shared/config/i18n';
 import { cn, toKebabCase, toLatin } from '@/shared/lib';
 import { ComponentPropsWithoutRef } from 'react';
 import { FiLink } from 'react-icons/fi';

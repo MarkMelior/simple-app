@@ -1,5 +1,5 @@
 import { getProject } from '@/entity/project';
-import { MDXRemote } from '@/shared/config';
+import { MDXRemote } from '@/shared/config/mdx';
 import { Header } from '@/widgets';
 import { MDXComponents } from 'mdx/types';
 import { Metadata } from 'next';

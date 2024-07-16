@@ -1,4 +1,4 @@
-import { Link } from '@/shared/config';
+import { Link } from '@/shared/config/i18n';
 import { StackButtons, StackVariants } from '@/shared/ui';
 import { cn, Skeleton } from '@nextui-org/react';
 

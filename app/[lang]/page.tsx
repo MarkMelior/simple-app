@@ -1,5 +1,5 @@
-import { getLang, MDXRemote } from '@/shared/config';
-import { getMdx } from '@/shared/lib';
+import { getLang } from '@/shared/config/i18n';
+import { getMdx, MDXRemote } from '@/shared/config/mdx';
 import { StackButtons } from '@/shared/ui';
 import { Header } from '@/widgets';
 import path from 'path';

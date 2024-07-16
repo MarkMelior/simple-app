@@ -1,6 +1,6 @@
 'use client';
 
-import { Dictionary } from '@/shared/config';
+import { Dictionary } from '@/shared/config/i18n';
 import { FontCode, FontDefault } from '@/shared/const/fonts';
 import { cn, gitHubRepoLink } from '@/shared/lib';
 import { GitHubPath } from '@/shared/types/github-path';
