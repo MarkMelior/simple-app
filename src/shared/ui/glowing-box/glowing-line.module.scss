@@ -1,7 +1,4 @@
 .glowing-line {
-	position: absolute;
-	width: 100%;
-	height: 1px;
 	background: radial-gradient(var(--spotlight-line-size) circle at var(--mouse-x) var(--mouse-y),
 			theme('colors.primary-700') 0%,
 			rgba(0, 0, 0, 0) 100%, transparent 40%);
@@ -12,7 +9,7 @@
 				rgba(0, 0, 0, 0) 100%, transparent 40%);
 	}
 
-	@media (max-width: theme('screens.lg')) {
+	@media (max-width: theme('screens.md')) {
 		display: none;
 	}
 }

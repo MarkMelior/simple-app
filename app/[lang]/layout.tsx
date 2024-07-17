@@ -2,7 +2,7 @@ import { ClientProviders } from '@/app/providers/client-providers';
 import '@/app/styles/index.scss';
 import { i18n, Locale } from '@/shared/config/i18n';
 import { FontDefault } from '@/shared/const/fonts';
-import { Light, PageLoader } from '@/shared/ui';
+import { GlowingLine, Light, PageLoader } from '@/shared/ui';
 import { Footer, Navbar, Sidebar } from '@/widgets';
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
@@ -38,16 +38,13 @@ export default async function RootLayout({
 						}
 					>
 						<Light />
+						<GlowingLine className='fixed z-50 top-0' />
 						<Navbar />
-						<div className='overflow-hidden'>
-							<div className='max-w-8xl mx-auto px-4 sm:px-6 md:px-8 z-20'>
-								<Sidebar />
-								<div className='lg:pl-[19.5rem]'>
-									<div className='max-w-3xl mx-auto pt-10 xl:max-w-none xl:ml-0 min-h-[var(--height-screen)] flex flex-col justify-between'>
-										<div>{children}</div>
-										<Footer />
-									</div>
-								</div>
+						<div className='max-w-7xl mx-auto px-4 sm:px-6 md:px-8 z-20 flex flex-col lg:grid lg:grid-cols-[17.5rem,1fr] gap-10'>
+							<Sidebar />
+							<div className='xl:max-w-none xl:ml-0 min-h-[var(--height-screen)] flex flex-col justify-between'>
+								<div>{children}</div>
+								<Footer />
 							</div>
 						</div>
 					</Suspense>

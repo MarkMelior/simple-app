@@ -31,7 +31,14 @@ export const LocaleSwitcher = ({ dict }: { dict: Dictionary['ui'] }) => {
 	};
 
 	return (
-		<Dropdown offset={20} backdrop='opaque'>
+		<Dropdown
+			offset={12}
+			backdrop='blur'
+			classNames={{
+				content:
+					'backdrop-filter backdrop-blur-lg bg-default-100 rounded-lg border border-default-900/5',
+			}}
+		>
 			<DropdownTrigger>
 				<Button variant='light' isIconOnly color='primary'>
 					<HiOutlineLanguage size={18} />
@@ -44,7 +51,10 @@ export const LocaleSwitcher = ({ dict }: { dict: Dictionary['ui'] }) => {
 				variant='faded'
 				aria-label='Dropdown menu with description'
 			>
-				<DropdownSection title={dict['change-lang']}>
+				<DropdownSection
+					title={dict['change-lang']}
+					classNames={{ heading: 'text-primary-400' }}
+				>
 					<DropdownItem
 						startContent={'ru'}
 						key='ru'

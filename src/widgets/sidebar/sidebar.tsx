@@ -13,17 +13,17 @@ export const Sidebar = async () => {
 	return (
 		<div
 			className={cn(
-				'hidden lg:block fixed z-10 inset-0 top-[3.8125rem] left-[max(0px,calc(50%-45rem))] right-auto w-[19rem] pb-10 pl-8 pr-6 overflow-y-auto',
+				'hidden lg:block z-10 w-full overflow-y-auto -mt-[var(--height-navbar)] h-screen sticky top-0 pr-6',
 				cls.wrapper,
 			)}
 		>
-			<nav className='lg:text-sm lg:leading-6 relative'>
+			<nav className='lg:text-sm lg:leading-6'>
 				<div className='sticky top-0 -ml-0.5 pointer-events-none'>
-					<div className='h-10 bg-default-50' />
+					<div className='h-[var(--height-navbar)] bg-default-100 dark:bg-default-50' />
 					<div className='relative pointer-events-auto'>
 						<DownloadCvButton dict={dict} />
 					</div>
-					<div className='h-8 bg-gradient-to-b from-default-50' />
+					<div className='h-8 bg-gradient-to-b from-default-100 dark:from-default-50' />
 				</div>
 				<SidebarNavigation items={items} />
 			</nav>

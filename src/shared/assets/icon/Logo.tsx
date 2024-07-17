@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { FC, useState } from 'react';
 
 interface Props extends React.SVGProps<SVGSVGElement> {
-	variant?: 'default' | 'graffiti' | 'text' | 'fly';
+	variant?: 'default' | 'graffiti' | 'text';
 	changeOnClick?: boolean;
 }
 
@@ -18,8 +18,7 @@ export const Logo: FC<Props> = ({
 
 	const handleClick = () => {
 		if (changeOnClick) {
-			const variants = ['default', 'graffiti', 'text', 'fly'];
-			// @ts-ignore
+			const variants: Props['variant'][] = ['default', 'graffiti', 'text'];
 			const currentIndex = variants.indexOf(currentVariant);
 			const nextIndex = (currentIndex + 1) % variants.length;
 			setCurrentVariant(variants[nextIndex] as Props['variant']);
@@ -56,16 +55,6 @@ export const Logo: FC<Props> = ({
 							</clipPath>
 						</defs>
 					</svg>
-				);
-			case 'fly':
-				return (
-					<Image
-						src='/images/melior-fly.png'
-						alt='logo'
-						width={128}
-						height={128}
-						className='max-h-[48px] max-w-[78px] object-contain'
-					/>
 				);
 			case 'graffiti':
 				return (

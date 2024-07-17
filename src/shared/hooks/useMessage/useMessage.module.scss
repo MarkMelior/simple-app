@@ -2,7 +2,7 @@
 
 .wrapper {
 	position: fixed;
-	top: calc(var(--height-navbar) + 6px);
+	bottom: 2rem;
 	z-index: var(--z-index-notification);
 	display: flex;
 	flex-direction: column;
@@ -20,23 +20,19 @@
 	justify-content: space-between;
 	padding: 15px 20px;
 	width: fit-content;
-	margin-bottom: 6px;
+	margin-top: 6px;
 	overflow: hidden;
 	user-select: none;
 	backdrop-filter: var(--blur-md);
 	animation: fadeInFromTop .3s ease-out forwards;
 
 	@include background(.3);
-	@apply rounded-lg text-sm cursor-pointer border-b border-default-900/10 sm:max-w-xl max-w-none;
+	@apply text-sm cursor-pointer border-b border-default-900/10 sm:max-w-xl max-w-none rounded-xl;
 
 	[class="light"] & {
 		@include background(1);
 		backdrop-filter: none;
 	}
-
-	// @media (max-width: theme('screens.sm')) {
-	// 	width: calc(100% - 10px * 2);
-	// }
 
 	button {
 		min-width: 37px;
@@ -89,12 +85,12 @@
 
 @keyframes fadeInFromTop {
 	0% {
-		margin-top: -50%;
+		margin-bottom: -3rem;
 		opacity: 0;
 	}
 
 	100% {
-		margin-top: 0;
+		margin-bottom: 0;
 		opacity: 1;
 	}
 }
@@ -105,12 +101,12 @@
 
 @keyframes fadeOutFromTop {
 	0% {
-		margin-top: 0;
+		margin-bottom: 0;
 		opacity: 1;
 	}
 
 	100% {
-		margin-top: -52px;
+		margin-bottom: -3rem;
 		opacity: 0;
 	}
 }

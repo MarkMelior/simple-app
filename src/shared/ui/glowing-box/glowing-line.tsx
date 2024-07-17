@@ -27,7 +27,7 @@ export const GlowingLine: FC<GlowingBoxProps> = ({ className }) => {
 
 	return (
 		<div
-			className={cn(cls['glowing-line'], className)}
+			className={cn(cls['glowing-line'], 'absolute w-full h-[1px]', className)}
 			style={style}
 			ref={ref}
 		/>

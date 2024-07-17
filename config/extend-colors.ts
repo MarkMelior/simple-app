@@ -9,7 +9,7 @@ export const ExtendColors = {
 		400: '#90A3BB',
 		300: '#B9C8DB',
 		200: '#D4DDE9',
-		100: '#F1F4F8',
+		100: '#E9F0F7',
 		50: '#F8FAFC',
 	},
 };

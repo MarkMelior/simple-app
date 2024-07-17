@@ -27,12 +27,12 @@ export const DownloadCvButton: FC<DownloadCvButtonProps> = ({
 			className={cn(
 				'py-6 md:py-4',
 				{
-					['bg-white dark:bg-default-200 text-default-600 border border-default-200 dark:border-0 hover:text-default-700 text-md']:
+					['bg-white dark:bg-default-100/90 text-default-600 dark:border-transparent hover:text-default-700 text-md border border-default-900/10 backdrop-filter backdrop-blur-lg']:
 						!color,
 				},
 				className,
 			)}
-			radius='sm'
+			radius='md'
 		>
 			{dict['download-cv']}
 		</Button>
