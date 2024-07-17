@@ -9,7 +9,7 @@ import path from 'path';
 export default async function Home() {
 	const lang = await getLang();
 
-	const dir = path.join(process.cwd(), 'app', '[lang]', `home-${lang}.mdx`);
+	const dir = path.join(process.cwd(), 'app', `home-${lang}.mdx`);
 	const mdx = await getMdx(dir);
 	const metadata = mdx.metadata;
 	const content = mdx.content;
@@ -23,15 +23,26 @@ export default async function Home() {
 	return (
 		<>
 			<div className='mb-8 z-30 rounded-lg relative overflow-hidden select-none pointer-events-none'>
-				<img src={'/images/banner.jpg'} alt='Banner' />
+				<img src='/images/banner.jpg' alt='Banner' />
 			</div>
 			<Header
 				note={metadata.note}
 				title={metadata.title}
 				description={metadata.description}
+				isCenter
+				classNames={{ description: 'mt-4 text-[1.075rem] md:w-[75%] mx-auto' }}
 			/>
 			<MDXRemote source={content} components={components} />
-			<StackButtons tags={['TypeScript', 'Next.js', 'RTK Query']} />
+			<StackButtons
+				tags={[
+					'TypeScript',
+					'Next.js',
+					// 'React',
+					// 'Redux Toolkit',
+					// 'Scss',
+					// 'Tailwind',
+				]}
+			/>
 		</>
 	);
 }

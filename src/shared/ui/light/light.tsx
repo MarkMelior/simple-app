@@ -1,3 +1,4 @@
+import { cn } from '@/shared/lib';
 import { FC } from 'react';
 import cls from './light.module.scss';
 
@@ -9,7 +10,12 @@ export const Light: FC<LightProps> = ({ variant = 'two' }) => {
 	return (
 		<>
 			{(variant === 'first' || variant === 'two') && (
-				<div className='absolute z-20 top-0 inset-x-0 flex justify-center overflow-hidden pointer-events-none select-none max-h-screen'>
+				<div
+					className={cn(
+						'absolute z-20 top-0 inset-x-0 flex justify-center overflow-hidden pointer-events-none select-none max-h-screen',
+						cls.fadeIn,
+					)}
+				>
 					<div className='w-[108rem] flex-none flex justify-end'>
 						<picture>
 							<source srcSet='/images/light.avif' type='image/avif' />
@@ -34,7 +40,7 @@ export const Light: FC<LightProps> = ({ variant = 'two' }) => {
 				</div>
 			)}
 			{(variant === 'second' || variant === 'two') && (
-				<div className={cls.light}>
+				<div className={cn(cls.light)}>
 					<span className={cls.ellipse1} />
 					<span className={cls.ellipse2} />
 					<span className={cls.ellipse3} />

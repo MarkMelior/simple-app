@@ -42,6 +42,7 @@ export const CodeBlock: FC<CodeBlockProps> = ({
 	disableLineNumbers,
 	dict,
 }) => {
+	text = text.trimEnd();
 	const [isExpanded, setIsExpanded] = useState(false);
 	const lines = text.split('\n');
 	const isLong = lines.length > linesLength;
@@ -57,7 +58,7 @@ export const CodeBlock: FC<CodeBlockProps> = ({
 		({ hoverButton }: { hoverButton?: boolean } = {}) => (
 			<div
 				className={cn('flex gap-1 items-center', {
-					'absolute flex-col-reverse right-2 top-2 opacity-0 group-hover/buttons:opacity-100 transition-opacity':
+					'absolute flex-col-reverse right-1 top-1 opacity-0 group-hover/buttons:opacity-100 transition-opacity':
 						hoverButton,
 				})}
 			>
@@ -95,7 +96,7 @@ export const CodeBlock: FC<CodeBlockProps> = ({
 	return (
 		<div
 			className={cn(
-				'my-4 rounded-md overflow-hidden border border-default-200 h-fit relative group/buttons code-block__wrapper',
+				'grid my-4 rounded-md overflow-hidden border border-default-200 h-fit relative group/buttons code-block__wrapper',
 				FontDefault.className,
 				className,
 			)}

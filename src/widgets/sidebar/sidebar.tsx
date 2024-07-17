@@ -13,7 +13,7 @@ export const Sidebar = async () => {
 	return (
 		<div
 			className={cn(
-				'hidden lg:block z-10 w-full overflow-y-auto -mt-[var(--height-navbar)] h-screen sticky top-0 pr-6',
+				'hidden lg:block z-10 overflow-y-auto -mt-[var(--height-navbar)] h-screen sticky top-0 pr-6 w-[17.5rem]',
 				cls.wrapper,
 			)}
 		>
