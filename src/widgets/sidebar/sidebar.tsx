@@ -1,4 +1,5 @@
 import { getProjects } from '@/entity/project';
+import { PortalEnum } from '@/shared/components';
 import { getDictionary } from '@/shared/config/i18n';
 import { cn } from '@/shared/lib';
 import { DownloadCvButton, SidebarNavigation } from '@/shared/ui';
@@ -13,13 +14,13 @@ export const Sidebar = async () => {
 	return (
 		<div
 			className={cn(
-				'hidden lg:block z-10 overflow-y-auto -mt-[var(--height-navbar)] h-screen sticky top-0 pr-6 w-[17.5rem]',
+				'hidden lg:flex z-10 -mt-[var(--height-navbar)] sticky top-0 w-[17.5rem] max-h-screen h-screen flex-col gap-3',
 				cls.wrapper,
 			)}
 		>
-			<nav className='lg:text-sm lg:leading-6'>
+			<nav className='lg:text-sm lg:leading-6 h-full overflow-y-auto pr-6'>
 				<div className='sticky top-0 -ml-0.5 pointer-events-none'>
-					<div className='h-[var(--height-navbar)] bg-default-100 dark:bg-default-50' />
+					<div className='h-10 bg-default-100 dark:bg-default-50' />
 					<div className='relative pointer-events-auto'>
 						<DownloadCvButton dict={dict} />
 					</div>
@@ -27,6 +28,8 @@ export const Sidebar = async () => {
 				</div>
 				<SidebarNavigation items={items} />
 			</nav>
+
+			<div id={PortalEnum.Headlines} />
 		</div>
 	);
 };

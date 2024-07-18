@@ -21,6 +21,7 @@ export async function getProject(
 	const mdx = await getMdx(dir);
 	const metadata = mdx.metadata;
 	const content = mdx.content;
+	const headlines = mdx.headlines;
 
 	const dirCategory = path.join(
 		process.cwd(),
@@ -42,5 +43,6 @@ export async function getProject(
 		},
 		contentCategory,
 		content,
+		headlines,
 	};
 }

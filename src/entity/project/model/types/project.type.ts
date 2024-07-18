@@ -1,10 +1,15 @@
-import { CategoryMetadata, ProjectMetadata } from '@/shared/config/mdx';
+import {
+	CategoryMetadata,
+	MdxHeadline,
+	ProjectMetadata,
+} from '@/shared/config/mdx';
 
 export interface ProjectResponse {
 	metadata: ProjectMetadata;
 	content: string;
 	metadataCategory: CategoryMetadata;
 	contentCategory: string;
+	headlines: MdxHeadline[];
 }
 
 export interface ProjectsResponse {

@@ -40,8 +40,11 @@ export default async function RootLayout({
 						<Light />
 						<GlowingLine className='fixed z-50 top-0' />
 						<Navbar />
-						<div className='max-w-7xl mx-auto px-4 sm:px-6 md:px-8 z-20 flex flex-col lg:grid lg:grid-cols-[17.5rem,1fr] gap-10'>
-							<Sidebar />
+						<div className='max-w-7xl mx-auto px-4 sm:px-6 md:px-8 z-20 grid lg:grid-cols-[17.5rem,1fr] gap-10'>
+							<div>
+								<Sidebar />
+								{/* todo this Headlines */}
+							</div>
 							<div className='xl:max-w-none xl:ml-0 min-h-[var(--height-screen)] flex flex-col justify-between'>
 								<div>{children}</div>
 								<Footer />
