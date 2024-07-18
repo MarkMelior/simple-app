@@ -117,21 +117,25 @@ function Heading({
 	children,
 	className,
 	Tag,
+	id,
 	...props
 }: {
 	children: React.ReactNode;
 	className?: string;
 	Tag: keyof JSX.IntrinsicElements;
+	id?: string;
 }) {
 	return (
 		<Tag
 			className={cn(
-				'whitespace-pre-wrap relative text-default-900 pt-[var(--height-navbar)] -mt-[var(--height-navbar)]',
+				'pt-[var(--height-navbar)] -mt-[var(--height-navbar)] text-default-900',
 				className,
 			)}
+			id={id}
+			data-headline-id={id}
 			{...props}
 		>
-			{children}
+			<span className='whitespace-pre-wrap relative'>{children}</span>
 		</Tag>
 	);
 }

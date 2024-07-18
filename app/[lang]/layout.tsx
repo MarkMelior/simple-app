@@ -1,5 +1,6 @@
 import { ClientProviders } from '@/app/providers/client-providers';
 import '@/app/styles/index.scss';
+import { ScrollUp } from '@/features';
 import { i18n, Locale } from '@/shared/config/i18n';
 import { FontDefault } from '@/shared/const/fonts';
 import { GlowingLine, Light, PageLoader } from '@/shared/ui';
@@ -38,6 +39,7 @@ export default async function RootLayout({
 						}
 					>
 						<Light />
+						<ScrollUp />
 						<GlowingLine className='fixed z-50 top-0' />
 						<Navbar />
 						<div className='max-w-7xl mx-auto px-4 sm:px-6 md:px-8 z-20 grid lg:grid-cols-[17.5rem,1fr] gap-10'>

@@ -14,7 +14,7 @@ export const Sidebar = async () => {
 	return (
 		<div
 			className={cn(
-				'hidden lg:flex z-10 -mt-[var(--height-navbar)] sticky top-0 w-[17.5rem] max-h-screen h-screen flex-col gap-3',
+				'hidden lg:grid z-10 -mt-[var(--height-navbar)] sticky top-0 w-[17.5rem] max-h-screen h-screen gap-3',
 				cls.wrapper,
 			)}
 		>

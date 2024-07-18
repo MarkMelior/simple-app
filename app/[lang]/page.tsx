@@ -1,7 +1,7 @@
 import { getLang } from '@/shared/config/i18n';
 import { getMdx, MDXRemote } from '@/shared/config/mdx';
 import { StackButtons } from '@/shared/ui';
-import { Header } from '@/widgets';
+import { Header, Headlines } from '@/widgets';
 import { MDXComponents } from 'mdx/types';
 import dynamic from 'next/dynamic';
 import path from 'path';
@@ -10,9 +10,7 @@ export default async function Home() {
 	const lang = await getLang();
 
 	const dir = path.join(process.cwd(), 'app', `home-${lang}.mdx`);
-	const mdx = await getMdx(dir);
-	const metadata = mdx.metadata;
-	const content = mdx.content;
+	const { metadata, content, headlines } = await getMdx(dir);
 
 	const components: MDXComponents = {
 		StackButtons: dynamic(() =>
@@ -33,6 +31,7 @@ export default async function Home() {
 				classNames={{ description: 'mt-4 text-[1.075rem] md:w-[75%] mx-auto' }}
 			/>
 			<MDXRemote source={content} components={components} />
+			<Headlines headlines={headlines} />
 			<StackButtons
 				tags={[
 					'TypeScript',

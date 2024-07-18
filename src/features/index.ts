@@ -6,6 +6,7 @@ import { FormSignup } from './auth/ui/form-signup/form-signup';
 import { LogoutButton } from './auth/ui/logout-button/logout-button';
 import { Burger } from './burger/burger';
 import { LocaleSwitcher } from './locale-switcher/locale-switcher';
+import { ScrollUp } from './scroll-up/scroll-up';
 import { ThemeSwitcher } from './theme-switcher/theme-switcher';
 
 export {
@@ -17,6 +18,7 @@ export {
 	LocaleSwitcher,
 	logout,
 	LogoutButton,
+	ScrollUp,
 	ThemeSwitcher,
 	verifySession,
 };
