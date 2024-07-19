@@ -15,7 +15,7 @@ export default async function ProjectCategoryPage({
 	const dict = await getDictionary();
 
 	return (
-		<>
+		<div>
 			<Header
 				note={dict.ui['category-note']}
 				title={category.title}
@@ -36,7 +36,7 @@ export default async function ProjectCategoryPage({
 					</Link>
 				))}
 			</div>
-		</>
+		</div>
 	);
 }
 

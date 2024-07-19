@@ -18,10 +18,7 @@ export async function getProject(
 		name,
 		`${lang}.mdx`,
 	);
-	const mdx = await getMdx(dir);
-	const metadata = mdx.metadata;
-	const content = mdx.content;
-	const headlines = mdx.headlines;
+	const { content, headlines, metadata } = await getMdx(dir);
 
 	const dirCategory = path.join(
 		process.cwd(),
@@ -29,9 +26,8 @@ export async function getProject(
 		category,
 		`${lang}.mdx`,
 	);
-	const mdxCategory = await getMdx<CategoryMetadata>(dirCategory);
-	const metadataCategory = mdxCategory.metadata;
-	const contentCategory = mdxCategory.content;
+	const { content: contentCategory, metadata: metadataCategory } =
+		await getMdx<CategoryMetadata>(dirCategory);
 
 	if (!metadata) throw new Error(`Unable to find metadata in file "${dir}"`);
 

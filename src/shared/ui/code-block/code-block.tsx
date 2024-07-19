@@ -1,7 +1,7 @@
 'use client';
 
 import { Dictionary } from '@/shared/config/i18n';
-import { FontCode, FontDefault } from '@/shared/const/fonts';
+import { FontDefault } from '@/shared/const/fonts';
 import { cn, gitHubRepoLink } from '@/shared/lib';
 import { GitHubPath } from '@/shared/types/github-path';
 import { Theme } from '@/shared/types/theme';
@@ -96,13 +96,13 @@ export const CodeBlock: FC<CodeBlockProps> = ({
 	return (
 		<div
 			className={cn(
-				'grid my-4 rounded-md overflow-hidden border border-default-200 h-fit relative group/buttons code-block__wrapper',
+				'grid mt-4 mb-12 rounded-md overflow-hidden border border-default-200 h-fit relative group/buttons code-block__wrapper',
 				FontDefault.className,
 				className,
 			)}
 		>
 			{!hideHeader && (
-				<div className='bg-default-100 text-sm text-default-600 py-1 px-3 flex justify-between items-center'>
+				<div className='bg-default-100 text-sm text-default-600 py-1 px-3 flex justify-between items-center text-wrap text-center'>
 					{StackData[language]?.icon || <TbFileUnknown size={20} />}
 					{fileName ? fileName : language}
 					{buttons()}
@@ -124,9 +124,12 @@ export const CodeBlock: FC<CodeBlockProps> = ({
 					className={cn('!bg-default-100 border-t-1 border-default-200', {
 						'border-0': hideHeader,
 					})}
-					codeTagProps={{
-						className: cn('text-[0.85rem]', FontCode.className),
-					}}
+					// codeTagProps={{
+					// 	className: cn(
+					// 		'text-[0.85rem]',
+					// 		FontCode.className
+					// 	),
+					// }}
 				>
 					{isExpanded || !isLong
 						? text

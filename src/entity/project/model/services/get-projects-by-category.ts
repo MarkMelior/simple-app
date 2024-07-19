@@ -18,8 +18,9 @@ export async function getProjectsByCategory(
 	const dirCategory = path.join(process.cwd(), 'projects', category);
 	const projectFile = path.join(dirCategory, `${lang}.mdx`);
 
-	const mdxCategory = await getMdx<CategoryMetadata>(projectFile);
-	const metadataCategory = mdxCategory.metadata;
+	const { metadata: metadataCategory } = await getMdx<CategoryMetadata>(
+		projectFile,
+	);
 
 	const projectDirs = await fs.readdir(dirCategory, { withFileTypes: true });
 

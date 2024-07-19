@@ -1,7 +1,7 @@
 'use client';
 
-import { GithubEditLink, Portal, PortalEnum } from '@/shared/components';
-import { useDictionary, useLang } from '@/shared/config/i18n';
+import { Portal, PortalEnum } from '@/shared/components';
+import { useDictionary } from '@/shared/config/i18n';
 import { MdxHeadline } from '@/shared/config/mdx';
 import { cn } from '@/shared/lib';
 import Link from 'next/link';
@@ -11,10 +11,10 @@ import cls from './headlines.module.scss';
 export const Headlines = ({ headlines }: { headlines: MdxHeadline[] }) => {
 	const boxRef = useRef<HTMLDivElement | null>(null);
 
-	const [height, setHeight] = useState(100);
+	const [height, setHeight] = useState(70);
+	const [limit, setLimit] = useState(false);
 	const [activeLink, setActiveLink] = useState('');
 
-	const lang = useLang();
 	const dict = useDictionary();
 
 	const N = 88; // Пиксели от верха окна
@@ -42,6 +42,7 @@ export const Headlines = ({ headlines }: { headlines: MdxHeadline[] }) => {
 			window.removeEventListener('scroll', handleScroll);
 		};
 	}, [activeLink]);
+
 	const handleMouseDown = useCallback(
 		(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
 			e.preventDefault();
@@ -58,16 +59,21 @@ export const Headlines = ({ headlines }: { headlines: MdxHeadline[] }) => {
 
 				if (newHeightPercentage < 20) {
 					setHeight(20);
+					setLimit(true);
 				} else if (newHeightPercentage > 100) {
 					setHeight(100);
+					setLimit(true);
 				} else {
 					setHeight(newHeightPercentage);
+					setLimit(false);
 				}
 			};
 
 			const stopDrag = () => {
 				document.documentElement.removeEventListener('mousemove', doDrag);
 				document.documentElement.removeEventListener('mouseup', stopDrag);
+
+				setLimit(false);
 			};
 
 			document.documentElement.addEventListener('mousemove', doDrag);
@@ -93,7 +99,12 @@ export const Headlines = ({ headlines }: { headlines: MdxHeadline[] }) => {
 						className='cursor-ns-resize flex items-center group'
 						onMouseDown={handleMouseDown}
 					>
-						<hr className='my-6 border-default-100 group-hover:border-primary-500 w-full transition-colors' />
+						<hr
+							className={cn(
+								'my-6 border-default-100 group-hover:border-primary-500 w-full transition-colors',
+								{ 'border-danger-500': limit },
+							)}
+						/>
 					</div>
 
 					<div className='block mb-4 font-semibold text-default-900 text-sm'>
@@ -105,12 +116,12 @@ export const Headlines = ({ headlines }: { headlines: MdxHeadline[] }) => {
 							<React.Fragment key={href}>
 								<li
 									className={cn('text-default-500', {
-										'text-primary-500': activeLink === href.slice(1),
+										'text-default-600': activeLink === href.slice(1),
 									})}
 								>
 									<Link
 										href={href}
-										className='hover:text-default-600 transition-colors'
+										className='hover:text-default-700 transition-colors'
 									>
 										{title}
 									</Link>
@@ -122,12 +133,12 @@ export const Headlines = ({ headlines }: { headlines: MdxHeadline[] }) => {
 												<li
 													key={href}
 													className={cn('text-default-500', {
-														'text-primary-500': activeLink === href.slice(1),
+														'text-default-600': activeLink === href.slice(1),
 													})}
 												>
 													<Link
 														href={href}
-														className='hover:text-default-600 transition-colors'
+														className='hover:text-default-700 transition-colors'
 													>
 														{title}
 													</Link>
@@ -138,10 +149,15 @@ export const Headlines = ({ headlines }: { headlines: MdxHeadline[] }) => {
 								)}
 							</React.Fragment>
 						))}
-						<hr className='mt-4 mb-2 border-default-100' />
+						{/* <hr className='mt-4 mb-2 border-default-100' />
 						<li className='text-default-500 hover:text-default-600 transition-colors'>
-							<GithubEditLink dict={dict?.ui} lang={lang} />
-						</li>
+							<Link
+								target='_blank'
+								href={gitHubRepoLink({ path: `/app/home-${lang}.mdx` })}
+							>
+								{dict?.ui['footer-edit']}
+							</Link>
+						</li> */}
 					</ul>
 				</div>
 			</div>

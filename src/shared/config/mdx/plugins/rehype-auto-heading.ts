@@ -1,3 +1,4 @@
+import { toLatin } from '@/shared/lib';
 import { slug } from 'github-slugger';
 import { toString } from 'hast-util-to-string';
 import { visit } from 'unist-util-visit';
@@ -10,7 +11,7 @@ export function rehypeAutoHeading(headlines?: MdxHeadline[]) {
 		visit(tree, 'element', (node) => {
 			if (/h[1-6]/.test(node.tagName)) {
 				const text = toString(node);
-				const id = slug(text);
+				const id = toLatin(slug(text));
 				const depth = parseInt(node.tagName.slice(1), 10);
 				const headline = {
 					title: text.endsWith(':') ? text.slice(0, -1) : text,

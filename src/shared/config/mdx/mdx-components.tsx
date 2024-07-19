@@ -1,6 +1,5 @@
-import { FontCode } from '@/shared/const/fonts';
 import { cn } from '@/shared/lib';
-import { CodeBlock, LinkHover, StackVariants } from '@/shared/ui';
+import { CodeBlock, Heading, LinkHover, StackVariants } from '@/shared/ui';
 import { Code } from '@nextui-org/react';
 import type { MDXComponents } from 'mdx/types';
 import { ComponentPropsWithoutRef } from 'react';
@@ -22,8 +21,9 @@ export const MDXComponentsData: MDXComponents = {
 			return (
 				<Code
 					className={cn(
-						'bg-default-200/50 py-0 px-1 h-fit rounded-md -top-0.5 select-text min-w-fit border border-default-200 text-default-700 !leading-5 text-[0.85rem]',
-						FontCode.className,
+						'bg-default-200/50 py-0 px-1 h-fit rounded-md -top-0.5 select-text min-w-fit border border-default-200 text-default-700 !leading-5',
+						// 'text-[0.85rem]',
+						// FontCode.className,
 					)}
 				>
 					{children}
@@ -112,30 +112,3 @@ export const MDXComponentsData: MDXComponents = {
 		);
 	},
 };
-
-function Heading({
-	children,
-	className,
-	Tag,
-	id,
-	...props
-}: {
-	children: React.ReactNode;
-	className?: string;
-	Tag: keyof JSX.IntrinsicElements;
-	id?: string;
-}) {
-	return (
-		<Tag
-			className={cn(
-				'pt-[var(--height-navbar)] -mt-[var(--height-navbar)] text-default-900',
-				className,
-			)}
-			id={id}
-			data-headline-id={id}
-			{...props}
-		>
-			<span className='whitespace-pre-wrap relative'>{children}</span>
-		</Tag>
-	);
-}

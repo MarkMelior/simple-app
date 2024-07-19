@@ -34,7 +34,7 @@ export const ScrollUp = () => {
 	return (
 		<Button
 			className={cn(
-				'bg-default-100 hover:bg-primary-500 fixed bottom-4 right-4 text-default-500 hover:text-default-900',
+				'bg-default-100 hover:bg-primary-500 fixed bottom-8 right-8 text-default-500 hover:text-default-900 z-50',
 				{
 					'opacity-0': !isScrolled,
 				},
@@ -42,6 +42,7 @@ export const ScrollUp = () => {
 			onClick={scrollToTop}
 			radius='lg'
 			isIconOnly
+			size='lg'
 		>
 			<GoArrowUp size={22} />
 		</Button>

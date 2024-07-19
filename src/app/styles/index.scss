@@ -22,18 +22,21 @@
 }
 
 html {
-	min-height: 100vh;
 	font-size: 16px;
+
+	@media (max-width: theme('screens.sm')) {
+		font-size: 15px;
+	}
+}
+
+body {
+	min-height: 100vh;
 	background: linear-gradient(90deg, theme('colors.default-50') 15px, transparent 1%) 50%, linear-gradient(theme('colors.default-50') 15px, theme('colors.default-200') 1%) 0, hsla(0deg, 0%, 100%, 16%);
 	background-size: 16px 16px;
 
 	[class="light"] & {
 		background: linear-gradient(90deg, theme('colors.default-100') 15px, transparent 1%) 50%, linear-gradient(theme('colors.default-100') 15px, theme('colors.default-300') 1%) 0, hsla(0deg, 0%, 100%, 16%);
 		background-size: 16px 16px;
-	}
-
-	@media (max-width: theme('screens.sm')) {
-		font-size: 14px;
 	}
 }
 

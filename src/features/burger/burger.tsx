@@ -1,20 +1,12 @@
 'use client';
 
 import { Button } from '@nextui-org/react';
-import { useState } from 'react';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { Drawer } from 'vaul';
 
 export const Burger = ({ children }: { children: React.ReactNode }) => {
-	const [snap, setSnap] = useState<number | string | null>(0.7);
-
 	return (
-		<Drawer.Root
-			direction='bottom'
-			snapPoints={[0.7, 1]}
-			activeSnapPoint={snap}
-			setActiveSnapPoint={setSnap}
-		>
+		<Drawer.Root direction='bottom'>
 			<Drawer.Trigger asChild>
 				<Button
 					className='text-default-500 hover:text-default-600 lg:hidden'

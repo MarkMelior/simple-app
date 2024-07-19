@@ -26,9 +26,11 @@
 		"change-lang": "Change language",
 		"lang-rus": "Russian",
 		"lang-eng": "English",
+		"locale-switcher": "Select language",
 		"auth-logged": "You have successfully logged in as an",
 		"auth-logout": "Logout",
 		"category-note": "Category",
-		"category-description": "All projects from this category are located here"
+		"category-description": "All projects from this category are located here",
+		"error-not-translate": "The page does not have a translation in the selected language. Try changing the language and using a translator. I apologize for the problems. 🥺"
 	}
 }

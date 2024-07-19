@@ -3,6 +3,7 @@
 import { Dictionary, i18n, Locale } from '@/shared/config/i18n';
 import {
 	Button,
+	ButtonProps,
 	Dropdown,
 	DropdownItem,
 	DropdownMenu,
@@ -13,7 +14,15 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { HiOutlineLanguage } from 'react-icons/hi2';
 
-export const LocaleSwitcher = ({ dict }: { dict: Dictionary['ui'] }) => {
+export const LocaleSwitcher = ({
+	dict,
+	likeButton,
+	variant = 'light',
+}: {
+	dict: Dictionary['ui'];
+	likeButton?: boolean;
+	variant?: ButtonProps['variant'];
+}) => {
 	const pathname = usePathname();
 	const segments = pathname.split('/');
 	const isDefaultLang = !i18n.locales.includes(segments[1] as Locale);
@@ -40,7 +49,8 @@ export const LocaleSwitcher = ({ dict }: { dict: Dictionary['ui'] }) => {
 			}}
 		>
 			<DropdownTrigger>
-				<Button variant='light' isIconOnly color='primary'>
+				<Button variant={variant} isIconOnly={!likeButton} color='primary'>
+					{likeButton && dict['locale-switcher']}
 					<HiOutlineLanguage size={18} />
 				</Button>
 			</DropdownTrigger>

@@ -4,6 +4,7 @@ import { CodeBlock } from './code-block/code-block';
 import { DownloadCvButton } from './download-cv-button/download-cv-button';
 import { GlowingBox } from './glowing-box/glowing-box';
 import { GlowingLine } from './glowing-box/glowing-line';
+import { Heading } from './heading/heading';
 import { Light } from './light/light';
 import { LinkHover } from './link-hover/link-hover';
 import { PageLoader } from './page-loader/page-loader';
@@ -16,6 +17,7 @@ export {
 	DownloadCvButton,
 	GlowingBox,
 	GlowingLine,
+	Heading,
 	Light,
 	LinkHover,
 	PageLoader,

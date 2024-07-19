@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from '@/shared/config/i18n';
 import { FiLink } from 'react-icons/fi';
 import { MdArrowOutward } from 'react-icons/md';
 import cls from './link-hover.module.scss';

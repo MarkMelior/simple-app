@@ -1,6 +1,6 @@
 import { getProjects } from '@/entity/project';
 import { GithubEditLink } from '@/shared/components';
-import { getDictionary, getLang, Link } from '@/shared/config/i18n';
+import { getDictionary, getLang } from '@/shared/config/i18n';
 import { FooterNavigation } from './footer-navigation';
 import cls from './footer.module.scss';
 
@@ -19,9 +19,9 @@ export const Footer = async () => {
 				<div className='mb-6 sm:mb-0 sm:flex'>
 					<p>{dict['footer-copyright']}</p>
 					<p className='sm:ml-4 sm:pl-4 sm:border-l sm:border-default-200 dark:border-default-100'>
-						<Link className='hover:text-default-600 transition' href='/'>
-							{dict['footer-made']}
-						</Link>
+						{/* <Link className='hover:text-default-600 transition' href='/'> */}
+						{dict['footer-made']}
+						{/* </Link> */}
 					</p>
 				</div>
 				<GithubEditLink dict={dict} lang={lang} />

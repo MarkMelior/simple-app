@@ -19,4 +19,8 @@
 		transform-origin: left;
 		transform: scaleX(1);
 	}
+
+	[class="light"] &::before {
+		height: 1px;
+	}
 }

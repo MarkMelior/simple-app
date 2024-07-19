@@ -19,7 +19,7 @@ export default async function Home() {
 	};
 
 	return (
-		<>
+		<div>
 			<div className='mb-8 z-30 rounded-lg relative overflow-hidden select-none pointer-events-none'>
 				<img src='/images/banner.jpg' alt='Banner' />
 			</div>
@@ -42,6 +42,6 @@ export default async function Home() {
 					// 'Tailwind',
 				]}
 			/>
-		</>
+		</div>
 	);
 }
