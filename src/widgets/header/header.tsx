@@ -10,7 +10,7 @@ interface HeaderProps {
 	description: string;
 	isLoading?: boolean;
 	tags?: StackVariants[];
-	isCenter?: boolean;
+	isCenter?: 'sm' | 'md' | 'lg' | boolean;
 	classNames?: {
 		title?: string;
 		description?: string;
@@ -39,6 +39,9 @@ export const Header: React.FC<HeaderProps> = ({
 			className={cn(
 				'relative z-20 mb-10',
 				{ 'text-center': isCenter },
+				{ 'sm:text-start': isCenter === 'sm' },
+				{ 'md:text-start': isCenter === 'md' },
+				{ 'lg:text-start': isCenter === 'lg' },
 				className,
 			)}
 		>

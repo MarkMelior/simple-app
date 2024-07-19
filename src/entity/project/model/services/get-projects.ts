@@ -25,7 +25,7 @@ export async function getProjects(): Promise<ProjectsResponse[]> {
 			const projectDirs = await fs.readdir(categoryDir, {
 				withFileTypes: true,
 			});
-			const projects: (ProjectMetadata & { link: string })[] = [];
+			const projects: ProjectMetadata[] = [];
 
 			for (const projectDirent of projectDirs) {
 				if (projectDirent.isDirectory()) {
@@ -41,7 +41,7 @@ export async function getProjects(): Promise<ProjectsResponse[]> {
 					projects.push({
 						...projectMetadata,
 						link: `/projects/${dirent.name}/${projectDirent.name}`,
-					} as ProjectMetadata & { link: string });
+					} as ProjectMetadata);
 				}
 			}
 

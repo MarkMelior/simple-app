@@ -3,6 +3,7 @@
 	height: 0px;
 	width: 80%;
 	margin: 0 auto;
+	mix-blend-mode: lighten;
 
 	[class="light"] & {
 		display: none;
@@ -15,8 +16,8 @@
 	height: 0px;
 	overflow: visible;
 	object-fit: cover;
-	mix-blend-mode: lighten;
 	transition: all .5s ease;
+	z-index: 21;
 	animation: fadeInBlackhole 1s ease-out forwards;
 }
 
@@ -36,7 +37,7 @@
 	position: absolute;
 	top: 100%;
 	left: 50%;
-	z-index: var(--z-index-blackhole);
+	z-index: 22;
 	width: 808px;
 	height: 808px;
 	transform: translateZ(0) translate(-50%, -50%);

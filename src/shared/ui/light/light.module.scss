@@ -13,8 +13,7 @@
 }
 
 .light {
-	overflow: hidden;
-	pointer-events: none;
+	@apply pointer-events-none overflow-hidden fixed w-full h-full z-20;
 }
 
 .ellipse1,

@@ -1,7 +1,7 @@
 ---
 title: 'MDX to HTML'
 description: 'Convert Markdown to HTML and synchronize with i18n'
-tags: ['TypeScript', 'SSR', 'Markdown']
+tags: ['typescript', 'ssr', 'markdown']
 ---
 
 First, read the article about [internationalization](/projects/best-practice/app-router-i18n)
@@ -60,7 +60,7 @@ shared/config/mdx
 
 Let's create a function to get all the data from .mdx files `shared/config/mdx/get-mdx.ts`:
 
-```TypeScript filename="shared/config/mdx/get-mdx.ts" githubPath="src/shared/config/mdx/get-mdx.ts"
+```typescript filename="shared/config/mdx/get-mdx.ts" githubPath="src/shared/config/mdx/get-mdx.ts"
 'use server';
 
 import fs from 'fs/promises';
@@ -113,7 +113,7 @@ Now we can safely change the logic of getting data from MDX. For example, instea
 
 We don't have any typing inside MDX files. But for convenience, we still type:
 
-```TypeScript filename="shared/config/mdx/types/get-mdx.type.ts" githubPath="src/shared/config/mdx/types/get-mdx.type.ts"
+```typescript filename="shared/config/mdx/types/get-mdx.type.ts" githubPath="src/shared/config/mdx/types/get-mdx.type.ts"
 import { StackVariants } from '@/shared/ui';
 
 export interface MdxHeadline {
@@ -143,7 +143,7 @@ export interface CategoryMetadata {
 
 Now the most interesting part... We create our own components to suit your taste and color in `MDXComponentsData`. Here is my implementation of the components, you can take ideas!
 
-```TypeScript filename="shared/config/mdx/mdx-components.tsx" githubPath="src/shared/config/mdx/mdx-components.tsx"
+```tsx filename="shared/config/mdx/mdx-components.tsx" githubPath="src/shared/config/mdx/mdx-components.tsx"
 import { cn } from '@/shared/lib';
 import { CodeBlock, Heading, LinkHover, StackVariants } from '@/shared/ui';
 import { Code } from '@nextui-org/react';
@@ -165,9 +165,7 @@ export const MDXComponentsData: MDXComponents = {
 
 		if (!match) {
 			return (
-				<Code
-					className='bg-default-200/50 py-0 px-1 h-fit rounded-md -top-0.5 select-text min-w-fit border border-default-200 text-default-700 !leading-5'
-				>
+				<Code className='bg-default-200/50 py-0 px-1 h-fit rounded-md -top-0.5 select-text min-w-fit border border-default-200 text-default-700 !leading-5'>
 					{children}
 				</Code>
 			);
@@ -260,7 +258,7 @@ export const MDXComponentsData: MDXComponents = {
 
 It is not necessary to make a wrapper for `MDXRemote`, but do we need flexibility? What if we suddenly want to use `MDXRemote` not only in the layout for MDX files, but also on another page?
 
-```TypeScript filename="shared/config/mdx/mdx-remote.tsx" githubPath="src/shared/config/mdx/mdx-remote.tsx"
+```tsx filename="shared/config/mdx/mdx-remote.tsx" githubPath="src/shared/config/mdx/mdx-remote.tsx"
 import { MDXRemoteProps, MDXRemote as MDXRemoteRSC } from 'next-mdx-remote/rsc';
 import { FC } from 'react';
 import remarkGfm from 'remark-gfm';
@@ -299,7 +297,7 @@ Everything is easy here. We just copy and use it. Now I'll tell you what these p
 
 - `rehypeAutoHeading` - plugin adds `id` to `h1 - h6` as in [`rehype-slug`](https://www.npmjs.com/package/rehype-slug), adds an anchor link to the header as in [`rehype-autolink-headers`](https://www.npmjs.com/package/rehype-autolink-headings) and outputs an array of all headers, taking into account the nesting **(but no more than 2 levels of nesting)** in the form of:
 
-```TypeScript hideHeader
+```typescript hideHeader
 {
 	title: string;
 	href: string;
@@ -314,7 +312,7 @@ Everything is easy here. We just copy and use it. Now I'll tell you what these p
 
 The code of the `rehypeAutoHeading` plugin:
 
-```TypeScript filename="shared/config/mdx/plugins/rehype-auto-heading.ts" githubPath="src/shared/config/mdx/plugins/rehype-auto-heading.ts"
+```typescript filename="shared/config/mdx/plugins/rehype-auto-heading.ts" githubPath="src/shared/config/mdx/plugins/rehype-auto-heading.ts"
 import { toLatin } from '@/shared/lib';
 import { slug } from 'github-slugger';
 import { toString } from 'hast-util-to-string';
@@ -378,7 +376,7 @@ export function rehypeAutoHeading(headlines?: MdxHeadline[]) {
 
 I don't know why, but the ready-made plugin [`rehype-mdx-code-props`](https://www.npmjs.com/package/rehype-mdx-code-props) he didn't work for me, so he wrote his own.
 
-```TypeScript filename="shared/config/mdx/plugins/rehype-extract-code-props.ts" githubPath="src/shared/config/mdx/plugins/rehype-extract-code-props.ts"
+```typescript filename="shared/config/mdx/plugins/rehype-extract-code-props.ts" githubPath="src/shared/config/mdx/plugins/rehype-extract-code-props.ts"
 import { visit } from 'unist-util-visit';
 
 export function rehypeExtractCodeProps() {
@@ -397,7 +395,7 @@ export function rehypeExtractCodeProps() {
 						props[match[1]] = match[2];
 					} else {
 						// For just a key (without a value)
-						props[match[3]] = true;  // Assign the value true
+						props[match[3]] = true; // Assign the value true
 					}
 				}
 
@@ -432,7 +430,7 @@ entity/project/model
 
 Now we are using the previously created `getMdx()` function and enjoying the ease of getting data from .mdx files. `get-project.ts`:
 
-```TypeScript filename="entity/project/model/services/get-project.ts" githubPath="src/entity/project/model/services/get-project.ts"
+```typescript filename="entity/project/model/services/get-project.ts" githubPath="src/entity/project/model/services/get-project.ts"
 'use server';
 
 import { getLang } from '@/shared/config/i18n';
@@ -489,7 +487,7 @@ export async function getProject(
 
 Everything is written in the comments to the code. `get-projects-by-category.ts`:
 
-```TypeScript filename="entity/project/model/services/get-projects-by-category.ts" githubPath="src/entity/project/model/services/get-projects-by-category.ts"
+```typescript filename="entity/project/model/services/get-projects-by-category.ts" githubPath="src/entity/project/model/services/get-projects-by-category.ts"
 'use server';
 
 import { getLang } from '@/shared/config/i18n';
@@ -548,7 +546,7 @@ export async function getProjectsByCategory(
 
 Everything is similar here. We get the data using `getMdx(dir)` and return the data to `get-projects.ts`:
 
-```TypeScript filename="entity/project/model/services/get-projects.ts" githubPath="src/entity/project/model/services/get-projects.ts"
+```typescript filename="entity/project/model/services/get-projects.ts" githubPath="src/entity/project/model/services/get-projects.ts"
 'use server';
 
 import { getLang } from '@/shared/config/i18n';
@@ -610,7 +608,7 @@ export async function getProjects(): Promise<ProjectsResponse[]> {
 
 #### Typification of the project entity
 
-```TypeScript filename="entity/project/model/types/project.type.ts" githubPath="src/entity/project/model/types/project.type.ts"
+```typescript filename="entity/project/model/types/project.type.ts" githubPath="src/entity/project/model/types/project.type.ts"
 import {
 	CategoryMetadata,
 	MdxHeadline,
@@ -651,7 +649,7 @@ The structure of dynamic routes in `/app`:
 
 Creating a layout for mdx `app/[lang]/projects/[category]/[name]/page.tsx`:
 
-```TypeScript filename="app/[lang]/projects/[category]/[name]/page.tsx" githubPath="app/[lang]/projects/[category]/[name]/page.tsx"
+```tsx filename="app/[lang]/projects/[category]/[name]/page.tsx" githubPath="app/[lang]/projects/[category]/[name]/page.tsx"
 import { getProject } from '@/entity/project';
 import { MDXRemote } from '@/shared/config/mdx';
 import { Header, Headlines } from '@/widgets';
@@ -715,7 +713,7 @@ export async function generateMetadata({
 
 Let's create a page with projects from a certain category `app/[lang]/projects/[category]/page.tsx`:
 
-```TypeScript filename="app/[lang]/projects/[category]/page.tsx" githubPath="app/[lang]/projects/[category]/page.tsx"
+```tsx filename="app/[lang]/projects/[category]/page.tsx" githubPath="app/[lang]/projects/[category]/page.tsx"
 import { getProjectsByCategory } from '@/entity/project';
 import { getDictionary } from '@/shared/config/i18n';
 import { Header } from '@/widgets';

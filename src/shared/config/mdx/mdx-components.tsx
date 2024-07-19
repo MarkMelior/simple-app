@@ -21,7 +21,7 @@ export const MDXComponentsData: MDXComponents = {
 			return (
 				<Code
 					className={cn(
-						'bg-default-200/50 py-0 px-1 h-fit rounded-md -top-0.5 select-text min-w-fit border border-default-200 text-default-700 !leading-5',
+						'bg-default-200/50 py-0 px-1 h-fit rounded-md -top-0.5 select-text min-w-fit border border-default-200 text-default-700 !leading-5 break-all whitespace-normal',
 						// 'text-[0.85rem]',
 						// FontCode.className,
 					)}
@@ -109,6 +109,35 @@ export const MDXComponentsData: MDXComponents = {
 			>
 				{children}
 			</ol>
+		);
+	},
+	img: ({ src, alt, ...props }: ComponentPropsWithoutRef<'img'>) => {
+		return (
+			<img
+				src={src}
+				alt={alt}
+				{...props}
+				className={cn(
+					'rounded-md select-none pointer-events-none w-full object-cover',
+					props.className,
+				)}
+			/>
+		);
+	},
+	blockquote: ({
+		children,
+		...props
+	}: ComponentPropsWithoutRef<'blockquote'>) => {
+		return (
+			<blockquote
+				className={cn(
+					'bg-default-100/50 px-4 rounded-md border border-default-200 my-5 text-sm',
+					props.className,
+				)}
+				{...props}
+			>
+				{children}
+			</blockquote>
 		);
 	},
 };

@@ -1,0 +1,144 @@
+.container {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+	gap: 50px;
+}
+
+.inner {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	z-index: 2;
+	box-sizing: border-box;
+	width: 100%;
+	height: 100%;
+	transform: translateY(-50%) translateZ(60px) scale(0.94);
+	perspective: inherit;
+
+	&>img {
+		width: 100px;
+		height: 100px;
+	}
+
+	&>div {
+		position: relative;
+		display: flex;
+		width: 100%;
+	}
+}
+
+.front {
+	// &::before {
+	// 	position: absolute;
+	// 	inset: 0 0 -30px;
+	// 	width: 110px;
+	// 	height: 110px;
+	// 	margin: auto;
+	// 	content: '';
+	// 	background: rgb(231, 212, 255, 15%);
+	// 	filter: blur(30px);
+	// 	border-radius: 100px;
+	// }
+
+	.inner {
+		display: flex;
+		flex-direction: column;
+		gap: 25px;
+		align-items: center;
+		justify-content: center;
+		padding: 15px 20px;
+		overflow: hidden;
+
+		h1 {
+			width: 100%;
+			font-weight: 500;
+			line-height: 22px;
+			color: #FFF;
+			text-align: center;
+
+			@apply text-lg;
+		}
+	}
+}
+
+.front,
+.back {
+	height: 160px;
+	background: url('/images/noise.png') repeat, #020014;
+	transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+	backface-visibility: hidden;
+
+	@apply rounded-md;
+}
+
+.back {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+
+	.inner {
+		display: grid;
+		gap: 15px;
+		align-items: center;
+		justify-content: center;
+		height: auto;
+		padding: 20px;
+
+		h1 {
+			width: 100%;
+			font-weight: 500;
+			line-height: 22px;
+			text-align: center;
+
+			@apply text-lg;
+		}
+
+		p {
+			color: #FFF;
+			text-align: center;
+
+			@apply text-sm;
+		}
+	}
+}
+
+.card {
+	cursor: pointer;
+	transition: transform .4s ease;
+	perspective: 1000px;
+	transform-style: preserve-3d;
+
+	.back {
+		transform: rotateY(180deg);
+		transform-style: preserve-3d;
+	}
+
+	.front {
+		transform: rotateY(0deg);
+		transform-style: preserve-3d;
+	}
+
+	&:hover {
+		transform: scale(1.2);
+
+		.back {
+			transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+			transform: rotateY(0deg);
+			transform-style: preserve-3d
+		}
+
+		.front {
+			transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+			transform: rotateY(-180deg);
+			transform-style: preserve-3d
+		}
+	}
+}
+
+.refresh {
+	position: absolute;
+	top: 0;
+	right: 0;
+	opacity: .15;
+}

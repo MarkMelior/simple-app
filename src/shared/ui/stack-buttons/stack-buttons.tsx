@@ -21,7 +21,7 @@ export const StackButtons = ({
 		<div className={cn('flex gap-2 flex-wrap', className)}>
 			{tags.map((tag) => (
 				<Button
-					key={tag}
+					key={StackData[tag]?.name}
 					variant='flat'
 					disableRipple
 					size='sm'
@@ -32,7 +32,7 @@ export const StackButtons = ({
 						(isColored && StackData[tag]?.colorText) || 'text-default-700'
 					} cursor-default`}
 				>
-					{tag}
+					{StackData[tag]?.name}
 				</Button>
 			))}
 		</div>

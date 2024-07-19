@@ -60,7 +60,7 @@ export const FooterNavigation = ({
 		<div className='mb-10 font-semibold flex items-center'>
 			<Button
 				as={Link}
-				className='bg-default-200/50 group flex items-center text-default-900'
+				className='bg-default-200/50 group flex items-center text-default-900 h-auto'
 				href={prevPage.link}
 				isDisabled={pathname === '/'}
 				size='sm'
@@ -79,18 +79,22 @@ export const FooterNavigation = ({
 						strokeLinejoin='round'
 					/>
 				</svg>
-				<span className='text-default-600'>{dict['footer-prev']}:</span>
-				{prevPage.title}
+				<div className='flex flex-col sm:flex-row my-2 text-wrap'>
+					<span className='text-default-600 mr-1'>{dict['footer-prev']}:</span>
+					{prevPage.title}
+				</div>
 			</Button>
 			<Button
 				as={Link}
-				className='bg-default-200/50 group ml-auto flex items-center text-default-900'
+				className='bg-default-200/50 group ml-auto flex items-center text-default-900 h-auto'
 				href={nextPage.link}
 				size='sm'
 				variant='flat'
 			>
-				<span className='text-default-600'>{dict['footer-next']}:</span>
-				{nextPage.title}
+				<div className='flex flex-col sm:flex-row my-2 text-wrap'>
+					<span className='text-default-600 mr-1'>{dict['footer-next']}:</span>
+					{nextPage.title}
+				</div>
 				<svg
 					viewBox='0 0 3 6'
 					className='ml-3 w-auto h-1.5 text-default-500 overflow-visible group-hover:text-default-500'

@@ -15,5 +15,5 @@ export interface ProjectResponse {
 export interface ProjectsResponse {
 	title: string;
 	link: string;
-	projects: (ProjectMetadata & { link: string })[];
+	projects: ProjectMetadata[];
 }

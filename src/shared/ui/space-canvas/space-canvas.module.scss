@@ -1,0 +1,8 @@
+.wrapper {
+	position: fixed;
+	inset: 0;
+	z-index: var(--z-index-space);
+	width: 100%;
+	height: auto;
+	background: var(--color-background);
+}

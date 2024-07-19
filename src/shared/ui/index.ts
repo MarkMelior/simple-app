@@ -1,5 +1,6 @@
 import { StackVariants } from '../const/stack-data';
 import { Blackhole } from './blackhole/blackhole';
+import { CardRotate } from './card-rotate/card-rotate';
 import { CodeBlock } from './code-block/code-block';
 import { DownloadCvButton } from './download-cv-button/download-cv-button';
 import { GlowingBox } from './glowing-box/glowing-box';
@@ -13,6 +14,7 @@ import { StackButtons } from './stack-buttons/stack-buttons';
 
 export {
 	Blackhole,
+	CardRotate,
 	CodeBlock,
 	DownloadCvButton,
 	GlowingBox,

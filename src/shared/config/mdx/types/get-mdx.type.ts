@@ -12,6 +12,7 @@ export interface ProjectMetadata {
 	description: string;
 	tags?: StackVariants[];
 	publishDate: string;
+	link: string;
 }
 
 export interface CategoryMetadata {

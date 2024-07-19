@@ -7,7 +7,7 @@ import path from 'path';
 
 interface ProjectsByCategoryResponse {
 	category: CategoryMetadata;
-	projects: (ProjectMetadata & { link: string })[];
+	projects: ProjectMetadata[];
 }
 
 export async function getProjectsByCategory(
@@ -36,7 +36,7 @@ export async function getProjectsByCategory(
 				return {
 					...projectMetadata,
 					link: `/projects/${category}/${dirent.name}`,
-				} as ProjectMetadata & { link: string };
+				} as ProjectMetadata;
 			}),
 	);
 
