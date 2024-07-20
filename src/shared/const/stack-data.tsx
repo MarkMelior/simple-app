@@ -11,10 +11,10 @@ import {
 	FaSass,
 } from 'react-icons/fa';
 import { GoDatabase } from 'react-icons/go';
-import { LuCakeSlice } from 'react-icons/lu';
+import { LuCakeSlice, LuFileJson2, LuTerminal } from 'react-icons/lu';
 import { MdOutlineCookie } from 'react-icons/md';
 import { PiMarkdownLogo } from 'react-icons/pi';
-import { RiNextjsFill, RiTailwindCssFill } from 'react-icons/ri';
+import { RiNextjsFill, RiSeoLine, RiTailwindCssFill } from 'react-icons/ri';
 import {
 	SiMongodb,
 	SiNestjs,
@@ -54,6 +54,9 @@ export type StackVariants =
 	| 'python'
 	| 'zod'
 	| 'fsd'
+	| 'json'
+	| 'seo'
+	| 'bash'
 	| 'figma';
 
 interface StackProps {
@@ -177,5 +180,17 @@ export const StackData: Record<StackVariants, StackProps> = {
 	fsd: {
 		name: 'FSD',
 		icon: <LuCakeSlice size={18} />,
+	},
+	json: {
+		name: 'json',
+		icon: <LuFileJson2 size={18} />,
+	},
+	seo: {
+		name: 'SEO',
+		icon: <RiSeoLine size={18} />,
+	},
+	bash: {
+		name: 'Terminal',
+		icon: <LuTerminal size={18} />,
 	},
 };

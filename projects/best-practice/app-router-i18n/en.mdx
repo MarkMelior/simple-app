@@ -1,0 +1,375 @@
+---
+title: 'i18n: Internationalization'
+description: 'Changing the interface languages without third-party libraries. The best SEO solution'
+tags: ['nextjs', 'typescript', 'ssr', 'seo', 'fsd']
+---
+
+---
+
+## Что получится в итоге?
+
+## What will happen in the end?
+
+Next.js allows you to configure the routing and rendering of content to support multiple languages. Adapting your site to different languages includes translating content (localization) and internationalizing routes.
+
+We will have full control over i18n, as we write everything without third-party libraries. For this purpose, `middleware.ts` will be enough for us.
+
+You do not need to pass the language to `getDictionary(lang)`, as it is implemented in [documentation Next.js](https://nextjs.org/docs/app/building-your-application/routing/internationalization#localization):
+
+```diff hideHeader
+- getDictionary(lang)
++ getDictionary()
+```
+
+Let's create an analog of `usePathname()` for server components - `getPathname()`.
+
+We will be able to receive translations and the selected language without throwing them into each component:
+
+```diff hideHeader
+-	export const Navbar = ({ dict }: { dict: Dictionary['ui'] }) => {...}
+
++	export const Navbar = async () => {
++		const dictionary = await getDictionary();
+```
+
+Just use `const dict = await getDictionary();` in any server component, throw it into the client component as props `{dict}: {dict: Dictionary['ui'] }` or use `useDictionary()`
+
+Usage example:
+
+```tsx hideHeader
+export const Component = async () => {
+	const dictionary = await getDictionary();
+	const lang = await getLang();
+
+	return (
+		<>
+			<h1>{dictionary.ui['title']}</h1>
+			<p>Selected language: {lang}</p>
+		</>
+	);
+};
+```
+
+---
+
+## Implementation of the main functionality
+
+#### i18n configuration
+
+Creating the i18n config `shared/config/i18n/i18n.config.ts`:
+
+```typescript filename="i18n.config.ts" githubPath="src/shared/config/i18n/i18n.config.ts"
+export const i18n = {
+	defaultLocale: 'ru',
+	locales: ['en', 'ru'],
+} as const;
+
+export type Locale = (typeof i18n)['locales'][number];
+```
+
+Let's create files with translations of `ru.json` and `en.json` in `shared/config/i18n/dictionaries`.
+
+Example:
+
+```json filename="en.json"
+{
+	"home-page": {
+		"note": "Home Page",
+		"title": "👋 Hi, I'm Mark Melior",
+		"description": "I am looking for a company where I will improve my skills to a strong Frontend developer (:"
+	}
+}
+```
+
+#### Middleware.ts
+
+All the internationalization functionality is here!
+
+In `middleware.ts` we implement the transfer of the url to headers for the future `getPathname()` + functionality:
+
+```typescript filename="middleware.ts" githubPath="middleware.ts"
+import { i18n } from '@/shared/config/i18n';
+import { NextRequest, NextResponse } from 'next/server';
+
+export function middleware(request: NextRequest) {
+	const { pathname } = request.nextUrl;
+
+	// Passing the url of the current page to headers
+	// This is necessary for the future getPathname() hook
+	const requestHeaders = new Headers(request.headers);
+	requestHeaders.set('x-url', request.url);
+
+	// `/_next/" and "/api/" are ignored by the observer, but we need to manually ignore the files in `public`
+	const ignoredPaths = [
+		/^\/images\/.*$/,
+		/^\/videos\/.*$/,
+		/^\/files\/.*$/,
+		/^\/favicon\.ico$/,
+	];
+	if (ignoredPaths.some((regex) => regex.test(pathname))) {
+		return;
+	}
+
+	if (
+		pathname.startsWith(`/${i18n.defaultLocale}/`) ||
+		pathname === `/${i18n.defaultLocale}`
+	) {
+		// If the incoming request is for /ru/whatever, then we will redirect it to /whatever
+		const response = NextResponse.redirect(
+			new URL(
+				pathname.replace(
+					`/${i18n.defaultLocale}`,
+					pathname === `/${i18n.defaultLocale}` ? '/' : '',
+				),
+				request.url,
+			),
+			{
+				headers: requestHeaders,
+			},
+		);
+		return response;
+	}
+
+	const pathnameIsMissingLocale = i18n.locales.every(
+		(locale) =>
+			!pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`,
+	);
+
+	if (pathnameIsMissingLocale) {
+		// Now we are going to specify Next for /en or /ru.js that the request is intended for /ru/whatever
+		const response = NextResponse.rewrite(
+			new URL(
+				`/${i18n.defaultLocale}${pathname}${request.nextUrl.search}`,
+				request.nextUrl.href,
+			),
+			{
+				request: {
+					headers: requestHeaders,
+				},
+			},
+		);
+		return response;
+	}
+
+	const response = NextResponse.next({
+		request: {
+			headers: requestHeaders,
+		},
+	});
+	return response;
+}
+
+export const config = {
+	matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+};
+```
+
+#### getPathname()
+
+Creating `getPathname()` to get the path on the server side. A kind of analogue of the `usePathname()` hook.
+
+`shared/lib/get-pathname/get-pathname.ts`:
+
+```typescript filename="get-pathname.ts" githubPath="src/shared/lib/get-pathname/get-pathname.ts"
+'use server';
+
+import { i18n, Locale } from '@/shared/config/i18n';
+import { headers } from 'next/headers';
+
+interface GetPathnameProps {
+	withoutLang?: boolean;
+}
+
+export const getPathname = async ({ withoutLang }: GetPathnameProps = {}) => {
+	const headersList = headers();
+	const fullUrl = headersList.get('x-url') || '';
+
+	const url = new URL(fullUrl);
+	const pathname = url.pathname;
+
+	if (withoutLang) {
+		const segment = pathname.split('/')[1] as Locale;
+
+		if (i18n.locales.includes(segment)) {
+			return `/${pathname.split('/').slice(2).join('/')}`;
+		}
+	}
+
+	return pathname;
+};
+```
+
+#### getLang()
+
+`const lang = await getLang()` returns the selected language `en | ru` for the server component.
+
+`shared/config/i18n/get-lang.ts`:
+
+```typescript filename="get-lang.ts" githubPath="src/shared/config/i18n/get-lang.ts"
+'use server';
+
+import { getPathname } from '@/shared/lib';
+import { Locale, i18n } from './i18n.config';
+
+export const getLang = async (): Promise<Locale> => {
+	const pathname = await getPathname();
+
+	const segment = pathname.split('/')[1] as Locale;
+
+	// If the URL segment is valid, return it
+	if (i18n.locales.includes(segment)) return segment;
+
+	// Otherwise, we return the default language
+	return i18n.defaultLocale;
+};
+```
+
+#### useLang()
+
+`const lang = useLang()` returns the selected language `en | ru` for the client component.
+
+`shared/config/i18n/use-lang.ts`:
+
+```typescript filename="use-lang.ts" githubPath="src/shared/config/i18n/use-lang.ts"
+'use client';
+
+import { usePathname } from 'next/navigation';
+import { Locale, i18n } from './i18n.config';
+
+export const useLang = (): Locale => {
+	const pathname = usePathname();
+
+	const segment = pathname.split('/')[1] as Locale;
+
+	if (i18n.locales.includes(segment)) return segment;
+
+	return i18n.defaultLocale;
+};
+```
+
+#### getDictionaries()
+
+`const dict = await getDictionaries()` returns an object with _"key-value"_ translations for the server component.
+
+`shared/config/i18n/dictionaries.ts`:
+
+```typescript filename="dictionaries.ts" githubPath="src/shared/config/i18n/dictionaries.ts"
+'use server';
+
+import { getLang } from './get-lang';
+import { Locale } from './i18n.config';
+
+const dictionaries = {
+	en: () => import('./dictionaries/en.json').then((module) => module.default),
+	ru: () => import('./dictionaries/ru.json').then((module) => module.default),
+};
+
+export const getDictionary = async (locale?: Locale) => {
+	const lang = await getLang();
+
+	return dictionaries[locale || lang]?.() ?? dictionaries.ru();
+};
+
+export type Dictionary = Awaited<ReturnType<typeof getDictionary>>;
+```
+
+#### useDictionaries()
+
+`const dict = useDictionaries()` returns an object with _"key-value"_ translations for the client component.
+
+`shared/config/i18n/use-dictionary.ts`:
+
+```typescript filename="use-dictionary.ts" githubPath="src/shared/config/i18n/use-dictionary.ts"
+'use client';
+
+import { useEffect, useState } from 'react';
+import { Dictionary } from './dictionaries';
+import { Locale } from './i18n.config';
+import { useLang } from './use-lang';
+
+export const useDictionary = (locale?: Locale): Dictionary | undefined => {
+	const dictionaries = {
+		en: () => import('./dictionaries/en.json').then((module) => module.default),
+		ru: () => import('./dictionaries/ru.json').then((module) => module.default),
+	};
+
+	const [dict, setDict] = useState<Dictionary>();
+
+	const lang = useLang();
+
+	useEffect(() => {
+		dictionaries[locale || lang]?.().then(setDict);
+	}, [lang, locale]);
+
+	return dict as Dictionary;
+};
+```
+
+#### Link Component
+
+Almost everything is ready, but when we switch to other links, the selected language is reset.
+
+To fix this, let's create our own component `<Link />` in `shared/config/i18n/link.tsx`:
+
+```tsx filename="link.tsx" githubPath="src/shared/config/i18n/link.tsx"
+'use client';
+
+import NextLink, { LinkProps as NextLinkProps } from 'next/link';
+import { FC } from 'react';
+import { UrlObject } from 'url';
+import { i18n } from './i18n.config';
+import { useLang } from './use-lang';
+
+interface LinkProps extends NextLinkProps {
+	children: React.ReactNode;
+}
+
+const isExternalLink = (href: string | UrlObject): boolean => {
+	return (
+		typeof href === 'string' &&
+		(href.startsWith('http://') || href.startsWith('https://'))
+	);
+};
+
+const getLocalizedHref = (
+	href: string | UrlObject,
+	lang: string,
+	defaultLocale: string,
+): string | UrlObject => {
+	if (isExternalLink(href) || typeof href !== 'string') {
+		return href;
+	}
+	return lang === defaultLocale ? href : `/${lang}${href}`;
+};
+
+export const Link: FC<
+	Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof LinkProps> &
+		LinkProps & {
+			children?: React.ReactNode;
+		} & React.RefAttributes<HTMLAnchorElement>
+> = ({ children, href, ...props }) => {
+	const lang = useLang();
+
+	const localizedHref = getLocalizedHref(href, lang, i18n.defaultLocale);
+
+	return (
+		<NextLink {...props} href={localizedHref}>
+			{children}
+		</NextLink>
+	);
+};
+```
+
+> All `Link` components must be exported from `@/shared/config/i18n`! Otherwise, when clicking on links on the site, the selected language will be reset.
+
+---
+
+## Conclusion
+
+As you can see, internationalization can be implemented literally with one `middleware.ts`. We receive transfers via `const dict = await getDictionaries()` and that's it!
+
+The rest of the hooks are needed more for convenience than for the functionality of the i18n.
+
+Also, instead of storing the language in the router, you can try to rewrite it with a Cookie, of course. But it will be bad for SEO
+
+Thanks for reading! I hope I helped you (:

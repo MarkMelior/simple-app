@@ -27,6 +27,7 @@ export const AuthExample = async () => {
 			<div className='grid sm:grid-cols-2 gap-12'>
 				<FormLoginExample className='w-full' isDisabled={Boolean(user)} />
 				<CodeBlock
+					hideHeader
 					dict={dict.ui}
 					text={
 						'# Administrator:\n- Username: admin\n- Password: pass\n\n# User:\n- Username: user\n- Password: pass'

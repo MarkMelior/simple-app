@@ -118,7 +118,7 @@ export const MDXComponentsData: MDXComponents = {
 				alt={alt}
 				{...props}
 				className={cn(
-					'rounded-md select-none pointer-events-none w-full object-cover',
+					'rounded-md select-none pointer-events-none w-full object-cover mt-4 mb-12',
 					props.className,
 				)}
 			/>
@@ -131,7 +131,7 @@ export const MDXComponentsData: MDXComponents = {
 		return (
 			<blockquote
 				className={cn(
-					'bg-default-100/50 px-4 rounded-md border border-default-200 my-5 text-sm',
+					'bg-default-100/50 px-4 rounded-md border border-default-200 mt-5 mb-12 text-sm',
 					props.className,
 				)}
 				{...props}

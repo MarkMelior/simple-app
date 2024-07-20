@@ -1,12 +1,30 @@
 ---
 title: 'MDX to HTML'
 description: 'Convert Markdown to HTML and synchronize with i18n'
-tags: ['typescript', 'ssr', 'markdown']
+tags: ['typescript', 'ssr', 'markdown', 'fsd']
 ---
 
 First, read the article about [internationalization](/projects/best-practice/app-router-i18n)
 
 ---
+
+## Markdown and multidimensional expressions
+
+[Markdown](http://daringfireball.net/projects/markdown/syntax) is a simplified markup language used for formatting text. It allows you to write using the syntax of plain text and convert it into structurally correct HTML. It is commonly used to create content on websites and blogs.
+
+You're writing...
+
+```md hideHeader
+I **love** to use [Ext.js ](https://extjs.org /)
+```
+
+Conclusion:
+
+```html hideHeader
+<p>I <strong>like</strong> to use <a href="https://extjs.org /">Ext.js </a></p>
+```
+
+[MDS](http://mds.com /) is a markdown superset that allows you to write [JSX](https://react.dev/learn/writing-markup-with-jsx) directly into your markdown files. It's a powerful way to add dynamic interactivity and embed React components into your content.
 
 ## What will happen in the end?
 

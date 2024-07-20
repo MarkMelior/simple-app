@@ -8,6 +8,12 @@ import Link from 'next/link';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import cls from './headlines.module.scss';
 
+const settings = {
+	minHeight: 20,
+	maxHeight: 100,
+	thresholdTop: 88, // Пиксели от верха окна
+};
+
 export const Headlines = ({ headlines }: { headlines: MdxHeadline[] }) => {
 	const boxRef = useRef<HTMLDivElement | null>(null);
 
@@ -17,8 +23,6 @@ export const Headlines = ({ headlines }: { headlines: MdxHeadline[] }) => {
 
 	const dict = useDictionary();
 
-	const N = 88; // Пиксели от верха окна
-
 	useEffect(() => {
 		const handleScroll = () => {
 			const sections = document.querySelectorAll('[data-headline-id]');
@@ -26,7 +30,10 @@ export const Headlines = ({ headlines }: { headlines: MdxHeadline[] }) => {
 
 			sections.forEach((section) => {
 				const rect = section.getBoundingClientRect();
-				if (rect.top <= N && rect.bottom >= N) {
+				if (
+					rect.top <= settings.thresholdTop &&
+					rect.bottom >= settings.thresholdTop
+				) {
 					lastVisibleId = section.getAttribute('data-headline-id');
 				}
 			});
@@ -57,11 +64,11 @@ export const Headlines = ({ headlines }: { headlines: MdxHeadline[] }) => {
 				const newHeightPx = startHeight - (dragEvent.clientY - startY);
 				const newHeightPercentage = (newHeightPx / parentHeight) * 100;
 
-				if (newHeightPercentage < 20) {
-					setHeight(20);
+				if (newHeightPercentage < settings.minHeight) {
+					setHeight(settings.minHeight);
 					setLimit(true);
-				} else if (newHeightPercentage > 100) {
-					setHeight(100);
+				} else if (newHeightPercentage > settings.maxHeight) {
+					setHeight(settings.maxHeight);
 					setLimit(true);
 				} else {
 					setHeight(newHeightPercentage);

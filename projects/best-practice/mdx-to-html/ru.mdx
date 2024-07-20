@@ -1,10 +1,32 @@
 ---
 title: 'MDX в HTML'
 description: 'Преобразуем Markdown в HTML и синхронизируем с i18n'
-tags: ['typescript', 'ssr', 'markdown']
+tags: ['typescript', 'ssr', 'markdown', 'fsd']
 ---
 
 Сначала прочитайте статью про [интернационализацию](/projects/best-practice/app-router-i18n)
+
+---
+
+## Markdown и многомерные выражения
+
+[Markdown](https://daringfireball.net/projects/markdown/syntax) - это упрощенный язык разметки, используемый для форматирования текста. Он позволяет вам писать, используя синтаксис обычного текста, и преобразовывать его в структурно корректный HTML. Он обычно используется для создания контента на веб-сайтах и в блогах.
+
+Вы пишете...
+
+```md hideHeader
+Я **люблю** использовать [Next.js](https://extjs.org/)
+```
+
+Вывод:
+
+```html hideHeader
+<p>
+	Я <strong>люблю</strong> использовать <a href="https://extjs.org/">Next.js</a>
+</p>
+```
+
+[MDX](https://mdxjs.com/) - это надмножество markdown, которое позволяет вам записывать [JSX](https://react.dev/learn/writing-markup-with-jsx) непосредственно в ваши файлы markdown. Это мощный способ добавить динамическую интерактивность и встроить компоненты React в ваш контент.
 
 ---
 

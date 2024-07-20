@@ -55,7 +55,7 @@ export const CodeBlock: FC<CodeBlockProps> = ({
 			{!hideHeader && (
 				<div className='bg-default-100 text-sm text-default-600 py-1 px-3 flex justify-between items-center break-all whitespace-normal text-center'>
 					{StackData[language]?.icon || <TbFileUnknown size={20} />}
-					{fileName ? fileName : language}
+					{fileName ? fileName : StackData[language]?.name}
 					<CodeBlockButtons dict={dict} text={text} github={github} />
 				</div>
 			)}
@@ -74,7 +74,7 @@ export const CodeBlock: FC<CodeBlockProps> = ({
 					showLineNumbers={!disableLineNumbers}
 					style={oneDark}
 					className={cn(
-						'border-t-1 border-default-200 max-h-96 text-sm sm:text-base overflow-auto !bg-default-100 !text-default-700',
+						'border-t-1 border-default-200 max-h-[28rem] text-sm sm:text-base overflow-auto !bg-default-100 !text-default-700',
 						{
 							'border-0': hideHeader,
 						},
