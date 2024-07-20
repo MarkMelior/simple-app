@@ -82,7 +82,7 @@ shared/config/mdx
 
 Создадим функцию для получение всех данных из .mdx файлов `shared/config/mdx/get-mdx.ts`:
 
-```typescript filename="shared/config/mdx/get-mdx.ts" githubPath="src/shared/config/mdx/get-mdx.ts"
+```typescript filename="config/mdx/get-mdx.ts" githubPath="src/shared/config/mdx/get-mdx.ts"
 'use server';
 
 import fs from 'fs/promises';
@@ -135,7 +135,7 @@ export async function getMdx<T = ProjectMetadata>(
 
 Внутри MDX файлов у нас отсутствует какая-либо типизация. Но для удобства всё равно типизируем:
 
-```typescript filename="shared/config/mdx/types/get-mdx.type.ts" githubPath="src/shared/config/mdx/types/get-mdx.type.ts"
+```typescript filename="config/mdx/types/get-mdx.type.ts" githubPath="src/shared/config/mdx/types/get-mdx.type.ts"
 import { StackVariants } from '@/shared/ui';
 
 export interface MdxHeadline {
@@ -165,7 +165,7 @@ export interface CategoryMetadata {
 
 Теперь самое интересное... Создаём свои компоненты на свой вкус и цвет в `MDXComponentsData`. Вот моя реализация компонентов, можете брать идеи!
 
-```tsx filename="shared/config/mdx/mdx-components.tsx" githubPath="src/shared/config/mdx/mdx-components.tsx"
+```tsx filename="config/mdx/mdx-components.tsx" githubPath="src/shared/config/mdx/mdx-components.tsx"
 import { cn } from '@/shared/lib';
 import { CodeBlock, Heading, LinkHover, StackVariants } from '@/shared/ui';
 import { Code } from '@nextui-org/react';
@@ -280,7 +280,7 @@ export const MDXComponentsData: MDXComponents = {
 
 Необязательно делать обёртку для `MDXRemote`, но нам же нужна гибкость? Вдруг мы резко захотим использовать `MDXRemote` не только в layout для MDX файлов, но и на другой странице?
 
-```tsx filename="shared/config/mdx/mdx-remote.tsx" githubPath="src/shared/config/mdx/mdx-remote.tsx"
+```tsx filename="config/mdx/mdx-remote.tsx" githubPath="src/shared/config/mdx/mdx-remote.tsx"
 import { MDXRemoteProps, MDXRemote as MDXRemoteRSC } from 'next-mdx-remote/rsc';
 import { FC } from 'react';
 import remarkGfm from 'remark-gfm';
@@ -334,7 +334,7 @@ export const MDXRemote: FC<MDXRemoteProps> = ({
 
 Код плагина `rehypeAutoHeading`:
 
-```typescript filename="shared/config/mdx/plugins/rehype-auto-heading.ts" githubPath="src/shared/config/mdx/plugins/rehype-auto-heading.ts"
+```typescript filename="config/mdx/plugins/rehype-auto-heading.ts" githubPath="src/shared/config/mdx/plugins/rehype-auto-heading.ts"
 import { toLatin } from '@/shared/lib';
 import { slug } from 'github-slugger';
 import { toString } from 'hast-util-to-string';
@@ -398,7 +398,7 @@ export function rehypeAutoHeading(headlines?: MdxHeadline[]) {
 
 Не знаю почему, но готовый плагин [`rehype-mdx-code-props`](https://www.npmjs.com/package/rehype-mdx-code-props) у меня не работал, поэтому написал свой.
 
-```typescript filename="shared/config/mdx/plugins/rehype-extract-code-props.ts" githubPath="src/shared/config/mdx/plugins/rehype-extract-code-props.ts"
+```typescript filename="config/mdx/plugins/rehype-extract-code-props.ts" githubPath="src/shared/config/mdx/plugins/rehype-extract-code-props.ts"
 import { visit } from 'unist-util-visit';
 
 export function rehypeExtractCodeProps() {

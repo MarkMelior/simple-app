@@ -78,7 +78,7 @@ shared/config/mdx
 
 Let's create a function to get all the data from .mdx files `shared/config/mdx/get-mdx.ts`:
 
-```typescript filename="shared/config/mdx/get-mdx.ts" githubPath="src/shared/config/mdx/get-mdx.ts"
+```typescript filename="config/mdx/get-mdx.ts" githubPath="src/shared/config/mdx/get-mdx.ts"
 'use server';
 
 import fs from 'fs/promises';
@@ -131,7 +131,7 @@ Now we can safely change the logic of getting data from MDX. For example, instea
 
 We don't have any typing inside MDX files. But for convenience, we still type:
 
-```typescript filename="shared/config/mdx/types/get-mdx.type.ts" githubPath="src/shared/config/mdx/types/get-mdx.type.ts"
+```typescript filename="config/mdx/types/get-mdx.type.ts" githubPath="src/shared/config/mdx/types/get-mdx.type.ts"
 import { StackVariants } from '@/shared/ui';
 
 export interface MdxHeadline {
@@ -161,7 +161,7 @@ export interface CategoryMetadata {
 
 Now the most interesting part... We create our own components to suit your taste and color in `MDXComponentsData`. Here is my implementation of the components, you can take ideas!
 
-```tsx filename="shared/config/mdx/mdx-components.tsx" githubPath="src/shared/config/mdx/mdx-components.tsx"
+```tsx filename="config/mdx/mdx-components.tsx" githubPath="src/shared/config/mdx/mdx-components.tsx"
 import { cn } from '@/shared/lib';
 import { CodeBlock, Heading, LinkHover, StackVariants } from '@/shared/ui';
 import { Code } from '@nextui-org/react';
@@ -276,7 +276,7 @@ export const MDXComponentsData: MDXComponents = {
 
 It is not necessary to make a wrapper for `MDXRemote`, but do we need flexibility? What if we suddenly want to use `MDXRemote` not only in the layout for MDX files, but also on another page?
 
-```tsx filename="shared/config/mdx/mdx-remote.tsx" githubPath="src/shared/config/mdx/mdx-remote.tsx"
+```tsx filename="config/mdx/mdx-remote.tsx" githubPath="src/shared/config/mdx/mdx-remote.tsx"
 import { MDXRemoteProps, MDXRemote as MDXRemoteRSC } from 'next-mdx-remote/rsc';
 import { FC } from 'react';
 import remarkGfm from 'remark-gfm';
@@ -330,7 +330,7 @@ Everything is easy here. We just copy and use it. Now I'll tell you what these p
 
 The code of the `rehypeAutoHeading` plugin:
 
-```typescript filename="shared/config/mdx/plugins/rehype-auto-heading.ts" githubPath="src/shared/config/mdx/plugins/rehype-auto-heading.ts"
+```typescript filename="config/mdx/plugins/rehype-auto-heading.ts" githubPath="src/shared/config/mdx/plugins/rehype-auto-heading.ts"
 import { toLatin } from '@/shared/lib';
 import { slug } from 'github-slugger';
 import { toString } from 'hast-util-to-string';
@@ -394,7 +394,7 @@ export function rehypeAutoHeading(headlines?: MdxHeadline[]) {
 
 I don't know why, but the ready-made plugin [`rehype-mdx-code-props`](https://www.npmjs.com/package/rehype-mdx-code-props) he didn't work for me, so he wrote his own.
 
-```typescript filename="shared/config/mdx/plugins/rehype-extract-code-props.ts" githubPath="src/shared/config/mdx/plugins/rehype-extract-code-props.ts"
+```typescript filename="config/mdx/plugins/rehype-extract-code-props.ts" githubPath="src/shared/config/mdx/plugins/rehype-extract-code-props.ts"
 import { visit } from 'unist-util-visit';
 
 export function rehypeExtractCodeProps() {

@@ -2,6 +2,7 @@
 
 import { Dictionary } from '@/shared/config/i18n';
 import { FontDefault } from '@/shared/const/fonts';
+import { StackData, StackVariants } from '@/shared/const/stack-data';
 import { cn, gitHubRepoLink } from '@/shared/lib';
 import { GitHubPath } from '@/shared/types/github-path';
 import { Button, Link, Tooltip } from '@nextui-org/react';
@@ -15,7 +16,6 @@ import markdown from 'react-syntax-highlighter/dist/esm/languages/prism/markdown
 import tsx from 'react-syntax-highlighter/dist/esm/languages/prism/tsx';
 import typescript from 'react-syntax-highlighter/dist/esm/languages/prism/typescript';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { StackData, StackVariants } from '../../const/stack-data';
 import { CopyButton } from '../copy-button/copy-button';
 import './code-block.scss';
 

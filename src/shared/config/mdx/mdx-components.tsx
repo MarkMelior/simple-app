@@ -38,6 +38,7 @@ export const MDXComponentsData: MDXComponents = {
 		return (
 			<CodeBlock
 				text={String(children)}
+				// @ts-ignore
 				lang={match[1] as StackVariants}
 				dict={dict.ui}
 				github={{ path: props?.githubPath }}
