@@ -14,9 +14,7 @@ tags: ['nextjs', 'typescript', 'cookie', 'ssr', 'prisma', 'fsd']
 
 Получение пользовательских данных: `const user = await getUser();`. Это очень просто :)
 
-Структура файлов со всем функционалом:
-
-```text hideHeader githubPath="projects"
+```text hideHeader githubPath="projects" signature="Структура файлов со всем функционалом"
 src/features/auth
 ├── api
 │   ├── jwt.ts
@@ -38,7 +36,7 @@ src/features/auth
 
 ## Реализация
 
-#### База данных
+### База данных
 
 Вы можете выбрать любую базу данных, поддерживаемую для вашего проекта: `MongoDB`, `PostgreSQL`, `MySQL` и т. д. В этом примере мы используем `MySQL`, но вы можете заменить URL подключения на параметры вашей базы данных.
 
@@ -50,70 +48,113 @@ DATABASE_URL="mysql://root@localhost:3306/simple-app"
 
 > Замените `root`, `password`, `localhost`, и `simple-app` на соответствующие значения вашей базы данных.
 
-#### Использование Prisma
+### Использование Prisma
 
 Можно использовать любую [ORM](https://ru.wikipedia.org/wiki/ORM): `TypeORM`, `Prisma`, `Sequelize` или ручками создавать каждое поле, типы и связи в бд. Я же буду использовать [`Prisma`](https://www.prisma.io/)
 
 > **Prisma** — это мощный ORM, который позволяет легко работать с базой данных, обеспечивая типобезопасность и удобный API.
 
-Установим Prisma CLI и клиент:
-
-```bash
-npm install @prisma/client
-npm install prisma --save-dev
-```
-
-Запустим команду для инициализации Prisma в внашем проекте:
-
-```bash
-npx prisma init
-```
-
-Это создаст директорию `prisma` с файлом `schema.prisma` и файл `.env`
-
-Откроем файл `prisma/schema.prisma` и определим модель данных. Например, создадим модель User:
-
-```prisma filename="schema.prisma"
-datasource db {
+<CodeSteps
+	steps={[
+		{
+			title: 'Установка',
+			body: () => (
+				<p>
+					Установим <code>Prisma CLI</code> и клиент
+				</p>
+			),
+			code: {
+				filename: 'Terminal',
+				lang: 'bash',
+				text: 'npm install @prisma/client\nnpm install prisma --save-dev',
+			},
+		},
+		{
+			title: 'Инициализация',
+			body: () => (
+				<>
+					<p>
+						Запустим команду для инициализации <code>Prisma</code> в нашем
+						проекте
+					</p>
+					<p>
+						Это создаст директорию <code>prisma</code> с файлом{' '}
+						<code>schema.prisma</code> и файл <code>.env</code>
+					</p>
+				</>
+			),
+			code: {
+				filename: 'Terminal',
+				lang: 'bash',
+				text: 'npx prisma init',
+			},
+		},
+		{
+			title: 'Модель данных',
+			body: () => (
+					<p>
+						Откроем файл <code>prisma/schema.prisma</code> и определим модель данных. Например, создадим модель User
+					</p>
+			),
+			code: {
+				filename: 'schema.prisma',
+				lang: 'prisma',
+				githubPath: 'prisma/schema.prisma',
+				text: `datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
 generator client {
-  provider = "prisma-client-js"
+provider = "prisma-client-js"
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  username String @unique
-  password String
-  name     String
-}
-```
-
-Выполним миграцию, чтобы создать таблицы в базе данных на основе схемы:
-
-```bash
-npx prisma migrate dev --name init
-```
-
-После создания схемы и миграции, сгенерируем клиент Prisma для взаимодействия с базой данных:
-
-```bash
-npx prisma generate
-```
+id Int @id @default(autoincrement())
+username String @unique
+password String
+name String
+}`,
+},
+},
+		{
+			title: 'Миграция',
+			body: () => (
+					<p>
+						Выполним миграцию, чтобы создать таблицы в базе данных на основе схемы
+					</p>
+			),
+			code: {
+				filename: 'Terminal',
+				lang: 'bash',
+				text: `npx prisma migrate dev --name init`,
+},
+},
+		{
+			title: 'Генерация клиента',
+			body: () => (
+					<p>
+						После создания схемы и миграции, сгенерируем клиент Prisma для взаимодействия с базой данных
+					</p>
+			),
+			code: {
+				filename: 'Terminal',
+				lang: 'bash',
+				text: `npx prisma generate`,
+},
+},
+]}
+/>
 
 > Вот дока как быстро начать работать с [Prisma](https://www.prisma.io/docs/getting-started/quickstart)
 
 ---
 
-#### JWT и сессия
+### JWT и сессия
 
-Создаём и обрабатываем JWT токены и сессии в файлах `features/auth/api/jwt.ts` и `features/auth/api/session.ts`.
+Создаём и обрабатываем JWT токены и сессии в файлах `features/auth/api/jwt.ts` и `features/auth/api/session.ts`
 
-`features/auth/api/jwt.ts`:
-
-```typescript filename="jwt.ts" githubPath="src/features/auth/api/jwt.ts"
+```typescript filename="auth/api/jwt.ts" githubPath="src/features/auth/api/jwt.ts"
 import { SignJWT, jwtVerify } from 'jose';
 import { SessionPayload } from '../types/definitions';
 
@@ -147,7 +188,7 @@ export async function decrypt(session: string | undefined = '') {
 - **Проверка сессии:** Функция `verifySession` извлекает JWT из куки и проверяет его действительность. Если сессия действительна, возвращает информацию о пользователе; иначе перенаправляет пользователя на страницу логина.
 - **Удаление сессии:** Функция `deleteSession` удаляет куки сессии, тем самым завершив сеанс пользователя и перенаправив его на страницу логина.
 
-```typescript filename="session.ts" githubPath="src/features/auth/api/session.ts"
+```typescript filename="auth/api/session.ts" githubPath="src/features/auth/api/session.ts"
 import 'server-only';
 
 import { cookies } from 'next/headers';
@@ -187,13 +228,13 @@ export function deleteSession() {
 }
 ```
 
-#### Валидация и типы
+### Валидация и типы
 
 Используем библиотеку [`Zod`](https://www.npmjs.com/package/zod) для строгой проверки данных.
 
 В файле `features/auth/types/definitions.ts` определены схемы валидации `LoginFormSchema`, которые гарантируют, что данные пользователя соответствуют ожиданиям: обязательные поля, минимальная длина и соответствие регулярным выражениям для пароля.
 
-```typescript filename="definitions.ts" githubPath="src/features/auth/types/definitions.ts"
+```typescript filename="auth/types/definitions.ts" githubPath="src/features/auth/types/definitions.ts"
 import { z } from 'zod';
 
 export const SignupFormSchema = z.object({
@@ -238,7 +279,7 @@ export type SessionPayload = {
 };
 ```
 
-#### Авторизация
+### Авторизация
 
 Функция логина реализована в `features/auth/services/login.ts`. Она выполняет следующие шаги:
 
@@ -347,7 +388,7 @@ export const FormLogin: FC<FormLoginProps> = ({ className }) => {
 };
 ```
 
-#### Регистрация
+### Регистрация
 
 Функция регистрации реализована в `features/auth/services/signup.ts`. Она выполняет следующие шаги:
 
@@ -475,7 +516,7 @@ export const FormSignup: FC<FormSignupProps> = ({ className }) => {
 };
 ```
 
-#### Выход
+### Выход
 
 После успешной аутентификации и создания сессии, пользователю нужно иметь возможность выйти из системы.
 
@@ -520,7 +561,7 @@ export const LogoutButton = ({ dict }: { dict: Dictionary['ui'] }) => {
 };
 ```
 
-#### getUser
+### getUser
 
 В `features/auth/services/user.ts` реализована функция `getUser`, которая использует `verifySession` для проверки текущей сессии и `PrismaClient` для извлечения данных пользователя из базы данных:
 

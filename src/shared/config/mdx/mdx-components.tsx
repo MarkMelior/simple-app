@@ -1,5 +1,11 @@
 import { cn } from '@/shared/lib';
-import { CodeBlock, Heading, LinkHover, StackVariants } from '@/shared/ui';
+import {
+	Blockquote,
+	CodeBlock,
+	Heading,
+	LinkHover,
+	StackVariants,
+} from '@/shared/ui';
 import { Code } from '@nextui-org/react';
 import type { MDXComponents } from 'mdx/types';
 import { ComponentPropsWithoutRef } from 'react';
@@ -22,8 +28,6 @@ export const MDXComponentsData: MDXComponents = {
 				<Code
 					className={cn(
 						'bg-default-200/50 py-0 px-1 h-fit rounded-md -top-0.5 select-text min-w-fit border border-default-200 text-default-700 !leading-5 break-all whitespace-normal',
-						// 'text-[0.85rem]',
-						// FontCode.className,
 					)}
 				>
 					{children}
@@ -34,13 +38,10 @@ export const MDXComponentsData: MDXComponents = {
 		return (
 			<CodeBlock
 				text={String(children)}
-				language={match[1] as StackVariants}
-				fileName={props?.filename}
-				hideHeader={props?.hideHeader}
+				lang={match[1] as StackVariants}
 				dict={dict.ui}
-				github={{
-					path: props?.githubPath,
-				}}
+				github={{ path: props?.githubPath }}
+				className='mt-4 mb-10'
 				{...rest}
 			/>
 		);
@@ -118,26 +119,16 @@ export const MDXComponentsData: MDXComponents = {
 				alt={alt}
 				{...props}
 				className={cn(
-					'rounded-md select-none pointer-events-none w-full object-cover mt-4 mb-12',
+					'rounded-md select-none pointer-events-none w-full object-cover mt-4 mb-10',
 					props.className,
 				)}
 			/>
 		);
 	},
-	blockquote: ({
-		children,
-		...props
-	}: ComponentPropsWithoutRef<'blockquote'>) => {
-		return (
-			<blockquote
-				className={cn(
-					'bg-default-100/50 px-4 rounded-md border border-default-200 mt-5 mb-12 text-sm',
-					props.className,
-				)}
-				{...props}
-			>
-				{children}
-			</blockquote>
-		);
-	},
+	blockquote: Blockquote,
+	strong: ({ children, ...props }: ComponentPropsWithoutRef<'strong'>) => (
+		<strong className='text-default-800' {...props}>
+			{children}
+		</strong>
+	),
 };

@@ -33,7 +33,7 @@ export const AuthExample = async () => {
 						'# Administrator:\n- Username: admin\n- Password: pass\n\n# User:\n- Username: user\n- Password: pass'
 					}
 					className='my-0 w-full'
-					language='markdown'
+					lang='markdown'
 				/>
 			</div>
 		</>

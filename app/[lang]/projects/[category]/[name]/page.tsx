@@ -25,6 +25,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 				(mod) => mod.AuthExample,
 			),
 		),
+		CodeSteps: dynamic(() => import('@/widgets').then((mod) => mod.CodeSteps)),
+		Blockquote: dynamic(() =>
+			import('@/shared/ui').then((mod) => mod.Blockquote),
+		),
 	};
 
 	if (!content) {
@@ -38,8 +42,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
 	return (
 		<div>
-			{/* <div className='grid lg:grid-cols-[1fr,14rem] gap-10'>
-				<div> */}
 			<Header
 				note={metadata?.note || metadataCategory?.title}
 				noteLink={metadata?.note || metadataCategory?.link}
@@ -49,17 +51,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 			/>
 			<MDXRemote source={content} components={components} />
 			<Headlines headlines={headlines} />
-			{/* </div>
-				<div className='sticky top-[var(--height-navbar)] h-screen'>
-					<ul>
-						{headlines.map(({ depth, title, href }) => (
-							<li key={title}>
-								<Link href={href}>{title}</Link>
-							</li>
-						))}
-					</ul>
-				</div>
-			</div> */}
 		</div>
 	);
 }

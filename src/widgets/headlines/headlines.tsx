@@ -108,7 +108,7 @@ export const Headlines = ({ headlines }: { headlines: MdxHeadline[] }) => {
 					>
 						<hr
 							className={cn(
-								'my-6 border-default-100 group-hover:border-primary-500 w-full transition-colors',
+								'my-6 border-default-200/50 group-hover:border-primary-500 w-full transition-colors',
 								{ 'border-danger-500': limit },
 							)}
 						/>

@@ -6,9 +6,11 @@ import { cn, gitHubRepoLink } from '@/shared/lib';
 import { GitHubPath } from '@/shared/types/github-path';
 import { Button, Link, Tooltip } from '@nextui-org/react';
 import { FC } from 'react';
+import { IoIosCode } from 'react-icons/io';
 import { LuEye } from 'react-icons/lu';
 import { TbFileUnknown } from 'react-icons/tb';
 import { PrismAsyncLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import bash from 'react-syntax-highlighter/dist/esm/languages/prism/bash';
 import markdown from 'react-syntax-highlighter/dist/esm/languages/prism/markdown';
 import tsx from 'react-syntax-highlighter/dist/esm/languages/prism/tsx';
 import typescript from 'react-syntax-highlighter/dist/esm/languages/prism/typescript';
@@ -17,81 +19,102 @@ import { StackData, StackVariants } from '../../const/stack-data';
 import { CopyButton } from '../copy-button/copy-button';
 import './code-block.scss';
 
-interface CodeBlockProps {
+export interface CodeBlockProps {
 	text: string;
-	fileName?: string;
-	language?: StackVariants;
+	filename?: string;
+	lang?: StackVariants;
 	github?: GitHubPath;
 	className?: string;
 	disableLineNumbers?: boolean;
 	hideHeader?: boolean;
 	dict: Dictionary['ui'];
+	signature?: string;
 }
 
 SyntaxHighlighter.registerLanguage('tsx', tsx);
+SyntaxHighlighter.registerLanguage('bash', bash);
 SyntaxHighlighter.registerLanguage('typescript', typescript);
 SyntaxHighlighter.registerLanguage('markdown', markdown);
 
 export const CodeBlock: FC<CodeBlockProps> = ({
 	text,
-	fileName,
+	filename,
 	github,
-	language = 'typescript',
+	lang = 'typescript',
 	hideHeader,
 	className,
 	disableLineNumbers,
 	dict,
+	signature,
 }) => {
 	text = text.trimEnd();
 
 	return (
-		<div
-			className={cn(
-				'grid mt-4 mb-12 rounded-md overflow-hidden border border-default-200 h-fit relative group/buttons code-block__wrapper',
-				FontDefault.className,
-				className,
-			)}
-		>
-			{!hideHeader && (
-				<div className='bg-default-100 text-sm text-default-600 py-1 px-3 flex justify-between items-center break-all whitespace-normal text-center'>
-					{StackData[language]?.icon || <TbFileUnknown size={20} />}
-					{fileName ? fileName : StackData[language]?.name}
-					<CodeBlockButtons dict={dict} text={text} github={github} />
+		<>
+			{signature && (
+				<div className='flex items-start my-6 space-x-4'>
+					<div className='relative mt-1 w-4 h-4 rounded-full text-default-900 flex items-center justify-center ring-2 bg-primary-500 ring-primary-500'>
+						<IoIosCode size={18} />
+						<div className='absolute top-full mt-1 left-[0.46875rem] w-px h-[1.375rem] rounded-full bg-primary-400/30' />
+					</div>
+					<p
+						className={cn(
+							'm-0 flex-1 font-semibold text-default-800',
+							FontDefault.className,
+						)}
+					>
+						{signature}
+					</p>
 				</div>
 			)}
-
-			<>
-				{hideHeader && (
-					<CodeBlockButtons
-						dict={dict}
-						text={text}
-						github={github}
-						hoverButton
-					/>
+			<div
+				className={cn(
+					'grid rounded-md overflow-hidden border border-default-200 h-fit relative group/buttons code-block__wrapper',
+					FontDefault.className,
+					className,
 				)}
-				<SyntaxHighlighter
-					language={language}
-					showLineNumbers={!disableLineNumbers}
-					style={oneDark}
-					className={cn(
-						'border-t-1 border-default-200 max-h-[28rem] text-sm sm:text-base overflow-auto !bg-default-100 !text-default-700',
-						{
-							'border-0': hideHeader,
-						},
+			>
+				{!hideHeader && (
+					<div className='bg-default-100 text-[0.825rem] text-default-600 py-0.5 px-3 flex justify-between items-center break-all whitespace-normal text-center'>
+						{StackData[lang]?.icon || <TbFileUnknown size={20} />}
+						{filename ? filename : StackData[lang]?.name}
+						<CodeBlockButtons dict={dict} text={text} github={github} />
+					</div>
+				)}
+
+				<>
+					{hideHeader && (
+						<CodeBlockButtons
+							dict={dict}
+							text={text}
+							github={github}
+							hoverButton
+						/>
 					)}
-					customStyle={{
-						textShadow: 'none',
-						margin: 0,
-						borderRadius: 0,
-					}}
-					codeTagProps={{
-						className: 'bg-inherit',
-					}}
-				>
-					{text}
-				</SyntaxHighlighter>
-			</>
-		</div>
+					<SyntaxHighlighter
+						language={lang}
+						showLineNumbers={!disableLineNumbers}
+						style={oneDark}
+						className={cn(
+							'border-t-1 border-default-200 max-h-[28rem] text-sm sm:text-base overflow-auto !bg-default-100 !text-default-700',
+							{
+								'border-0': hideHeader,
+							},
+						)}
+						customStyle={{
+							textShadow: 'none',
+							margin: 0,
+							borderRadius: 0,
+						}}
+						codeTagProps={{
+							className: 'bg-inherit',
+						}}
+					>
+						{text}
+					</SyntaxHighlighter>
+				</>
+			</div>
+		</>
 	);
 };
 
@@ -111,15 +134,12 @@ function CodeBlockButtons({
 	return (
 		<div
 			className={cn('flex gap-1 items-center', {
-				'absolute flex-col-reverse right-1 top-1 opacity-0 group-hover/buttons:opacity-100 transition-opacity':
+				'absolute right-2 top-2 opacity-0 group-hover/buttons:opacity-100 transition-opacity':
 					hoverButton,
 			})}
 		>
 			{github?.path && (
-				<Tooltip
-					content={dict['code-view-github']}
-					placement={hoverButton ? 'left' : 'top'}
-				>
+				<Tooltip content={dict['code-view-github']} placement='top'>
 					<Button
 						as={Link}
 						href={gitHubRepoLink(github)}
@@ -136,11 +156,7 @@ function CodeBlockButtons({
 					</Button>
 				</Tooltip>
 			)}
-			<CopyButton
-				text={text}
-				dict={dict}
-				tooltipPlaceman={hoverButton ? 'left' : 'top'}
-			/>
+			<CopyButton text={text} dict={dict} />
 		</div>
 	);
 }
