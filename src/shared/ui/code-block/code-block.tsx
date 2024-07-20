@@ -53,7 +53,7 @@ export const CodeBlock: FC<CodeBlockProps> = ({
 		<>
 			{signature && (
 				<div className='flex items-start my-6 space-x-4'>
-					<div className='relative mt-1 w-4 h-4 rounded-full text-default-900 flex items-center justify-center ring-2 bg-primary-500 ring-primary-500'>
+					<div className='relative mt-1 w-4 h-4 rounded-full text-white flex items-center justify-center ring-2 bg-primary-500 ring-primary-500'>
 						<IoIosCode size={18} />
 						<div className='absolute top-full mt-1 left-[0.46875rem] w-px h-[1.375rem] rounded-full bg-primary-400/30' />
 					</div>

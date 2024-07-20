@@ -23,6 +23,10 @@ export async function getMdx<T = ProjectMetadata>(
 ): Promise<MdxResponse<T>> {
 	const fileContents = await fs.readFile(filePath, 'utf8');
 
+	// if (!fileContents) {
+	// 	throw new Error('File not found');
+	// }
+
 	const matterData = matter(fileContents);
 	const metadata = matterData.data as T;
 	const content = matterData.content;

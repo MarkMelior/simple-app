@@ -16,7 +16,7 @@ export const Footer = async () => {
 		<footer className='text-sm leading-6 mt-12'>
 			<FooterNavigation dict={dict} projects={projects} />
 			<div className={cls.content}>
-				<div className='mb-6 sm:mb-0 sm:flex'>
+				<div className='sm:flex'>
 					<p>{dict['footer-copyright']}</p>
 					<p className='sm:ml-4 sm:pl-4 sm:border-l sm:border-default-200 dark:border-default-100'>
 						{/* <Link className='hover:text-default-600 transition' href='/'> */}
