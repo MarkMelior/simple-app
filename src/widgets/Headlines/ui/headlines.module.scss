@@ -1,0 +1,18 @@
+.content {
+  @apply mb-8 flex flex-col mt-auto;
+}
+
+// .content {
+//   @apply bg-default-50/80 border-default-900/5 hover:border-default-900/10 rounded-lg border px-4 py-3 transition-colors mb-8 flex flex-col relative;
+
+//   &::before {
+//     content: "";
+//     display: block;
+//     left: 0;
+//     width: 100%;
+//     background: linear-gradient(90deg, rgba(56, 189, 248, 0) 20%, rgba(144, 163, 187, 0.2) 50%, rgba(236, 72, 153, 0) 80%);
+//     height: 1px;
+//     position: absolute;
+//     top: -1px;
+//   }
+// }

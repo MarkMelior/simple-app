@@ -1,0 +1,9 @@
+.code-block__wrapper {
+  .linenumber {
+    @apply text-sm text-left w-8;
+
+    text-align: left !important;
+
+    color: hsl(var(--simple-default-400) / var(--simple-default-400-opacity, 1)) !important;
+  }
+}

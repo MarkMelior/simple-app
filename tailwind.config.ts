@@ -1,29 +1,31 @@
-import { nextui } from '@nextui-org/react';
+import { heroui } from '@heroui/react';
+import typography from '@tailwindcss/typography';
+
+import { heroUiThemes } from './config/hero-ui/themes';
+
 import type { Config } from 'tailwindcss';
-import { nextuiThemes } from './config/nextui-themes';
 
 const config: Config = {
-	content: [
-		'./src/**/*.{js,ts,jsx,tsx,mdx}',
-		'./projects/**/*.{js,ts,jsx,tsx,mdx}',
-		'./app/**/*.{js,ts,jsx,tsx,mdx}',
-		'./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
-	],
-	darkMode: 'class',
-	theme: {
-		extend: {
-			maxWidth: {
-				'8xl': '90rem',
-			},
-		},
-	},
-	plugins: [
-		nextui({
-			addCommonColors: true,
-			prefix: 'simple',
-			themes: nextuiThemes,
-		}),
-		require('@tailwindcss/typography'),
-	],
+  content: [
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
+    './node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}',
+  ],
+  darkMode: 'class',
+  plugins: [
+    heroui({
+      addCommonColors: true,
+      prefix: 'simple',
+      themes: heroUiThemes,
+    }),
+    typography,
+  ],
+  theme: {
+    extend: {
+      maxWidth: {
+        '8xl': '90rem',
+      },
+    },
+  },
 };
+
 export default config;

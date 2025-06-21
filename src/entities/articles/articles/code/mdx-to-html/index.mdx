@@ -1,0 +1,809 @@
+---
+title: 'MDX в HTML'
+description: 'Преобразуем Markdown в HTML и синхронизируем с i18n'
+tags: ['typescript', 'ssr', 'markdown', 'fsd']
+---
+
+Сначала прочитайте статью про [интернационализацию](/projects/best-practice/app-router-i18n)
+
+---
+
+## Markdown и многомерные выражения
+
+[Markdown](https://daringfireball.net/projects/markdown/syntax) - это упрощенный язык разметки, используемый для форматирования текста. Он позволяет вам писать, используя синтаксис обычного текста, и преобразовывать его в структурно корректный HTML. Он обычно используется для создания контента на веб-сайтах и в блогах.
+
+Вы пишете...
+
+```md hideHeader
+Я **люблю** использовать [Next.js](https://extjs.org/)
+```
+
+Вывод:
+
+```html hideHeader
+<p>
+  Я <strong>люблю</strong> использовать <a href="https://extjs.org/">Next.js</a>
+</p>
+```
+
+[MDX](https://mdxjs.com/) - это надмножество markdown, которое позволяет вам записывать [JSX](https://react.dev/learn/writing-markup-with-jsx) непосредственно в ваши файлы markdown. Это мощный способ добавить динамическую интерактивность и встроить компоненты React в ваш контент.
+
+---
+
+## Что получится в итоге?
+
+Функционал статей, навигация по главам и категории на этом сайте - это то, что получится в итоге (:
+
+Просто создаёте папки с категориями и проектами внутри `projects`, перемещаете как угодно - всё сделается за вас, но сначала нужно объяснить кодом компу, что вам нужно 🧑‍💻
+
+Так будет выглядеть структура ваших проектов, блогов или чего захотите:
+
+```text hideHeader githubPath="projects"
+your-project
+├── projects
+│   └── category
+│       ├── project-name
+│       │   ├── en.mdx
+│       │   └── ru.mdx
+│       ├── en.mdx
+│       └── ru.mdx
+└── package.json
+```
+
+Допустим, вы захотели создать новый проект в новой категории:
+
+1. Создаём папку с категорией и добавляем в неё `ru.mdx`, `en.mdx`;
+2. Создаём папку с проектом и добавляем `ru.mdx`, `en.mdx`;
+3. Пишем статью 🥰
+
+---
+
+## Создаём основной функционал
+
+Почему не реализовать MDX как в документации [Next.js](https://nextjs.org/docs/app/building-your-application/configuring/mdx)? Почему не использовать готовые плагины по типу [`rehype-slug`](https://www.npmjs.com/package/rehype-slug), [`rehype-autolink-headings`](https://www.npmjs.com/package/rehype-autolink-headings) и [`rehype-mdx-code-props`](https://www.npmjs.com/package/rehype-mdx-code-props)?
+
+Вы можете так и сделать, это будет намного проще, но вы потеряете часть контроля над процессом разработки. Конечно, намного больше контроля вы можете получить написав свой фреймворк вместо Next.js 😁 Но не будем уходить в крайности.
+
+Так выглядит директория с основным функционалом MDX:
+
+```text hideHeader githubPath="src/shared/config/mdx"
+shared/config/mdx
+├── plugins   - наши rehype/remark плагины
+│   ├── rehype-auto-heading.ts
+│   └── rehype-extract-code-props.ts
+├── types
+│   └── get-mdx.type.ts
+├── get-mdx.ts   - получение metadata, контента и headlines из mdx
+├── mdx-components.tsx   - настройка отображения компонентов mdx
+└── mdx-remote.tsx   - общая конфигурация MDXRemote
+```
+
+#### Получение данных с MDX
+
+Создадим функцию для получение всех данных из .mdx файлов `shared/config/mdx/get-mdx.ts`:
+
+```typescript filename="config/mdx/get-mdx.ts" githubPath="src/shared/config/mdx/get-mdx.ts"
+'use server';
+
+import fs from 'fs/promises';
+import matter from 'gray-matter';
+import rehypeStringify from 'rehype-stringify';
+import remarkParse from 'remark-parse';
+import remarkRehype from 'remark-rehype';
+import { unified } from 'unified';
+import {
+  MdxHeadline,
+  ProjectMetadata,
+} from '../../config/mdx/types/get-mdx.type';
+import { rehypeAutoHeading } from './plugins/rehype-auto-heading';
+
+interface MdxResponse<T> {
+  metadata: T;
+  content: string;
+  headlines: MdxHeadline[];
+}
+
+export async function getMdx<T = ProjectMetadata>(
+  filePath: string,
+): Promise<MdxResponse<T>> {
+  const fileContents = await fs.readFile(filePath, 'utf8');
+
+  // Преобразуем код через gray-matter
+  const matterData = matter(fileContents);
+  const metadata = matterData.data as T;
+  const content = matterData.content;
+
+  // * Get project headlines
+  const headlines: MdxHeadline[] = [];
+
+  await unified()
+    .use(remarkParse)
+    .use(remarkRehype)
+    .use(rehypeAutoHeading, headlines)
+    .use(rehypeStringify)
+    .process(content);
+
+  return { metadata, content, headlines };
+}
+```
+
+Можно было просто в каждом компоненте вызывать `matter(fileContents)` и получать контент с метаданными, но для расширяемости и поддерживаемости кода выносим получение всех данных в функцию `getMdx()`.
+
+Теперь мы можем спокойно изменить логику получения данных из MDX. Например, вместо [`gray-matter`](https://www.npmjs.com/package/gray-matter) спокойно поставить [`front-matter`](front-matter) и т.п.
+
+#### Типизация MDX данных
+
+Внутри MDX файлов у нас отсутствует какая-либо типизация. Но для удобства всё равно типизируем:
+
+```typescript filename="config/mdx/types/get-mdx.type.ts" githubPath="src/shared/config/mdx/types/get-mdx.type.ts"
+import { StackVariants } from '@/shared/constants';
+
+export interface MdxHeadline {
+  title: string;
+  href: string;
+  nested?: MdxHeadline[];
+}
+
+export interface ProjectMetadata {
+  // Пишем любые свои типы в зависимости от ваших возможных метаданных
+  // Вот, например, мои типы:
+  note: string;
+  title: string;
+  description: string;
+  tags?: StackVariants[];
+  publishDate: string;
+}
+
+export interface CategoryMetadata {
+  // Также пишем любые свои типы
+  title: string;
+  link: string;
+}
+```
+
+#### Создание компонентов
+
+Теперь самое интересное... Создаём свои компоненты на свой вкус и цвет в `MDXComponentsData`. Вот моя реализация компонентов, можете брать идеи!
+
+```tsx filename="config/mdx/mdx-components.tsx" githubPath="src/shared/config/mdx/mdx-components.tsx"
+import { cn } from '@/shared/lib/react';
+import { StackVariants } from '@/shared/constants';
+import { CodeBlock } from '@/shared/ui/client';
+import { Heading, LinkHover, Code } from '@/shared/ui';
+import type { MDXComponents } from 'mdx/types';
+import { ComponentPropsWithoutRef } from 'react';
+import { getDictionary } from '../i18n/dictionaries';
+
+interface ExtendedCodeProps extends React.HTMLAttributes<HTMLElement> {
+  filename?: string;
+  githubPath?: string;
+  hideHeader?: boolean;
+}
+
+export const MDXComponentsData: MDXComponents = {
+  code: async (props: ExtendedCodeProps) => {
+    const { children, className, ...rest } = props;
+    const match = /language-(\w+)/.exec(className || '');
+    const dict = await getDictionary();
+
+    if (!match) {
+      return (
+        <Code className='bg-default-200/50 py-0 px-1 h-fit rounded-md -top-0.5 select-text min-w-fit border border-default-200 text-default-700 !leading-5'>
+          {children}
+        </Code>
+      );
+    }
+
+    return (
+      <CodeBlock
+        text={String(children)}
+        language={match[1] as StackVariants}
+        fileName={props?.filename}
+        hideHeader={props?.hideHeader}
+        dict={dict.ui}
+        github={{
+          path: props?.githubPath,
+        }}
+        {...rest}
+      />
+    );
+  },
+  p: ({ children, className }: ComponentPropsWithoutRef<'p'>) => {
+    return (
+      <p className={cn('text-default-600 my-5 leading-7', className)}>
+        {children}
+      </p>
+    );
+  },
+  a: ({ href, children, ...props }: ComponentPropsWithoutRef<'a'>) => {
+    return (
+      <LinkHover href={href} {...props}>
+        {children}
+      </LinkHover>
+    );
+  },
+  h2: ({ children, ...props }: ComponentPropsWithoutRef<'h2'>) => (
+    <Heading
+      Tag='h2'
+      className='text-xl font-bold -mt-[calc(var(--height-navbar) - 2rem)] mb-6'
+      {...props}
+    >
+      {children}
+    </Heading>
+  ),
+  h3: ({ children, ...props }: ComponentPropsWithoutRef<'h3'>) => (
+    <Heading
+      Tag='h3'
+      className='text-lg font-semibold -mt-[calc(var(--height-navbar) - 1.5rem)] mb-4'
+      {...props}
+    >
+      {children}
+    </Heading>
+  ),
+  h4: ({ children, ...props }: ComponentPropsWithoutRef<'h4'>) => (
+    <Heading
+      Tag='h4'
+      className='font-medium -mt-[calc(var(--height-navbar) - 1.5rem)] mb-4'
+      {...props}
+    >
+      {children}
+    </Heading>
+  ),
+  hr: () => <hr className='my-12 border-default-100' />,
+  ul: ({ children, className }: ComponentPropsWithoutRef<'ul'>) => {
+    return (
+      <ul
+        className={cn(
+          'text-default-600 my-5 leading-7 list-disc marker:text-default-200 list-inside',
+          className,
+        )}
+      >
+        {children}
+      </ul>
+    );
+  },
+  ol: ({ children, className }: ComponentPropsWithoutRef<'ol'>) => {
+    return (
+      <ol
+        className={cn(
+          'text-default-600 my-5 leading-7 list-decimal marker:text-default-500 list-inside',
+          className,
+        )}
+      >
+        {children}
+      </ol>
+    );
+  },
+};
+```
+
+#### Обёртка для MDXRemote
+
+Необязательно делать обёртку для `MDXRemote`, но нам же нужна гибкость? Вдруг мы резко захотим использовать `MDXRemote` не только в layout для MDX файлов, но и на другой странице?
+
+```tsx filename="config/mdx/mdx-remote.tsx" githubPath="src/shared/config/mdx/mdx-remote.tsx"
+import { MDXRemoteProps, MDXRemote as MDXRemoteRSC } from 'next-mdx-remote/rsc';
+import { FC } from 'react';
+import remarkGfm from 'remark-gfm';
+import { MDXComponentsData } from './mdx-components';
+import { rehypeAutoHeading } from './plugins/rehype-auto-heading';
+import { rehypeExtractCodeProps } from './plugins/rehype-extract-code-props';
+
+export const MDXRemote: FC<MDXRemoteProps> = ({
+  source,
+  components,
+  options,
+}) => {
+  return (
+    <MDXRemoteRSC
+      source={source}
+      components={{ ...MDXComponentsData, ...components }}
+      options={{
+        mdxOptions: {
+          rehypePlugins: [rehypeExtractCodeProps, rehypeAutoHeading],
+          remarkPlugins: [remarkGfm],
+        },
+        ...options,
+      }}
+    />
+  );
+};
+```
+
+---
+
+## Пишем свои rehype плагины
+
+Тут всё легко. Просто копируем и пользуемся. Сейчас расскажу для чего нужны эти плагины и почему мы не используем готовые решения.
+
+#### rehypeAutoHeading
+
+- `rehypeAutoHeading` - плагин добавляет `id` к `h1 - h6` как в [`rehype-slug`](https://www.npmjs.com/package/rehype-slug), добавляет якорную ссылку на заголовок как в [`rehype-autolink-headings`](https://www.npmjs.com/package/rehype-autolink-headings) и выводит массив всех заголовков с учётом вложенности **(но не более 2-х уровней вложенности)** в виде:
+
+```typescript hideHeader
+{
+  title: string;
+  href: string;
+  nested?: [
+    {
+      title: string;
+      href: string;
+    }
+  ];
+}[]
+```
+
+Код плагина `rehypeAutoHeading`:
+
+```typescript filename="config/mdx/plugins/rehype-auto-heading.ts" githubPath="src/shared/config/mdx/plugins/rehype-auto-heading.ts"
+import { toLatin } from '@/shared/lib';
+import { slug } from 'github-slugger';
+import { toString } from 'hast-util-to-string';
+import { visit } from 'unist-util-visit';
+import { MdxHeadline } from '../types/get-mdx.type';
+
+export function rehypeAutoHeading(headlines?: MdxHeadline[]) {
+  return (tree: any) => {
+    const stack: { depth: number; headline: MdxHeadline }[] = [];
+
+    visit(tree, 'element', (node) => {
+      if (/h[1-6]/.test(node.tagName)) {
+        const text = toString(node);
+        const id = toLatin(slug(text));
+        const depth = parseInt(node.tagName.slice(1), 10);
+        const headline = {
+          title: text.endsWith(':') ? text.slice(0, -1) : text,
+          href: `#${id}`,
+        };
+
+        if (!node.properties) node.properties = {};
+        node.properties.id = id;
+
+        while (stack.length && stack[stack.length - 1].depth >= depth) {
+          stack.pop();
+        }
+
+        if (headlines) {
+          if (depth === 1 || stack.length === 0) {
+            headlines.push(headline);
+            stack.push({ depth, headline });
+          } else {
+            const parent = stack[stack.length - 1].headline;
+            if (!parent.nested) {
+              parent.nested = [];
+            }
+            parent.nested.push(headline);
+            if (depth === 2) {
+              stack.push({ depth, headline });
+            }
+          }
+        }
+
+        node.children = [
+          {
+            type: 'element',
+            tagName: 'a',
+            properties: { href: `#${id}`, isTitle: true },
+            children: [...node.children],
+          },
+        ];
+      }
+    });
+  };
+}
+```
+
+#### rehypeExtractCodeProps
+
+- `rehypeExtractCodeProps` - плагин для получения всех полей `ключ-значение` в болоке кода из файла .mdx, также поддерживается `boolean` тип, если передан только ключ.
+
+Не знаю почему, но готовый плагин [`rehype-mdx-code-props`](https://www.npmjs.com/package/rehype-mdx-code-props) у меня не работал, поэтому написал свой.
+
+```typescript filename="config/mdx/plugins/rehype-extract-code-props.ts" githubPath="src/shared/config/mdx/plugins/rehype-extract-code-props.ts"
+import { visit } from 'unist-util-visit';
+
+export function rehypeExtractCodeProps() {
+  return (tree: any) => {
+    visit(tree, 'element', (node) => {
+      if (node.tagName === 'code' && node.data && node.data.meta) {
+        const metaString = node.data.meta.trim();
+
+        // Извлечение всех пар ключ="значение"
+        const props: { [key: string]: string | boolean } = {};
+        const regex = /(\w+)="([^"]*)"|(\w+)/g;
+        let match;
+        while ((match = regex.exec(metaString)) !== null) {
+          if (match[2] !== undefined) {
+            // Для ключ="значение"
+            props[match[1]] = match[2];
+          } else {
+            // Для просто ключа (без значения)
+            props[match[3]] = true; // Присваиваем значение true
+          }
+        }
+
+        // Добавление извлеченных атрибутов в свойства узла
+        node.properties = {
+          ...node.properties,
+          ...props,
+        };
+      }
+    });
+  };
+}
+```
+
+---
+
+## Логика получения проектов
+
+Структура файлов получения проектов:
+
+```text hideHeader githubPath="src/entity/project/model"
+entity/project/model
+├── services
+│   ├── get-project.ts   - получение проекта
+│   ├── get-projects-by-category.ts   - получение проектов по категории
+│   └── get-projects.ts   - получение всех категорий и проектов
+└── types
+    └── project.type.ts
+```
+
+#### Получение проекта
+
+Теперь мы пускаем в ход раннее созданную функцию `getMdx()` и наслаждаемся лёгкостью получения данных с .mdx файлов. `get-project.ts`:
+
+```typescript filename="entity/project/model/services/get-project.ts" githubPath="src/entity/project/model/services/get-project.ts"
+'use server';
+
+import { getLang } from '@/shared/config/i18n';
+import { CategoryMetadata, getMdx } from '@/shared/config/mdx';
+import path from 'path';
+import { ProjectResponse } from '../types/project.type';
+
+export async function getProject(
+  category: string,
+  name: string,
+): Promise<ProjectResponse> {
+  const lang = await getLang();
+
+  // Получаем директорию проекта нужного нам .mdx файла
+  const dir = path.join(
+    process.cwd(),
+    'projects',
+    category,
+    name,
+    `${lang}.mdx`,
+  );
+  // Получаем данные проекта
+  const { content, headlines, metadata } = await getMdx(dir);
+
+  // Получаем директорию категории нужного нам .mdx файла
+  const dirCategory = path.join(
+    process.cwd(),
+    'projects',
+    category,
+    `${lang}.mdx`,
+  );
+  // Получаем данные категории
+  const { content: contentCategory, metadata: metadataCategory } =
+    await getMdx<CategoryMetadata>(dirCategory);
+
+  // Если метадата не найдена, то пробрасываем ошибку!
+  if (!metadata) throw new Error(`Unable to find metadata in file "${dir}"`);
+
+  // Просто возвращаем полученные данные с getMdx()
+  return {
+    metadata,
+    metadataCategory: {
+      ...metadataCategory,
+      link: `/projects/${category}`,
+    },
+    contentCategory,
+    content,
+    headlines,
+  };
+}
+```
+
+#### Получение проектов по категориям
+
+В комментариях к коду всё написано. `get-projects-by-category.ts`:
+
+```typescript filename="entity/project/model/services/get-projects-by-category.ts" githubPath="src/entity/project/model/services/get-projects-by-category.ts"
+'use server';
+
+import { getLang } from '@/shared/config/i18n';
+import { CategoryMetadata, getMdx, ProjectMetadata } from '@/shared/config/mdx';
+import fs from 'fs/promises';
+import path from 'path';
+
+interface ProjectsByCategoryResponse {
+  category: CategoryMetadata;
+  projects: (ProjectMetadata & { link: string })[];
+}
+
+export async function getProjectListByCategory(
+  category: string,
+): Promise<ProjectsByCategoryResponse> {
+  // Смотрим статью про i18n!
+  // Ссылка в самом начале страницы
+  // Или выпиливаем функционал с i18n
+  const lang = await getLang();
+
+  const dirCategory = path.join(process.cwd(), 'projects', category);
+  const projectFile = path.join(dirCategory, `${lang}.mdx`);
+
+  const { metadata: metadataCategory } = await getMdx<CategoryMetadata>(
+    projectFile,
+  );
+
+  const projectDirs = await fs.readdir(dirCategory, { withFileTypes: true });
+
+  // Проходимся по всем проектам из категории
+  // И возвращаем метаданные проектов для отображения
+  const metadataProject = await Promise.all(
+    projectDirs
+      .filter((dirent) => dirent.isDirectory())
+      .map(async (dirent) => {
+        const projectFile = path.join(dirCategory, dirent.name, `${lang}.mdx`);
+
+        const mdxProject = await getMdx<CategoryMetadata>(projectFile);
+        const projectMetadata = mdxProject.metadata;
+
+        return {
+          ...projectMetadata,
+          link: `/projects/${category}/${dirent.name}`,
+        } as ProjectMetadata & { link: string };
+      }),
+  );
+
+  return {
+    category: metadataCategory,
+    projects: metadataProject,
+  };
+}
+```
+
+#### Получение всех проектов
+
+Тут всё аналогично. Получаем данные с помощью `getMdx(dir)` и возвращаем данные `get-projects.ts`:
+
+```typescript filename="entity/project/model/services/get-projects.ts" githubPath="src/entity/project/model/services/get-projects.ts"
+'use server';
+
+import { getLang } from '@/shared/config/i18n';
+import { CategoryMetadata, getMdx, ProjectMetadata } from '@/shared/config/mdx';
+import fs from 'fs/promises';
+import path from 'path';
+import { ProjectsResponse } from '../types/project.type';
+
+export async function getProjectList(): Promise<ProjectsResponse[]> {
+  const lang = await getLang();
+
+  const rootDir = path.join(process.cwd(), 'projects');
+  const categoryDirs = await fs.readdir(rootDir, { withFileTypes: true });
+
+  const projectsByCategory: ProjectsResponse[] = [];
+
+  for (const dirent of categoryDirs) {
+    if (dirent.isDirectory()) {
+      const categoryDir = path.join(rootDir, dirent.name);
+      const projectFile = path.join(categoryDir, `${lang}.mdx`);
+
+      const mdxCategory = await getMdx<CategoryMetadata>(projectFile);
+      const metadataCategory = mdxCategory.metadata;
+
+      const projectDirs = await fs.readdir(categoryDir, {
+        withFileTypes: true,
+      });
+      const projects: (ProjectMetadata & { link: string })[] = [];
+
+      for (const projectDirent of projectDirs) {
+        if (projectDirent.isDirectory()) {
+          const projectFile = path.join(
+            categoryDir,
+            projectDirent.name,
+            `${lang}.mdx`,
+          );
+
+          const mdxProject = await getMdx<CategoryMetadata>(projectFile);
+          const projectMetadata = mdxProject.metadata;
+
+          projects.push({
+            ...projectMetadata,
+            link: `/projects/${dirent.name}/${projectDirent.name}`,
+          } as ProjectMetadata & { link: string });
+        }
+      }
+
+      projectsByCategory.push({
+        title: metadataCategory.title,
+        link: `/projects/${dirent.name}`,
+        projects,
+      });
+    }
+  }
+
+  return projectsByCategory;
+}
+```
+
+#### Типизация сущности проекта
+
+```typescript filename="entity/project/model/types/project.type.ts" githubPath="src/entity/project/model/types/project.type.ts"
+import {
+  CategoryMetadata,
+  MdxHeadline,
+  ProjectMetadata,
+} from '@/shared/config/mdx';
+
+export interface ProjectResponse {
+  metadata: ProjectMetadata;
+  content: string;
+  metadataCategory: CategoryMetadata;
+  contentCategory: string;
+  headlines: MdxHeadline[];
+}
+
+export interface ProjectsResponse {
+  title: string;
+  link: string;
+  projects: (ProjectMetadata & { link: string })[];
+}
+```
+
+---
+
+## Настройка App Router
+
+Структура динамических роутов в `/app`:
+
+```text hideHeader
+[lang]   - для интернационализации
+└── projects
+    └── [category]
+        ├── [name]
+        │   └── page.tsx   - layout для mdx файлов проектов
+        └── page.tsx   - страница с проектами из N категории
+```
+
+#### Обёртка для MDX
+
+Создадим layout для mdx `app/[lang]/projects/[category]/[name]/page.tsx`:
+
+```tsx filename="app/[lang]/projects/[category]/[name]/page.tsx" githubPath="app/[lang]/projects/[category]/[name]/page.tsx"
+import { getProject } from '@/entity/project';
+import { MDXRemote } from '@/shared/config/mdx';
+import { Header, Headlines } from '@/widgets';
+import { MDXComponents } from 'mdx/types';
+import { Metadata } from 'next';
+import dynamic from 'next/dynamic';
+
+export type ProjectPageProps = {
+  params: { name: string; category: string };
+};
+
+export default async function ProjectPage({ params }: ProjectPageProps) {
+  const { metadata, content, metadataCategory, headlines } = await getProject(
+    params.category,
+    params.name,
+  );
+
+  const components: MDXComponents = {
+    // Здесь вы можете добавить импорт компонента в ваш .mdx файл
+    // Чтобы не импортировать его внутри .mdx
+    AuthExample: dynamic(() =>
+      import('@/projects/best-practice/app-router-auth/examples/auth').then(
+        (mod) => mod.AuthExample,
+      ),
+    ),
+  };
+
+  return (
+    <>
+      <Header
+        note={metadata?.note || metadataCategory?.title}
+        noteLink={metadata?.note || metadataCategory?.link}
+        title={metadata?.title}
+        description={metadata?.description}
+        tags={metadata?.tags}
+      />
+      {/* MDXRemote импортируем из @/shared/config/mdx ! */}
+      <MDXRemote source={content} components={components} />
+      <Headlines headlines={headlines} />
+    </>
+  );
+}
+
+// Генерируем метадату (не обязательно)
+// Будет полезно для SEO вашего сайта
+export async function generateMetadata({
+  params,
+}: ProjectPageProps): Promise<Metadata> {
+  const { metadata } = await getProject(params.category, params.name);
+
+  return {
+    title: `Simple App | ${metadata.title}`,
+    description: `${metadata.description}. Technologies: ${metadata.tags?.join(
+      ', ',
+    )}`,
+  };
+}
+```
+
+#### Страница с категориями
+
+Создадим страницу с проектами из определённой категории `app/[lang]/projects/[category]/page.tsx`:
+
+```tsx filename="app/[lang]/projects/[category]/page.tsx" githubPath="app/[lang]/projects/[category]/page.tsx"
+import { getProjectListByCategory } from '@/entity/project';
+import { getDictionary } from '@/shared/config/i18n';
+import { Header } from '@/widgets';
+import { Metadata } from 'next';
+import Link from 'next/link';
+
+export type ProjectCategoryPageProps = {
+  params: { category: string };
+};
+
+export default async function ProjectCategoryPage({
+  params,
+}: ProjectCategoryPageProps) {
+  const { projects, category } = await getProjectListByCategory(params.category);
+
+  // Получаем переводы
+  const dict = await getDictionary();
+
+  return (
+    <>
+      <Header
+        note={dict.ui['category-note']}
+        title={category.title}
+        description={dict.ui['category-description']}
+      />
+
+      {/* Просто выводим проекты, которые относятся к определённой категории */}
+      <div className='grid sm:grid-cols-2 gap-4'>
+        {projects.map((project) => (
+          <Link
+            href={project.link}
+            key={project.title}
+            className='px-6 py-4 bg-default-100 hover:bg-default-100/50 border border-default-200 hover:border-default-300 rounded-md flex flex-col gap-2 transition active:scale-[0.98]'
+          >
+            {project.title}
+            <span className='text-default-600 text-sm'>
+              {project.description}
+            </span>
+          </Link>
+        ))}
+      </div>
+    </>
+  );
+}
+
+// Генерируем метадату (не обязательно)
+// Будет полезно для SEO вашего сайта
+export async function generateMetadata({
+  params,
+}: ProjectCategoryPageProps): Promise<Metadata> {
+  const { category, projects } = await getProjectListByCategory(params.category);
+
+  return {
+    title: `Simple App | ${category.title}`,
+    description: `Category: ${category.title}. Projects: ${projects
+      .map((project) => project.title)
+      .join(', ')}.`,
+  };
+}
+```
+
+---
+
+## Заключение
+
+Спасибо, что прочитал до конца. Надеюсь ты нашёл ответы на свои вопросы и смог реализовать то, что планировал!
+
+Если что-то не получается, то просто загляни в репозиторий моего проекта и проанализируй код. Почему у тебя не работает, а у меня работает? Может версии пакетов не те, или невнимательность зарешала 🤨
+
+Ты же кодер (так ведь?) ищи решения!

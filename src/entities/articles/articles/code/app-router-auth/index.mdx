@@ -1,0 +1,607 @@
+---
+title: 'Next.js: Аутентификация'
+description: 'Серверные компоненты, Actions, Middleware'
+tags: ['nextjs', 'typescript', 'cookie', 'ssr', 'prisma', 'fsd']
+---
+
+<AuthExample />
+
+---
+
+Аутентификация в Next.js может быть достаточно простой и удобной благодаря использованию серверных компонентов, Actions и Middleware. Давайте рассмотрим, как можно реализовать аутентификацию с помощью JWT токенов и сессий, используя Prisma для работы с базой данных.
+
+## Об этом подходе
+
+Получение пользовательских данных: `const user = await getUser();`. Это очень просто :)
+
+```text hideHeader githubPath="projects" signature="Структура файлов со всем функционалом"
+src/features/auth
+├── api
+│   ├── jwt.ts
+│   └── session.ts
+├── services
+│   ├── login.ts
+│   ├── logout.ts
+│   ├── signup.ts
+│   └── user.ts
+├── types
+│   └── definitions.ts
+└── ui
+    ├── form-login.tsx
+    ├── form-signup.tsx
+    └── logout-button.tsx
+```
+
+---
+
+## Реализация
+
+### База данных
+
+Вы можете выбрать любую базу данных, поддерживаемую для вашего проекта: `MongoDB`, `PostgreSQL`, `MySQL` и т. д. В этом примере мы используем `MySQL`, но вы можете заменить URL подключения на параметры вашей базы данных.
+
+В корневой папке проекта создайте файл `.env` и добавьте строку с URL подключения к базе данных:
+
+```env hideHeader
+DATABASE_URL="mysql://root@localhost:3306/simple-app"
+```
+
+> Замените `root`, `password`, `localhost`, и `simple-app` на соответствующие значения вашей базы данных.
+
+### Использование Prisma
+
+Можно использовать любую [ORM](https://ru.wikipedia.org/wiki/ORM): `TypeORM`, `Prisma`, `Sequelize` или ручками создавать каждое поле, типы и связи в бд. Я же буду использовать [`Prisma`](https://www.prisma.io/)
+
+> **Prisma** — это мощный ORM, который позволяет легко работать с базой данных, обеспечивая типобезопасность и удобный API.
+
+<CodeSteps
+  steps={[
+    {
+      title: 'Установка',
+      body: () => (
+        <p>
+          Установим <code>Prisma CLI</code> и клиент
+        </p>
+      ),
+      code: {
+        filename: 'Terminal',
+        lang: 'bash',
+        text: 'npm install @prisma/client\nnpm install prisma --save-dev',
+      },
+    },
+    {
+      title: 'Инициализация',
+      body: () => (
+        <>
+          <p>
+            Запустим команду для инициализации <code>Prisma</code> в нашем
+            проекте
+          </p>
+          <p>
+            Это создаст директорию <code>prisma</code> с файлом{' '}
+            <code>schema.prisma</code> и файл <code>.env</code>
+          </p>
+        </>
+      ),
+      code: {
+        filename: 'Terminal',
+        lang: 'bash',
+        text: 'npx prisma init',
+      },
+    },
+    {
+      title: 'Модель данных',
+      body: () => (
+          <p>
+            Откроем файл <code>prisma/schema.prisma</code> и определим модель данных. Например, создадим модель User
+          </p>
+      ),
+      code: {
+        filename: 'schema.prisma',
+        lang: 'prisma',
+        githubPath: 'prisma/schema.prisma',
+        text: `datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+provider = "prisma-client-js"
+}
+
+model User {
+id Int @id @default(autoincrement())
+username String @unique
+password String
+name String
+}`,
+},
+},
+    {
+      title: 'Миграция',
+      body: () => (
+          <p>
+            Выполним миграцию, чтобы создать таблицы в базе данных на основе схемы
+          </p>
+      ),
+      code: {
+        filename: 'Terminal',
+        lang: 'bash',
+        text: `npx prisma migrate dev --name init`,
+},
+},
+    {
+      title: 'Генерация клиента',
+      body: () => (
+          <p>
+            После создания схемы и миграции, сгенерируем клиент Prisma для взаимодействия с базой данных
+          </p>
+      ),
+      code: {
+        filename: 'Terminal',
+        lang: 'bash',
+        text: `npx prisma generate`,
+},
+},
+]}
+/>
+
+> Вот дока как быстро начать работать с [Prisma](https://www.prisma.io/docs/getting-started/quickstart)
+
+---
+
+### JWT и сессия
+
+Создаём и обрабатываем JWT токены и сессии в файлах `features/auth/api/jwt.ts` и `features/auth/api/session.ts`
+
+```typescript filename="auth/api/jwt.ts" githubPath="src/features/auth/api/jwt.ts"
+import { SignJWT, jwtVerify } from 'jose';
+import { SessionPayload } from '../types/definitions';
+
+const secretKey = process.env.SESSION_SECRET;
+const encodedKey = new TextEncoder().encode(secretKey);
+
+export async function encrypt(payload: SessionPayload) {
+  return new SignJWT(payload)
+    .setProtectedHeader({ alg: 'HS256' })
+    .setIssuedAt()
+    .setExpirationTime('7d')
+    .sign(encodedKey);
+}
+
+export async function decrypt(session: string | undefined = '') {
+  try {
+    const { payload } = await jwtVerify(session, encodedKey, {
+      algorithms: ['HS256'],
+    });
+    return payload;
+  } catch (error) {
+    console.log('Не удалось подтвердить сеанс');
+    return null;
+  }
+}
+```
+
+В `features/auth/api/session.ts` реализованы функции для работы с сессией:
+
+- **Создание сессии:** Функция `createSession` генерирует JWT с данными пользователя и устанавливает его в куки с параметрами безопасности (например, `httpOnly`, `secure`, `sameSite`).
+- **Проверка сессии:** Функция `verifySession` извлекает JWT из куки и проверяет его действительность. Если сессия действительна, возвращает информацию о пользователе; иначе перенаправляет пользователя на страницу логина.
+- **Удаление сессии:** Функция `deleteSession` удаляет куки сессии, тем самым завершив сеанс пользователя и перенаправив его на страницу логина.
+
+```typescript filename="auth/api/session.ts" githubPath="src/features/auth/api/session.ts"
+import 'server-only';
+
+import { cookies } from 'next/headers';
+import { decrypt, encrypt } from './jwt';
+
+export async function createSession(userId: string) {
+  // Длительность 1 сутки
+  const expiresAt = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000);
+  const session = await encrypt({ userId, expiresAt });
+
+  cookies().set('session', session, {
+    httpOnly: true,
+    secure: true,
+    expires: expiresAt,
+    sameSite: 'lax',
+    path: '/',
+  });
+
+  redirect('/dashboard');
+}
+
+export async function verifySession() {
+  const cookie = cookies().get('session')?.value;
+  const session = await decrypt(cookie);
+
+  if (!session?.userId) {
+    redirect('/login');
+    return null;
+  }
+
+  return { isAuth: true, userId: Number(session.userId) };
+}
+
+export function deleteSession() {
+  cookies().delete('session');
+  redirect('/login');
+}
+```
+
+### Валидация и типы
+
+Используем библиотеку [`Zod`](https://www.npmjs.com/package/zod) для строгой проверки данных.
+
+В файле `features/auth/types/definitions.ts` определены схемы валидации `LoginFormSchema`, которые гарантируют, что данные пользователя соответствуют ожиданиям: обязательные поля, минимальная длина и соответствие регулярным выражениям для пароля.
+
+```typescript filename="auth/types/definitions.ts" githubPath="src/features/auth/types/definitions.ts"
+import { z } from 'zod';
+
+export const SignupFormSchema = z.object({
+  name: z
+    .string()
+    .min(2, { message: 'Name must be at least 2 characters long.' })
+    .trim(),
+  username: z
+    .string()
+    .min(4, { message: 'Be at least 4 characters long' })
+    .trim(),
+  password: z
+    .string()
+    .min(8, { message: 'Be at least 8 characters long' })
+    .regex(/[a-zA-Z]/, { message: 'Contain at least one letter.' })
+    .regex(/[0-9]/, { message: 'Contain at least one number.' })
+    .regex(/[^a-zA-Z0-9]/, {
+      message: 'Contain at least one special character.',
+    })
+    .trim(),
+});
+
+export const LoginFormSchema = z.object({
+  username: z.string().min(1, { message: 'Username field must not be empty.' }),
+  password: z.string().min(1, { message: 'Password field must not be empty.' }),
+});
+
+export type FormState =
+  | {
+      errors?: {
+        username?: string[];
+        password?: string[];
+        name?: string[];
+      };
+      message?: string;
+    }
+  | undefined;
+
+export type SessionPayload = {
+  userId: string | number;
+  expiresAt: Date;
+};
+```
+
+### Авторизация
+
+Функция логина реализована в `features/auth/services/login.ts`. Она выполняет следующие шаги:
+
+1. Используем `LoginFormSchema` для проверки данных формы на соответствие требованиям;
+2. Ищем пользователя по имени пользователя в базе данных;
+3. Сравниваем введённый пароль с хешем, сохранённым в базе данных, с помощью bcrypt;
+4. Если данные верны, создаём сессию пользователя, используя функцию createSession.
+
+```typescript filename="login.ts" githubPath="src/features/auth/services/login.ts"
+'use server';
+
+import { PrismaClient } from '@prisma/client';
+import bcrypt from 'bcryptjs';
+import { createSession } from '../api/session';
+import { FormState, LoginFormSchema } from '../types/definitions';
+
+const prisma = new PrismaClient();
+
+export async function login(
+  state: FormState,
+  formData: FormData,
+): Promise<FormState> {
+  // 1. Validate form fields
+  const validatedFields = LoginFormSchema.safeParse({
+    username: formData.get('username'),
+    password: formData.get('password'),
+  });
+  const errorMessage = { message: 'Invalid login credentials.' };
+
+  // If any form fields are invalid, return early
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+
+  // 2. Query the database for the user with the given email
+  const { username, password } = validatedFields.data;
+
+  const user = await prisma.user.findFirst({
+    where: { username },
+  });
+
+  if (!user) {
+    return errorMessage;
+  }
+
+  // 3. Compare the user's password with the hashed password in the database
+  const passwordMatch = await bcrypt.compare(password, user.password);
+
+  // If the password does not match, return early
+  if (!passwordMatch) {
+    return errorMessage;
+  }
+
+  // 4. If login successful, create a session for the user and redirect
+  const userId = user.id.toString();
+  await createSession(userId);
+}
+```
+
+Для создания интерфейса логина используется компонент `FormLogin` в `features/auth/ui/form-login/form-login.tsx`. Этот компонент собирает данные от пользователя и передаёт их в функцию `login`.
+
+```tsx filename="form-login.tsx" githubPath="src/features/auth/ui/form-login/form-login.tsx"
+'use client';
+
+import { cn } from '@/shared/lib/react';
+import { Button, Input } from @/shared/ui/client';
+import { FC } from 'react';
+import { useFormState, useFormStatus } from 'react-dom';
+import { login } from '../../services/login';
+
+interface FormLoginProps {
+  className?: string;
+}
+
+export const FormLogin: FC<FormLoginProps> = ({ className }) => {
+  const [state, action] = useFormState(login, undefined);
+  const { pending } = useFormStatus();
+
+  return (
+    <form action={action} className={cn('grid gap-2 h-fit', className)}>
+      <Input
+        name='username'
+        placeholder='Username'
+        errorMessage={state?.errors?.username}
+        isInvalid={Boolean(state?.errors?.username)}
+      />
+      <Input
+        name='password'
+        placeholder='Password'
+        type='password'
+        errorMessage={state?.errors?.password}
+        isInvalid={Boolean(state?.errors?.password)}
+      />
+      <Button
+        color='primary'
+        disabled={pending}
+        type='submit'
+        className='mt-2 w-full'
+      >
+        {pending ? 'Submitting...' : 'Login'}
+      </Button>
+    </form>
+  );
+};
+```
+
+### Регистрация
+
+Функция регистрации реализована в `features/auth/services/signup.ts`. Она выполняет следующие шаги:
+
+1. Используем `SignupFormSchema` из `features/auth/types/definitions.ts` для проверки данных формы на соответствие требованиям;
+2. Запрашиваем базу данных, чтобы убедиться, что имя пользователя ещё не занято;
+3. Используем `bcrypt` для хеширования пароля перед его сохранением в базе данных;
+4. Вставляем новую запись о пользователе в таблицу пользователей;
+5. После успешной регистрации создаём сессию для пользователя, используя функцию `createSession` из `features/auth/api/session.ts`.
+
+```typescript filename="signup.ts" githubPath="src/features/auth/services/signup.ts"
+'use server';
+
+import { PrismaClient } from '@prisma/client';
+import bcrypt from 'bcryptjs';
+import { createSession } from '../api/session';
+import { FormState, SignupFormSchema } from '../types/definitions';
+
+const prisma = new PrismaClient();
+
+export async function signup(
+  state: FormState,
+  formData: FormData,
+): Promise<FormState> {
+  // 1. Validate form fields
+  const validatedFields = SignupFormSchema.safeParse({
+    name: formData.get('name'),
+    username: formData.get('username'),
+    password: formData.get('password'),
+  });
+
+  // If any form fields are invalid, return early
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+
+  // 2. Prepare data for insertion into database
+  const { name, username, password } = validatedFields.data;
+
+  // 3. Check if the user's username already exists
+  const existingUser = await prisma.user.findFirst({ where: { username } });
+
+  if (existingUser) {
+    return {
+      message: 'Username already exists, please use a different username.',
+    };
+  }
+
+  // Hash the user's password
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  // 3. Insert the user into the database or call an Auth Provider's API
+  const user = await prisma.user.create({
+    data: {
+      name,
+      username,
+      password: hashedPassword,
+    },
+    select: { id: true },
+  });
+
+  if (!user) {
+    return {
+      message: 'An error occurred while creating your account.',
+    };
+  }
+
+  // 4. Create a session for the user
+  const userId = user.id.toString();
+  await createSession(userId);
+}
+```
+
+`features/auth/ui/form-login/form-signup.tsx`:
+
+```tsx filename="form-signup.tsx" githubPath="src/features/auth/ui/form-signup/form-signup.tsx"
+'use client';
+
+import { cn } from '@/shared/lib/react';
+import { Button, Input } from @/shared/ui/client';
+import { FC } from 'react';
+import { useFormState, useFormStatus } from 'react-dom';
+import { signup } from '../../services/signup';
+
+interface FormSignupProps {
+  className?: string;
+}
+
+export const FormSignup: FC<FormSignupProps> = ({ className }) => {
+  const [state, action] = useFormState(signup, undefined);
+  const { pending } = useFormStatus();
+
+  return (
+    <form action={action} className={cn('grid gap-2 h-fit', className)}>
+      <Input
+        name='name'
+        placeholder='Name'
+        errorMessage={state?.errors?.name}
+        isInvalid={Boolean(state?.errors?.name)}
+      />
+      <Input
+        name='username'
+        placeholder='Username'
+        errorMessage={state?.errors?.username}
+        isInvalid={Boolean(state?.errors?.username)}
+      />
+      <Input
+        name='password'
+        placeholder='Password'
+        type='password'
+        errorMessage={state?.errors?.password}
+        isInvalid={Boolean(state?.errors?.password)}
+      />
+      <Button
+        color='primary'
+        disabled={pending}
+        type='submit'
+        className='mt-2 w-full'
+      >
+        {pending ? 'Submitting...' : 'Signup'}
+      </Button>
+    </form>
+  );
+};
+```
+
+### Выход
+
+После успешной аутентификации и создания сессии, пользователю нужно иметь возможность выйти из системы.
+
+В этом разделе мы реализуем функциональность выхода пользователя, удаляя его сессию и очищая куки.
+
+`features/auth/services/logout.ts`:
+
+```typescript filename="logout.ts" githubPath="src/features/auth/services/logout.ts"
+'use server';
+
+import { deleteSession } from '../api/session';
+
+export async function logout() {
+  deleteSession();
+}
+```
+
+Для удобства пользователя добавим кнопку выхода в интерфейс.
+
+`features/auth/ui/logout-button/logout-button.tsx`:
+
+```tsx filename="logout-button.tsx" githubPath="src/features/auth/ui/logout-button/logout-button.tsx"
+'use client';
+
+import { Dictionary } from '@/shared/config/i18n';
+import { Button } from @/shared/ui/client';
+import { RxExit } from 'react-icons/rx';
+import { logout } from '../../services/logout';
+
+export const LogoutButton = ({ dict }: { dict: Dictionary['ui'] }) => {
+  return (
+    <Button
+      startContent={<RxExit size={18} />}
+      color='danger'
+      variant='flat'
+      size='sm'
+      onClick={async () => await logout()}
+    >
+      {dict['auth-logout']}
+    </Button>
+  );
+};
+```
+
+### getUser
+
+В `features/auth/services/user.ts` реализована функция `getUser`, которая использует `verifySession` для проверки текущей сессии и `PrismaClient` для извлечения данных пользователя из базы данных:
+
+```typescript filename="user.ts" githubPath="src/features/auth/services/user.ts"
+import 'server-only';
+
+import { PrismaClient } from '@prisma/client';
+import { cache } from 'react';
+import { verifySession } from '../api/session';
+
+const prisma = new PrismaClient();
+
+export const getUser = cache(async () => {
+  const session = await verifySession();
+  if (!session) return null;
+
+  try {
+    const user = await prisma.user.findFirst({
+      where: {
+        id: session.userId,
+      },
+      select: {
+        id: true,
+        username: true,
+        name: true,
+      },
+    });
+
+    return user;
+  } catch (error) {
+    console.log('Failed to fetch user');
+    return null;
+  }
+});
+```
+
+## Заключение
+
+В этой статье мы реализовали полную систему аутентификации с регистрацией, логином, выходом и получением данных пользователя.
+
+Используя `Prisma` для работы с базой данных и `JWT` для управления сессиями, мы создали безопасное и удобное решение для аутентификации пользователей.
+
+Спасибо за прочтение (:
