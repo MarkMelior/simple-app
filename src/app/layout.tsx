@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 import { FontDefault } from '@/shared/constants';
 import { Light, PageLoader } from '@/shared/ui';
 
-import { HeroUIProvider, MessageProvider, NextThemesProvider } from './@core/providers';
+import { HeroUIProvider, NextThemesProvider } from './@core/providers';
 
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
@@ -25,20 +25,18 @@ const RootLayout = async ({ children }: Readonly<Props>) => (
     <body className={FontDefault.className}>
       <NextThemesProvider>
         <HeroUIProvider>
-          <MessageProvider>
-            <Suspense
-              fallback={(
-                <>
-                  <Light />
-                  <PageLoader fullScreen={true} />
-                </>
-              )}
-            >
-              {children}
-            </Suspense>
-            {/* <div id="modal-root" /> */}
-            <div id="message-root" />
-          </MessageProvider>
+          <Suspense
+            fallback={(
+              <>
+                <Light />
+                <PageLoader fullScreen={true} />
+              </>
+            )}
+          >
+            {children}
+          </Suspense>
+          {/* <div id="modal-root" /> */}
+          <div id="message-root" />
         </HeroUIProvider>
       </NextThemesProvider>
 

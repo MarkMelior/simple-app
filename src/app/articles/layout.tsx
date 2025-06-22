@@ -17,7 +17,7 @@ const ArticlesLayout: FC<LayoutProps> = ({ children }) => (
   <>
     <Light />
     <ScrollUp />
-    <GlowingLine className="fixed top-0 z-50" />
+    {/* <GlowingLine className="fixed top-0 z-50" /> */}
     <Navbar />
     <div className="z-20 mx-auto grid max-w-8xl gap-10 px-4 sm:px-6 md:px-8 lg:grid-cols-[17.5rem,1fr]">
       <Sidebar />

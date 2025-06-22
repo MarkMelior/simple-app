@@ -12,10 +12,10 @@ interface GlowingBoxSettings {
 export const glowingSettings: GlowingBoxSettings = {
   bgSize: '1500px',
   bgStrength: 0,
-  bgStrengthHover: 0.03,
+  bgStrengthHover: 0.04,
   borderSize: '600px',
   borderStrength: 0,
-  borderStrengthHover: 0.8,
+  borderStrengthHover: 0.7,
 };
 
 export const glowingStyle = {

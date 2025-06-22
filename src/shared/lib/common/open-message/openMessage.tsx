@@ -2,47 +2,95 @@
 
 import { useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
+import { FaCheckCircle } from 'react-icons/fa';
+import { FaCircleInfo } from 'react-icons/fa6';
+import { IoWarning } from 'react-icons/io5';
+import { MdError } from 'react-icons/md';
 
-import type { IAlert } from '@/shared/ui';
-import { Alert } from '@/shared/ui';
+import { CrossIcon } from '@/shared/icons';
+import { Button, Progress } from '@/shared/ui/client';
 
 import styles from './openMessage.module.scss';
 
+import type { CSSProperties, ReactNode } from 'react';
+
 import './openMessage.global.scss';
 
-export interface IOpenMessage extends IAlert {
+type MessageType =
+  | 'info'
+  | 'success'
+  | 'error'
+  | 'warning';
+
+const getIcon = (type: MessageType) => {
+  switch (type) {
+    case 'info':
+      return <FaCircleInfo className="text-info" size={16} />;
+    case 'success':
+      return <FaCheckCircle className="text-success" size={18} />;
+    case 'error':
+      return <MdError className="text-error" size={20} />;
+    case 'warning':
+      return <IoWarning className="text-warning" size={20} />;
+    default:
+      return null;
+  }
+};
+
+export interface IOpenMessage {
+  className?: string
+  closable?: boolean
+  content: ReactNode
   duration?: number | 'infinite'
+  onClose?: () => void
+  type?: MessageType
 }
 
 const MessageContainer = ({
   closable,
   content,
-  description,
   duration = 5,
-  isCopy,
   onClose,
-  type,
+  type = 'success',
 }: IOpenMessage & { onClose: () => void }) => {
   useEffect(() => {
-    if (duration === 'infinite') {
-      return;
-    }
-
+    if (duration === 'infinite') return;
     const timer = setTimeout(onClose, duration * 1000);
 
     return () => clearTimeout(timer);
   }, [duration, onClose]);
 
+  const style = duration === 'infinite' ? {} : {
+    '--animation-duration-notification': `${duration * 1000}ms`,
+  } as CSSProperties;
+
   return (
-    <Alert
+    <article
       className={styles.message}
-      closable={closable}
-      content={content}
-      description={description}
-      isCopy={isCopy}
-      onClose={onClose}
-      type={type}
-    />
+      onClick={onClose}
+      style={style}
+    >
+      <Progress
+        className={styles.progress}
+        color="success"
+        size="sm"
+      />
+      <div className={styles.content}>
+        <div className={styles.icon}>
+          {getIcon(type)}
+        </div>
+        {content}
+      </div>
+      {closable ? (
+        <Button
+          className={styles.button}
+          isIconOnly={true}
+          onPress={onClose}
+        >
+          <CrossIcon />
+        </Button>
+      ) : null}
+    </article>
   );
 };
 
@@ -58,7 +106,7 @@ export const openMessage = (message: IOpenMessage) => {
   // Проверяем, есть ли сообщение с таким же содержимым
   const existingMessage = Array.from(
     rootContainer.querySelectorAll('[data-message="open"]'),
-  ).find((msg) => msg.textContent?.includes(message.content));
+  ).find((msg) => msg.textContent?.includes(String(message.content)));
 
   if (existingMessage) {
     // Если сообщение уже существует, добавляем класс тряски
