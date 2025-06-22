@@ -2,6 +2,7 @@
 title: 'Next.js: Аутентификация'
 description: 'Серверные компоненты, Actions, Middleware'
 tags: ['nextjs', 'typescript', 'cookie', 'ssr', 'prisma', 'fsd']
+createdAt: 2024-07-20T10:45:00+03:00
 ---
 
 <AuthExample />
@@ -14,7 +15,7 @@ tags: ['nextjs', 'typescript', 'cookie', 'ssr', 'prisma', 'fsd']
 
 Получение пользовательских данных: `const user = await getUser();`. Это очень просто :)
 
-```text hideHeader githubPath="projects" signature="Структура файлов со всем функционалом"
+```text hideHeader github="projects" signature="Структура файлов со всем функционалом"
 src/features/auth
 ├── api
 │   ├── jwt.ts
@@ -154,7 +155,7 @@ name String
 
 Создаём и обрабатываем JWT токены и сессии в файлах `features/auth/api/jwt.ts` и `features/auth/api/session.ts`
 
-```typescript filename="auth/api/jwt.ts" githubPath="src/features/auth/api/jwt.ts"
+```typescript filename="auth/api/jwt.ts" exampleLink="https://github.com/MarkMelior/melior-web/blob/Release-0.1.0/src/features/auth/api/jwt.ts"
 import { SignJWT, jwtVerify } from 'jose';
 import { SessionPayload } from '../types/definitions';
 
@@ -188,7 +189,7 @@ export async function decrypt(session: string | undefined = '') {
 - **Проверка сессии:** Функция `verifySession` извлекает JWT из куки и проверяет его действительность. Если сессия действительна, возвращает информацию о пользователе; иначе перенаправляет пользователя на страницу логина.
 - **Удаление сессии:** Функция `deleteSession` удаляет куки сессии, тем самым завершив сеанс пользователя и перенаправив его на страницу логина.
 
-```typescript filename="auth/api/session.ts" githubPath="src/features/auth/api/session.ts"
+```typescript filename="auth/api/session.ts" exampleLink="https://github.com/MarkMelior/melior-web/blob/Release-0.1.0/src/features/auth/api/session.ts"
 import 'server-only';
 
 import { cookies } from 'next/headers';
@@ -234,7 +235,7 @@ export function deleteSession() {
 
 В файле `features/auth/types/definitions.ts` определены схемы валидации `LoginFormSchema`, которые гарантируют, что данные пользователя соответствуют ожиданиям: обязательные поля, минимальная длина и соответствие регулярным выражениям для пароля.
 
-```typescript filename="auth/types/definitions.ts" githubPath="src/features/auth/types/definitions.ts"
+```typescript filename="auth/types/definitions.ts" exampleLink="https://github.com/MarkMelior/melior-web/blob/Release-0.1.0/src/features/auth/types/definitions.ts"
 import { z } from 'zod';
 
 export const SignupFormSchema = z.object({
@@ -288,7 +289,7 @@ export type SessionPayload = {
 3. Сравниваем введённый пароль с хешем, сохранённым в базе данных, с помощью bcrypt;
 4. Если данные верны, создаём сессию пользователя, используя функцию createSession.
 
-```typescript filename="login.ts" githubPath="src/features/auth/services/login.ts"
+```typescript filename="login.ts" exampleLink="https://github.com/MarkMelior/melior-web/blob/Release-0.1.0/src/features/auth/services/login.ts"
 'use server';
 
 import { PrismaClient } from '@prisma/client';
@@ -343,7 +344,7 @@ export async function login(
 
 Для создания интерфейса логина используется компонент `FormLogin` в `features/auth/ui/form-login/form-login.tsx`. Этот компонент собирает данные от пользователя и передаёт их в функцию `login`.
 
-```tsx filename="form-login.tsx" githubPath="src/features/auth/ui/form-login/form-login.tsx"
+```tsx filename="form-login.tsx" exampleLink="https://github.com/MarkMelior/melior-web/blob/Release-0.1.0/src/features/auth/ui/form-login/form-login.tsx"
 'use client';
 
 import { cn } from '@/shared/lib/react';
@@ -398,7 +399,7 @@ export const FormLogin: FC<FormLoginProps> = ({ className }) => {
 4. Вставляем новую запись о пользователе в таблицу пользователей;
 5. После успешной регистрации создаём сессию для пользователя, используя функцию `createSession` из `features/auth/api/session.ts`.
 
-```typescript filename="signup.ts" githubPath="src/features/auth/services/signup.ts"
+```typescript filename="signup.ts" exampleLink="https://github.com/MarkMelior/melior-web/blob/Release-0.1.0/src/features/auth/services/signup.ts"
 'use server';
 
 import { PrismaClient } from '@prisma/client';
@@ -465,7 +466,7 @@ export async function signup(
 
 `features/auth/ui/form-login/form-signup.tsx`:
 
-```tsx filename="form-signup.tsx" githubPath="src/features/auth/ui/form-signup/form-signup.tsx"
+```tsx filename="form-signup.tsx" exampleLink="https://github.com/MarkMelior/melior-web/blob/Release-0.1.0/src/features/auth/ui/form-signup/form-signup.tsx"
 'use client';
 
 import { cn } from '@/shared/lib/react';
@@ -524,7 +525,7 @@ export const FormSignup: FC<FormSignupProps> = ({ className }) => {
 
 `features/auth/services/logout.ts`:
 
-```typescript filename="logout.ts" githubPath="src/features/auth/services/logout.ts"
+```typescript filename="logout.ts" exampleLink="https://github.com/MarkMelior/melior-web/blob/Release-0.1.0/src/features/auth/services/logout.ts"
 'use server';
 
 import { deleteSession } from '../api/session';
@@ -538,7 +539,7 @@ export async function logout() {
 
 `features/auth/ui/logout-button/logout-button.tsx`:
 
-```tsx filename="logout-button.tsx" githubPath="src/features/auth/ui/logout-button/logout-button.tsx"
+```tsx filename="logout-button.tsx" exampleLink="https://github.com/MarkMelior/melior-web/blob/Release-0.1.0/src/features/auth/ui/logout-button/logout-button.tsx"
 'use client';
 
 import { Dictionary } from '@/shared/config/i18n';
@@ -565,7 +566,7 @@ export const LogoutButton = ({ dict }: { dict: Dictionary['ui'] }) => {
 
 В `features/auth/services/user.ts` реализована функция `getUser`, которая использует `verifySession` для проверки текущей сессии и `PrismaClient` для извлечения данных пользователя из базы данных:
 
-```typescript filename="user.ts" githubPath="src/features/auth/services/user.ts"
+```typescript filename="user.ts" exampleLink="https://github.com/MarkMelior/melior-web/blob/Release-0.1.0/src/features/auth/services/user.ts"
 import 'server-only';
 
 import { PrismaClient } from '@prisma/client';

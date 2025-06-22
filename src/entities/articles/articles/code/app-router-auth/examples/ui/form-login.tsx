@@ -1,13 +1,11 @@
 'use client';
 
-import { useFormState } from 'react-dom';
+import { type FC, useActionState } from 'react';
 
-import { cn } from '@/shared/lib/react';
+import { cn } from '@/shared/lib/common';
 import { Button, Input } from '@/shared/ui/client';
 
 import { login } from '../services/login';
-
-import type { FC } from 'react';
 
 interface FormLoginProps {
   className?: string
@@ -18,7 +16,7 @@ export const FormLoginExample: FC<FormLoginProps> = ({
   className,
   isDisabled,
 }) => {
-  const [state, action, pending] = useFormState(login, undefined);
+  const [state, action, pending] = useActionState(login, undefined);
 
   return (
     <form action={action} className={cn('grid gap-2 h-fit', className)}>

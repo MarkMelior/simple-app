@@ -24,7 +24,10 @@ export type ButtonProps = Pick<HeroButtonProps,
   | 'target'
   | 'type'
   | 'variant'
->;
+> & {
+  'download'?: string
+  'data-copied'?: boolean
+};
 
 export const Button: FC<ButtonProps> = ({
   as,
@@ -33,6 +36,7 @@ export const Button: FC<ButtonProps> = ({
   color,
   disabled,
   disableRipple,
+  download,
   fullWidth,
   href,
   isDisabled,
@@ -45,13 +49,16 @@ export const Button: FC<ButtonProps> = ({
   target,
   type,
   variant,
+  ...props
 }) => (
   <HeroButton
     as={as}
     className={className}
     color={color}
+    data-copied={props['data-copied']}
     disabled={disabled}
     disableRipple={disableRipple}
+    download={download}
     fullWidth={fullWidth}
     href={href}
     isDisabled={isDisabled}

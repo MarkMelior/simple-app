@@ -38,7 +38,7 @@ export async function getProjectListByCategory(
 
         return {
           ...projectMetadata,
-          link: `/projects/${category}/${dirent.name}`,
+          link: `/articles/${category}/${dirent.name}`,
         } as ProjectMetadata;
       }),
   );

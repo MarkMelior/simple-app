@@ -2,6 +2,7 @@
 title: 'i18n: Интернационализация'
 description: 'Меняем языки интерфейса без сторонних библиотек. Лучшее решение для SEO'
 tags: ['nextjs', 'typescript', 'ssr', 'seo', 'fsd']
+createdAt: 2024-07-20T03:39:00+03:00
 ---
 
 ---
@@ -56,7 +57,7 @@ export const Component = async () => {
 
 Создадим конфиг i18n `shared/config/i18n/i18n.config.ts`:
 
-```typescript filename="i18n.config.ts" githubPath="src/shared/config/i18n/i18n.config.ts"
+```typescript filename="i18n.config.ts" exampleLink="https://github.com/MarkMelior/melior-web/blob/Release-0.1.0/src/shared/config/i18n/i18n.config.ts"
 export const i18n = {
   defaultLocale: 'ru',
   locales: ['en', 'ru'],
@@ -85,7 +86,7 @@ export type Locale = (typeof i18n)['locales'][number];
 
 В `middleware.ts` реализуем передачу url в headers для будущего `getPathname()` + функционал:
 
-```typescript filename="middleware.ts" githubPath="middleware.ts"
+```typescript filename="middleware.ts" exampleLink="https://github.com/MarkMelior/melior-web/blob/Release-0.1.0/middleware.ts"
 import { i18n } from '@/shared/config/i18n';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -168,7 +169,7 @@ export const config = {
 
 `shared/lib/get-pathname/get-pathname.ts`:
 
-```typescript filename="get-pathname.ts" githubPath="src/shared/lib/get-pathname/get-pathname.ts"
+```typescript filename="get-pathname.ts" exampleLink="https://github.com/MarkMelior/melior-web/blob/Release-0.1.0/src/shared/lib/get-pathname/get-pathname.ts"
 'use server';
 
 import { i18n, Locale } from '@/shared/config/i18n';
@@ -203,7 +204,7 @@ export const getPathname = async ({ withoutLang }: GetPathnameProps = {}) => {
 
 `shared/config/i18n/get-lang.ts`:
 
-```typescript filename="get-lang.ts" githubPath="src/shared/config/i18n/get-lang.ts"
+```typescript filename="get-lang.ts" exampleLink="https://github.com/MarkMelior/melior-web/blob/Release-0.1.0/src/shared/config/i18n/get-lang.ts"
 'use server';
 
 import { getPathname } from '@/shared/lib';
@@ -228,7 +229,7 @@ export const getLang = async (): Promise<Locale> => {
 
 `shared/config/i18n/use-lang.ts`:
 
-```typescript filename="use-lang.ts" githubPath="src/shared/config/i18n/use-lang.ts"
+```typescript filename="use-lang.ts" exampleLink="https://github.com/MarkMelior/melior-web/blob/Release-0.1.0/src/shared/config/i18n/use-lang.ts"
 'use client';
 
 import { usePathname } from 'next/navigation';
@@ -251,7 +252,7 @@ export const useLang = (): Locale => {
 
 `shared/config/i18n/dictionaries.ts`:
 
-```typescript filename="dictionaries.ts" githubPath="src/shared/config/i18n/dictionaries.ts"
+```typescript filename="dictionaries.ts" exampleLink="https://github.com/MarkMelior/melior-web/blob/Release-0.1.0/src/shared/config/i18n/dictionaries.ts"
 'use server';
 
 import { getLang } from './get-lang';
@@ -277,7 +278,7 @@ export type Dictionary = Awaited<ReturnType<typeof getDictionary>>;
 
 `shared/config/i18n/use-dictionary.ts`:
 
-```typescript filename="use-dictionary.ts" githubPath="src/shared/config/i18n/use-dictionary.ts"
+```typescript filename="use-dictionary.ts" exampleLink="https://github.com/MarkMelior/melior-web/blob/Release-0.1.0/src/shared/config/i18n/use-dictionary.ts"
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -309,7 +310,7 @@ export const useDictionary = (locale?: Locale): Dictionary | undefined => {
 
 Чтобы это исправить, создадим свой компонент `<Link />` в `shared/config/i18n/link.tsx`:
 
-```tsx filename="link.tsx" githubPath="src/shared/config/i18n/link.tsx"
+```tsx filename="link.tsx" exampleLink="https://github.com/MarkMelior/melior-web/blob/Release-0.1.0/src/shared/config/i18n/link.tsx"
 'use client';
 
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';

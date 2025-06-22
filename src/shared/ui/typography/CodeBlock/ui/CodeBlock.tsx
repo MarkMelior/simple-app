@@ -1,7 +1,6 @@
 'use client';
 
-// import { Link } from '@heroui/react'; // TODO
-import Link from 'next/link';
+import { Link } from '@heroui/react';
 import { IoIosCode } from 'react-icons/io';
 import { LuEye } from 'react-icons/lu';
 import { TbFileUnknown } from 'react-icons/tb';
@@ -15,10 +14,8 @@ import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { FontDefault } from '@/shared/constants/fonts';
 import { StackData } from '@/shared/constants/stack-data';
 import type { StackVariants } from '@/shared/constants/stack-data';
-import { gitHubRepoLink } from '@/shared/lib/github';
-import type { GithubPath } from '@/shared/lib/github/types';
-import { cn } from '@/shared/lib/react';
-import { Button, Tooltip } from '@/shared/ui/client';
+import { cn } from '@/shared/lib/common';
+import { Button, GlowingBox, Tooltip } from '@/shared/ui/client';
 
 import { CopyButton } from '../../CopyButton';
 
@@ -29,8 +26,8 @@ import './codeBlock.scss';
 export interface CodeBlockProps {
   className?: string
   disableLineNumbers?: boolean
+  exampleLink?: string
   filename?: string
-  github?: GithubPath
   hideHeader?: boolean
   lang?: StackVariants
   signature?: string
@@ -45,8 +42,8 @@ SyntaxHighlighter.registerLanguage('markdown', markdown);
 export const CodeBlock: FC<CodeBlockProps> = ({
   className,
   disableLineNumbers,
+  exampleLink,
   filename,
-  github,
   hideHeader,
   lang = 'typescript',
   signature,
@@ -57,10 +54,10 @@ export const CodeBlock: FC<CodeBlockProps> = ({
   return (
     <>
       {signature && (
-        <div className="flex items-start my-6 space-x-4">
-          <div className="relative mt-1 w-4 h-4 rounded-full text-white flex items-center justify-center ring-2 bg-primary-500 ring-primary-500">
+        <div className="my-6 flex items-start space-x-4">
+          <div className="relative mt-1 flex size-4 items-center justify-center rounded-full bg-primary-500 text-white ring-2 ring-primary-500">
             <IoIosCode size={18} />
-            <div className="absolute top-full mt-1 left-[0.46875rem] w-px h-[1.375rem] rounded-full bg-primary-400/30" />
+            <div className="absolute left-[0.46875rem] top-full mt-1 h-[1.375rem] w-px rounded-full bg-primary-400/30" />
           </div>
           <p
             className={cn(
@@ -72,35 +69,34 @@ export const CodeBlock: FC<CodeBlockProps> = ({
           </p>
         </div>
       )}
-      <div
-        className={cn(
-          'grid rounded-md overflow-hidden border border-default-200 h-fit relative group/buttons code-block__wrapper',
-          FontDefault.className,
-          className,
-        )}
+      <GlowingBox
+        classNames={{
+          background: cn(
+            'grid rounded-md overflow-hidden border border-default-100 h-fit relative group/buttons code-block__wrapper',
+            FontDefault.className,
+          ),
+          border: className,
+        }}
       >
         {!hideHeader && (
-          <div className="bg-default-100 text-[0.825rem] text-default-600 py-0.5 px-3 flex justify-between items-center break-all whitespace-normal text-center">
+          <div className="flex items-center justify-between whitespace-normal break-all bg-default-100 px-3 py-0.5 text-center text-[0.825rem] text-default-600">
             {StackData[lang]?.icon || <TbFileUnknown size={20} />}
             {filename ? filename : StackData[lang]?.name}
-            <CodeBlockButtons github={github} text={text} />
+            <CodeBlockButtons exampleLink={exampleLink} text={text} />
           </div>
         )}
-
         <>
           {hideHeader && (
             <CodeBlockButtons
-              github={github}
+              exampleLink={exampleLink}
               hoverButton={true}
               text={text}
             />
           )}
           <SyntaxHighlighter
             className={cn(
-              'border-t-1 border-default-200 max-h-[28rem] text-sm sm:text-base overflow-auto !bg-default-100 !text-default-700',
-              {
-                'border-0': hideHeader,
-              },
+              'border-t-1 border-default-200 max-h-[28rem] text-sm overflow-auto !bg-default-100 !text-default-700',
+              { 'border-0': hideHeader },
             )}
             codeTagProps={{
               className: 'bg-inherit',
@@ -117,19 +113,19 @@ export const CodeBlock: FC<CodeBlockProps> = ({
             {text}
           </SyntaxHighlighter>
         </>
-      </div>
+      </GlowingBox>
     </>
   );
 };
 
 interface CodeBlockButtonsProps {
-  github?: GithubPath
+  exampleLink?: string
   hoverButton?: boolean
   text: string
 }
 
 function CodeBlockButtons({
-  github,
+  exampleLink,
   hoverButton,
   text,
 }: CodeBlockButtonsProps) {
@@ -139,11 +135,11 @@ function CodeBlockButtons({
         'absolute right-2 top-2 opacity-0 group-hover/buttons:opacity-100 transition-opacity': hoverButton,
       })}
     >
-      {github?.path && (
+      {exampleLink ? (
         <Tooltip content="Посмотреть код на GitHub" placement="top">
           <Button
             as={Link}
-            href={gitHubRepoLink(github)}
+            href={exampleLink}
             isIconOnly={true}
             radius="sm"
             size="sm"
@@ -151,13 +147,15 @@ function CodeBlockButtons({
             variant="light"
           >
             <LuEye
-              className="text-default-400 group-hover:text-default-600 transition-colors"
+              className="text-default-400 transition-colors group-hover:text-default-600"
               size={20}
             />
           </Button>
         </Tooltip>
-      )}
+      ) : null}
       <CopyButton text={text} />
     </div>
   );
 }
+
+export default CodeBlock;

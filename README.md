@@ -4,6 +4,21 @@
 
 Tailwind можно использовать только в `shared/ui` и в `.module.scss`. Везде пишем стили ручками, если нужно. В идеале обходится без стилей вообще! Все должны покрывать компоненты из ui
 
+### Скрипты
+
+- `yarn dev` - Локальный запуск в режиме разработки с hot-reload
+- `yarn build` - Сборка проекта для production
+- `yarn start` - Запуск предварительно собранного проекта в production-режиме
+- `yarn lint:ts` - Проверка tslint
+- `yarn lint:es` - Проверка eslint
+- `yarn lint:es:fix` - Авто-исправление eslint
+- `yarn lint:fsd` - Проверка архитектурных нарушений FSD
+- `yarn lint:style` - Проверка stylelint
+- `yarn lint:style:fix` - Авто-исправление stylelint
+- `yarn lint:all` - Проверка всех линтеров
+
+---
+
 ## Реализованный функционал
 
 ## MDX

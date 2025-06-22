@@ -1,4 +1,4 @@
-import { cn } from '@/shared/lib/react';
+import { cn } from '@/shared/lib/common';
 
 import styles from './blackhole.module.scss';
 

@@ -24,6 +24,13 @@ const config: Config = {
       maxWidth: {
         '8xl': '90rem',
       },
+      zIndex: {
+        // hud: '10',
+        // light: '35',
+        message: '40',
+        // overlay: '20',
+        // overlayChild: '30',
+      },
     },
   },
 };

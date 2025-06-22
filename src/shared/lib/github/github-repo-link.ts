@@ -1,7 +1,8 @@
 import type { GithubPath } from '@/shared/lib/github/types';
 
 export const gitHubRepoLink = ({
+  branch = 'main',
   owner = 'MarkMelior',
   path,
-  repo = 'simple-app',
-}: GithubPath) => `https://github.com/${owner}/${repo}/blob/master/${path}`;
+  repo = 'melior-web',
+}: GithubPath) => `https://github.com/${owner}/${repo}/blob/${branch}/${path}`;

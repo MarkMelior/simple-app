@@ -1,9 +1,9 @@
-import { cn } from '@/shared/lib/react';
+import { cn } from '@/shared/lib/common';
 
-import type { JSX } from 'react';
+import type { JSX, ReactNode } from 'react';
 
 interface HeadingProps {
-  children: React.ReactNode
+  children: ReactNode
   className?: string
   id?: string
   Tag: keyof JSX.IntrinsicElements
@@ -18,15 +18,15 @@ export const Heading = ({
 }: HeadingProps) => (
   <Tag
     className={cn(
-      'pt-[var(--height-navbar)] -mt-[var(--height-navbar)] text-default-900',
+      'pt-[var(--articles-height-navbar)] -mt-[var(--articles-height-navbar)] text-default-900',
       className,
     )}
     data-headline-id={id}
     id={id}
-    {...props} // TODO
+    {...props}
   >
     <span
-      className="whitespace-pre-wrap relative"
+      className="relative whitespace-pre-wrap"
     >
       {children}
     </span>

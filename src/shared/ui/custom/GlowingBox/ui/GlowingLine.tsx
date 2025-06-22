@@ -2,11 +2,12 @@
 
 import { useEffect, useState } from 'react';
 
-import { cn, useMouse } from '@/shared/lib/react';
+import { cn } from '@/shared/lib/common';
+import { useMouse } from '@/shared/lib/react';
 
 import styles from './glowingLine.module.scss';
 
-import type { FC } from 'react';
+import type { CSSProperties, FC } from 'react';
 
 interface GlowingBoxProps {
   className?: string
@@ -21,10 +22,10 @@ export const GlowingLine: FC<GlowingBoxProps> = ({ className }) => {
   }, []);
 
   const style = {
-    '--mouse-x': `${mousePosition.elementX}px`,
-    '--mouse-y': `${mousePosition.elementY}px`,
+    '--mouse-x': `${mousePosition.x}px`,
+    '--mouse-y': `${mousePosition.y}px`,
     '--spotlight-line-size': '300px',
-  } as React.CSSProperties;
+  } as CSSProperties;
 
   if (!mounted) {
     return null;

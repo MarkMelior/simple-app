@@ -1,0 +1,15 @@
+#message-root {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  z-index: theme('zIndex.message');
+  width: 100%;
+  max-width: 640px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  padding: 0 16px;
+
+  transform: translateX(-50%);
+}

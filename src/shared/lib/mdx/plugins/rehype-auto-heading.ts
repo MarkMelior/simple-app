@@ -7,6 +7,7 @@ import { toLatin } from '@/shared/lib/text';
 import type { MdxHeadline } from '../types';
 
 export function rehypeAutoHeading(headlines?: MdxHeadline[]) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return (tree: any) => {
     const stack: { depth: number, headline: MdxHeadline }[] = [];
 

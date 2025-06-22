@@ -6,7 +6,7 @@ export const fetchGitHubFileContent = cache(
   async ({
     owner = 'MarkMelior',
     path,
-    repo = 'simple-app',
+    repo = 'melior-web',
   }: GithubPath): Promise<string> => {
     const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
 

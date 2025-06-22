@@ -1,6 +1,6 @@
 import { StackData } from '@/shared/constants';
 import type { StackVariants } from '@/shared/constants';
-import { cn } from '@/shared/lib/react';
+import { cn } from '@/shared/lib/common';
 import { Button } from '@/shared/ui/client';
 
 interface StackButtonsProps {

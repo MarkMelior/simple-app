@@ -3,16 +3,16 @@
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-export enum PortalEnum {
-  Headlines = 'headlines-portal',
-}
+import type { FC, ReactNode } from 'react';
+
+export type PortalId = 'headlines-portal';
 
 interface PortalProps {
-  children: React.ReactNode
-  id: PortalEnum
+  children: ReactNode
+  id: PortalId
 }
 
-export const Portal = ({ children, id }: PortalProps) => {
+export const Portal: FC<PortalProps> = ({ children, id }) => {
   const [mounted, setMounted] = useState(false);
   const portalRef = useRef<HTMLElement | null>(null);
 

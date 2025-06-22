@@ -3,6 +3,8 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
+import { cn } from '../lib/common';
+
 import type { FC } from 'react';
 
 interface LogoProps {
@@ -10,6 +12,8 @@ interface LogoProps {
   className?: string
   variant?: 'default' | 'graffiti' | 'text'
 }
+
+const variants: LogoProps['variant'][] = ['default', 'text'];
 
 export const Logo: FC<LogoProps> = ({
   changeOnClick,
@@ -20,7 +24,6 @@ export const Logo: FC<LogoProps> = ({
 
   const handleClick = () => {
     if (changeOnClick) {
-      const variants: LogoProps['variant'][] = ['default', 'graffiti', 'text'];
       const currentIndex = variants.indexOf(currentVariant);
       const nextIndex = (currentIndex + 1) % variants.length;
 
@@ -72,7 +75,7 @@ export const Logo: FC<LogoProps> = ({
       case 'default':
         return (
           <svg
-            className="text-default-900"
+            className={cn('text-default-900', className)}
             fill="none"
             height="48"
             viewBox="0 0 48 48"
@@ -94,7 +97,7 @@ export const Logo: FC<LogoProps> = ({
 
   return (
     <div
-      className="cursor-pointer select-none active:scale-[0.96] transition-transform"
+      className="cursor-pointer select-none transition-transform active:scale-[0.96]"
       onClick={handleClick}
     >
       {renderLogo()}

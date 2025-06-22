@@ -9,13 +9,11 @@
     margin-top: 5px;
 
     font-size: .6rem;
-
-    color: rgb(var(--color-text-rgb), 1);
   }
 }
 
 .fullScreen {
-  min-height: var(--height-screen);
+  min-height: var(--articles-height-screen);
 }
 
 .loader {

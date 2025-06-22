@@ -19,8 +19,6 @@ const eslintCommonRules = {
   'arrow-body-style': ['error', 'as-needed'],
   // https://eslint.org/docs/latest/rules/comma-dangle
   'comma-dangle': ['error', 'always-multiline'],
-  // https://eslint.org/docs/latest/rules/curly
-  'curly': ['error', 'all'],
   // https://eslint.org/docs/latest/rules/no-console
   'no-console': ['error', { allow: ['warn', 'info', 'error'] }],
   // Запретить использование пустых функций
@@ -205,11 +203,16 @@ const eslintNextRules = {
   '@next/next/no-img-element': 'off',
 };
 
+const eslintTailwindRules = {
+  'tailwindcss/no-custom-classname': 'off',
+};
+
 const eslintConfig = [
   stylistic.configs.recommended,
   ...compat.extends(
     'next/core-web-vitals',
     'next/typescript',
+    'plugin:tailwindcss/recommended',
   ),
   {
     plugins: {
@@ -226,15 +229,14 @@ const eslintConfig = [
       ...eslintTypescriptRules,
       ...eslintPerfectionistRules,
       ...eslintNextRules,
+      ...eslintTailwindRules,
       'custom-rules/scss-import-name': 'error',
     },
   },
   {
-    files: ['./config/**/*.{js,ts}', 'global.d.ts'],
+    files: ['src/shared/lib/mdx/mdx-components.tsx', 'src/shared/ui/typography/**'],
     rules: {
-      '@typescript-eslint/ban-ts-comment': 'off',
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-require-imports': 'off',
+      'react/jsx-props-no-spreading': 'off',
     },
   },
 ];

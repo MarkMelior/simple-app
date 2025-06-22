@@ -1,3 +1,5 @@
+import type { CSSProperties } from 'react';
+
 interface GlowingBoxSettings {
   bgSize?: string
   bgStrength?: number
@@ -8,12 +10,12 @@ interface GlowingBoxSettings {
 }
 
 export const glowingSettings: GlowingBoxSettings = {
-  bgSize: '700px',
+  bgSize: '1500px',
   bgStrength: 0,
-  bgStrengthHover: 0.05,
-  borderSize: '500px',
-  borderStrength: 0.5,
-  borderStrengthHover: 1,
+  bgStrengthHover: 0.03,
+  borderSize: '600px',
+  borderStrength: 0,
+  borderStrengthHover: 0.8,
 };
 
 export const glowingStyle = {
@@ -23,4 +25,4 @@ export const glowingStyle = {
   '--spotlight-border-size': glowingSettings.borderSize,
   '--spotlight-border-strength': glowingSettings.borderStrength,
   '--spotlight-border-strength-hover': glowingSettings.borderStrengthHover,
-} as React.CSSProperties;
+} as CSSProperties;
