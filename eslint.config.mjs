@@ -51,8 +51,6 @@ const eslintReactRules = {
   'react-hooks/exhaustive-deps': 'off',
   // Указывает пропсам значения true и false
   'react/jsx-boolean-value': ['error', 'always'],
-  // Запрет на пропсы-спред, если нужно
-  'react/jsx-props-no-spreading': 'error',
   // Соответствие стандартным DOM-свойствам
   'react/no-unknown-property': 'error',
   // Компоненты должны быть закрыты
@@ -234,9 +232,9 @@ const eslintConfig = [
     },
   },
   {
-    files: ['src/shared/lib/mdx/mdx-components.tsx', 'src/shared/ui/typography/**'],
+    files: ['global.d.ts'],
     rules: {
-      'react/jsx-props-no-spreading': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
     },
   },
 ];

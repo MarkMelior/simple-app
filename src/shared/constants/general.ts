@@ -5,3 +5,5 @@ export enum AppRouteEnum {
   // last
   NOT_FOUND = '/not-found',
 }
+
+export const APP_NAME = 'Melior Web';

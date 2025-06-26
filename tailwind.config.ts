@@ -13,23 +13,28 @@ const config: Config = {
   darkMode: 'class',
   plugins: [
     heroui({
-      addCommonColors: true,
-      prefix: 'simple',
+      // addCommonColors: true,
+      prefix: 'melior',
       themes: heroUiThemes,
     }),
     typography,
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        noise: 'url(\'/images/noise.png\')',
+      },
+      height: {
+        articlesNavbar: '64px',
+      },
       maxWidth: {
         '8xl': '90rem',
       },
       zIndex: {
-        // hud: '10',
-        // light: '35',
+        header: '50',
+        headerAlert: '45',
+        light: '30',
         message: '40',
-        // overlay: '20',
-        // overlayChild: '30',
       },
     },
   },

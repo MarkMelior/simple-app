@@ -138,7 +138,6 @@ export const openMessage = (message: IOpenMessage) => {
   };
 
   root.render(
-    // eslint-disable-next-line react/jsx-props-no-spreading
     <MessageContainer {...message} onClose={removeMessage} />,
   );
 };

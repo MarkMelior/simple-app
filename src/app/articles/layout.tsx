@@ -2,8 +2,7 @@ import { Footer } from '@/widgets/(articles)/Footer';
 import { Navbar } from '@/widgets/(articles)/Navbar';
 import { Sidebar } from '@/widgets/(articles)/Sidebar';
 
-import { Light } from '@/shared/ui';
-import { GlowingLine } from '@/shared/ui/client';
+import { Light, Spacer } from '@/shared/ui';
 
 import { ScrollUp } from '@/features/ScrollUp';
 
@@ -21,7 +20,8 @@ const ArticlesLayout: FC<LayoutProps> = ({ children }) => (
     <Navbar />
     <div className="z-20 mx-auto grid max-w-8xl gap-10 px-4 sm:px-6 md:px-8 lg:grid-cols-[17.5rem,1fr]">
       <Sidebar />
-      <div className="flex min-h-[var(--articles-height-screen)] flex-col justify-between xl:ml-0 xl:max-w-none">
+      <div className="min-h-[calc(100vh - h-articlesNavbar)] flex flex-col justify-between xl:ml-0 xl:max-w-none">
+        <Spacer y={16} />
         {children}
         <Footer />
       </div>

@@ -57,7 +57,7 @@ export const CodeBlock: FC<CodeBlockProps> = ({
         <div className="my-6 flex items-start space-x-4">
           <div className="relative mt-1 flex size-4 items-center justify-center rounded-full bg-primary-500 text-white ring-2 ring-primary-500">
             <IoIosCode size={18} />
-            <div className="absolute left-[0.46875rem] top-full mt-1 h-[1.375rem] w-px rounded-full bg-primary-400/30" />
+            <div className="absolute left-[0.46875rem] top-full mt-1 h-[1.375rem] w-px rounded-full bg-primary-600/30" />
           </div>
           <p
             className={cn(
@@ -75,7 +75,7 @@ export const CodeBlock: FC<CodeBlockProps> = ({
             'grid rounded-md overflow-hidden border border-default-100 h-fit relative group/buttons code-block__wrapper',
             FontDefault.className,
           ),
-          border: className,
+          border: cn(className, 'bg-default-200'),
         }}
       >
         {!hideHeader && (

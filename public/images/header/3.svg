@@ -1,0 +1,27 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="bgIllustration" clip-path="url(#clip0_3526_358)">
+<g id="Rectangle 5056" filter="url(#filter0_b_3526_358)">
+<rect x="19" y="48" width="69" height="100" rx="6" fill="white" fill-opacity="0.2"/>
+</g>
+<g id="Rectangle 5057" filter="url(#filter1_b_3526_358)">
+<rect x="96" y="48" width="69" height="100" rx="6" fill="white" fill-opacity="0.2"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_b_3526_358" x="7" y="36" width="93" height="124" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feGaussianBlur in="BackgroundImageFix" stdDeviation="6"/>
+<feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_3526_358"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_3526_358" result="shape"/>
+</filter>
+<filter id="filter1_b_3526_358" x="84" y="36" width="93" height="124" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feGaussianBlur in="BackgroundImageFix" stdDeviation="6"/>
+<feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_3526_358"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_3526_358" result="shape"/>
+</filter>
+<clipPath id="clip0_3526_358">
+<rect width="120" height="120" fill="white"/>
+</clipPath>
+</defs>
+</svg>

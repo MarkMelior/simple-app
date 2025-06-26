@@ -1,4 +1,4 @@
-@use '@/shared/styles/utils' as *;
+@use '@/shared/styles/mixin' as *;
 
 .message {
   display: flex;
@@ -11,22 +11,23 @@
   margin-bottom: 8px;
   padding: 15px 20px;
 
+  background: theme('backgroundImage.noise') repeat, theme('colors.default-50');
+  border: 1px solid theme('colors.default-200');
   overflow: hidden;
 
   animation: fade-in-from-bottom 0.3s ease-out forwards;
   backdrop-filter: var(--blur-md);
   user-select: none;
 
-  @include background(.3);
+  [class="dark"] & {
+    background: theme('backgroundImage.noise') repeat, theme('colors.default-50/0.3');
+    backdrop-filter: blur(theme('backdropBlur.lg'));
+  }
+
   @apply text-sm cursor-pointer border-b border-default-900/10 sm:max-w-xl max-w-none rounded-xl;
 
   [data-message="closed"] & {
     animation: fade-out-from-bottom 0.3s ease-in forwards;
-  }
-
-  [class="light"] & {
-    @include background(1);
-    backdrop-filter: none;
   }
 
   button {

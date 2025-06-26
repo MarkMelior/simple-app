@@ -1,5 +1,6 @@
 .glowingIconbox {
   position: relative;
+  height: fit-content;
 
   &:hover::after {
     opacity: var(--spotlight-border-strength-hover);

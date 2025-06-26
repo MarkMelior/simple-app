@@ -1,4 +1,3 @@
-// import { Link } from '@heroui/react'; // TODO
 import Link from 'next/link';
 
 import { cn } from '@/shared/lib/common';

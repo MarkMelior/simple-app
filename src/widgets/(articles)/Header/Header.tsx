@@ -60,11 +60,10 @@ export const Header: FC<HeaderProps> = ({
         className,
       )}
     >
-      <Spacer y={16} />
       <div>
         <p
           className={cn(
-            'mb-2 text-sm leading-6 font-semibold text-primary-400',
+            'mb-2 text-sm leading-6 font-semibold text-primary-600',
             classNames?.note,
           )}
         >
@@ -106,7 +105,6 @@ export const Header: FC<HeaderProps> = ({
 
 const HeaderSkeleton = () => (
   <header className="z-20 flex flex-col gap-5">
-    <Spacer y={16} />
     <Skeleton className="h-5 w-14 rounded-full" />
     <Skeleton className="h-5 w-96 rounded-full" />
     <Skeleton className="h-5 w-64 rounded-full" />

@@ -18,7 +18,7 @@ export const Heading = ({
 }: HeadingProps) => (
   <Tag
     className={cn(
-      'pt-[var(--articles-height-navbar)] -mt-[var(--articles-height-navbar)] text-default-900',
+      'pt-[h-articlesNavbar] -mt-[h-articlesNavbar] text-default-900',
       className,
     )}
     data-headline-id={id}

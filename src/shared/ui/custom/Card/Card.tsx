@@ -1,12 +1,13 @@
 import { clsx } from 'clsx';
 
-import type { AsComponent, TwBackgroundColor, TwRounded, TwSize } from '@/shared/types';
+import type { AsComponent, HeroBackgroundColor, TwRounded, TwSize } from '@/shared/types';
 
 import type { ReactNode } from 'react';
 
 interface CardProps {
   as?: AsComponent
-  background?: TwBackgroundColor
+  background?: HeroBackgroundColor
+  border?: string // TODO
   children: ReactNode
   className?: string
   full?: boolean
@@ -17,7 +18,8 @@ interface CardProps {
 
 export const Card = ({
   as: Component = 'div',
-  background = 'bg-zinc-800',
+  background = 'bg-default-200',
+  // border,
   children,
   className,
   full,
@@ -29,6 +31,7 @@ export const Card = ({
     className={clsx(
       {
         [background]: background,
+        // [border]: border,
         [paddingHorizontal]: paddingHorizontal,
         [paddingVertical]: paddingVertical,
         [rounded]: rounded,

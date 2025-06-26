@@ -1,0 +1,151 @@
+.wrapper {
+  position: relative;
+}
+
+.alert {
+    position: absolute;
+    z-index: theme('zIndex.headerAlert');
+    min-height: 120px;
+
+    border-radius: theme('borderRadius.2xl');
+
+    animation: fade-in-alert 0.6s ease-out forwards;
+    backdrop-filter: blur(theme('backdropBlur.lg'));
+    inset: -6px;
+
+    @media (width <= 1179px) {
+        position: static;
+        min-height: auto;
+    }
+
+    @media (width <= 770px) {
+        align-items: center;
+        position: absolute;
+        width: fit-content;
+        max-width: calc(100% - 32px);
+        min-height: 44px;
+        margin: 0 auto;
+        inset: auto 0 -42px;
+    }
+
+    &Row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+        padding: 0 20px 16px;
+
+        @media (width <= 1179px) {
+            padding: 5px 10px;
+        }
+
+        @media (width <= 600px) {
+            flex-direction: column;
+            gap: 5px;
+        }
+    }
+
+    &Wrapper {
+        display: flex;
+        align-items: center;
+    }
+
+    &Title {
+        font-size: 15px;
+        font-weight: 500;
+
+        color: theme('colors.default-800');
+
+        [class="dark"] & {
+            color: theme('colors.default-900');
+        }
+
+        span {
+            text-decoration-line: underline;
+        }
+    }
+
+    &Link {
+        font-size: 14px;
+        line-height: 18px;
+    }
+
+    &Close {
+        display: block;
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        fill: #7B8193;
+    }
+}
+
+@mixin alert-color($color) {
+    background: linear-gradient(0deg, theme('colors.#{$color}-100/0.3') 0%, theme('colors.secondary-500/0.2') 100%);
+    border: 2px solid theme('colors.#{$color}-200');
+
+    [class="dark"] & {
+        background: linear-gradient(0deg, theme('colors.#{$color}-400/0.15') 0%, theme('colors.#{$color}-700/0.15') 100%);
+        border: 1.5px solid theme('colors.#{$color}-500');
+    }
+}
+
+.secondary {
+    @include alert-color('secondary');
+}
+
+.primary {
+    @include alert-color('primary');
+}
+
+.success {
+    @include alert-color('success');
+}
+
+.warning {
+    @include alert-color('warning');
+}
+
+.danger {
+    @include alert-color('danger');
+}
+
+.default {
+    @include alert-color('default');
+}
+
+.closing {
+  animation: fade-out-alert 0.6s ease-out forwards;
+}
+
+.closed {
+  display: none;
+}
+
+@keyframes fade-in-alert {
+    from {
+        opacity: 0;
+
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+}
+
+@keyframes fade-out-alert {
+    from {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+
+        transform: translateY(-10px);
+    }
+}

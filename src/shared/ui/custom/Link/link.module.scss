@@ -1,5 +1,5 @@
 .link {
-  @apply text-primary-500 hover:text-primary-400 transition-colors inline-flex leading-4 relative;
+  @apply text-primary-500 hover:text-primary-600 transition-colors inline-flex leading-4 relative;
 
   &::before {
     position: absolute;
@@ -13,7 +13,7 @@
     content: '';
     transform-origin: right;
 
-    @apply bg-primary-400 rounded-full;
+    @apply bg-primary-600 rounded-full;
   }
 
   &:hover::before {

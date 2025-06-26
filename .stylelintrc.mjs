@@ -16,6 +16,7 @@ const config = {
       },
     ],
     'media-query-no-invalid': null,
+    'no-descending-specificity': null,
     'order/order': [
       [
         'custom-properties',

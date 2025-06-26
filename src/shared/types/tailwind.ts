@@ -11,6 +11,38 @@ type Luminance =
   | '900'
   | '950';
 
+type Direction = 't' | 'b' | 'l' | 'r' | 'bl' | 'br' | 'tl' | 'tr';
+type Size4Xl = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl';
+
+/**
+ * Hero UI
+ */
+export type SemanticColors =
+  | 'primary'
+  | 'secondary'
+  | 'success'
+  | 'warning'
+  | 'danger'
+  | 'default';
+
+type HeroColor =
+  | `${SemanticColors}-${Exclude<Luminance, '950'>}`
+  | SemanticColors
+  | 'content1'
+  | 'content2'
+  | 'content3'
+  | 'content4'
+  | 'background'
+  | 'foreground'
+  | 'divider'
+  | 'focus';
+
+export type HeroTextColor = `text-${HeroColor}`;
+export type HeroBackgroundColor = `bg-${HeroColor}`;
+
+/**
+ * Tailwind
+ */
 type Colors =
   | 'primary'
   | 'base'
@@ -36,15 +68,12 @@ type Colors =
   | 'fuchsia'
   | 'pink'
   | 'rose';
+type TwColor = `${Colors}-${Luminance}`;
 
-type Direction = 't' | 'b' | 'l' | 'r' | 'bl' | 'br' | 'tl' | 'tr';
-type Size4Xl = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl';
-
-export type TwRounded = `rounded-${Direction}-${Size4Xl}` | `rounded-${Size4Xl}`;
-
-export type TwColor = `${Colors}-${Luminance}`;
 export type TwTextColor = `text-${TwColor}`;
 export type TwBackgroundColor = `bg-${TwColor}`;
+
+export type TwRounded = `rounded-${Direction}-${Size4Xl}` | `rounded-${Size4Xl}`;
 
 export type TwGap = `gap-${TwSize}`;
 export type TwAlignItems = 'items-center' | 'items-start' | 'items-end' | 'items-stretch';

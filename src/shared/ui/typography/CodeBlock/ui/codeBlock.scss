@@ -4,6 +4,6 @@
 
     text-align: left !important;
 
-    color: hsl(var(--simple-default-400) / var(--simple-default-400-opacity, 1)) !important;
+    color: theme('colors.default-400') !important;
   }
 }

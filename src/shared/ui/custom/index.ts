@@ -6,6 +6,7 @@ export * from './DownloadCvButton';
 export * from './Icon';
 export * from './Layout';
 export * from './Light';
+export * from './Link';
 export * from './PageLoader';
 export * from './StackButtons';
 export * from './Text';

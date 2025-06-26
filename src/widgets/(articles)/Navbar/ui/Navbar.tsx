@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { BsGithub } from 'react-icons/bs';
 
+import { APP_NAME } from '@/shared/constants';
 import { Logo } from '@/shared/icons';
 import { DownloadCvButton } from '@/shared/ui';
 import { Button, SidebarNavigation } from '@/shared/ui/client';
@@ -20,10 +21,14 @@ export const Navbar = async () => {
       <Logo changeOnClick={true} className="scale-80" />
       <Button
         as={Link}
-        className="ml-1 flex h-min items-center gap-0 rounded-full bg-primary-400/10 px-3 py-1 text-xs font-medium leading-5 text-primary-400 hover:bg-primary-400/20"
+        className="ml-1 flex h-min items-center gap-0 rounded-full bg-primary-600/10 px-3 py-1 text-xs font-medium leading-5 text-primary-600 hover:bg-primary-600/20"
         href="/"
       >
-        <span>🚀 Melior Web</span>
+        <span>
+          🚀
+          {' '}
+          {APP_NAME}
+        </span>
         <svg
           aria-hidden="true"
           className="mx-1.5 inline text-primary"
@@ -45,7 +50,11 @@ export const Navbar = async () => {
           target="_blank"
           variant="light"
         >
-          <span className="sr-only">Melior Web on GitHub</span>
+          <span className="sr-only">
+            {APP_NAME}
+            {' '}
+            on GitHub
+          </span>
           <BsGithub size={20} />
         </Button>
         <Burger>

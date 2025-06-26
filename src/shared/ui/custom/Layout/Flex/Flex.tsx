@@ -48,7 +48,7 @@ export const Flex = ({
 }: FlexProps) => (
   <Component
     className={clsx(
-      'flex w-fit',
+      'flex',
       {
         ['flex-col']: vertical,
         ['flex-wrap']: wrap,
@@ -58,7 +58,6 @@ export const Flex = ({
         ['w-full']: full,
       },
       className,
-      'gap',
     )}
     id={id}
   >

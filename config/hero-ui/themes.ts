@@ -18,7 +18,7 @@ export const heroUiThemes: ConfigThemes = {
         foreground: '#FFFFFF',
       },
       primary: {
-        ...colors.blue,
+        ...swapColorValues(colors.blue),
         DEFAULT: colors.blue[500],
         foreground: '#FFFFFF',
       },
@@ -36,7 +36,7 @@ export const heroUiThemes: ConfigThemes = {
         foreground: '#000000',
       },
       primary: {
-        ...swapColorValues(colors.blue),
+        ...colors.blue,
         DEFAULT: colors.blue[500],
         foreground: '#FFFFFF',
       },

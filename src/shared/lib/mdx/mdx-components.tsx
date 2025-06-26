@@ -23,7 +23,12 @@ export const MDXComponentsData: MDXComponents = {
       {children}
     </LinkHover>
   ),
-  blockquote: Blockquote,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  blockquote: ({ children, className, color, ...props }: ComponentPropsWithoutRef<'blockquote'>) => (
+    <Blockquote className={cn('mb-12 mt-5 py-0', className)} {...props}>
+      {children}
+    </Blockquote>
+  ),
   code: async ({ children, className, exampleLink, ...props }: ExtendedCodeProps) => {
     const match = /language-(\w+)/.exec(className || '');
 
@@ -52,7 +57,7 @@ export const MDXComponentsData: MDXComponents = {
   },
   h2: ({ children, ...props }: ComponentPropsWithoutRef<'h2'>) => (
     <Heading
-      className="mt-[-calc(var(--articles-height-navbar) - 2rem)] mb-6 text-xl font-bold"
+      className="mt-[-calc(h-articlesNavbar - 2rem)] mb-6 text-xl font-bold"
       Tag="h2"
       {...props}
     >
@@ -61,7 +66,7 @@ export const MDXComponentsData: MDXComponents = {
   ),
   h3: ({ children, ...props }: ComponentPropsWithoutRef<'h3'>) => (
     <Heading
-      className="mt-[-calc(var(--articles-height-navbar) - 1.5rem)] mb-4 text-lg font-semibold"
+      className="mt-[-calc(h-articlesNavbar - 1.5rem)] mb-4 text-lg font-semibold"
       Tag="h3"
       {...props}
     >
@@ -70,7 +75,7 @@ export const MDXComponentsData: MDXComponents = {
   ),
   h4: ({ children, ...props }: ComponentPropsWithoutRef<'h4'>) => (
     <Heading
-      className="mt-[-calc(var(--articles-height-navbar) - 1.5rem)] mb-4 font-medium"
+      className="mt-[-calc(h-articlesNavbar - 1.5rem)] mb-4 font-medium"
       Tag="h4"
       {...props}
     >
@@ -78,16 +83,16 @@ export const MDXComponentsData: MDXComponents = {
     </Heading>
   ),
   hr: () => <hr className="my-12 border-default-100" />,
-  img: ({ alt, src, ...props }: ComponentPropsWithoutRef<'img'>) => (
+  img: ({ alt, className, src, ...props }: ComponentPropsWithoutRef<'img'>) => (
 
     <img
       alt={alt}
-      src={src}
-      {...props}
       className={cn(
         'rounded-md select-none pointer-events-none w-full object-cover mt-4 mb-10',
-        props.className,
+        className,
       )}
+      src={src}
+      {...props}
     />
   ),
   ol: ({ children, className }: ComponentPropsWithoutRef<'ol'>) => (

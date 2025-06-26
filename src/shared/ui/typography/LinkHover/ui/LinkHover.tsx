@@ -1,8 +1,6 @@
-import Link from 'next/link';
 import { FiLink } from 'react-icons/fi';
-import { MdArrowOutward } from 'react-icons/md';
 
-import styles from './linkHover.module.scss';
+import { Link } from '@/shared/ui/custom';
 
 import type { FC, ReactNode } from 'react';
 
@@ -34,9 +32,8 @@ export const LinkHover: FC<LinkHoverProps> = ({
   }
 
   return (
-    <Link className={styles.link} href={href || ''} target="_blank">
+    <Link href={href || ''} isExternal={true}>
       {children}
-      <MdArrowOutward size={12} />
     </Link>
   );
 };

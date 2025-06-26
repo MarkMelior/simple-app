@@ -24,12 +24,14 @@
     "gray-matter": "^4.0.3",
     "hast-util-to-string": "^3.0.0",
     "jose": "^5.6.3",
+    "lottie-react": "^2.4.1",
     "next": "15.3.4",
     "next-mdx-remote": "^5.0.0",
     "next-themes": "^0.4.6",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-icons": "^5.2.1",
+    "react-intersection-observer": "^9.16.0",
     "react-syntax-highlighter": "^15.5.0",
     "rehype-stringify": "^10.0.0",
     "remark-gfm": "^4.0.0",
@@ -39,7 +41,8 @@
     "unified": "^11.0.5",
     "unist-util-visit": "^5.0.0",
     "vaul": "^0.9.1",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "zustand": "^5.0.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -60,6 +63,7 @@
     "prisma": "^5.16.2",
     "sass": "^1.89.2",
     "steiger": "^0.5.7",
+    "storybook": "^9.0.13",
     "stylelint": "^16.21.0",
     "stylelint-config-standard": "^38.0.0",
     "stylelint-config-standard-scss": "^15.0.1",

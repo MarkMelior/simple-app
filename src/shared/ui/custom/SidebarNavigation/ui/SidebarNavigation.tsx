@@ -52,7 +52,7 @@ export const SidebarNavigation: FC<SidebarNavigationProps> = ({ items }) => {
                     'block border-l pl-4 -ml-px border-transparent transition',
                     {
                       ['hover:border-default-400 text-default-600 hover:text-default-700']: !pathname.endsWith(link),
-                      ['text-primary-400 border-current font-semibold']: pathname.endsWith(link),
+                      ['text-primary-600 border-current font-semibold']: pathname.endsWith(link),
                     },
                   )}
                   href={link}

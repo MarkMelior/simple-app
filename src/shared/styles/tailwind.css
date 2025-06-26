@@ -1,27 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-:root {
-  /* colors */
-  --color-border: rgb(0 0 0 / 6%); /* ! REMOVE */
-  --color-background-rgb: 248, 250, 252; /* ! REMOVE */
-
-  /* height */
-  --articles-height-navbar: 64px;
-  --articles-height-screen: calc(100vh - var(--articles-height-navbar));
-
-  /* z-index */
-  --z-index-navbar: 40;
-  --z-index-notification: 30;
-  --z-index-light: 30;
-
-  /* background */
-  --bg-noise: url('/images/noise.png') repeat;
-}
-
-[class="dark"] {
-  /* colors */
-  --color-border: rgb(255 255 255 / 10%);
-  --color-background-rgb: 2, 6, 23;
-}

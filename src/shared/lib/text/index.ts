@@ -1,3 +1,5 @@
+import { APP_NAME } from '@/shared/constants';
+
 export * from './copy-to-clipboard';
 export * from './date';
 export * from './to-latin';
@@ -11,4 +13,4 @@ export const toKebabCase = (str: string) =>
     .replace(/[\s_]+/g, '-')
     .toLowerCase();
 
-export const getMetadataTitle = (title: string) => `Melior Web | ${title}`;
+export const getMetadataTitle = (title: string) => `${APP_NAME} | ${title}`;
