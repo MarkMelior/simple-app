@@ -1,4 +1,4 @@
-import { Logo } from '@/shared/icons/Logo';
+import { Logo } from '@/shared/icons';
 import { cn } from '@/shared/lib/common';
 
 import styles from './pageLoader.module.scss';

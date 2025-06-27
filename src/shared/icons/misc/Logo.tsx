@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
-import { cn } from '../lib/common';
+import { cn } from '../../lib/common';
 
 import type { FC } from 'react';
 

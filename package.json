@@ -6,6 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
+    "storybook": "storybook dev -p 6006 -c ./config/storybook",
     "lint:ts": "tsc --noEmit",
     "lint:es": "eslint src --ext .js,.jsx,.ts,.tsx",
     "lint:es:fix": "eslint --fix src --ext .js,.jsx,.ts,.tsx",
@@ -47,6 +48,8 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@storybook/addon-docs": "^9.0.13",
+    "@storybook/nextjs": "^9.0.13",
     "@stylistic/eslint-plugin": "^4.4.1",
     "@tailwindcss/typography": "^0.5.13",
     "@types/bcryptjs": "^2.4.6",
