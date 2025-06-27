@@ -237,6 +237,13 @@ const eslintConfig = [
       '@typescript-eslint/no-explicit-any': 'off',
     },
   },
+  {
+    files: ['scripts/**'],
+    rules: {
+      '@typescript-eslint/no-require-imports': 'off',
+      'no-console': 'off',
+    },
+  },
 ];
 
 export default eslintConfig;

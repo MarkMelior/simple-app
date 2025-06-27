@@ -12,7 +12,8 @@
     "lint:fsd": "npx steiger ./src",
     "lint:style": "stylelint src/**/*.scss",
     "lint:style:fix": "stylelint src/**/*.scss --fix",
-    "lint:all": "yarn lint:ts && yarn lint:es && yarn lint:fsd && yarn lint:style"
+    "lint:all": "yarn lint:ts && yarn lint:es && yarn lint:fsd && yarn lint:style",
+    "script:tgs": "yarn --cwd ./scripts/tgs run start"
   },
   "dependencies": {
     "@heroui/react": "2.7.10",
