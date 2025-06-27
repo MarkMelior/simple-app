@@ -9,13 +9,12 @@ import { getProjectListByCategory } from '@/entities/articles';
 import type { Metadata } from 'next';
 
 export type ProjectCategoryPageProps = {
-  params: { category: ArticlesCategoryEnum }
+  params: Promise<{ category: ArticlesCategoryEnum }>
 };
 
-export default async function ProjectCategoryPage({
-  params,
-}: ProjectCategoryPageProps) {
-  const { category, projects } = await getProjectListByCategory(params.category);
+export default async function ProjectCategoryPage({ params }: ProjectCategoryPageProps) {
+  const { category: categoryParams } = await params;
+  const { category, projects } = await getProjectListByCategory(categoryParams);
 
   return (
     <div>
@@ -30,10 +29,9 @@ export default async function ProjectCategoryPage({
   );
 }
 
-export async function generateMetadata({
-  params,
-}: ProjectCategoryPageProps): Promise<Metadata> {
-  const { category, projects } = await getProjectListByCategory(params.category);
+export async function generateMetadata({ params }: ProjectCategoryPageProps): Promise<Metadata> {
+  const { category: categoryParams } = await params;
+  const { category, projects } = await getProjectListByCategory(categoryParams);
 
   return {
     description: `Category: ${category.title}. Projects: ${projects
