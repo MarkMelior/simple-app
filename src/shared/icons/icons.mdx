@@ -1,0 +1,49 @@
+import { Meta, IconGallery, IconItem } from '@storybook/addon-docs/blocks';
+
+import * as action from './action'
+import * as misc from './misc'
+import * as status from './status'
+
+<Meta title="shared/Icons" />
+
+## Action
+
+<IconGallery>
+  {Object.keys(action).map((icon) => {
+    const Icon = action[icon];
+
+    return (
+      <IconItem key={icon} name={icon}>
+        <Icon />
+      </IconItem>
+    )
+  })}
+</IconGallery>
+
+## Status
+
+<IconGallery>
+  {Object.keys(status).map((icon) => {
+    const Icon = status[icon];
+
+    return (
+      <IconItem key={icon} name={icon}>
+        <Icon />
+      </IconItem>
+    )
+  })}
+</IconGallery>
+
+## Misc
+
+<IconGallery>
+  {Object.keys(misc).map((icon) => {
+    const Icon = misc[icon];
+
+    return (
+      <IconItem key={icon} name={icon}>
+        <Icon />
+      </IconItem>
+    )
+  })}
+</IconGallery>

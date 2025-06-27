@@ -3,7 +3,7 @@ import React from 'react';
 import { Icon } from '@/shared/ui';
 import type { IIcon } from '@/shared/ui';
 
-import { cn } from '../lib/common';
+import { cn } from '../../lib/common';
 
 interface DownIcon extends IIcon {
   isActive?: boolean
