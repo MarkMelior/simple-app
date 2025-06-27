@@ -7,15 +7,15 @@ export function swapColorValues<T extends object>(colors: T) {
     const key1 = keys[i];
     const key2 = keys[length - 1 - i];
 
-    // @ts-ignore
+    // @ts-expect-error any
     swappedColors[key1] = colors[key2];
-    // @ts-ignore
+    // @ts-expect-error any
     swappedColors[key2] = colors[key1];
   }
   if (length % 2 !== 0) {
     const middleKey = keys[Math.floor(length / 2)];
 
-    // @ts-ignore
+    // @ts-expect-error any
     swappedColors[middleKey] = colors[middleKey];
   }
 

@@ -1,9 +1,8 @@
 'use server';
 
-import { createSession } from '@/features';
-
 import { usersExample } from './data';
 import { LoginFormExampleSchema } from './definitions';
+import { createSession } from '../api/session';
 
 import type { FormState } from './definitions';
 

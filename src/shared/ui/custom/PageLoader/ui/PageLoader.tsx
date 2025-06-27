@@ -1,6 +1,5 @@
-import cn from 'clsx';
-
 import { Logo } from '@/shared/icons/Logo';
+import { cn } from '@/shared/lib/common';
 
 import styles from './pageLoader.module.scss';
 
@@ -24,7 +23,7 @@ export const PageLoader: FC<PageLoaderProps> = async ({
       className,
     )}
   >
-    <div className="transform scale-[1.75]">
+    <div className="scale-[1.75]">
       <div className={styles.loader}>
         <span className={styles.spinner} />
         <Logo />

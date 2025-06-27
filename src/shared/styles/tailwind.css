@@ -1,21 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-:root {
-  --color-text-rgb: 0, 0, 0;
-  --color-border: rgb(0 0 0 / 6%);
-  --color-background-rgb: 248, 250, 252;
-  --height-navbar: 64px;
-  --height-screen: calc(100vh - var(--height-navbar));
-  --z-index-navbar: 40;
-  --z-index-notification: 30;
-  --z-index-light: 30;
-  --bg-noise: url('/images/noise.png') repeat;
-}
-
-[class="dark"] {
-  --color-text-rgb: 255, 255, 255;
-  --color-border: rgb(255 255 255 / 10%);
-  --color-background-rgb: 2, 6, 23;
-}

@@ -1,12 +1,13 @@
 'use client';
 
-import { cn, useMouse } from '@/shared/lib/react';
+import { cn } from '@/shared/lib/common';
+import { useMouse } from '@/shared/lib/react';
 
 import { glowingStyle } from '../constants';
 
 import styles from './glowingBox.module.scss';
 
-import type { FC } from 'react';
+import type { CSSProperties, FC, ReactNode } from 'react';
 
 interface GlowingBoxClassnames {
   background?: string
@@ -15,8 +16,7 @@ interface GlowingBoxClassnames {
 }
 
 interface GlowingBoxProps {
-  children: React.ReactNode
-  className?: string
+  children: ReactNode
   classNames?: GlowingBoxClassnames
 }
 
@@ -24,16 +24,16 @@ export const GlowingBox: FC<GlowingBoxProps> = ({ children, classNames }) => {
   const [mousePosition, ref] = useMouse();
 
   const style = {
-    '--mouse-x': `${mousePosition.elementX}px`,
-    '--mouse-y': `${mousePosition.elementY}px`,
+    '--mouse-x': `${mousePosition.x}px`,
+    '--mouse-y': `${mousePosition.y}px`,
     ...glowingStyle,
-  } as React.CSSProperties;
+  } as CSSProperties;
 
   return (
     <div
       className={cn(
         styles.glowingIconbox,
-        'rounded-md p-[1px] bg-default-400',
+        'rounded-md p-[1px] bg-default-100',
         classNames?.common,
         classNames?.border,
       )}

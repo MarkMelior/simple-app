@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { cn } from '@/shared/lib/react';
+import { cn } from '@/shared/lib/common';
 
 import type { FC } from 'react';
 
@@ -14,7 +14,7 @@ interface GithubEditLinkProps {
 export const GithubEditLink: FC<GithubEditLinkProps> = ({ className }) => {
   const pathname = usePathname();
 
-  const hrefGithub = `https://github.com/MarkMelior/simple-app/blob/master${pathname}/index.mdx`;
+  const hrefGithub = `https://github.com/MarkMelior/melior-web/blob/master${pathname}/index.mdx`;
 
   return (
     <Link

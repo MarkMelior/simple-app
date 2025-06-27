@@ -27,7 +27,7 @@
   --light-color-ellipse-3: rgb(255 90 209 / 10%);
   --light-blur-ellipse-3: blur(25vh);
 
-  z-index: var(--z-index-light);
+  z-index: theme('zIndex.light');
 
   // transition: all 1s ease;
 }

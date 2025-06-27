@@ -24,7 +24,14 @@ export type ButtonProps = Pick<HeroButtonProps,
   | 'target'
   | 'type'
   | 'variant'
->;
+  | 'onMouseEnter'
+  | 'onMouseLeave'
+  | 'endContent'
+> & {
+  'download'?: string
+  'data-copied'?: boolean
+  'data-menu'?: string
+};
 
 export const Button: FC<ButtonProps> = ({
   as,
@@ -33,11 +40,15 @@ export const Button: FC<ButtonProps> = ({
   color,
   disabled,
   disableRipple,
+  download,
+  endContent,
   fullWidth,
   href,
   isDisabled,
   isIconOnly,
   isLoading,
+  onMouseEnter,
+  onMouseLeave,
   onPress,
   radius,
   size,
@@ -45,18 +56,24 @@ export const Button: FC<ButtonProps> = ({
   target,
   type,
   variant,
+  ...props
 }) => (
   <HeroButton
     as={as}
     className={className}
     color={color}
+    data-copied={props['data-copied']}
     disabled={disabled}
     disableRipple={disableRipple}
+    download={download}
+    endContent={endContent}
     fullWidth={fullWidth}
     href={href}
     isDisabled={isDisabled}
     isIconOnly={isIconOnly}
     isLoading={isLoading}
+    onMouseEnter={onMouseEnter}
+    onMouseLeave={onMouseLeave}
     onPress={onPress}
     radius={radius}
     size={size}

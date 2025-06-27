@@ -27,11 +27,11 @@ export const CopyButton: FC<CopyButtonProps> = ({ text }) => {
         variant="light"
       >
         <LuCheck
-          className="absolute text-success-400 group-hover:text-success-600 opacity-0 scale-50 group-data-[copied=true]:opacity-100 group-data-[copied=true]:scale-100 transition-all fade-in"
+          className="fade-in absolute scale-50 text-success-400 opacity-0 transition-all group-hover:text-success-600 group-data-[copied=true]:scale-100 group-data-[copied=true]:opacity-100"
           size={18}
         />
         <LuCopy
-          className="absolute text-default-400 group-hover:text-default-600 opacity-100 scale-100 group-data-[copied=true]:opacity-0 group-data-[copied=true]:scale-50 transition-all fade-out"
+          className="fade-out absolute scale-100 text-default-400 opacity-100 transition-all group-hover:text-default-600 group-data-[copied=true]:scale-50 group-data-[copied=true]:opacity-0"
           size={18}
         />
       </Button>

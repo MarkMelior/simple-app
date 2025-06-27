@@ -1,44 +1,40 @@
 import dynamic from 'next/dynamic';
 
+import { Header } from '@/widgets/(articles)/Header';
+import { Headlines } from '@/widgets/(articles)/Headlines';
+
 import { MDXRemote } from '@/shared/lib/mdx';
+import { getMetadataTitle } from '@/shared/lib/text';
 
 import { getProject } from '@/entities/articles';
-
-import { Header, Headlines } from '@/widgets';
 
 import type { MDXComponents } from 'mdx/types';
 import type { Metadata } from 'next';
 
 export type ProjectPageProps = {
-  params: { name: string, category: string }
+  params: Promise<{ name: string, category: string }>
 };
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
-  const { content, headlines, metadata, metadataCategory } = await getProject(
-    params.category,
-    params.name,
-  );
+  const { category, name } = await params;
+  const { content, headlines, metadata, metadataCategory } = await getProject(category, name);
 
   const components: MDXComponents = {
-    AuthExample: dynamic(() =>
-      import('@/entities/articles/articles/code/app-router-auth/examples/auth').then(
-        (mod) => mod.AuthExample,
-      ),
-    ),
-    Blockquote: dynamic(() =>
-      import('@/shared/ui').then((mod) => mod.Blockquote),
-    ),
-    CodeSteps: dynamic(() => import('@/widgets').then((mod) => mod.CodeSteps)),
+    AuthExample: dynamic(() => import('@/entities/articles/articles/code/app-router-auth/examples').then((mod) => mod.AuthExample)),
+    Blockquote: dynamic(() => import('@/shared/ui/typography/Blockquote').then((mod) => mod.Blockquote)),
+    CodeSteps: dynamic(() => import('@/shared/ui/typography/CodeSteps').then((mod) => mod.CodeSteps)),
   };
 
   return (
     <div>
       <Header
+        createdAt={metadata?.createdAt}
         description={metadata?.description}
         note={metadata?.note || metadataCategory?.title}
         noteLink={metadata?.note || metadataCategory?.link}
         tags={metadata?.tags}
         title={metadata?.title}
+        updatedAt={metadata?.updatedAt}
       />
       <MDXRemote components={components} source={content} />
       <Headlines headlines={headlines} />
@@ -49,12 +45,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 export async function generateMetadata({
   params,
 }: ProjectPageProps): Promise<Metadata> {
-  const { metadata } = await getProject(params.category, params.name);
+  const { category, name } = await params;
+  const { metadata } = await getProject(category, name);
 
   return {
     description: `${metadata.description}. Technologies: ${metadata.tags?.join(
       ', ',
     )}`,
-    title: `Simple App | ${metadata.title}`,
+    title: getMetadataTitle(metadata.title),
   };
 }

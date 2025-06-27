@@ -1,7 +1,10 @@
+import { CategoryCard } from '@/widgets/(articles)/CategoryCard';
+import { Header } from '@/widgets/(articles)/Header';
+
+import { getMetadataTitle } from '@/shared/lib/text';
+
 import type { ArticlesCategoryEnum } from '@/entities/articles';
 import { getProjectListByCategory } from '@/entities/articles';
-
-import { CategoryCard, Header } from '@/widgets';
 
 import type { Metadata } from 'next';
 
@@ -36,6 +39,6 @@ export async function generateMetadata({
     description: `Category: ${category.title}. Projects: ${projects
       .map((project) => project.title)
       .join(', ')}.`,
-    title: `Simple App | ${category.title}`,
+    title: getMetadataTitle(category.title),
   };
 }

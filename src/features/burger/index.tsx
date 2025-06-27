@@ -5,7 +5,13 @@ import { Drawer } from 'vaul';
 
 import { Button } from '@/shared/ui/client';
 
-export const Burger = ({ children }: { children: React.ReactNode }) => (
+import type { FC, ReactNode } from 'react';
+
+interface BurgerProps {
+  children: ReactNode
+}
+
+export const Burger: FC<BurgerProps> = ({ children }) => (
   <Drawer.Root direction="bottom">
     <Drawer.Trigger asChild={true}>
       <Button
@@ -17,15 +23,15 @@ export const Burger = ({ children }: { children: React.ReactNode }) => (
       </Button>
     </Drawer.Trigger>
     <Drawer.Portal>
-      <Drawer.Overlay className="fixed inset-0 bg-black/40 z-40" />
+      <Drawer.Overlay className="fixed inset-0 z-40 bg-black/40" />
       <Drawer.Content
-        className="bg-default-100 flex flex-col rounded-t-[10px] h-[90%] mt-24 fixed bottom-0 left-0 right-0 z-40 outline-none"
+        className="fixed inset-x-0 bottom-0 z-40 mt-24 flex h-[90%] flex-col rounded-t-[10px] bg-default-100 outline-none"
       >
-        <div className="w-full bg-default-100 h-5 flex justify-center items-center">
-          <div className="w-12 h-1 rounded-full bg-default-300" />
+        <div className="flex h-5 w-full items-center justify-center bg-default-100">
+          <div className="h-1 w-12 rounded-full bg-default-300" />
         </div>
         <div className="overflow-auto">
-          <div className="max-w-md mx-auto px-4">{children}</div>
+          <div className="mx-auto max-w-md px-4">{children}</div>
         </div>
       </Drawer.Content>
     </Drawer.Portal>

@@ -1,0 +1,21 @@
+.header {
+  display: grid;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100%;
+  padding: 16px;
+
+  font-family: Inter, Manrope, sans-serif;
+  box-sizing: border-box;
+  grid-template-columns: 1fr max-content 1fr;
+
+  @media (width <= 1280px) {
+    display: flex;
+    justify-content: space-between;
+    grid-template-columns: auto;
+  }
+}

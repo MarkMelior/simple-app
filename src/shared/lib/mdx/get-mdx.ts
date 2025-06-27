@@ -22,6 +22,7 @@ export async function getMdx<T = ProjectMetadata>(
 ): Promise<MdxResponse<T>> {
   const fileContents = await fs.readFile(filePath, 'utf8');
 
+  // TODO: Обработка пустого файла. Редкий кейс, но сделать нужно
   // if (!fileContents) {
   // throw new Error('File not found');
   // }
@@ -30,7 +31,6 @@ export async function getMdx<T = ProjectMetadata>(
   const metadata = matterData.data as T;
   const content = matterData.content;
 
-  // * Get project headlines
   const headlines: MdxHeadline[] = [];
 
   await unified()

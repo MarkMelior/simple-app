@@ -1,0 +1,13 @@
+.logo {
+  display: block;
+  position: relative;
+  z-index: 1000;
+  width: 42px;
+  height: 42px;
+
+  transition: transform 0.15s ease-in-out;
+
+  &:active {
+    transform: scale(0.95);
+  }
+}

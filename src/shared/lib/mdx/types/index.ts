@@ -7,12 +7,13 @@ export interface MdxHeadline {
 }
 
 export interface ProjectMetadata {
+  createdAt: string
   description: string
   link: string
   note: string
-  publishDate: string
   tags?: StackVariants[]
   title: string
+  updatedAt: string
 }
 
 export interface CategoryMetadata {

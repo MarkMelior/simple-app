@@ -41,13 +41,13 @@ export async function getProjectList(): Promise<ProjectsResponse[]> {
 
           projects.push({
             ...projectMetadata,
-            link: `/projects/${dirent.name}/${projectDirent.name}`,
+            link: `/articles/${dirent.name}/${projectDirent.name}`,
           } as ProjectMetadata);
         }
       }
 
       projectsByCategory.push({
-        link: `/projects/${dirent.name}`,
+        link: `/articles/${dirent.name}`,
         projects,
         title: metadataCategory.title,
       });

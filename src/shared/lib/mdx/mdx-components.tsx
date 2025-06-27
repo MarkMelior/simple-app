@@ -6,14 +6,14 @@ import {
 } from '@/shared/ui';
 import { CodeBlock } from '@/shared/ui/client';
 
-import { cn } from '../react';
+import { cn } from '../common';
 
 import type { MDXComponents } from 'mdx/types';
-import type { ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithoutRef, HTMLAttributes } from 'react';
 
-interface ExtendedCodeProps extends React.HTMLAttributes<HTMLElement> {
+interface ExtendedCodeProps extends HTMLAttributes<HTMLElement> {
+  exampleLink?: string
   filename?: string
-  githubPath?: string
   hideHeader?: boolean
 }
 
@@ -23,17 +23,20 @@ export const MDXComponentsData: MDXComponents = {
       {children}
     </LinkHover>
   ),
-  blockquote: Blockquote,
-  code: async (props: ExtendedCodeProps) => {
-    const { children, className, ...rest } = props;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  blockquote: ({ children, className, color, ...props }: ComponentPropsWithoutRef<'blockquote'>) => (
+    <Blockquote className={cn('mb-12 mt-5 py-0', className)} {...props}>
+      {children}
+    </Blockquote>
+  ),
+  code: async ({ children, className, exampleLink, ...props }: ExtendedCodeProps) => {
     const match = /language-(\w+)/.exec(className || '');
 
     if (!match) {
       return (
         <Code
           className={cn(
-            'bg-default-200/50 py-0 px-1 h-fit rounded-md -top-0.5 select-text min-w-fit'
-            + 'border border-default-200 text-default-700 !leading-5 break-all whitespace-normal',
+            'bg-default-200/50 text-[0.8rem] py-[0.075rem] px-1 h-fit rounded-md select-text min-w-fit border border-default-200 text-default-700 !leading-5 break-all whitespace-normal top-[-0.0825rem] relative',
           )}
         >
           {children}
@@ -43,17 +46,18 @@ export const MDXComponentsData: MDXComponents = {
 
     return (
       <CodeBlock
-        className="mt-4 mb-10"
-        github={{ path: props?.githubPath }}
-        lang={match[1]} // ! FIX
+        className="mb-10 mt-4"
+        exampleLink={exampleLink}
+        // @ts-expect-error as StackVariants
+        lang={match[1]}
         text={String(children)}
-        {...rest}
+        {...props}
       />
     );
   },
   h2: ({ children, ...props }: ComponentPropsWithoutRef<'h2'>) => (
     <Heading
-      className="text-xl font-bold -mt-[calc(var(--height-navbar) - 2rem)] mb-6"
+      className="mt-[-calc(h-articlesNavbar - 2rem)] mb-6 text-xl font-bold"
       Tag="h2"
       {...props}
     >
@@ -62,7 +66,7 @@ export const MDXComponentsData: MDXComponents = {
   ),
   h3: ({ children, ...props }: ComponentPropsWithoutRef<'h3'>) => (
     <Heading
-      className="text-lg font-semibold -mt-[calc(var(--height-navbar) - 1.5rem)] mb-4"
+      className="mt-[-calc(h-articlesNavbar - 1.5rem)] mb-4 text-lg font-semibold"
       Tag="h3"
       {...props}
     >
@@ -71,7 +75,7 @@ export const MDXComponentsData: MDXComponents = {
   ),
   h4: ({ children, ...props }: ComponentPropsWithoutRef<'h4'>) => (
     <Heading
-      className="font-medium -mt-[calc(var(--height-navbar) - 1.5rem)] mb-4"
+      className="mt-[-calc(h-articlesNavbar - 1.5rem)] mb-4 font-medium"
       Tag="h4"
       {...props}
     >
@@ -79,16 +83,16 @@ export const MDXComponentsData: MDXComponents = {
     </Heading>
   ),
   hr: () => <hr className="my-12 border-default-100" />,
-  img: ({ alt, src, ...props }: ComponentPropsWithoutRef<'img'>) => (
+  img: ({ alt, className, src, ...props }: ComponentPropsWithoutRef<'img'>) => (
 
     <img
       alt={alt}
-      src={src}
-      {...props}
       className={cn(
         'rounded-md select-none pointer-events-none w-full object-cover mt-4 mb-10',
-        props.className,
+        className,
       )}
+      src={src}
+      {...props}
     />
   ),
   ol: ({ children, className }: ComponentPropsWithoutRef<'ol'>) => (

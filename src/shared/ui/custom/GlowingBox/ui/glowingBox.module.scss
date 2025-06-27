@@ -1,5 +1,6 @@
 .glowingIconbox {
   position: relative;
+  height: fit-content;
 
   &:hover::after {
     opacity: var(--spotlight-border-strength-hover);
@@ -26,7 +27,7 @@
   }
 
   &::before {
-    z-index: 3;
+    z-index: 9999;
 
     background: radial-gradient(var(--spotlight-bg-size) circle at var(--mouse-x) var(--mouse-y), #488bff, transparent 40%);
     opacity: var(--spotlight-bg-strength);

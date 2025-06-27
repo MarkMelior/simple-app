@@ -1,0 +1,15 @@
+@keyframes show-header-section {
+    from {
+        opacity: 0;
+
+        transform: translateX(5px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: none;
+    }
+}
+
+$header-section-animation: show-header-section 250ms ease-in-out;

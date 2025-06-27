@@ -1,0 +1,63 @@
+@use '@/shared/styles/mixin' as *;
+
+.wrapper {
+  position: relative;
+  z-index: theme('zIndex.header');
+
+  @media (width <= 1179px) {
+    display: none;
+  }
+}
+
+.header {
+  display: flex;
+  padding: 4px;
+
+  border-radius: theme('borderRadius.xl');
+
+  @include header-background(false);
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 10px;
+
+  font-size: 14px;
+  font-weight: 400;
+
+  color: theme('colors.default-700');
+  background: transparent;
+  border-radius: theme('borderRadius.lg');
+
+  $root: &;
+
+  &:hover, &.opened {
+    color: theme('colors.default-950');
+    background: theme('colors.default-950/0.1');
+  }
+}
+
+.action {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 12px);
+
+  transform: translateY(-50%);
+}
+
+.button {
+  animation: fade-in 0.4s ease-out forwards;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+  
+}

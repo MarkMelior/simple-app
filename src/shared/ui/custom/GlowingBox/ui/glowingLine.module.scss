@@ -1,11 +1,11 @@
 .glowingLine {
   background: radial-gradient(var(--spotlight-line-size) circle at var(--mouse-x) var(--mouse-y),
-      theme('colors.primary-700') 0%,
+      theme('colors.primary-300') 0%,
       rgb(0 0 0 / 0%) 100%, transparent 40%);
 
   [class="dark"] & {
     background: radial-gradient(var(--spotlight-line-size) circle at var(--mouse-x) var(--mouse-y),
-        theme('colors.primary-400') 0%,
+        theme('colors.primary-600') 0%,
         rgb(0 0 0 / 0%) 100%, transparent 40%);
   }
 

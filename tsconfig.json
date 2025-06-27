@@ -20,9 +20,9 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      // "@/articles/*": ["src/entity/articles/articles/*"] // TODO
+      "@/core/*": ["./src/app/@core/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "private"]
 }

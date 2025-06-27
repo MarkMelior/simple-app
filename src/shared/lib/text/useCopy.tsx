@@ -2,10 +2,9 @@
 
 import { useState } from 'react';
 
-import { useMessage } from '../react';
+import { openMessage } from '../common';
 
 export const useCopy = () => {
-  const { showMessage } = useMessage();
   const [copied, setCopied] = useState(false);
 
   const handleCopy = (text: string) => {
@@ -16,13 +15,15 @@ export const useCopy = () => {
     try {
       navigator.clipboard.writeText(text);
 
-      showMessage({
+      openMessage({
         content: 'Скопировано в буфер обмена',
+        duration: 2.5,
         type: 'success',
       });
     } catch {
-      showMessage({
+      openMessage({
         content: 'Не удалось скопировать',
+        duration: 2.5,
         type: 'error',
       });
     }

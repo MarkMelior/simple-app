@@ -1,0 +1,144 @@
+@use '@/shared/styles/mixin' as *;
+
+.message {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  width: fit-content;
+  margin: 0 auto;
+  margin-bottom: 8px;
+  padding: 15px 20px;
+
+  background: theme('backgroundImage.noise') repeat, theme('colors.default-50');
+  border: 1px solid theme('colors.default-200');
+  overflow: hidden;
+
+  animation: fade-in-from-bottom 0.3s ease-out forwards;
+  backdrop-filter: var(--blur-md);
+  user-select: none;
+
+  [class="dark"] & {
+    background: theme('backgroundImage.noise') repeat, theme('colors.default-50/0.3');
+    backdrop-filter: blur(theme('backdropBlur.lg'));
+  }
+
+  @apply text-sm cursor-pointer border-b border-default-900/10 sm:max-w-xl max-w-none rounded-xl;
+
+  [data-message="closed"] & {
+    animation: fade-out-from-bottom 0.3s ease-in forwards;
+  }
+
+  button {
+    min-width: 37px;
+    height: 37px;
+  }
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icon {
+  max-width: 24px;
+  max-height: 24px;
+}
+
+.button {
+  min-width: 24px;
+  max-width: 24px;
+  min-height: 24px;
+  max-height: 24px;
+}
+
+.shake {
+  animation: shake 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  15% {
+    transform: translate(-6px, -3px) rotate(-1deg);
+  }
+
+  30% {
+    transform: translate(6px, 3px) rotate(1deg);
+  }
+
+  45% {
+    transform: translate(-4px, 2px) rotate(-0.5deg);
+  }
+
+  60% {
+    transform: translate(4px, -2px) rotate(0.5deg);
+  }
+
+  75% {
+    transform: translate(-2px, 1px) rotate(0deg);
+  }
+
+  90% {
+    transform: translate(2px, -1px) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+}
+
+@keyframes fade-in-from-bottom {
+	0% {
+		margin-bottom: -1rem;
+
+		opacity: 0;
+	}
+
+	100% {
+		margin-bottom: 0;
+
+		opacity: 1;
+	}
+}
+
+@keyframes fade-out-from-bottom {
+	0% {
+		margin-bottom: 0;
+
+		opacity: 1;
+	}
+
+	100% {
+		margin-bottom: -5rem;
+
+		opacity: 0;
+	}
+}
+
+.progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+
+  &>div>div {
+    animation: progress var(--animation-duration-notification) linear forwards;
+  }
+}
+
+@keyframes progress {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+    background-color: theme('colors.danger');
+  }
+}

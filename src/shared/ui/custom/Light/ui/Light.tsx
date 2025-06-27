@@ -1,4 +1,4 @@
-import { cn } from '@/shared/lib/react';
+import { cn } from '@/shared/lib/common';
 
 import styles from './light.module.scss';
 
@@ -17,12 +17,12 @@ export const Light: FC<LightProps> = ({ variant = 'two' }) => (
           styles.fadeIn,
         )}
       >
-        <div className="w-[108rem] flex-none flex justify-end">
+        <div className="flex w-[108rem] flex-none justify-end">
           <picture>
             <source srcSet="/images/light.avif" type="image/avif" />
             <img
               alt=""
-              className="w-[71.75rem] flex-none max-w-none dark:hidden"
+              className="w-[71.75rem] max-w-none flex-none dark:hidden"
               decoding="async"
               src="/images/light.avif"
             />
@@ -32,7 +32,7 @@ export const Light: FC<LightProps> = ({ variant = 'two' }) => (
             <source srcSet="/images/light-dark.avif" type="image/avif" />
             <img
               alt=""
-              className="w-[90rem] flex-none max-w-none hidden dark:block"
+              className="hidden w-[90rem] max-w-none flex-none dark:block"
               decoding="async"
               src="/images/light-dark.avif"
             />

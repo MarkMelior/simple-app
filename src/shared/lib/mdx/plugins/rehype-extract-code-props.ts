@@ -1,6 +1,7 @@
 import { visit } from 'unist-util-visit';
 
 export function rehypeExtractCodeProps() {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return (tree: any) => {
     visit(tree, 'element', (node) => {
       if (node.tagName === 'code' && node.data && node.data.meta) {

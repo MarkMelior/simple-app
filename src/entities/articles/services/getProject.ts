@@ -41,7 +41,7 @@ export async function getProject(
     metadata,
     metadataCategory: {
       ...metadataCategory,
-      link: `/projects/${category}`,
+      link: `/articles/${category}`,
     },
   };
 }
