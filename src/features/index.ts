@@ -1,2 +1,2 @@
-export * from './burger';
-export * from './scroll-up';
+export * from './Burger';
+export * from './ScrollUp';
