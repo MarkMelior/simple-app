@@ -6,10 +6,9 @@ import { Logo } from '@/shared/icons';
 import { DownloadCvButton } from '@/shared/ui';
 import { Button, SidebarNavigation } from '@/shared/ui/client';
 
-import { Burger } from '@/features/Burger';
-
 import { getProjectList } from '@/entities/articles';
 
+import { Burger } from './Burger';
 import { NavbarScroll } from './NavbarScroll';
 import { ThemeSwitcher } from './ThemeSwitcher';
 
