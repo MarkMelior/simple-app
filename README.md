@@ -109,13 +109,13 @@
 
 <h4 id="mdx"> Реализация MDX:</h4>
 
-- [`src/app/articles/[category]/[name]/page.tsx`](/src/app/articles//[category]/[name]/page.tsx) - layout для mdx файлов проектов;
-- [`src/app/articles/[category]/page.tsx`](/src/app/articles/[category]/page.tsx) - страница отображения проектов из категории;
+- [`src/app/articles/[category]/[name]/page.tsx`](/src/app/articles//[category]/[name]/page.tsx) - layout для mdx файлов статей;
+- [`src/app/articles/[category]/page.tsx`](/src/app/articles/[category]/page.tsx) - страница отображения статей из категории;
 - [getMdx()](/src/shared/lib/mdx/get-mdx.ts) - получение metadata и контента из mdx;
 - [getArticle(category, name)](/src/entities/articles/services/getArticle.ts) - получение проекта по категории и имени;
-- [getArticleListByCategory(category)](/src/entities/articles/services/getArticleListByCategory.ts) - получение всех проектов в выбранной категории;
-- [getArticleList()](/src/entities/articles/services/getArticleList.ts) - получение всех категорий и проектов;
-- [mdx-components.tsx](/src/shared/lib/mdx/mdx-components.tsx) - настройка отображения mdx;
+- [getArticleListByCategory(category)](/src/entities/articles/services/getArticleListByCategory.ts) - получение всех статей в выбранной категории;
+- [getArticleList()](/src/entities/articles/services/getArticleList.ts) - получение всех категорий и статей;
+- [mdx-components.tsx](/src/shared/lib/mdx/components/index.tsx) - настройка отображения mdx;
 - [MDXRemote](/src/shared/lib/mdx/mdx-remote.tsx) - общая настройка MDXRemote;
 - [rehypeExtractCodeProps](/src/shared/lib/mdx/plugins/rehype-extract-code-props.ts) - самописный rehype-плагин для чтения пар ключ-значение в коде.
 

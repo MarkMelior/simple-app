@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     /** FIXED: Ломался порядок импортов стилей - tailwind был в приоритете */
-    cssChunking: 'strict',
+    cssChunking: false,
   },
 };
 
