@@ -6,7 +6,7 @@ import { Headlines } from '@/widgets/(articles)/Headlines';
 import { MDXRemote } from '@/shared/lib/mdx';
 import { getMetadataTitle } from '@/shared/lib/text';
 
-import { getArticle, getArticleList } from '@/entities/articles';
+import { getArticle } from '@/entities/articles';
 
 import type { MDXComponents } from 'mdx/types';
 import type { Metadata } from 'next';
@@ -43,14 +43,17 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   );
 }
 
-export async function generateStaticParams() {
-  const categories = await getArticleList();
+// TODO: build production error DYNAMIC_SERVER_USAGE
+// export async function generateStaticParams() {
+//   const categories = await getArticleList();
 
-  return categories.map(({ articles, slug: categorySlug }) => articles.map(({ slug }) => ({
-    category: categorySlug,
-    name: slug,
-  })));
-}
+//   return categories.flatMap(({ articles, slug: categorySlug }) => (
+//     articles.map(({ slug }) => ({
+//       category: categorySlug,
+//       name: slug,
+//     }))
+//   ));
+// }
 
 export async function generateMetadata({
   params,

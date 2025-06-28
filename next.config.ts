@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     /** FIXED: Ломался порядок импортов стилей - tailwind был в приоритете */
-    cssChunking: false,
+    cssChunking: 'strict',
   },
   /** FIXED: Лимит при сборке vercel 250 MB */
   outputFileTracingExcludes: {
