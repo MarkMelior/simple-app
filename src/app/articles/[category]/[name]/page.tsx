@@ -43,6 +43,18 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   );
 }
 
+// TODO: build production error DYNAMIC_SERVER_USAGE
+// export async function generateStaticParams() {
+//   const categories = await getArticleList();
+
+//   return categories.flatMap(({ articles, slug: categorySlug }) => (
+//     articles.map(({ slug }) => ({
+//       category: categorySlug,
+//       name: slug,
+//     }))
+//   ));
+// }
+
 export async function generateMetadata({
   params,
 }: ArticlePageProps): Promise<Metadata> {

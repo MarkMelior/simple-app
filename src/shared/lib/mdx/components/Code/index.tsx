@@ -1,6 +1,5 @@
 import { cn } from '@/shared/lib/common';
-import { Code } from '@/shared/ui';
-import { CodeBlock } from '@/shared/ui/client';
+import { Code, CodeBlock } from '@/shared/ui';
 
 import type { HTMLAttributes } from 'react';
 

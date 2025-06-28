@@ -7,11 +7,12 @@ import { type ArticleMetadata, type CategoryMetadata, getMdx } from '@/shared/li
 
 import { articlesDirectory } from '../constants';
 
-import type { ArticleListResponse } from '../types';
+import type { ArticleData, ArticleListResponse, ArticlesCategoryEnum } from '../types';
+import type { Dirent } from 'fs';
 
 export async function getArticleList(): Promise<ArticleListResponse[]> {
   const rootDir = path.join(process.cwd(), articlesDirectory);
-  const categoryDirs = await fs.readdir(rootDir, { withFileTypes: true });
+  const categoryDirs = await fs.readdir(rootDir, { withFileTypes: true }) as Dirent<ArticlesCategoryEnum>[];
 
   const articleListByCategory: ArticleListResponse[] = [];
 
@@ -26,7 +27,7 @@ export async function getArticleList(): Promise<ArticleListResponse[]> {
       const articleDirs = await fs.readdir(categoryDir, {
         withFileTypes: true,
       });
-      const articleList: ArticleMetadata[] = [];
+      const articleList: ArticleData[] = [];
 
       for (const articleDirent of articleDirs) {
         if (articleDirent.isDirectory()) {
@@ -36,19 +37,21 @@ export async function getArticleList(): Promise<ArticleListResponse[]> {
             'index.mdx',
           );
 
-          const mdxArticle = await getMdx<CategoryMetadata>(articleFile);
+          const mdxArticle = await getMdx<ArticleMetadata>(articleFile);
           const articleMetadata = mdxArticle.metadata;
 
           articleList.push({
             ...articleMetadata,
             link: `/articles/${dirent.name}/${articleDirent.name}`,
-          } as ArticleMetadata);
+            slug: articleDirent.name,
+          });
         }
       }
 
       articleListByCategory.push({
         articles: articleList,
         link: `/articles/${dirent.name}`,
+        slug: dirent.name,
         title: metadataCategory.title,
       });
     }

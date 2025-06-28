@@ -11,7 +11,6 @@ export interface ArticleMetadata {
   createdAt?: string
   description: string
   icon?: IconNames
-  link?: string
   note?: string
   tags?: StackVariants[]
   title: string

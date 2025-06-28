@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { Spinner, Tooltip } from '@/shared/ui/client';
 
+// TODO: Нужен ли? Если да, то переписать на next/dynamic
 export const NavbarLoader = () => {
   const [mounted, setMounted] = useState(false);
 

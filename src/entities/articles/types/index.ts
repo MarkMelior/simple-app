@@ -8,9 +8,15 @@ export interface ArticleResponse {
   metadataCategory: CategoryMetadata
 }
 
-export interface ArticleListResponse {
-  articles: ArticleMetadata[]
+export interface ArticleData extends ArticleMetadata {
   link: string
+  slug: string
+}
+
+export interface ArticleListResponse {
+  articles: ArticleData[]
+  link: string
+  slug: ArticlesCategoryEnum
   title: string
 }
 

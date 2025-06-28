@@ -1,6 +1,7 @@
 import { FiUserCheck } from 'react-icons/fi';
 
-import { Card, CodeBlock } from '@/shared/ui/client';
+import { CodeBlock } from '@/shared/ui';
+import { Card } from '@/shared/ui/client';
 
 import { getUserExample } from './services/user';
 import { FormLoginExample } from './ui/form-login';
