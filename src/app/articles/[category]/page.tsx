@@ -4,17 +4,17 @@ import { Header } from '@/widgets/(articles)/Header';
 import { getMetadataTitle } from '@/shared/lib/text';
 
 import type { ArticlesCategoryEnum } from '@/entities/articles';
-import { getProjectListByCategory } from '@/entities/articles';
+import { getArticleListByCategory } from '@/entities/articles';
 
 import type { Metadata } from 'next';
 
-export type ProjectCategoryPageProps = {
+type ArticleCategoryPageProps = {
   params: Promise<{ category: ArticlesCategoryEnum }>
 };
 
-export default async function ProjectCategoryPage({ params }: ProjectCategoryPageProps) {
+export default async function ArticleCategoryPage({ params }: ArticleCategoryPageProps) {
   const { category: categoryParams } = await params;
-  const { category, projects } = await getProjectListByCategory(categoryParams);
+  const { articles, category } = await getArticleListByCategory(categoryParams);
 
   return (
     <div>
@@ -24,18 +24,18 @@ export default async function ProjectCategoryPage({ params }: ProjectCategoryPag
         title={category.title}
       />
 
-      <CategoryCard projects={projects} />
+      <CategoryCard articles={articles} />
     </div>
   );
 }
 
-export async function generateMetadata({ params }: ProjectCategoryPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: ArticleCategoryPageProps): Promise<Metadata> {
   const { category: categoryParams } = await params;
-  const { category, projects } = await getProjectListByCategory(categoryParams);
+  const { articles, category } = await getArticleListByCategory(categoryParams);
 
   return {
-    description: `Category: ${category.title}. Projects: ${projects
-      .map((project) => project.title)
+    description: `Категория: ${category.title}. Статьи: ${articles
+      .map((article) => article.title)
       .join(', ')}.`,
     title: getMetadataTitle(category.title),
   };

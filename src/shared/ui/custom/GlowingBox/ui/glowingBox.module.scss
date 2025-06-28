@@ -1,4 +1,4 @@
-.glowingIconbox {
+.wrapper {
   position: relative;
   height: fit-content;
 
@@ -29,7 +29,7 @@
   &::before {
     z-index: 9999;
 
-    background: radial-gradient(var(--spotlight-bg-size) circle at var(--mouse-x) var(--mouse-y), #488bff, transparent 40%);
+    background: radial-gradient(var(--spotlight-bg-size) circle at var(--mouse-x) var(--mouse-y), theme('colors.blue.500'), transparent 40%);
     opacity: var(--spotlight-bg-strength);
   }
 
@@ -37,16 +37,9 @@
     z-index: 1;
 
     background: radial-gradient(var(--spotlight-border-size) circle at var(--mouse-x) var(--mouse-y),
-        rgb(57 196 255 / 100%) 0%,
-        rgb(227 57 255 / 100%) 50%,
-        rgb(0 0 0 / 0%) 100%, transparent 40%);
+        theme('colors.blue.300') 0%,
+        theme('colors.purple.500') 50%,
+        theme('colors.black') 100%, transparent 40%);
     opacity: var(--spotlight-border-strength);
-
-    // background: radial-gradient(var(--spotlight-border-size) circle at var(--mouse-x) var(--mouse-y),
-    //     rgba(57, 196, 255, 1) 0%,
-    //     rgba(57, 101, 255, 1) 25%,
-    //     rgba(227, 57, 255, 1) 50%,
-    //     rgba(0, 0, 0, 0) 75%,
-    //     rgba(0, 0, 0, 0) 100%, transparent 40%);
   }
 }

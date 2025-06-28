@@ -6,18 +6,18 @@ import { useEffect, useState } from 'react';
 
 import { Button } from '@/shared/ui/client';
 
-import type { ProjectsResponse } from '@/entities/articles';
+import type { ArticleListResponse } from '@/entities/articles';
 
 import type { FC } from 'react';
 
 interface FooterNavigationProps {
-  projects: ProjectsResponse[]
+  articleList: ArticleListResponse[]
 }
 
 type Page = { link: string, title: string };
 const initialPage: Page = { link: '/', title: 'Главная' };
 
-export const FooterNavigation: FC<FooterNavigationProps> = ({ projects }) => {
+export const FooterNavigation: FC<FooterNavigationProps> = ({ articleList }) => {
   const pathname = usePathname();
 
   const [prevPage, setPrevPage] = useState(initialPage);
@@ -30,25 +30,25 @@ export const FooterNavigation: FC<FooterNavigationProps> = ({ projects }) => {
   }, [pathname]);
 
   const determineNavigationLinks = (currentPath: string) => {
-    const allPages = projects.flatMap((category) =>
-      category.projects.map((project) => ({
-        link: project.link,
-        title: project.title,
+    const allPages = articleList.flatMap((category) =>
+      category.articles.map((article) => ({
+        link: article.link,
+        title: article.title,
       })),
     );
 
     const currentIndex = allPages.findIndex((page) =>
-      currentPath.endsWith(page.link),
+      currentPath.endsWith(page.link ?? ''),
     );
 
     if (currentIndex > 0) {
-      setPrevPage(allPages[currentIndex - 1]);
+      setPrevPage(allPages[currentIndex - 1] as Page);
     } else {
       setPrevPage({ ...prevPage, ...initialPage });
     }
 
     if (currentIndex < allPages.length - 1) {
-      setNextPage(allPages[currentIndex + 1]);
+      setNextPage(allPages[currentIndex + 1] as Page);
     } else {
       setNextPage({ ...nextPage, ...initialPage });
     }

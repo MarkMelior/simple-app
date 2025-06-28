@@ -24,7 +24,7 @@
   background: theme('colors.default-50/0.8');
   border: solid;
 
-  transition: all 0.15s ease-in-out;
+  // transition: all 0.15s ease-in-out; // ! BUG: Border flash
   backdrop-filter: blur(theme('backdropBlur.lg'));
   border-color: theme('colors.default-900/0.1');
 

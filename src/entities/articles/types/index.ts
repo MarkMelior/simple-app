@@ -1,19 +1,19 @@
-import type { CategoryMetadata, MdxHeadline, ProjectMetadata } from '@/shared/lib/mdx';
+import type { ArticleMetadata, CategoryMetadata, MdxHeadline } from '@/shared/lib/mdx';
 
-export interface ProjectResponse {
+export interface ArticleResponse {
   content: string
   contentCategory: string
   headlines: MdxHeadline[]
-  metadata: ProjectMetadata
+  metadata: ArticleMetadata
   metadataCategory: CategoryMetadata
 }
 
-export interface ProjectsResponse {
+export interface ArticleListResponse {
+  articles: ArticleMetadata[]
   link: string
-  projects: ProjectMetadata[]
   title: string
 }
 
 export enum ArticlesCategoryEnum {
-  CODE = 'code'
+  FRONTEND = 'frontend'
 }

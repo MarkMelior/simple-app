@@ -1,6 +1,7 @@
 'use client';
 
 import { Link } from '@heroui/react';
+import { type FC, useEffect, useState } from 'react';
 import { IoIosCode } from 'react-icons/io';
 import { LuEye } from 'react-icons/lu';
 import { TbFileUnknown } from 'react-icons/tb';
@@ -18,8 +19,6 @@ import { cn } from '@/shared/lib/common';
 import { Button, GlowingBox, Tooltip } from '@/shared/ui/client';
 
 import { CopyButton } from '../../CopyButton';
-
-import type { FC } from 'react';
 
 import './codeBlock.scss';
 
@@ -50,6 +49,14 @@ export const CodeBlock: FC<CodeBlockProps> = ({
   text,
 }) => {
   text = text.trimEnd();
+
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
 
   return (
     <>
@@ -93,25 +100,27 @@ export const CodeBlock: FC<CodeBlockProps> = ({
               text={text}
             />
           )}
-          <SyntaxHighlighter
-            className={cn(
-              'border-t-1 border-default-200 max-h-[28rem] text-sm overflow-auto !bg-default-100 !text-default-700',
-              { 'border-0': hideHeader },
-            )}
-            codeTagProps={{
-              className: 'bg-inherit',
-            }}
-            customStyle={{
-              borderRadius: 0,
-              margin: 0,
-              textShadow: 'none',
-            }}
-            language={lang}
-            showLineNumbers={!disableLineNumbers}
-            style={oneDark}
-          >
-            {text}
-          </SyntaxHighlighter>
+          {mounted ? (
+            <SyntaxHighlighter
+              className={cn(
+                'border-t-1 border-default-200 max-h-[28rem] text-sm overflow-auto !bg-default-100 !text-default-700',
+                { 'border-0': hideHeader },
+              )}
+              codeTagProps={{
+                className: 'bg-inherit',
+              }}
+              customStyle={{
+                borderRadius: 0,
+                margin: 0,
+                textShadow: 'none',
+              }}
+              language={lang}
+              showLineNumbers={!disableLineNumbers}
+              style={oneDark}
+            >
+              {text}
+            </SyntaxHighlighter>
+          ) : text}
         </>
       </GlowingBox>
     </>

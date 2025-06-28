@@ -7,7 +7,7 @@ import { Headlines } from '@/widgets/(articles)/Headlines';
 
 import { MDXRemote, getMdx } from '@/shared/lib/mdx';
 
-import { ArticlesCategoryEnum, getProjectListByCategory } from '@/entities/articles';
+import { ArticlesCategoryEnum, getArticleListByCategory } from '@/entities/articles';
 
 import type { MDXComponents } from 'mdx/types';
 
@@ -21,7 +21,7 @@ export default async function Home() {
     ),
   };
 
-  const { projects } = await getProjectListByCategory(ArticlesCategoryEnum.CODE);
+  const { articles } = await getArticleListByCategory(ArticlesCategoryEnum.FRONTEND);
 
   return (
     <div>
@@ -52,7 +52,7 @@ export default async function Home() {
           src="/images/heart.png"
         />
       </div>
-      <CategoryCard className="mt-6" projects={projects.slice(0, 4)} />
+      <CategoryCard articles={articles.slice(0, 4)} className="mt-6" />
       <MDXRemote components={components} source={content} />
       <Headlines headlines={headlines} />
     </div>

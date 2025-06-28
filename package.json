@@ -14,7 +14,8 @@
     "lint:style": "stylelint src/**/*.scss",
     "lint:style:fix": "stylelint src/**/*.scss --fix",
     "lint:all": "yarn lint:ts && yarn lint:es && yarn lint:fsd && yarn lint:style",
-    "script:tgs": "yarn --cwd ./scripts/tgs run start"
+    "script:tgs": "yarn --cwd ./scripts/tgs run start",
+    "script:tgs:clear": "yarn --cwd ./scripts/tgs run clear"
   },
   "dependencies": {
     "@heroui/react": "2.7.10",

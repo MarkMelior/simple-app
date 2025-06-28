@@ -6,21 +6,21 @@ import { Headlines } from '@/widgets/(articles)/Headlines';
 import { MDXRemote } from '@/shared/lib/mdx';
 import { getMetadataTitle } from '@/shared/lib/text';
 
-import { getProject } from '@/entities/articles';
+import { getArticle } from '@/entities/articles';
 
 import type { MDXComponents } from 'mdx/types';
 import type { Metadata } from 'next';
 
-export type ProjectPageProps = {
+type ArticlePageProps = {
   params: Promise<{ name: string, category: string }>
 };
 
-export default async function ProjectPage({ params }: ProjectPageProps) {
+export default async function ArticlePage({ params }: ArticlePageProps) {
   const { category, name } = await params;
-  const { content, headlines, metadata, metadataCategory } = await getProject(category, name);
+  const { content, headlines, metadata, metadataCategory } = await getArticle(category, name);
 
   const components: MDXComponents = {
-    AuthExample: dynamic(() => import('@/entities/articles/articles/code/app-router-auth/examples').then((mod) => mod.AuthExample)),
+    AuthExample: dynamic(() => import('@/entities/articles/articles/frontend/app-router-auth/examples').then((mod) => mod.AuthExample)),
     Blockquote: dynamic(() => import('@/shared/ui/typography/Blockquote').then((mod) => mod.Blockquote)),
     CodeSteps: dynamic(() => import('@/shared/ui/typography/CodeSteps').then((mod) => mod.CodeSteps)),
   };
@@ -30,6 +30,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <Header
         createdAt={metadata?.createdAt}
         description={metadata?.description}
+        icon={metadata?.icon}
         note={metadata?.note || metadataCategory?.title}
         noteLink={metadata?.note || metadataCategory?.link}
         tags={metadata?.tags}
@@ -44,12 +45,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
 export async function generateMetadata({
   params,
-}: ProjectPageProps): Promise<Metadata> {
+}: ArticlePageProps): Promise<Metadata> {
   const { category, name } = await params;
-  const { metadata } = await getProject(category, name);
+  const { metadata } = await getArticle(category, name);
 
   return {
-    description: `${metadata.description}. Technologies: ${metadata.tags?.join(
+    description: `${metadata.description}. Технологии: ${metadata.tags?.join(
       ', ',
     )}`,
     title: getMetadataTitle(metadata.title),

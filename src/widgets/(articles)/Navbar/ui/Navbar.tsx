@@ -1,21 +1,16 @@
 import Link from 'next/link';
-import { BsGithub } from 'react-icons/bs';
 
 import { APP_NAME } from '@/shared/constants';
 import { Logo } from '@/shared/icons';
-import { DownloadCvButton } from '@/shared/ui';
-import { Button, SidebarNavigation } from '@/shared/ui/client';
+import { Button, EmojiAnim } from '@/shared/ui/client';
 
-import { getProjectList } from '@/entities/articles';
-
-import { Burger } from './Burger';
+import { AboutHoverButton } from './AboutHoverButton';
+import { AboutHoverMenu } from './AboutHoverMenu';
 import { NavbarScroll } from './NavbarScroll';
 import { ThemeSwitcher } from './ThemeSwitcher';
 
-export const Navbar = async () => {
-  const items = await getProjectList();
-
-  return (
+export const Navbar = () => (
+  <>
     <NavbarScroll>
       <Logo changeOnClick={true} className="scale-80" />
       <Button
@@ -24,7 +19,7 @@ export const Navbar = async () => {
         href="/"
       >
         <span>
-          🚀
+          <EmojiAnim emoji="🚀" />
           {' '}
           {APP_NAME}
         </span>
@@ -41,38 +36,9 @@ export const Navbar = async () => {
       </Button>
       <div className="ml-auto flex items-center gap-2">
         <ThemeSwitcher />
-        <Button
-          as={Link}
-          className="hidden text-default-500 hover:text-default-600 lg:flex"
-          href="https://github.com/MarkMelior/melior-web"
-          isIconOnly={true}
-          target="_blank"
-          variant="light"
-        >
-          <span className="sr-only">
-            {APP_NAME}
-            {' '}
-            on GitHub
-          </span>
-          <BsGithub size={20} />
-        </Button>
-        <Burger>
-          <Button
-            as={Link}
-            className="mb-3 py-6 md:py-4"
-            color="default"
-            fullWidth={true}
-            href="https://github.com/MarkMelior/melior-web"
-            radius="md"
-            startContent={<BsGithub size={20} />}
-            target="_blank"
-          >
-            GitHub
-          </Button>
-          <DownloadCvButton className="mb-8" color="primary" />
-          <SidebarNavigation items={items} />
-        </Burger>
+        <AboutHoverButton />
       </div>
     </NavbarScroll>
-  );
-};
+    <AboutHoverMenu />
+  </>
+);

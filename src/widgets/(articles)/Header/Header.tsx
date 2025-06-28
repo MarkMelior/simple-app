@@ -1,9 +1,10 @@
 import Link from 'next/link';
 
 import type { StackVariants } from '@/shared/constants';
+import type { IconNames } from '@/shared/icons/types';
 import { cn } from '@/shared/lib/common';
 import { formatDate } from '@/shared/lib/text';
-import { Spacer, StackButtons } from '@/shared/ui';
+import { Flex, IconComponent, StackButtons } from '@/shared/ui';
 import { Skeleton } from '@/shared/ui/client';
 
 import type { FC } from 'react';
@@ -18,9 +19,10 @@ interface HeaderProps {
   }
   createdAt?: string
   description: string
+  icon?: IconNames
   isCenter?: 'sm' | 'md' | 'lg' | boolean
   isLoading?: boolean
-  note: string
+  note?: string
   noteLink?: string
   tags?: StackVariants[]
   title: string
@@ -32,6 +34,7 @@ export const Header: FC<HeaderProps> = ({
   classNames,
   createdAt,
   description,
+  icon,
   isCenter,
   isLoading,
   note,
@@ -60,16 +63,16 @@ export const Header: FC<HeaderProps> = ({
         className,
       )}
     >
-      <div>
-        <p
-          className={cn(
-            'mb-2 text-sm leading-6 font-semibold text-primary-600',
-            classNames?.note,
-          )}
-        >
-          {noteLink ? <Link href={noteLink}>{note}</Link> : note}
-        </p>
-        <div className="flex items-center">
+      <Flex align="items-center" justify="justify-between">
+        <div>
+          <div
+            className={cn(
+              'mb-2 text-sm leading-6 font-semibold text-primary-600',
+              classNames?.note,
+            )}
+          >
+            {noteLink ? <Link href={noteLink}>{note}</Link> : note}
+          </div>
           <h1
             className={cn(
               'inline-block text-2xl sm:text-3xl font-extrabold text-default-900 tracking-tight w-full',
@@ -78,26 +81,36 @@ export const Header: FC<HeaderProps> = ({
           >
             {title}
           </h1>
+          <p className={cn('mt-2 text-lg text-default-600', classNames?.description)}>
+            {description}
+          </p>
+          {(formattedCreatedAt || formattedUpdatedAt) && (
+            <p className={cn('mt-2 text-sm text-default-400', classNames?.description)}>
+              {formattedCreatedAt && (
+                <span title={formattedCreatedAtWithTime}>
+                  Опубликовано:&nbsp;
+                  {formattedCreatedAt}
+                </span>
+              )}
+              {formattedUpdatedAt && (
+                <>
+                  {formattedCreatedAt && ' / '}
+                  <span title={formattedUpdatedAtWithTime}>
+                    Обновлено:&nbsp;
+                    {formattedUpdatedAt}
+                  </span>
+                </>
+              )}
+            </p>
+          )}
         </div>
-      </div>
-      <p className={cn('mt-2 text-lg text-default-600', classNames?.description)}>
-        {description}
-      </p>
-      <p className={cn('mt-2 text-sm text-default-400', classNames?.description)}>
-        <span title={formattedCreatedAtWithTime}>
-          опубликовано:
-          {' '}
-          {formattedCreatedAt}
-        </span>
-        {formattedUpdatedAt ? (
-          <span title={formattedUpdatedAtWithTime}>
-            {' / '}
-            обновлено:
-            {' '}
-            {formattedUpdatedAt}
-          </span>
-        ) : null }
-      </p>
+        <IconComponent
+          className="mr-8 text-primary-600"
+          height={64}
+          icon={icon}
+          width={64}
+        />
+      </Flex>
       <StackButtons className={cn('mt-6', classNames?.tags)} tags={tags} />
     </header>
   );

@@ -2,7 +2,6 @@ import { APP_NAME } from '@/shared/constants';
 
 export * from './copy-to-clipboard';
 export * from './date';
-export * from './to-latin';
 export * from './useCopy';
 
 export const cleanText = (text: string) => text.replace(/[^a-zA-Zа-яА-Я\s]/g, '');
