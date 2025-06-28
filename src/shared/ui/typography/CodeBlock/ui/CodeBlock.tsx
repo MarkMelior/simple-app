@@ -1,15 +1,8 @@
-'use client';
-
-import { Link } from '@heroui/react';
-import { type FC, useEffect, useState } from 'react';
+import Link from 'next/link';
+import { type FC } from 'react';
 import { IoIosCode } from 'react-icons/io';
 import { LuEye } from 'react-icons/lu';
 import { TbFileUnknown } from 'react-icons/tb';
-import { PrismAsyncLight as SyntaxHighlighter } from 'react-syntax-highlighter';
-import bash from 'react-syntax-highlighter/dist/esm/languages/prism/bash';
-import markdown from 'react-syntax-highlighter/dist/esm/languages/prism/markdown';
-import tsx from 'react-syntax-highlighter/dist/esm/languages/prism/tsx';
-import typescript from 'react-syntax-highlighter/dist/esm/languages/prism/typescript';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 import { FontDefault } from '@/shared/constants/fonts';
@@ -18,6 +11,7 @@ import type { StackVariants } from '@/shared/constants/stack-data';
 import { cn } from '@/shared/lib/common';
 import { Button, GlowingBox, Tooltip } from '@/shared/ui/client';
 
+import { SyntaxHighlighter } from './SyntaxHighlighter';
 import { CopyButton } from '../../CopyButton';
 
 import './codeBlock.scss';
@@ -33,11 +27,6 @@ export interface CodeBlockProps {
   text: string
 }
 
-SyntaxHighlighter.registerLanguage('tsx', tsx);
-SyntaxHighlighter.registerLanguage('bash', bash);
-SyntaxHighlighter.registerLanguage('typescript', typescript);
-SyntaxHighlighter.registerLanguage('markdown', markdown);
-
 export const CodeBlock: FC<CodeBlockProps> = ({
   className,
   disableLineNumbers,
@@ -49,14 +38,6 @@ export const CodeBlock: FC<CodeBlockProps> = ({
   text,
 }) => {
   text = text.trimEnd();
-
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
 
   return (
     <>
@@ -92,36 +73,32 @@ export const CodeBlock: FC<CodeBlockProps> = ({
             <CodeBlockButtons exampleLink={exampleLink} text={text} />
           </div>
         )}
-        <>
-          {hideHeader && (
-            <CodeBlockButtons
-              exampleLink={exampleLink}
-              hoverButton={true}
-              text={text}
-            />
+        {hideHeader && (
+          <CodeBlockButtons
+            exampleLink={exampleLink}
+            hoverButton={true}
+            text={text}
+          />
+        )}
+        <SyntaxHighlighter
+          className={cn(
+            'border-t-1 border-default-200 max-h-[28rem] text-sm overflow-auto !bg-default-100 !text-default-700',
+            { 'border-0': hideHeader },
           )}
-          {mounted ? (
-            <SyntaxHighlighter
-              className={cn(
-                'border-t-1 border-default-200 max-h-[28rem] text-sm overflow-auto !bg-default-100 !text-default-700',
-                { 'border-0': hideHeader },
-              )}
-              codeTagProps={{
-                className: 'bg-inherit',
-              }}
-              customStyle={{
-                borderRadius: 0,
-                margin: 0,
-                textShadow: 'none',
-              }}
-              language={lang}
-              showLineNumbers={!disableLineNumbers}
-              style={oneDark}
-            >
-              {text}
-            </SyntaxHighlighter>
-          ) : text}
-        </>
+          codeTagProps={{
+            className: 'bg-inherit',
+          }}
+          customStyle={{
+            borderRadius: 0,
+            margin: 0,
+            textShadow: 'none',
+          }}
+          language={lang}
+          showLineNumbers={!disableLineNumbers}
+          style={oneDark}
+        >
+          {text}
+        </SyntaxHighlighter>
       </GlowingBox>
     </>
   );

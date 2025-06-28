@@ -1,13 +1,14 @@
 import Link from 'next/link';
 
 import { cn } from '@/shared/lib/common';
-import type { ArticleMetadata } from '@/shared/lib/mdx';
 import { Flex, IconComponent } from '@/shared/ui';
+
+import type { ArticleData } from '@/entities/articles';
 
 import type { FC } from 'react';
 
 interface CategoryCardProps {
-  articles: ArticleMetadata[]
+  articles: ArticleData[]
   className?: string
 }
 

@@ -8,10 +8,10 @@ import { getMdx } from '@/shared/lib/mdx';
 
 import { articlesDirectory } from '../constants';
 
-import type { ArticlesCategoryEnum } from '../types';
+import type { ArticleData, ArticlesCategoryEnum } from '../types';
 
 interface ArticleListByCategoryResponse {
-  articles: ArticleMetadata[]
+  articles: ArticleData[]
   category: CategoryMetadata
 }
 
@@ -27,19 +27,20 @@ export async function getArticleListByCategory(
 
   const articleDirs = await fs.readdir(dirCategory, { withFileTypes: true });
 
-  const metadataArticle = await Promise.all(
+  const metadataArticle: ArticleData[] = await Promise.all(
     articleDirs
       .filter((dirent) => dirent.isDirectory())
       .map(async (dirent) => {
         const articleFile = path.join(dirCategory, dirent.name, 'index.mdx');
 
-        const mdxArticle = await getMdx<CategoryMetadata>(articleFile);
+        const mdxArticle = await getMdx<ArticleMetadata>(articleFile);
         const articleMetadata = mdxArticle.metadata;
 
         return {
           ...articleMetadata,
           link: `/articles/${category}/${dirent.name}`,
-        } as ArticleMetadata;
+          slug: dirent.name,
+        };
       }),
   );
 
