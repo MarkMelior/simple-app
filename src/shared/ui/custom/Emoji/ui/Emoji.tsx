@@ -1,14 +1,8 @@
-'use client';
-
-import dynamic from 'next/dynamic';
-import { type FC, memo, useMemo } from 'react';
-import { useInView } from 'react-intersection-observer';
+import { type FC, memo } from 'react';
 
 import { cn } from '@/shared/lib/common';
 
-import { type EmojiType, emojiData } from '../data';
-
-const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
+import { type EmojiType, emojiData } from '../data/static';
 
 interface EmojiProps {
   className?: string
@@ -16,28 +10,30 @@ interface EmojiProps {
   size?: number
 }
 
-const animationCache = new Map<string, unknown>();
+const imageCache = new Map<string, string>();
 
 export const Emoji: FC<EmojiProps> = memo(({
   className,
   emoji,
   size = 16,
 }) => {
-  const { inView, ref } = useInView({ rootMargin: '200px', triggerOnce: true });
+  const src = (() => {
+    if (!imageCache.has(emoji)) {
+      const entry = emojiData[emoji];
 
-  const animationData = useMemo(() => {
-    if (!animationCache.has(emoji)) animationCache.set(emoji, emojiData[emoji]);
+      imageCache.set(
+        emoji,
+        typeof entry === 'string' ? entry : entry?.src ?? '',
+      );
+    }
 
-    return animationCache.get(emoji)!;
-  }, [emoji]);
-
-  const canAnimate = typeof window !== 'undefined' && inView;
+    return imageCache.get(emoji);
+  })();
 
   return (
     <span
       aria-label={emoji}
-      className={cn('inline-flex items-center justify-center align-baseline', className)}
-      ref={ref}
+      className={cn('inline-flex items-center justify-center align-baseline relative', className)}
       style={{
         fontSize: size,
         height: size,
@@ -46,12 +42,11 @@ export const Emoji: FC<EmojiProps> = memo(({
         width: size,
       }}
     >
-      {canAnimate ? (
-        <Lottie
-          animationData={animationData}
-          autoplay={true}
-          loop={true}
-          rendererSettings={{ preserveAspectRatio: 'xMidYMid slice', progressiveLoad: true }}
+      {src ? (
+        <img
+          alt={emoji}
+          loading="lazy"
+          src={src}
           style={{ height: '100%', width: '100%' }}
         />
       ) : (

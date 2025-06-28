@@ -13,10 +13,13 @@ export type InputProps = Pick<HeroInputProps,
   | 'name'
   | 'placeholder'
   | 'type'
+  // FIXED: Нужен для корректной работы useActionState
+  | 'defaultValue'
 >;
 
 export const Input: FC<InputProps> = ({
   children,
+  defaultValue,
   errorMessage,
   isDisabled,
   isInvalid,
@@ -25,6 +28,7 @@ export const Input: FC<InputProps> = ({
   type,
 }) => (
   <HeroInput
+    defaultValue={defaultValue}
     errorMessage={errorMessage}
     isDisabled={isDisabled}
     isInvalid={isInvalid}

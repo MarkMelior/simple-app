@@ -6,6 +6,10 @@ const nextConfig: NextConfig = {
   env: {
     NEXT_PUBLIC_APP_VERSION: version,
   },
+  experimental: {
+    /** FIXED: Ломался порядок импортов стилей - tailwind был в приоритете */
+    cssChunking: 'strict',
+  },
 };
 
 export default nextConfig;

@@ -86,7 +86,8 @@
 - `yarn lint:style` - Проверка stylelint
 - `yarn lint:style:fix` - Авто-исправление stylelint
 - `yarn lint:all` - Проверка всех линтеров
-- `yarn script:tgs` - Скрипт конвертирования .tgs в .json
+- `yarn script:tgs` - Скрипт конвертирования .tgs в .json ([описание](/scripts/tgs/README.md))
+- `yarn script:tgs:clear` - Очистить конвертированные файлы
 
 ---
 ⠀
@@ -111,9 +112,9 @@
 - [`src/app/articles/[category]/[name]/page.tsx`](/src/app/articles//[category]/[name]/page.tsx) - layout для mdx файлов проектов;
 - [`src/app/articles/[category]/page.tsx`](/src/app/articles/[category]/page.tsx) - страница отображения проектов из категории;
 - [getMdx()](/src/shared/lib/mdx/get-mdx.ts) - получение metadata и контента из mdx;
-- [getProject(category, name)](/src/entities/articles/services/getProject.ts) - получение проекта по категории и имени;
-- [getProjectListByCategory(category)](/src/entities/articles/services/getProjectListByCategory.ts) - получение всех проектов в выбранной категории;
-- [getProjectList()](/src/entities/articles/services/getProjectList.ts) - получение всех категорий и проектов;
+- [getArticle(category, name)](/src/entities/articles/services/getArticle.ts) - получение проекта по категории и имени;
+- [getArticleListByCategory(category)](/src/entities/articles/services/getArticleListByCategory.ts) - получение всех проектов в выбранной категории;
+- [getArticleList()](/src/entities/articles/services/getArticleList.ts) - получение всех категорий и проектов;
 - [mdx-components.tsx](/src/shared/lib/mdx/mdx-components.tsx) - настройка отображения mdx;
 - [MDXRemote](/src/shared/lib/mdx/mdx-remote.tsx) - общая настройка MDXRemote;
 - [rehypeExtractCodeProps](/src/shared/lib/mdx/plugins/rehype-extract-code-props.ts) - самописный rehype-плагин для чтения пар ключ-значение в коде.

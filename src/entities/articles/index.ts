@@ -1,6 +1,6 @@
-export { getProject } from './services/getProject';
-export { getProjectList } from './services/getProjectList';
-export { getProjectListByCategory } from './services/getProjectListByCategory';
+export { getArticle } from './services/getArticle';
+export { getArticleList } from './services/getArticleList';
+export { getArticleListByCategory } from './services/getArticleListByCategory';
 
-export type { ProjectResponse, ProjectsResponse } from './types';
+export type { ArticleResponse, ArticleListResponse } from './types';
 export { ArticlesCategoryEnum } from './types';

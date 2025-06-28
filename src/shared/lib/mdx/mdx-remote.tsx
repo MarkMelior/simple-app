@@ -1,7 +1,7 @@
 import { MDXRemote as MDXRemoteRSC } from 'next-mdx-remote/rsc';
 import remarkGfm from 'remark-gfm';
 
-import { MDXComponentsData } from './mdx-components';
+import { MDXComponentsData } from './components';
 import { rehypeAutoHeading } from './plugins/rehype-auto-heading';
 import { rehypeExtractCodeProps } from './plugins/rehype-extract-code-props';
 

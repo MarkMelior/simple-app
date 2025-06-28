@@ -1,17 +1,17 @@
 import { GithubEditLink } from '@/shared/lib/github';
 
-import { getProjectList } from '@/entities/articles';
+import { getArticleList } from '@/entities/articles';
 
 import { FooterNavigation } from './FooterNavigation';
 
 import styles from './footer.module.scss';
 
 export const Footer = async () => {
-  const projects = await getProjectList();
+  const articleList = await getArticleList();
 
   return (
     <footer className="mt-12 text-sm leading-6">
-      <FooterNavigation projects={projects} />
+      <FooterNavigation articleList={articleList} />
       <div className={styles.content}>
         <div className="sm:flex">
           <p>Копирайт © 2025 Mark Melior</p>

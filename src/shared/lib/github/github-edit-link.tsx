@@ -14,7 +14,7 @@ interface GithubEditLinkProps {
 export const GithubEditLink: FC<GithubEditLinkProps> = ({ className }) => {
   const pathname = usePathname();
 
-  const hrefGithub = `https://github.com/MarkMelior/melior-web/blob/master${pathname}/index.mdx`;
+  const hrefGithub = `https://github.com/MarkMelior/melior-web/blob/master/src/entities/articles${pathname}/index.mdx`;
 
   return (
     <Link

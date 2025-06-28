@@ -1,0 +1,39 @@
+@use '@/shared/styles/mixin' as *;
+
+.menu {
+  display: flex;
+  justify-content: end;
+  position: fixed;
+  top: 48px;
+  right: 32px;
+  left: 0;
+  z-index: theme('zIndex.header');
+  max-width: theme('maxWidth.8xl');
+  margin: 0 auto;
+  padding-top: 15px;
+
+  opacity: 0;
+  pointer-events: none;
+
+  &.opened {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  @media (width <= 1179px) {
+    display: none;
+  }
+
+  &:not(.opened) .content {
+    border: none;
+  }
+}
+
+.content {
+  width: 704px;
+
+  border-radius: 16px;
+  backdrop-filter: blur(theme('backdropBlur.xl'));
+
+  @include header-background(false);
+}

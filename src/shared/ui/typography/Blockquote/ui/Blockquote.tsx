@@ -10,17 +10,15 @@ import type { FC, JSX, ReactNode } from 'react';
 
 type Variants = 'idea' | 'info' | 'note' | 'quote';
 
-type Color = SemanticColors | 'yellow';
-
 interface BlockquoteProps {
   children: ReactNode
   className?: string
-  color?: Color
+  color?: SemanticColors
   variant?: Variants
 }
 
 const blockquoteColors: Record<
-  Color,
+  SemanticColors,
   { divider: string, background: string, icon: string }
 > = {
   danger: {
@@ -53,11 +51,6 @@ const blockquoteColors: Record<
     divider: 'bg-warning-500',
     icon: 'text-warning-500',
   },
-  yellow: {
-    background: 'from-yellow-400/10',
-    divider: 'bg-yellow-300',
-    icon: 'text-yellow-300',
-  },
 };
 
 const iconsBlockquote: Record<Variants, JSX.Element> = {
@@ -70,7 +63,7 @@ const iconsBlockquote: Record<Variants, JSX.Element> = {
 export const Blockquote: FC<BlockquoteProps> = ({
   children,
   className,
-  color = 'yellow',
+  color = 'warning',
   variant = 'note',
   ...props
 }) => {

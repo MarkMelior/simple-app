@@ -1,2 +1,2 @@
-export { getPathname } from './get-pathname';
-export { isClient } from './is-clients';
+export * from './get-pathname';
+export * from './is-clients';

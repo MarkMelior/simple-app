@@ -3,6 +3,7 @@ import { Meta, IconGallery, IconItem } from '@storybook/addon-docs/blocks';
 import * as action from './action'
 import * as misc from './misc'
 import * as status from './status'
+import * as status from './dev'
 
 <Meta title="shared/Icons" />
 
@@ -39,6 +40,20 @@ import * as status from './status'
 <IconGallery>
   {Object.keys(misc).map((icon) => {
     const Icon = misc[icon];
+
+    return (
+      <IconItem key={icon} name={icon}>
+        <Icon />
+      </IconItem>
+    )
+  })}
+</IconGallery>
+
+## Dev
+
+<IconGallery>
+  {Object.keys(dev).map((icon) => {
+    const Icon = dev[icon];
 
     return (
       <IconItem key={icon} name={icon}>

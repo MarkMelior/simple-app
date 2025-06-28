@@ -13,7 +13,7 @@
 }
 
 .fullScreen {
-  min-height: calc(100vh - theme('height.articlesNavbar'));
+  min-height: calc(100vh - theme('spacing.heightArticlesNavbar'));
 }
 
 .loader {
