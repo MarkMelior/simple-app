@@ -1,3 +1,4 @@
+import { PublicImages } from '@/shared/constants';
 import { cn } from '@/shared/lib/common';
 
 import styles from './light.module.scss';
@@ -19,22 +20,22 @@ export const Light: FC<LightProps> = ({ variant = 'two' }) => (
       >
         <div className="flex w-[108rem] flex-none justify-end">
           <picture>
-            <source srcSet="/images/light.avif" type="image/avif" />
+            <source srcSet={PublicImages.interface.Light} type="image/avif" />
             <img
               alt=""
               className="w-[71.75rem] max-w-none flex-none dark:hidden"
               decoding="async"
-              src="/images/light.avif"
+              src={PublicImages.interface.Light}
             />
           </picture>
 
           <picture>
-            <source srcSet="/images/light-dark.avif" type="image/avif" />
+            <source srcSet={PublicImages.interface.LightDark} type="image/avif" />
             <img
               alt=""
               className="hidden w-[90rem] max-w-none flex-none dark:block"
               decoding="async"
-              src="/images/light-dark.avif"
+              src={PublicImages.interface.LightDark}
             />
           </picture>
         </div>

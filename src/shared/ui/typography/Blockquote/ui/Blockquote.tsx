@@ -5,17 +5,11 @@ import { IoMdInformationCircle } from 'react-icons/io';
 
 import { cn } from '@/shared/lib/common';
 import type { SemanticColors } from '@/shared/types';
+import { Flex } from '@/shared/ui/custom';
 
-import type { FC, JSX, ReactNode } from 'react';
+import styles from './blockquote.module.scss';
 
-type Variants = 'idea' | 'info' | 'note' | 'quote';
-
-interface BlockquoteProps {
-  children: ReactNode
-  className?: string
-  color?: SemanticColors
-  variant?: Variants
-}
+import type { FC, JSX, ReactNode, Ref } from 'react';
 
 const blockquoteColors: Record<
   SemanticColors,
@@ -27,9 +21,9 @@ const blockquoteColors: Record<
     icon: 'text-red-500',
   },
   default: {
-    background: 'from-default-400/10',
-    divider: 'bg-default-700',
-    icon: 'text-default-700',
+    background: 'from-default-400/15',
+    divider: 'dark:bg-default-700 bg-default-400',
+    icon: 'dark:text-default-700 text-default-400',
   },
   primary: {
     background: 'from-primary-600/10',
@@ -60,27 +54,39 @@ const iconsBlockquote: Record<Variants, JSX.Element> = {
   quote: <BiSolidQuoteRight size={20} />,
 };
 
+type Variants = 'idea' | 'info' | 'note' | 'quote';
+
+interface BlockquoteProps {
+  children: ReactNode
+  className?: string
+  color?: SemanticColors
+  icon?: ReactNode
+  ref?: Ref<HTMLDivElement>
+  variant?: Variants
+}
+
 export const Blockquote: FC<BlockquoteProps> = ({
   children,
   className,
   color = 'warning',
+  icon,
+  ref,
   variant = 'note',
-  ...props
 }) => {
-  const { background, divider, icon } = blockquoteColors[color];
+  const { background, divider, icon: iconColor } = blockquoteColors[color];
 
   return (
-    <blockquote
-      className={cn(
-        'bg-default-100/30 backdrop-blur-sm rounded-md border border-default-200/50 text-sm flex items-center gap-4 px-5 py-5 overflow-hidden relative',
-        className,
-      )}
-      {...props}
+    <Flex
+      align="items-center"
+      as="blockquote"
+      className={cn(styles.wrapper, className)}
+      gap="gap-4"
+      ref={ref}
     >
-      <span className={icon}>{iconsBlockquote[variant]}</span>
-      <span className={cn('pointer-events-none absolute left-0 h-full w-60 bg-gradient-to-r to-transparent', background)} />
-      <span className={cn('absolute left-0 h-full w-1', divider)} />
+      <span className={iconColor}>{icon ? icon : iconsBlockquote[variant]}</span>
+      <span className={cn(styles.background, 'bg-gradient-to-r to-transparent', background)} />
+      <span className={cn(styles.divider, divider)} />
       {children}
-    </blockquote>
+    </Flex>
   );
 };

@@ -1,0 +1,27 @@
+.wrapper {
+  position: relative;
+  padding: theme('spacing.5');
+
+  font-size: theme('fontSize.sm');
+
+  background: theme('colors.default-100 / 0.3');
+  border-radius: theme('borderRadius.md');
+  border: 1px solid theme('colors.default-200 / 0.5');
+  overflow: hidden;
+  backdrop-filter: blur(theme('backdropBlur.sm'));
+}
+
+.background {
+  position: absolute;
+  left: 0;
+  width: theme('spacing.60');
+  height: 100%;
+  pointer-events: none;
+}
+
+.divider {
+  position: absolute;
+  left: 0;
+  width: theme('spacing.1');
+  height: 100%;
+}
