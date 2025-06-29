@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { APP_NAME, AppRouteEnum } from '@/shared/constants';
+import { APP_NAME, AppRouteEnum, PublicImages } from '@/shared/constants';
 import { Tooltip } from '@/shared/ui/client';
 
 import styles from './headerLogo.module.scss';
@@ -13,7 +13,7 @@ export const HeaderLogo = () => (
         <Image
           alt={APP_NAME}
           height={64}
-          src="/images/ice-cube.png"
+          src={PublicImages.interface.IceCube}
           title={APP_NAME}
           width={64}
         />

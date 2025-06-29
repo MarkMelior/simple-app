@@ -21,7 +21,7 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
-        noise: 'url(\'/images/noise.png\')',
+        noise: 'url(\'/images/interface/noise.png\')',
       },
       maxWidth: {
         '8xl': '90rem',

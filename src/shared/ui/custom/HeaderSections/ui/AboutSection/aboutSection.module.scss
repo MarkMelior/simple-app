@@ -103,19 +103,24 @@
 }
 
 @mixin service($color, $bg) {
-  background: url('/images/header/#{$bg}'), theme('colors.#{$color}');
   border: 1.5px solid theme('colors.#{$color}-600');
 
   transition: all 0.2s ease-in-out;
+  background-color: theme('colors.#{$color}');
+  background-image: url('/images/header/#{$bg}');
   background-position: right bottom;
   background-repeat: no-repeat;
 
-  &:hover {
-    background: url('/images/header/#{$bg}'), theme('colors.#{$color}/0.4');
+  [class="light"] & {
+    border: 2.5px solid theme('colors.#{$color}-100');
+  }
 
+  &:hover {
     transform: scale(1.02);
-    background-position: right bottom;
-    background-repeat: no-repeat;
+    
+    [class="dark"] & {
+      background-color: theme('colors.#{$color}/0.4');
+    }
   }
 }
 
@@ -125,11 +130,17 @@
   min-height: 140px;
   padding: 12px;
 
+  color: theme('colors.default-950');
+
   border-radius: 8px;
   background-position: bottom right;
   background-repeat: no-repeat;
 
   $root: &;
+
+  [class="light"] & {
+    color: theme('colors.default-50');
+  }
 
   &.youtube {
     @include service('danger', '1.png');
@@ -154,10 +165,6 @@
   }
 
   &Description {
-    color: theme('colors.default-950/0.6');
+    opacity: 0.6;
   }
-}
-
-.blockquote {
-  grid-column: 1 / 3;
 }

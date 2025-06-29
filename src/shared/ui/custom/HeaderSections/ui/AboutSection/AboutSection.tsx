@@ -7,8 +7,10 @@ import { TbCube3dSphere } from 'react-icons/tb';
 
 import { LinksMediaEnum } from '@/shared/constants';
 import { cn } from '@/shared/lib/common';
-import { Blockquote, Flex, Text } from '@/shared/ui';
+import { Flex, Text } from '@/shared/ui';
 import { Button, EmojiAnim } from '@/shared/ui/client';
+
+import { DynamicQuote } from './DynamicQuote';
 
 import styles from './aboutSection.module.scss';
 
@@ -153,25 +155,14 @@ export const AboutSection: FC<AboutSectionProps> = ({ isVisible }) => (
             <MdArrowOutward className={styles.serviceArrow} size={18} />
           </Flex>
           <Flex className="mt-auto" vertical={true}>
-            <Text
-              color="text-default-900"
-              size="text-lg"
-              weight="font-semibold"
-            >
+            <Text size="text-lg" weight="font-semibold">
               {title}
             </Text>
             <Text className={styles.serviceDescription} size="text-sm">{description}</Text>
           </Flex>
         </Link>
       ))}
-      {/* TODO: сделать список цитат и они будут стрираться и заново появляться + РАЗНЫЕ ИКОНКИ */}
-      <Blockquote
-        className={styles.blockquote}
-        color="default"
-        variant="quote"
-      >
-        Сила в маленьких шагах
-      </Blockquote>
+      <DynamicQuote />
     </div>
   </div>
 );

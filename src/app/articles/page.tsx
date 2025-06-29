@@ -5,6 +5,7 @@ import { CategoryCard } from '@/widgets/(articles)/CategoryCard';
 import { Header } from '@/widgets/(articles)/Header';
 import { Headlines } from '@/widgets/(articles)/Headlines';
 
+import { PublicImages } from '@/shared/constants';
 import { MDXRemote, getMdx } from '@/shared/lib/mdx';
 
 import { ArticlesCategoryEnum, getArticleListByCategory } from '@/entities/articles';
@@ -30,7 +31,7 @@ export default async function Home() {
           <img
             alt="Banner"
             className="min-h-32 min-w-full object-cover xl:h-full"
-            src="/images/banner.jpg"
+            src={PublicImages.misc.Banner}
           />
         </div>
         {/* <Blackhole flip /> */}
@@ -49,7 +50,7 @@ export default async function Home() {
         <img
           alt="3д модель сердца"
           className="pointer-events-none z-20 max-w-36 select-none md:max-w-48"
-          src="/images/heart.png"
+          src={PublicImages.misc.Heart}
         />
       </div>
       <CategoryCard articles={articles.slice(0, 4)} className="mt-6" />

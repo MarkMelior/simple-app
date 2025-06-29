@@ -2,7 +2,7 @@ import { clsx } from 'clsx';
 
 import type { AsComponent, TwAlignItems, TwGap, TwJustify } from '@/shared/types';
 
-import type { ReactNode } from 'react';
+import type { ReactNode, Ref } from 'react';
 
 interface FlexProps {
   align?: TwAlignItems
@@ -13,6 +13,7 @@ interface FlexProps {
   gap?: TwGap
   id?: string
   justify?: TwJustify
+  ref?: Ref<HTMLDivElement>
   vertical?: boolean
   wrap?: boolean
 }
@@ -33,6 +34,7 @@ interface FlexProps {
  * @param id — ID DOM-элемента.
  * @param vertical — Вертикальное направление (flex-direction: column).
  * @param wrap — Разрешить перенос строк (flex-wrap: wrap).
+ * @param ref — Ссылка на DOM-элемент.
  */
 export const Flex = ({
   align,
@@ -43,6 +45,7 @@ export const Flex = ({
   gap,
   id,
   justify,
+  ref,
   vertical,
   wrap,
 }: FlexProps) => (
@@ -60,6 +63,7 @@ export const Flex = ({
       className,
     )}
     id={id}
+    ref={ref}
   >
     {children}
   </Component>

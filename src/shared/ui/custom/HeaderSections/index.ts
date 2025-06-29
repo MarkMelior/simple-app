@@ -1,2 +1,2 @@
-export { AboutSection } from './ui/AboutSection';
-export { ResourcesSection } from './ui/ResourcesSection';
+export { AboutSection } from './ui/AboutSection/AboutSection';
+export { ResourcesSection } from './ui/ResourcesSection/ResourcesSection';
