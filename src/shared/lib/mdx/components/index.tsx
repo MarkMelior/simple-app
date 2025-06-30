@@ -4,6 +4,7 @@ import { BlockquoteMDX } from './Blockquote';
 import { CodeMDX } from './Code';
 import { LinkMDX } from './Link';
 import { cn } from '../../common';
+import { Emoji } from '../../emoji';
 
 import type { MDXComponents } from 'mdx/types';
 import type { ComponentPropsWithoutRef } from 'react';
@@ -12,6 +13,7 @@ export const MDXComponentsData: MDXComponents = {
   a: LinkMDX,
   blockquote: BlockquoteMDX,
   code: CodeMDX,
+  Emoji,
   h2: ({ children, ...props }: ComponentPropsWithoutRef<'h2'>) => (
     <Heading
       className="-mt-8 mb-6 text-2xl font-bold"

@@ -2,7 +2,8 @@ import Link from 'next/link';
 
 import { APP_NAME } from '@/shared/constants';
 import { Logo } from '@/shared/icons';
-import { Button, EmojiAnim } from '@/shared/ui/client';
+import { Emoji } from '@/shared/lib/emoji';
+import { Button } from '@/shared/ui/client';
 
 import { AboutHoverButton } from './AboutHoverButton';
 import { AboutHoverMenu } from './AboutHoverMenu';
@@ -19,7 +20,7 @@ export const Navbar = () => (
         href="/"
       >
         <span>
-          <EmojiAnim emoji="🚀" />
+          <Emoji emoji="🚀" />
           {' '}
           {APP_NAME}
         </span>

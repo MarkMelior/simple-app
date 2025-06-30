@@ -4,10 +4,10 @@ import Link from 'next/link';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { cn } from '@/shared/lib/common';
+import { Emoji } from '@/shared/lib/emoji';
 import type { MdxHeadline } from '@/shared/lib/mdx';
 import { Portal } from '@/shared/lib/react';
 import { Flex } from '@/shared/ui';
-import { EmojiAnim } from '@/shared/ui/client';
 
 import styles from './headlines.module.scss';
 
@@ -125,7 +125,7 @@ export const Headlines: FC<HeadlinesProps> = ({ headlines }) => {
           </div>
 
           <Flex align="items-center" className="mb-4 block text-[0.9375rem] font-semibold text-default-900" gap="gap-1.5">
-            <EmojiAnim emoji="💻" size={18} />
+            <Emoji emoji="💻" />
             Навигация по странице
           </Flex>
 

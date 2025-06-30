@@ -3,7 +3,6 @@ export * from './Blackhole';
 export * from './Card';
 export * from './CardRotate';
 export * from './DownloadCvButton';
-export * from './Emoji';
 export * from './HeaderSections';
 export * from './Icon';
 export * from './IconComponent';
