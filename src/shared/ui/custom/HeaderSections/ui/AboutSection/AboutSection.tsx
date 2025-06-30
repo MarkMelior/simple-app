@@ -7,8 +7,9 @@ import { TbCube3dSphere } from 'react-icons/tb';
 
 import { LinksMediaEnum } from '@/shared/constants';
 import { cn } from '@/shared/lib/common';
+import { Emoji } from '@/shared/lib/emoji';
 import { Flex, Text } from '@/shared/ui';
-import { Button, EmojiAnim } from '@/shared/ui/client';
+import { Button } from '@/shared/ui/client';
 
 import { DynamicQuote } from './DynamicQuote';
 
@@ -79,7 +80,7 @@ export const AboutSection: FC<AboutSectionProps> = ({ isVisible }) => (
         weight="font-semibold"
       >
         Привет, я Mark Melior
-        <EmojiAnim className="ml-1" emoji="👋" size={20} />
+        <Emoji className="ml-1" emoji="👋" size={18} />
       </Text>
       <Flex
         className={styles.links}

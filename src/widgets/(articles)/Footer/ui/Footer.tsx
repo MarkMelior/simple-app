@@ -1,3 +1,4 @@
+import { Emoji } from '@/shared/lib/emoji';
 import { GithubEditLink } from '@/shared/lib/github';
 
 import { getArticleList } from '@/entities/articles';
@@ -16,7 +17,8 @@ export const Footer = async () => {
         <div className="sm:flex">
           <p>Копирайт © 2025 Mark Melior</p>
           <p className="dark:border-default-100 sm:ml-4 sm:border-l sm:border-default-200 sm:pl-4">
-            Сделано с ❤️
+            Сделано с&nbsp;
+            <Emoji emoji="❤️" />
           </p>
         </div>
         <GithubEditLink />

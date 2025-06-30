@@ -1,7 +1,5 @@
-import Link from 'next/link';
 import { type FC } from 'react';
 import { IoIosCode } from 'react-icons/io';
-import { LuEye } from 'react-icons/lu';
 import { TbFileUnknown } from 'react-icons/tb';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
@@ -9,10 +7,10 @@ import { FontDefault } from '@/shared/constants/fonts';
 import { StackData } from '@/shared/constants/stack-data';
 import type { StackVariants } from '@/shared/constants/stack-data';
 import { cn } from '@/shared/lib/common';
-import { Button, GlowingBox, Tooltip } from '@/shared/ui/client';
+import { GlowingBox } from '@/shared/ui/client';
 
+import { CodeBlockButtons } from './CodeBlockButtons';
 import { SyntaxHighlighter } from './SyntaxHighlighter';
-import { CopyButton } from '../../CopyButton';
 
 import './codeBlock.scss';
 
@@ -66,19 +64,18 @@ export const CodeBlock: FC<CodeBlockProps> = ({
           border: cn(className, 'bg-default-200'),
         }}
       >
-        {!hideHeader && (
-          <div className="flex items-center justify-between whitespace-normal break-all bg-default-100 px-3 py-0.5 text-center text-[0.825rem] text-default-600">
-            {StackData[lang]?.icon || <TbFileUnknown size={20} />}
-            {filename ? filename : StackData[lang]?.name}
-            <CodeBlockButtons exampleLink={exampleLink} text={text} />
-          </div>
-        )}
-        {hideHeader && (
+        {hideHeader ? (
           <CodeBlockButtons
             exampleLink={exampleLink}
             hoverButton={true}
             text={text}
           />
+        ) : (
+          <div className="flex items-center justify-between whitespace-normal break-all bg-default-100 px-3 py-0.5 text-center text-[0.825rem] text-default-600">
+            {StackData[lang]?.icon || <TbFileUnknown size={20} />}
+            {filename ? filename : StackData[lang]?.name}
+            <CodeBlockButtons exampleLink={exampleLink} text={text} />
+          </div>
         )}
         <SyntaxHighlighter
           className={cn(
@@ -103,45 +100,3 @@ export const CodeBlock: FC<CodeBlockProps> = ({
     </>
   );
 };
-
-interface CodeBlockButtonsProps {
-  exampleLink?: string
-  hoverButton?: boolean
-  text: string
-}
-
-function CodeBlockButtons({
-  exampleLink,
-  hoverButton,
-  text,
-}: CodeBlockButtonsProps) {
-  return (
-    <div
-      className={cn('flex gap-1 items-center', {
-        'absolute right-2 top-2 opacity-0 group-hover/buttons:opacity-100 transition-opacity': hoverButton,
-      })}
-    >
-      {exampleLink ? (
-        <Tooltip content="Посмотреть код на GitHub" placement="top">
-          <Button
-            as={Link}
-            href={exampleLink}
-            isIconOnly={true}
-            radius="sm"
-            size="sm"
-            target="_blank"
-            variant="light"
-          >
-            <LuEye
-              className="text-default-400 transition-colors group-hover:text-default-600"
-              size={20}
-            />
-          </Button>
-        </Tooltip>
-      ) : null}
-      <CopyButton text={text} />
-    </div>
-  );
-}
-
-export default CodeBlock;
