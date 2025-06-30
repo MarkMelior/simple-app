@@ -14,7 +14,8 @@
     "lint:style": "stylelint src/**/*.scss",
     "lint:style:fix": "stylelint src/**/*.scss --fix",
     "lint:all": "yarn lint:ts && yarn lint:es && yarn lint:fsd && yarn lint:style",
-    "script:tgs": "yarn --cwd ./scripts/tgs run start"
+    "script:tgs": "yarn --cwd ./scripts/tgs run start",
+    "script:tgs:clear": "yarn --cwd ./scripts/tgs run clear"
   },
   "dependencies": {
     "@heroui/react": "2.7.10",
@@ -22,7 +23,6 @@
     "bcryptjs": "^2.4.3",
     "clsx": "^2.1.1",
     "framer-motion": "^12.18.1",
-    "github-slugger": "^2.0.0",
     "gray-matter": "^4.0.3",
     "hast-util-to-string": "^3.0.0",
     "jose": "^5.6.3",
@@ -34,7 +34,7 @@
     "react-dom": "^19.1.0",
     "react-icons": "^5.2.1",
     "react-intersection-observer": "^9.16.0",
-    "react-syntax-highlighter": "^15.5.0",
+    "react-syntax-highlighter": "^15.6.1",
     "rehype-stringify": "^10.0.0",
     "remark-gfm": "^4.0.0",
     "remark-parse": "^11.0.0",

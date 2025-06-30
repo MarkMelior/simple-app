@@ -1,6 +1,7 @@
 'use client';
 
 import { useTheme as useThemeNext } from 'next-themes';
+import { useEffect, useState } from 'react';
 import { CiDark, CiLight } from 'react-icons/ci';
 
 import { ThemeEnum } from '../constants';
@@ -19,6 +20,22 @@ interface UseThemeProps {
 
 export const useTheme = (): UseThemeProps => {
   const { setTheme: setThemeNext, theme: themeNext } = useThemeNext();
+
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return {
+      Icon: CiDark,
+      setTheme: () => { /* void */ },
+      theme: ThemeEnum.DARK,
+      themeName: 'Темная',
+      toggleTheme: () => { /* void */ },
+    };
+  };
 
   const theme = themeNext as ThemeEnum;
   const setTheme = setThemeNext as SetTheme;

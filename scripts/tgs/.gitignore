@@ -3,3 +3,4 @@ assets/*
 !assets/emoji-for-test.tgs
 converted/*
 !converted/emoji-for-test.json
+archive

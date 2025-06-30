@@ -13,7 +13,6 @@ const config: Config = {
   darkMode: 'class',
   plugins: [
     heroui({
-      // addCommonColors: true,
       prefix: 'melior',
       themes: heroUiThemes,
     }),
@@ -22,13 +21,13 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
-        noise: 'url(\'/images/noise.png\')',
-      },
-      height: {
-        articlesNavbar: '64px',
+        noise: 'url(\'/images/interface/noise.png\')',
       },
       maxWidth: {
         '8xl': '90rem',
+      },
+      spacing: {
+        heightArticlesNavbar: '64px',
       },
       zIndex: {
         header: '50',

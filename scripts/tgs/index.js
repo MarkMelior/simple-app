@@ -1,11 +1,9 @@
-const fs = require('fs');
-const glob = require('glob');
-const path = require('path');
-const zlib = require('zlib');
+import fs from 'fs';
+import glob from 'glob';
+import path from 'path';
+import zlib from 'zlib';
 
-const [,, srcDirArg, destDirArg] = process.argv;
-const SRC_DIR = srcDirArg || path.resolve(__dirname, 'assets');
-const DEST_DIR = destDirArg || path.resolve(__dirname, 'converted');
+import { DEST_DIR, SRC_DIR } from './constants.js';
 
 if (!fs.existsSync(SRC_DIR)) {
   console.error(`❌ Source directory not found: ${SRC_DIR}`);

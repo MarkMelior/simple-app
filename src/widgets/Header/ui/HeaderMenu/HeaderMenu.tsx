@@ -1,9 +1,8 @@
 'use client';
 
 import { cn } from '@/shared/lib/common';
+import { AboutSection, ResourcesSection } from '@/shared/ui';
 
-import { AboutSection } from './AboutSection';
-import { ResourcesSection } from './ResourcesSection';
 import { headerSections } from '../../constants';
 import { useHeader } from '../../store';
 

@@ -1,12 +1,17 @@
 import { Header } from '@/widgets/(articles)/Header';
 
-export default async function ProjectLoading() {
+import { Spacer } from '@/shared/ui';
+
+export default async function ArticleLoading() {
   return (
-    <Header
-      description=""
-      isLoading={true}
-      note=""
-      title=""
-    />
+    <>
+      <Header
+        description=""
+        isLoading={true}
+        note=""
+        title=""
+      />
+      <Spacer y={32} />
+    </>
   );
 }

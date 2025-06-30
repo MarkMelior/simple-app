@@ -1,6 +1,6 @@
 import { cn } from '@/shared/lib/common';
-import type { CodeBlockProps } from '@/shared/ui/client';
-import { CodeBlock } from '@/shared/ui/client';
+import type { CodeBlockProps } from '@/shared/ui';
+import { CodeBlock } from '@/shared/ui';
 
 import type { FC, JSX } from 'react';
 

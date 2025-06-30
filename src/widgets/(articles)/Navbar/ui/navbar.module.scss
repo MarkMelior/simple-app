@@ -5,7 +5,7 @@
   top: 0;
   z-index: theme('zIndex.header');
   width: 100%;
-  height: theme('height.articlesNavbar');
+  height: theme('spacing.heightArticlesNavbar');
 
   @apply pointer-events-none;
 }

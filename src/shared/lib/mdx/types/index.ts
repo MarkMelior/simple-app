@@ -1,4 +1,5 @@
 import type { StackVariants } from '@/shared/constants';
+import type { IconNames } from '@/shared/icons/types';
 
 export interface MdxHeadline {
   href: string
@@ -6,14 +7,14 @@ export interface MdxHeadline {
   title: string
 }
 
-export interface ProjectMetadata {
-  createdAt: string
+export interface ArticleMetadata {
+  createdAt?: string
   description: string
-  link: string
-  note: string
+  icon?: IconNames
+  note?: string
   tags?: StackVariants[]
   title: string
-  updatedAt: string
+  updatedAt?: string
 }
 
 export interface CategoryMetadata {

@@ -32,7 +32,7 @@ export const GlowingBox: FC<GlowingBoxProps> = ({ children, classNames }) => {
   return (
     <div
       className={cn(
-        styles.glowingIconbox,
+        styles.wrapper,
         'rounded-md p-[1px] bg-default-100',
         classNames?.common,
         classNames?.border,

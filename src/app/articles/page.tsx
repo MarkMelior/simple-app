@@ -5,9 +5,10 @@ import { CategoryCard } from '@/widgets/(articles)/CategoryCard';
 import { Header } from '@/widgets/(articles)/Header';
 import { Headlines } from '@/widgets/(articles)/Headlines';
 
+import { PublicImages } from '@/shared/constants';
 import { MDXRemote, getMdx } from '@/shared/lib/mdx';
 
-import { ArticlesCategoryEnum, getProjectListByCategory } from '@/entities/articles';
+import { ArticlesCategoryEnum, getArticleListByCategory } from '@/entities/articles';
 
 import type { MDXComponents } from 'mdx/types';
 
@@ -21,7 +22,7 @@ export default async function Home() {
     ),
   };
 
-  const { projects } = await getProjectListByCategory(ArticlesCategoryEnum.CODE);
+  const { articles } = await getArticleListByCategory(ArticlesCategoryEnum.FRONTEND);
 
   return (
     <div>
@@ -30,7 +31,7 @@ export default async function Home() {
           <img
             alt="Banner"
             className="min-h-32 min-w-full object-cover xl:h-full"
-            src="/images/banner.jpg"
+            src={PublicImages.misc.Banner}
           />
         </div>
         {/* <Blackhole flip /> */}
@@ -49,10 +50,10 @@ export default async function Home() {
         <img
           alt="3д модель сердца"
           className="pointer-events-none z-20 max-w-36 select-none md:max-w-48"
-          src="/images/heart.png"
+          src={PublicImages.misc.Heart}
         />
       </div>
-      <CategoryCard className="mt-6" projects={projects.slice(0, 4)} />
+      <CategoryCard articles={articles.slice(0, 4)} className="mt-6" />
       <MDXRemote components={components} source={content} />
       <Headlines headlines={headlines} />
     </div>

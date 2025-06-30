@@ -4,8 +4,10 @@ import Link from 'next/link';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { cn } from '@/shared/lib/common';
+import { Emoji } from '@/shared/lib/emoji';
 import type { MdxHeadline } from '@/shared/lib/mdx';
 import { Portal } from '@/shared/lib/react';
+import { Flex } from '@/shared/ui';
 
 import styles from './headlines.module.scss';
 
@@ -122,9 +124,10 @@ export const Headlines: FC<HeadlinesProps> = ({ headlines }) => {
             />
           </div>
 
-          <div className="mb-4 block text-sm font-semibold text-default-900">
+          <Flex align="items-center" className="mb-4 block text-[0.9375rem] font-semibold text-default-900" gap="gap-1.5">
+            <Emoji emoji="💻" />
             Навигация по странице
-          </div>
+          </Flex>
 
           <ul className="flex grow flex-col gap-1 overflow-y-auto text-sm">
             {headlines.map(({ href, nested, title }) => (
