@@ -20,13 +20,13 @@ import type { FC } from 'react';
 const aboutLinks = [
   {
     description: 'Какой стек использую',
-    href: '/about/stack',
+    href: '/#технологии-которые-я-использую',
     icon: <BiLogoTypescript className="text-primary" size={17} />,
     title: 'Технологии',
   },
   {
     description: 'Какие курсы я прошел',
-    href: '/about/courses',
+    href: '/#пройденные-курсы',
     icon: <LuGraduationCap className="text-primary" size={16} />,
     title: 'Пройденные курсы',
   },
@@ -41,7 +41,7 @@ const aboutLinks = [
 
 const aboutSocials = [
   {
-    href: LinksMediaEnum.GitHub,
+    href: LinksMediaEnum.GitHubCurrentRepo,
     icon: <FaGithub size={18} />,
   },
 ];
@@ -79,8 +79,8 @@ export const AboutSection: FC<AboutSectionProps> = ({ isVisible }) => (
         uppercase={true}
         weight="font-semibold"
       >
-        Привет, я Mark Melior
-        <Emoji className="ml-1" emoji="👋" size={18} />
+        Немного про меня
+        <Emoji className="ml-1" emoji="😃" size={18} />
       </Text>
       <Flex
         className={styles.links}

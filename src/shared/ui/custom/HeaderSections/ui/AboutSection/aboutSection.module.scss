@@ -2,7 +2,7 @@
 
 .wrapper {
   gap: 8px;
-  width: 100%;
+  width: 704px; // Зависит от ширины в headerSections. Они должны быть одинаковые
   padding: 20px;
 
   @media (width >= 1180px) {

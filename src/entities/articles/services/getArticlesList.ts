@@ -7,14 +7,14 @@ import { type ArticleMetadata, type CategoryMetadata, getMdx } from '@/shared/li
 
 import { articlesDirectory } from '../constants';
 
-import type { ArticleData, ArticleListResponse, ArticlesCategoryEnum } from '../types';
+import type { ArticleData, ArticlesCategoryEnum, ArticlesListResponse } from '../types';
 import type { Dirent } from 'fs';
 
-export async function getArticleList(): Promise<ArticleListResponse[]> {
+export async function getArticlesList(): Promise<ArticlesListResponse[]> {
   const rootDir = path.join(process.cwd(), articlesDirectory);
   const categoryDirs = await fs.readdir(rootDir, { withFileTypes: true }) as Dirent<ArticlesCategoryEnum>[];
 
-  const articleListByCategory: ArticleListResponse[] = [];
+  const articleListByCategory: ArticlesListResponse[] = [];
 
   for (const dirent of categoryDirs) {
     if (dirent.isDirectory()) {

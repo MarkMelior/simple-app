@@ -1,8 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-
 import { cn } from '@/shared/lib/common';
+import { useScrolled } from '@/shared/lib/react';
 
 import styles from './navbar.module.scss';
 
@@ -13,27 +12,7 @@ interface NavbarScrollProps {
 }
 
 export const NavbarScroll: FC<NavbarScrollProps> = ({ children }) => {
-  const [isScrolled, setIsScrolled] = useState(true);
-
-  useEffect(() => {
-    setIsScrolled(false);
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 30) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+  const isScrolled = useScrolled();
 
   return (
     <div className={styles.wrapper}>

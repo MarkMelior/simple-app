@@ -1,2 +1,2 @@
 export { AboutSection } from './ui/AboutSection/AboutSection';
-export { ResourcesSection } from './ui/ResourcesSection/ResourcesSection';
+export { ArticlesSection } from './ui/ArticlesSection/ArticlesSection';

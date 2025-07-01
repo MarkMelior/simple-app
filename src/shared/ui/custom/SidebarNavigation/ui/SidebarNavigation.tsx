@@ -6,12 +6,12 @@ import { usePathname } from 'next/navigation';
 import { cn } from '@/shared/lib/common';
 import { Flex, IconComponent } from '@/shared/ui';
 
-import type { ArticleListResponse } from '@/entities/articles';
+import type { ArticlesListResponse } from '@/entities/articles';
 
 import type { FC } from 'react';
 
 interface SidebarNavigationProps {
-  items: ArticleListResponse[]
+  items: ArticlesListResponse[]
 }
 
 export const SidebarNavigation: FC<SidebarNavigationProps> = ({ items }) => {

@@ -1,11 +1,11 @@
-import { Button } from '@/shared/ui/client';
+import { FontRouge } from '@/shared/constants';
+import { cn } from '@/shared/lib/common';
+import { Text } from '@/shared/ui';
 
 import styles from './headerButtons.module.scss';
 
 export const HeaderButtons = () => (
-  <div className={styles.wrapper}>
-    <Button variant="faded">
-      Кнопка
-    </Button>
-  </div>
+  <Text className={cn(styles.wrapper, FontRouge.className)}>
+    Melior Web
+  </Text>
 );

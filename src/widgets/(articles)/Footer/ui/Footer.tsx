@@ -1,14 +1,14 @@
 import { Emoji } from '@/shared/lib/emoji';
 import { GithubEditLink } from '@/shared/lib/github';
 
-import { getArticleList } from '@/entities/articles';
+import { getArticlesList } from '@/entities/articles';
 
 import { FooterNavigation } from './FooterNavigation';
 
 import styles from './footer.module.scss';
 
 export const Footer = async () => {
-  const articleList = await getArticleList();
+  const articleList = await getArticlesList();
 
   return (
     <footer className="mt-12 text-sm leading-6">

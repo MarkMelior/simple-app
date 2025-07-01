@@ -6,12 +6,12 @@ import { useEffect, useState } from 'react';
 
 import { Button } from '@/shared/ui/client';
 
-import type { ArticleListResponse } from '@/entities/articles';
+import type { ArticlesListResponse } from '@/entities/articles';
 
 import type { FC } from 'react';
 
 interface FooterNavigationProps {
-  articleList: ArticleListResponse[]
+  articleList: ArticlesListResponse[]
 }
 
 type Page = { link: string, title: string };

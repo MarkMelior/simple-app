@@ -1,5 +1,7 @@
 import { Header } from '@/widgets/Header';
 
+import { Light } from '@/shared/ui';
+
 import type { ReactNode } from 'react';
 
 interface BaseLayoutProps {
@@ -8,6 +10,7 @@ interface BaseLayoutProps {
 
 export const BaseLayout = ({ children }: BaseLayoutProps) => (
   <>
+    <Light />
     <Header />
     {children}
     {/* <Footer /> */}

@@ -1,9 +1,10 @@
 'use client';
 
-import { type FC, type ReactNode, useState } from 'react';
+import { type FC, type ReactNode, useEffect, useState } from 'react';
 
 import { CrossIcon, FlaskIcon } from '@/shared/icons';
 import { cn } from '@/shared/lib/common';
+import { useScrolled } from '@/shared/lib/react';
 import type { SemanticColors } from '@/shared/types';
 import { Flex, Link } from '@/shared/ui';
 import { Button } from '@/shared/ui/client';
@@ -28,6 +29,8 @@ export const HeaderAlert: FC<HeaderAlertProps> = ({
   link,
   title,
 }) => {
+  const isScrolled = useScrolled(60);
+
   const { isAlertClosed, setIsAlertClosed } = useHeader();
   const [isClosing, setIsClosing] = useState(false);
 
@@ -42,6 +45,18 @@ export const HeaderAlert: FC<HeaderAlertProps> = ({
     return () => clearTimeout(timer);
   };
 
+  useEffect(() => {
+    if (!isScrolled) {
+      setIsClosing(false);
+
+      return;
+    }
+
+    if (isScrolled && isAlertClosed) {
+      handleClose();
+    }
+  }, [isScrolled]);
+
   return (
     <div className={styles.wrapper}>
       {children}
@@ -51,7 +66,7 @@ export const HeaderAlert: FC<HeaderAlertProps> = ({
           styles.alert,
           { [styles[color!]]: color },
           { [styles.closing]: isClosing },
-          { [styles.closed]: isAlertClosed },
+          { [styles.closed]: isScrolled && !isClosing && isAlertClosed },
         )}
       >
         <div className={styles.alertRow}>
@@ -68,13 +83,16 @@ export const HeaderAlert: FC<HeaderAlertProps> = ({
               </Link>
             ) : null}
             <Button
-              className="opacity-40"
+              className={cn(
+                'opacity-60',
+                { ['opacity-0 pointer-events-none select-none']: !isScrolled || isClosing },
+              )}
+              color="secondary"
               isIconOnly={true}
               onPress={handleClose}
               size="sm"
               startContent={(
                 <CrossIcon
-                  className="text-default-700"
                   height={12}
                   strokeWidth={2}
                   width={12}

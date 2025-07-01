@@ -3,6 +3,8 @@ import { Suspense } from 'react';
 import { FontDefault } from '@/shared/constants';
 import { Light, PageLoader } from '@/shared/ui';
 
+import { ScrollUp } from '@/features/ScrollUp';
+
 import { HeroUIProvider, NextThemesProvider } from './@core/providers';
 
 import type { Metadata } from 'next';
@@ -13,7 +15,7 @@ import '@/shared/styles/tailwind.css';
 
 export const metadata: Metadata = {
   description: 'Small and modern pet-projects. Hi, I\'am Mark Melior - Frontend developer.',
-  title: 'Melior | Frontend',
+  title: 'Melior :: Frontend',
 };
 
 type Props = {
@@ -37,6 +39,7 @@ const RootLayout = async ({ children }: Readonly<Props>) => (
           </Suspense>
           {/* <div id="modal-root" /> */}
           <div id="message-root" />
+          <ScrollUp />
         </HeroUIProvider>
       </NextThemesProvider>
 

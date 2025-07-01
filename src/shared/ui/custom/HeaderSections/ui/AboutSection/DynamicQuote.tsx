@@ -1,5 +1,6 @@
 'use client';
 
+import { useMemo } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import type { PublicImagePath } from '@/shared/constants';
@@ -22,9 +23,12 @@ const QUOTES: { text: string, image: PublicImagePath }[] = [
 
 export const DynamicQuote = () => {
   const { inView, ref } = useInView({ threshold: 0 });
-  const { key, text } = useTyping(QUOTES.map((q) => q.text), { active: inView });
 
-  const { image } = QUOTES[key];
+  const shuffledQuotes = useMemo(() => QUOTES.sort(() => Math.random() - 0.5), []);
+
+  const { key, text } = useTyping(shuffledQuotes.map(({ text }) => text), { active: inView });
+
+  const { image } = shuffledQuotes[key];
 
   return (
     <Blockquote

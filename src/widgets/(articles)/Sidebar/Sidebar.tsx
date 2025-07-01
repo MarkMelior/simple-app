@@ -2,10 +2,10 @@ import { LuFolderTree } from 'react-icons/lu';
 
 import { Button, SidebarNavigation } from '@/shared/ui/client';
 
-import { getArticleList } from '@/entities/articles';
+import { getArticlesList } from '@/entities/articles';
 
 export const Sidebar = async () => {
-  const items = await getArticleList();
+  const items = await getArticlesList();
 
   return (
     <div className="sticky top-0 z-10 mt-[-theme('spacing.heightArticlesNavbar')] hidden h-screen max-h-screen grid-rows-2 gap-3 lg:grid">
