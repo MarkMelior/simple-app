@@ -31,8 +31,6 @@
   background: transparent;
   border-radius: theme('borderRadius.lg');
 
-  $root: &;
-
   &:hover, &.opened {
     color: theme('colors.default-950');
     background: theme('colors.default-950/0.1');
@@ -49,6 +47,10 @@
 
 .button {
   animation: fade-in 0.4s ease-out forwards;
+
+  [class="light"] & {
+    color: theme('colors.secondary-300');
+  }
 }
 
 @keyframes fade-in {

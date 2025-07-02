@@ -1,5 +1,3 @@
-import { getArticlesList } from '@/entities/articles';
-
 import { HeaderAlert } from '../HeaderAlert/HeaderAlert';
 import { HeaderButtons } from '../HeaderButtons/HeaderButtons';
 import { HeaderLinks } from '../HeaderLinks/HeaderLinks';
@@ -31,21 +29,17 @@ import styles from './header.module.scss';
  * 6) Все ссылки
  */
 
-export const Header = async () => {
-  const articlesList = await getArticlesList();
-
-  return (
-    <header className={styles.header}>
-      <HeaderLogo />
-      <HeaderAlert
-        color="secondary"
-        // link={{ href: '#', text: 'Какие новости? 👀' }}
-        title={`[${process.env.NEXT_PUBLIC_APP_VERSION}] Сайт в разработке...`}
-      >
-        <HeaderLinks color="secondary" />
-      </HeaderAlert>
-      <HeaderButtons />
-      <HeaderMenu articlesList={articlesList} />
-    </header>
-  );
-};
+export const Header = () => (
+  <header className={styles.header}>
+    <HeaderLogo />
+    <HeaderAlert
+      color="secondary"
+      // link={{ href: '#', text: 'Какие новости? 👀' }}
+      title={`[${process.env.NEXT_PUBLIC_APP_VERSION}] Сайт в разработке...`}
+    >
+      <HeaderLinks color="secondary" />
+    </HeaderAlert>
+    <HeaderButtons />
+    <HeaderMenu />
+  </header>
+);

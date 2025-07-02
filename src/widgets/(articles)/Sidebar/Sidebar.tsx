@@ -1,8 +1,10 @@
 import { LuFolderTree } from 'react-icons/lu';
 
-import { Button, SidebarNavigation } from '@/shared/ui/client';
+import { Button } from '@/shared/ui/client';
 
 import { getArticlesList } from '@/entities/articles';
+
+import { SidebarNavigation } from './SidebarNavigation';
 
 export const Sidebar = async () => {
   const items = await getArticlesList();

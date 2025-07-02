@@ -18,24 +18,3 @@ body {
     background-size: 16px 16px;
   }
 }
-
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: theme('colors.default-100');
-}
-
-::-webkit-scrollbar-thumb {
-  background: theme('colors.default-300');
-  border-radius: 3px;
-
-  [class="light"] & {
-    background: theme('colors.default-400');
-  }
-
-  &:hover {
-    background: theme('colors.default-600');
-  }
-}

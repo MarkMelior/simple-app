@@ -34,6 +34,7 @@ const config: Config = {
         headerAlert: '45',
         light: '30',
         message: '40',
+        scrollUp: '50',
       },
     },
   },

@@ -2,8 +2,6 @@ export * from './Alert';
 export * from './Blackhole';
 export * from './Card';
 export * from './CardRotate';
-export * from './DownloadCvButton';
-export * from './HeaderSections';
 export * from './Icon';
 export * from './IconComponent';
 export * from './Layout';

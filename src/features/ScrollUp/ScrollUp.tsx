@@ -6,6 +6,8 @@ import { GoArrowUp } from 'react-icons/go';
 import { cn } from '@/shared/lib/common';
 import { Button } from '@/shared/ui/client';
 
+import styles from './scrollUp.module.scss';
+
 export const ScrollUp = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -39,7 +41,8 @@ export const ScrollUp = () => {
   return (
     <Button
       className={cn(
-        'bg-default-100 hover:bg-primary-500 fixed bottom-8 right-8 text-default-500 hover:text-default-900 z-50',
+        styles.wrapper,
+        'bg-default-100 hover:bg-primary-500 fixed bottom-8 right-8 text-default-500 dark:hover:text-default-900 z-50 hover:text-default-100',
         {
           'opacity-0 pointer-events-none': !isScrolled,
         },
