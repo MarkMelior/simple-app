@@ -8,6 +8,8 @@ import { getMetadataTitle } from '@/shared/lib/text';
 
 import { getArticle } from '@/entities/articles';
 
+import { ViewListener } from './ViewListener';
+
 import type { MDXComponents } from 'mdx/types';
 import type { Metadata } from 'next';
 
@@ -39,6 +41,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       />
       <MDXRemote components={components} source={content} />
       <Headlines headlines={headlines} />
+      <ViewListener slug={name} />
     </div>
   );
 }

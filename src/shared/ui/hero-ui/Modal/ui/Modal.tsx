@@ -10,18 +10,27 @@ type ModalProps = Pick<HeroModalProps,
   | 'isOpen'
   | 'onOpenChange'
   | 'backdrop'
+  | 'size'
+  | 'hideCloseButton'
 >;
 
 export const Modal: FC<ModalProps> = ({
   backdrop,
   children,
+  hideCloseButton,
   isOpen,
   onOpenChange,
+  size,
 }) => (
   <HeroModal
     backdrop={backdrop}
+    classNames={{
+      base: 'border border-default-200 bg-default-100/95',
+    }}
+    hideCloseButton={hideCloseButton}
     isOpen={isOpen}
     onOpenChange={onOpenChange}
+    size={size}
   >
     {children}
   </HeroModal>

@@ -1,46 +1,81 @@
-'use client'; // TODO
-import { ModalBody, ModalContent, ModalFooter, ModalHeader } from '@heroui/react'; // TODO
+'use client';
 
-import type { BaseModalProps } from '@/shared/lib/common';
-import { Button, Modal } from '@/shared/ui/client';
+import Link from 'next/link';
+import { FaSort } from 'react-icons/fa6';
 
+import { CategoryCard } from '@/widgets/(articles)/CategoryCard';
+
+import { AppRouteEnum } from '@/shared/constants';
+import { SettingsIcon } from '@/shared/icons';
+import { useModals } from '@/shared/lib/common';
+import { Emoji } from '@/shared/lib/emoji';
+import { Flex, Text } from '@/shared/ui';
+import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@/shared/ui/client';
+
+import type { ArticlesListResponse } from '../../types';
 import type { FC } from 'react';
 
-export const ArticlesModal: FC<BaseModalProps> = ({ isOpen, options, toggle }) => (
-  <Modal backdrop={options?.backdrop} isOpen={isOpen} onOpenChange={() => toggle()}>
-    <ModalContent>
-      {(onClose) => (
-        <>
-          <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
-          <ModalBody>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non
-              risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor
-              quam.
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non
-              risus hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor
-              quam.
-            </p>
-            <p>
-              Magna exercitation reprehenderit magna aute tempor cupidatat consequat elit dolor
-              adipisicing. Mollit dolor eiusmod sunt ex incididunt cillum quis. Velit duis sit
-              officia eiusmod Lorem aliqua enim laboris do dolor eiusmod. Et mollit incididunt
-              nisi consectetur esse laborum eiusmod pariatur proident Lorem eiusmod et. Culpa
-              deserunt nostrud ad veniam.
-            </p>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="danger" onPress={onClose} variant="light">
-              Close
-            </Button>
-            <Button color="primary" onPress={onClose}>
-              Action
-            </Button>
-          </ModalFooter>
-        </>
-      )}
-    </ModalContent>
-  </Modal>
-);
+interface ArticlesModalProps {
+  articlesList: ArticlesListResponse[]
+}
+
+export const ArticlesModal: FC<ArticlesModalProps> = ({ articlesList }) => {
+  const { isOpen, options, toggle } = useModals('articles');
+
+  return (
+    <Modal
+      backdrop={options?.backdrop}
+      hideCloseButton={true}
+      isOpen={isOpen}
+      onOpenChange={() => toggle()}
+      size="5xl"
+    >
+      <ModalContent>
+        {(onClose) => (
+          <>
+            <ModalHeader className="flex flex-col gap-1">
+              <Flex align="items-center" gap="gap-2">
+                <Button
+                  startContent={<SettingsIcon />}
+                  variant="flat"
+                >
+                  Фильтры
+                </Button>
+                <Button
+                  startContent={<FaSort />}
+                  variant="flat"
+                >
+                  Сортировка
+                </Button>
+                <Button
+                  as={Link}
+                  className="ml-auto"
+                  color="primary"
+                  href={AppRouteEnum.ARTICLES}
+                  onPress={onClose}
+                  variant="light"
+                >
+                  Перейти на страницу
+                </Button>
+              </Flex>
+            </ModalHeader>
+            <ModalBody>
+              {articlesList.map(({ articles, title }) => (
+                <Flex gap="gap-6" key={title} vertical={true}>
+                  <Text size="text-lg" weight="font-bold">{title}</Text>
+                  <CategoryCard articles={articles} variant="small" />
+                </Flex>
+              ))}
+            </ModalBody>
+            <ModalFooter className="flex justify-center py-6">
+              <Text color="text-default-500" size="text-sm">
+                Конец списка&nbsp;
+                <Emoji emoji="👀" />
+              </Text>
+            </ModalFooter>
+          </>
+        )}
+      </ModalContent>
+    </Modal>
+  );
+};

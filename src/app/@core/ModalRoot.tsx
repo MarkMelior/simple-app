@@ -1,18 +1,14 @@
-'use client';
-
-import { useModals } from '@/shared/lib/common';
-
-import { ArticlesModal } from '@/entities/articles';
+import { ArticlesModal, getArticlesList } from '@/entities/articles';
 
 /**
  * Регистрируем все модалки здесь
  */
-export const ModalRoot = () => {
-  const { isOpen: isArticlesOpen, options: articlesOptions, toggle: toggleArticles } = useModals('articles');
+export const ModalRoot = async () => {
+  const articlesList = await getArticlesList();
 
   return (
     <>
-      <ArticlesModal isOpen={isArticlesOpen} options={articlesOptions} toggle={toggleArticles} />
+      <ArticlesModal articlesList={articlesList} />
     </>
   );
 };

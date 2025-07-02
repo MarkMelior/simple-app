@@ -1,3 +1,4 @@
+import eye from './eye.json';
 import heart from './heart.json';
 import hi from './hi.json';
 import monitor from './monitor.json';
@@ -8,6 +9,7 @@ import smile from './smile.webp';
 export const emojiData = {
   '❇️': sber,
   '❤️': heart,
+  '👀': eye,
   '👋': hi,
   '💻': monitor,
   '😃': smile,
