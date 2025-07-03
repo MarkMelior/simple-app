@@ -1,14 +1,12 @@
-import { ArticlesModal, getArticlesList } from '@/entities/articles';
-
 /**
- * Регистрируем все модалки здесь
+ * Регистрируем все будущие клиентские модалки здесь
  */
-export const ModalRoot = async () => {
-  const articlesList = await getArticlesList();
+export const ModalRoot = async () =>
+// const articlesList = await getArticlesList();
 
-  return (
+  (
     <>
-      <ArticlesModal articlesList={articlesList} />
+      {/* <ArticlesModal articlesList={articlesList} /> */}
     </>
-  );
-};
+  )
+;

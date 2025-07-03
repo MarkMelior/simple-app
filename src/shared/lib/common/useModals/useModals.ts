@@ -4,6 +4,7 @@ import { create } from 'zustand';
 
 import type { ModalOptions } from './types';
 
+// articles больше не используется. Хук useModals сейчас просто для примера
 type ModalKey = 'articles';
 
 type ModalState = {

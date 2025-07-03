@@ -68,7 +68,7 @@ export const CodeBlock: FC<CodeBlockProps> = ({
             text={text}
           />
         ) : (
-          <div className="flex items-center justify-between whitespace-normal break-all rounded-t-md bg-default-100 px-3 py-0.5 text-center text-[0.825rem] text-default-600">
+          <div className="flex items-center justify-between whitespace-normal break-all rounded-t-md bg-default-200 px-3 py-0.5 text-center text-[0.825rem] text-default-600">
             {StackData[lang]?.icon || <TbFileUnknown size={20} />}
             {filename ? filename : StackData[lang]?.name}
             <CodeBlockButtons exampleLink={exampleLink} text={text} />

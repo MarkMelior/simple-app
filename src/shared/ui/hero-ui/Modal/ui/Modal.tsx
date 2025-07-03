@@ -12,14 +12,18 @@ type ModalProps = Pick<HeroModalProps,
   | 'backdrop'
   | 'size'
   | 'hideCloseButton'
+  | 'onClose'
+  | 'scrollBehavior'
 >;
 
 export const Modal: FC<ModalProps> = ({
-  backdrop,
+  backdrop = 'blur',
   children,
   hideCloseButton,
   isOpen,
+  onClose,
   onOpenChange,
+  scrollBehavior,
   size,
 }) => (
   <HeroModal
@@ -29,7 +33,9 @@ export const Modal: FC<ModalProps> = ({
     }}
     hideCloseButton={hideCloseButton}
     isOpen={isOpen}
+    onClose={onClose}
     onOpenChange={onOpenChange}
+    scrollBehavior={scrollBehavior}
     size={size}
   >
     {children}

@@ -1,10 +1,12 @@
 'use client';
 
-import { type FC, useMemo } from 'react';
+import Link from 'next/link';
+import { type FC } from 'react';
 import { TbMessageCircleUp } from 'react-icons/tb';
 
+import { AppRouteEnum } from '@/shared/constants';
 import { DownIcon } from '@/shared/icons';
-import { cn, typedEntries, useModals } from '@/shared/lib/common';
+import { cn, typedEntries } from '@/shared/lib/common';
 import { useTheme } from '@/shared/lib/theme';
 import type { SemanticColors } from '@/shared/types';
 import { Card, Flex } from '@/shared/ui';
@@ -15,6 +17,17 @@ import { useHeader } from '../../store';
 
 import styles from './headerLinks.module.scss';
 
+const headerLinks = [
+  {
+    href: AppRouteEnum.ARTICLES,
+    label: 'Статьи',
+  },
+  {
+    href: AppRouteEnum.HELP,
+    label: 'Помощь',
+  },
+];
+
 interface HeaderLinksProps {
   color?: SemanticColors
 }
@@ -24,22 +37,9 @@ export const HeaderLinks: FC<HeaderLinksProps> = ({ color = 'primary' }) => {
 
   const { Icon, toggleTheme } = useTheme();
 
-  const { toggle } = useModals('articles');
-
   const handleClose = () => {
     setActiveSection(null);
   };
-
-  const headerLinks = useMemo(() => [
-    {
-      label: 'Статьи',
-      onPress: () => toggle({ backdrop: 'blur' }),
-    },
-    {
-      label: 'Помощь',
-      onPress: () => { /* void */ },
-    },
-  ], []);
 
   return (
     <div className={styles.wrapper}>
@@ -60,12 +60,13 @@ export const HeaderLinks: FC<HeaderLinksProps> = ({ color = 'primary' }) => {
             </Button>
           );
         })}
-        {headerLinks.map(({ label, onPress }) => (
+        {headerLinks.map(({ href, label }) => (
           <Button
+            as={Link}
             className={styles.link}
+            href={href}
             key={label}
             onMouseEnter={handleClose}
-            onPress={onPress}
           >
             {label}
           </Button>
