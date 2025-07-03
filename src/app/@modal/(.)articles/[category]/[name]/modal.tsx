@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { FaWindowRestore } from 'react-icons/fa6';
 
 import { Emoji } from '@/shared/lib/emoji';
@@ -15,6 +15,7 @@ interface ModalClientProps {
 
 export const ModalClient: FC<ModalClientProps> = ({ children }) => {
   const router = useRouter();
+  const pathname = usePathname();
 
   return (
     <Modal
@@ -31,7 +32,7 @@ export const ModalClient: FC<ModalClientProps> = ({ children }) => {
               <Button
                 as="a"
                 color="primary"
-                href="/articles/frontend/app-router-i18n"
+                href={pathname}
                 startContent={<FaWindowRestore />}
                 variant="shadow"
               >

@@ -10,6 +10,8 @@ import { Emoji } from '@/shared/lib/emoji';
 import { Flex, Text } from '@/shared/ui';
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@/shared/ui/client';
 
+import { articlesSortName, useArticles } from '@/entities/articles';
+
 import type { FC, ReactNode } from 'react';
 
 interface ModalClientProps {
@@ -18,6 +20,7 @@ interface ModalClientProps {
 
 export const ModalClient: FC<ModalClientProps> = ({ children }) => {
   const router = useRouter();
+  const { sort: { field } } = useArticles();
 
   return (
     <Modal
@@ -33,21 +36,27 @@ export const ModalClient: FC<ModalClientProps> = ({ children }) => {
               <Flex align="items-center" gap="gap-2">
                 <Button
                   color="primary"
+                  isDisabled={true}
                   isIconOnly={true}
                   startContent={<TbSettings size={26} strokeWidth={1} />}
                   variant="light"
                 />
                 <Button
+                  isDisabled={true}
                   startContent={<FaFilter />}
                   variant="flat"
                 >
                   Фильтры
                 </Button>
                 <Button
+                  isDisabled={true}
                   startContent={<FaSort size={14} />}
                   variant="flat"
                 >
-                  Сортировка
+                  <Text>Сортировка:</Text>
+                  <Text color="text-default-500">
+                    {articlesSortName[field]}
+                  </Text>
                 </Button>
                 <Button
                   as="a"

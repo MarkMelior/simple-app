@@ -33,7 +33,7 @@ const config: Config = {
         header: '50',
         headerAlert: '45',
         light: '30',
-        message: '40',
+        message: '60',
         scrollUp: '50',
       },
     },
