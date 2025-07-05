@@ -1,3 +1,16 @@
+@mixin variant($primary-color, $secondary-color, $light-color) {
+  &::before {
+    background: radial-gradient(var(--spotlight-bg-size) circle at var(--mouse-x) var(--mouse-y), $light-color, transparent 40%);
+  }
+
+  &::after {
+    background: radial-gradient(var(--spotlight-border-size) circle at var(--mouse-x) var(--mouse-y),
+        $primary-color 0%,
+        $secondary-color 50%,
+        theme('colors.default-200') 100%, transparent 40%);
+  }
+}
+
 .wrapper {
   position: relative;
   height: fit-content;
@@ -29,17 +42,25 @@
   &::before {
     z-index: 9999;
 
-    background: radial-gradient(var(--spotlight-bg-size) circle at var(--mouse-x) var(--mouse-y), theme('colors.blue.500'), transparent 40%);
+    // background: radial-gradient(var(--spotlight-bg-size) circle at var(--mouse-x) var(--mouse-y), theme('colors.blue.500'), transparent 40%);
     opacity: var(--spotlight-bg-strength);
   }
 
   &::after {
     z-index: 1;
 
-    background: radial-gradient(var(--spotlight-border-size) circle at var(--mouse-x) var(--mouse-y),
-        theme('colors.blue.300') 0%,
-        theme('colors.purple.500') 50%,
-        theme('colors.black') 100%, transparent 40%);
+    // background: radial-gradient(var(--spotlight-border-size) circle at var(--mouse-x) var(--mouse-y),
+    //     theme('colors.blue.300') 0%,
+    //     theme('colors.purple.500') 50%,
+    //     theme('colors.default-200') 100%, transparent 40%);
     opacity: var(--spotlight-border-strength);
   }
+}
+
+.purple-gradient {
+  @include variant(theme('colors.blue.300'), theme('colors.purple.500'), theme('colors.blue.500'));
+}
+
+.soft-orange {
+  @include variant(theme('colors.yellow.300'), theme('colors.red.500'), theme('colors.orange.500'));
 }

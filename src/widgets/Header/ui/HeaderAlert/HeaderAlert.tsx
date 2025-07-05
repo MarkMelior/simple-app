@@ -1,9 +1,10 @@
 'use client';
 
-import { type FC, type ReactNode, useState } from 'react';
+import { type FC, type ReactNode, useEffect, useState } from 'react';
 
 import { CrossIcon, FlaskIcon } from '@/shared/icons';
 import { cn } from '@/shared/lib/common';
+import { ScrollThresholdEnum, useScrolled } from '@/shared/lib/react';
 import type { SemanticColors } from '@/shared/types';
 import { Flex, Link } from '@/shared/ui';
 import { Button } from '@/shared/ui/client';
@@ -28,19 +29,38 @@ export const HeaderAlert: FC<HeaderAlertProps> = ({
   link,
   title,
 }) => {
+  const isScrolled = useScrolled(ScrollThresholdEnum.MAIN_HEADER);
+
   const { isAlertClosed, setIsAlertClosed } = useHeader();
   const [isClosing, setIsClosing] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   const handleClose = () => {
     setIsClosing(true);
 
-    const timer = setTimeout(() => {
+    const id = setTimeout(() => {
       setIsAlertClosed(true);
       setIsClosing(false);
     }, 600);
 
-    return () => clearTimeout(timer);
+    return () => clearTimeout(id);
   };
+
+  useEffect(() => {
+    let id: NodeJS.Timeout;
+
+    if (!isScrolled) {
+      // FIXED: При перезагрузке страницы "моргает" alert
+      id = setTimeout(() => {
+        setIsVisible(true);
+        setIsClosing(false);
+      }, 30);
+    } else if (isScrolled && isAlertClosed) {
+      handleClose();
+    }
+
+    return () => clearTimeout(id);
+  }, [isScrolled]);
 
   return (
     <div className={styles.wrapper}>
@@ -51,7 +71,7 @@ export const HeaderAlert: FC<HeaderAlertProps> = ({
           styles.alert,
           { [styles[color!]]: color },
           { [styles.closing]: isClosing },
-          { [styles.closed]: isAlertClosed },
+          { [styles.opened]: isVisible && !(isScrolled && !isClosing && isAlertClosed) },
         )}
       >
         <div className={styles.alertRow}>
@@ -68,13 +88,16 @@ export const HeaderAlert: FC<HeaderAlertProps> = ({
               </Link>
             ) : null}
             <Button
-              className="opacity-40"
+              className={cn(
+                'opacity-60',
+                { ['opacity-0 pointer-events-none select-none']: !isScrolled || isClosing },
+              )}
+              color="secondary"
               isIconOnly={true}
               onPress={handleClose}
               size="sm"
               startContent={(
                 <CrossIcon
-                  className="text-default-700"
                   height={12}
                   strokeWidth={2}
                   width={12}

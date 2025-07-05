@@ -48,10 +48,10 @@ const blockquoteColors: Record<
 };
 
 const iconsBlockquote: Record<Variants, JSX.Element> = {
-  idea: <FaRegLightbulb size={22} />,
-  info: <IoMdInformationCircle size={22} />,
-  note: <CiStickyNote size={22} />,
-  quote: <BiSolidQuoteRight size={20} />,
+  idea: <FaRegLightbulb size={24} />,
+  info: <IoMdInformationCircle size={24} />,
+  note: <CiStickyNote size={24} />,
+  quote: <BiSolidQuoteRight size={22} />,
 };
 
 type Variants = 'idea' | 'info' | 'note' | 'quote';

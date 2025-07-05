@@ -1,9 +1,14 @@
 export enum AppRouteEnum {
   MAIN = '/',
   ARTICLES = '/articles',
-  // UI_CORE = '/ui-core',
+  HELP = '/help',
   // last
   NOT_FOUND = '/not-found',
+}
+
+export enum LocalStorageKeys {
+  HEADER_ALERT = 'header-alert',
+  ARTICLES = 'articles',
 }
 
 export const APP_NAME = 'Melior Web';

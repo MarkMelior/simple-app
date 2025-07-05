@@ -7,7 +7,7 @@ import { formatDate } from '@/shared/lib/text';
 import { Flex, IconComponent, StackButtons } from '@/shared/ui';
 import { Skeleton } from '@/shared/ui/client';
 
-import type { FC } from 'react';
+import type { FC, ReactNode } from 'react';
 
 interface HeaderProps {
   className?: string
@@ -18,14 +18,14 @@ interface HeaderProps {
     tags?: string
   }
   createdAt?: string
-  description: string
+  description: ReactNode
   icon?: IconNames
   isCenter?: 'sm' | 'md' | 'lg' | boolean
   isLoading?: boolean
   note?: string
   noteLink?: string
   tags?: StackVariants[]
-  title: string
+  title: ReactNode
   updatedAt?: string
 }
 
@@ -81,9 +81,9 @@ export const Header: FC<HeaderProps> = ({
           >
             {title}
           </h1>
-          <p className={cn('mt-2 text-lg text-default-600', classNames?.description)}>
+          <div className={cn('mt-2 text-lg text-default-600', classNames?.description)}>
             {description}
-          </p>
+          </div>
           {(formattedCreatedAt || formattedUpdatedAt) && (
             <p className={cn('mt-2 text-sm text-default-400', classNames?.description)}>
               {formattedCreatedAt && (

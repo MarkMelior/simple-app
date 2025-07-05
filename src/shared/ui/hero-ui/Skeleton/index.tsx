@@ -5,7 +5,7 @@ import { Skeleton as HeroSkeleton } from '@heroui/react';
 import type { SkeletonProps as HeroSkeletonProps } from '@heroui/react';
 import type { FC } from 'react';
 
-export type SkeletonProps = Pick<HeroSkeletonProps,
+type SkeletonProps = Pick<HeroSkeletonProps,
   | 'className'
 >;
 

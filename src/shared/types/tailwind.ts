@@ -13,6 +13,7 @@ type Luminance =
 
 type Direction = 't' | 'b' | 'l' | 'r' | 'bl' | 'br' | 'tl' | 'tr';
 type Size4Xl = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl';
+type Size9Xl = Size4Xl | '5xl' | '6xl' | '7xl' | '8xl' | '9xl';
 
 /**
  * Hero UI
@@ -94,9 +95,4 @@ export type TwWeight =
   | 'font-semibold'
   | 'font-bold';
 
-export type TwTextSize =
-  | 'text-xs'
-  | 'text-sm'
-  | 'text-base'
-  | 'text-lg'
-  | 'text-xl';
+export type TwTextSize = `text-${Exclude<Size9Xl, 'md'>}` | 'text-base';

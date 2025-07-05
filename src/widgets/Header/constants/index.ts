@@ -11,10 +11,4 @@ export const headerSections: Record<
 > = {
   about: { label: 'Обо мне', width: 704 },
   apps: { label: 'Мини-приложения', width: 700 },
-  resources: { label: 'Статьи', width: 736 },
 };
-
-export const headerLinks = [
-  // { href: '/articles', label: 'Статьи' },
-  { href: '/help', label: 'Помощь' },
-];

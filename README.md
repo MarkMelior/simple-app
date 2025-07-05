@@ -114,7 +114,7 @@
 - [getMdx()](/src/shared/lib/mdx/get-mdx.ts) - получение metadata и контента из mdx;
 - [getArticle(category, name)](/src/entities/articles/services/getArticle.ts) - получение проекта по категории и имени;
 - [getArticleListByCategory(category)](/src/entities/articles/services/getArticleListByCategory.ts) - получение всех статей в выбранной категории;
-- [getArticleList()](/src/entities/articles/services/getArticleList.ts) - получение всех категорий и статей;
+- [getArticlesList()](/src/entities/articles/services/getArticlesList.ts) - получение всех категорий и статей;
 - [mdx-components.tsx](/src/shared/lib/mdx/components/index.tsx) - настройка отображения mdx;
 - [MDXRemote](/src/shared/lib/mdx/mdx-remote.tsx) - общая настройка MDXRemote;
 - [rehypeExtractCodeProps](/src/shared/lib/mdx/plugins/rehype-extract-code-props.ts) - самописный rehype-плагин для чтения пар ключ-значение в коде.

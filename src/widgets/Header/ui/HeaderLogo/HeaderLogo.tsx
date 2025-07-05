@@ -8,7 +8,7 @@ import styles from './headerLogo.module.scss';
 
 export const HeaderLogo = () => (
   <div className={styles.wrapper}>
-    <Tooltip content={APP_NAME} placement="right">
+    <Tooltip content="<- Кубик льда" placement="right">
       <Link className={styles.logo} href={AppRouteEnum.MAIN} title={APP_NAME}>
         <Image
           alt={APP_NAME}

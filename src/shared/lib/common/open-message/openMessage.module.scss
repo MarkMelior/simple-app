@@ -11,17 +11,20 @@
   margin-bottom: 8px;
   padding: 15px 20px;
 
-  background: theme('backgroundImage.noise') repeat, theme('colors.default-50');
   border: 1px solid theme('colors.default-200');
   overflow: hidden;
 
   animation: fade-in-from-bottom 0.3s ease-out forwards;
-  backdrop-filter: var(--blur-md);
+  backdrop-filter: blur(theme('backdropBlur.lg'));
+
+  background-color: theme('colors.default-50/0.3');
+  background-image: theme('backgroundImage.noise');
+  background-repeat: repeat;
   user-select: none;
 
-  [class="dark"] & {
-    background: theme('backgroundImage.noise') repeat, theme('colors.default-50/0.3');
-    backdrop-filter: blur(theme('backdropBlur.lg'));
+  [class="light"] & {
+    backdrop-filter: blur(theme('backdropBlur.md'));
+    background-color: theme('colors.default-50');
   }
 
   @apply text-sm cursor-pointer border-b border-default-900/10 sm:max-w-xl max-w-none rounded-xl;
