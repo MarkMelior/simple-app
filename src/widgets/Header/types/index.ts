@@ -1,1 +1,1 @@
-export type HeaderSectionType = 'about' | 'resources' | 'apps' | null;
+export type HeaderSectionType = 'about' | 'apps' | null;

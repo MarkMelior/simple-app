@@ -10,7 +10,7 @@ import type {
 import type { ReactNode } from 'react';
 
 interface TextProps {
-  align?: 'text-center'
+  align?: 'text-center' | 'text-end'
   as?: AsComponent
   children: ReactNode
   className?: string

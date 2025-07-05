@@ -1,0 +1,365 @@
+@use '@/shared/styles/keyframes' as *;
+
+.resources {
+    gap: 16px;
+    width: 900px; // Зависит от ширины в headerSections. Они должны быть одинаковые
+    padding: 20px;
+    flex: none;
+
+    @media (width >= 1180px) {
+        animation: $header-section-animation;
+
+        &.visible {
+            display: flex !important;
+        }
+    }
+
+    @media (width <= 1179px) {
+        gap: 16px;
+        width: 100%;
+        margin-top: 16px;
+        padding: 0;
+    }
+
+    &Title {
+        margin-bottom: 20px;
+
+        font-size: 12px;
+        font-weight: 500;
+
+        color: #7B8193;
+        letter-spacing: 0.48px;
+        text-transform: uppercase;
+
+        @media (width <= 767px) {
+            display: none;
+        }
+    }
+
+    &Wrapper {
+        @media (width <= 1179px) {
+            width: 100%;
+            max-width: 50%;
+        }
+
+        @media (width <= 767px) {
+            max-width: 100%;
+        }
+    }
+
+    &Useful {
+        &Links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        &Link {
+            display: flex;
+            gap: 8px;
+            padding: 4px 16px 4px 4px;
+
+            border-radius: 8px;
+
+            transition: 100ms ease all;
+
+            $root: &;
+
+            &:hover {
+                background: #F9F9FB;
+            }
+
+            &.mobile-only {
+                @media (width >= 768px) {
+                    display: none;
+                }
+            }
+
+            &Icon {
+                display: block;
+                width: 16px;
+                height: 16px;
+
+                transition: 100ms ease all;
+                fill: #6788F3;
+
+                #{$root}:hover & {
+                    fill: #6788F3;
+                }
+            }
+
+            &Title {
+                font-size: 14px;
+                font-weight: 500;
+
+                color: #2E3038;
+
+                transition: 100ms ease all;
+
+                #{$root}:hover & {
+                    color: #6788F3;
+                }
+            }
+
+            &Description {
+                margin-top: 4px;
+
+                font-size: 12px;
+                font-weight: 400;
+
+                color: #7B8193;
+
+                @media (width <= 767px) {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    &Examples {
+        margin-top: 40px;
+
+        @media (width <= 767px) {
+            display: none;
+        }
+
+        &Links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        &Link {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 2px 16px 2px 2px;
+
+            border-radius: 8px;
+
+            $root: &;
+
+            &:hover {
+                background: #F9F9FB;
+            }
+
+            &Icon {
+                display: block;
+                width: 30px;
+                height: 30px;
+
+                transition: 100ms ease all;
+                fill: #35AAFF;
+                object-fit: contain;
+                stroke: transparent;
+
+                #{$root}:hover & {
+                    fill: #6788F3;
+                }
+
+                &Wrapper {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 36px;
+                    height: 36px;
+
+                    background: #FFF;
+                    border-radius: 6px;
+                    border: 0.5px solid #E4E5E9;
+                    flex: none;
+                }
+            }
+
+            &Title {
+                display: -webkit-box;
+
+                font-size: 14px;
+                font-weight: 500;
+
+                color: #2E3038;
+                overflow: hidden;
+
+                transition: 100ms ease all;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 1;
+
+                #{$root}:hover & {
+                    color: #6788F3;
+                }
+            }
+
+            &Description {
+                display: -webkit-box;
+                margin-top: 2px;
+
+                font-size: 12px;
+                font-weight: 400;
+
+                color: #7B8193;
+                overflow: hidden;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 1;
+            }
+        }
+
+        &More {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 2px 16px 2px 2px;
+
+            border-radius: 8px;
+
+            transition: 100ms ease all;
+
+            $root: &;
+
+            &:hover {
+                background: #F9F9FB;
+            }
+
+            &Icon {
+                display: block;
+                width: 20px;
+                height: 20px;
+
+                transition: 100ms ease all;
+                fill: #7B8193;
+
+                #{$root}:hover & {
+                    fill: #6788F3;
+                }
+
+                &Wrapper {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 36px;
+                    height: 36px;
+
+                    background: #F9F9FB;
+                    border-radius: 8px;
+                    flex: none;
+                }
+            }
+
+            &Title {
+                font-size: 14px;
+                font-weight: 500;
+
+                color: #7B8193;
+
+                transition: 100ms ease all;
+
+                #{$root}:hover & {
+                    color: #6788F3;
+                }
+            }
+        }
+    }
+
+    &Services {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        @media (width <= 1179px) {
+            max-width: 50%;
+        }
+
+        @media (width <= 767px) {
+            max-width: 100%;
+        }
+
+        &Service {
+            display: flex;
+            flex-direction: column;
+            min-height: 160px;
+            padding: 12px;
+
+            background: #FBFBFC;
+            border-radius: 8px;
+
+            transition: 100ms ease all;
+
+            $root: &;
+
+            &:hover {
+                background: #F4F4F6;
+            }
+
+            @media (width <= 767px) {
+                background: rgb(103 136 243 / 10%);
+            }
+
+            &Wrapper {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+            }
+
+            &Icon {
+                display: block;
+                width: 40px;
+                height: 40px;
+
+                border-radius: 4px;
+            }
+
+            &Arrow {
+                display: block;
+                width: 16px;
+                height: 16px;
+
+                opacity: 0.33;
+
+                transition: 100ms ease all;
+                fill: #2E3038;
+
+                #{$root}:hover & {
+                    opacity: 1;
+                }
+
+                @media (width <= 767px) {
+                    opacity: 1;
+                    fill: #6788F3;
+                }
+            }
+
+            &Title {
+                margin-top: auto;
+
+                font-size: 17px;
+                font-weight: 500;
+                line-height: 17px;
+
+                color: #2E3038;
+
+                transition: 100ms ease all;
+
+                #{$root}:hover & {
+                    color: #6788F3;
+                }
+
+                @media (width <= 767px) {
+                    color: #6788F3;
+                }
+            }
+
+            &Description {
+                margin-top: 4px;
+
+                font-size: 15px;
+                font-weight: 400;
+                line-height: 19px;
+
+                color: #4D505E;
+
+                @media (width <= 767px) {
+                    color: #6788F3;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,5 @@
+.wrapper {
+  [class="light"] & {
+    box-shadow: 6px 6px 16px 0 theme('colors.default-300/0.75');
+  }
+}

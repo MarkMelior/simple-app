@@ -1,0 +1,19 @@
+@use '@/shared/styles/mixin' as *;
+
+.footer {
+  @apply text-sm py-4 px-8 mt-10 text-default-500 border-t border-default-300/15 hover:border-default-300/30 transition-colors;
+
+  position: relative;
+  background-color: theme('colors.default-50');
+
+  background-image: theme('backgroundImage.noise');
+  background-repeat: repeat;
+
+  [class="light"] & {
+    background-color: theme('colors.default-100');
+  }
+
+  &::before {
+    @include gradient-line-before('top');
+  }
+}

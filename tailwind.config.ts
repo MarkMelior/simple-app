@@ -20,6 +20,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      animation: {
+        'fade-in-opacity': 'fade-in-opacity 0.15s ease-out forwards',
+      },
       backgroundImage: {
         noise: 'url(\'/images/interface/noise.png\')',
       },
@@ -33,7 +36,8 @@ const config: Config = {
         header: '50',
         headerAlert: '45',
         light: '30',
-        message: '40',
+        message: '60',
+        scrollUp: '50',
       },
     },
   },

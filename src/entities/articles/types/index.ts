@@ -13,7 +13,7 @@ export interface ArticleData extends ArticleMetadata {
   slug: string
 }
 
-export interface ArticleListResponse {
+export interface ArticlesListResponse {
   articles: ArticleData[]
   link: string
   slug: ArticlesCategoryEnum

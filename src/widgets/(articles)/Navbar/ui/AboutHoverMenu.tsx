@@ -18,10 +18,7 @@ export const AboutHoverMenu = () => {
       onMouseEnter={() => setIsHoveredMenu(true)}
       onMouseLeave={() => setIsHoveredMenu(false)}
     >
-      {/* // ? Может убрать content */}
-      <div className={styles.content}>
-        <AboutSection isVisible={isVisible} />
-      </div>
+      <AboutSection className={styles.content} isVisible={isVisible} />
     </div>
   );
 };

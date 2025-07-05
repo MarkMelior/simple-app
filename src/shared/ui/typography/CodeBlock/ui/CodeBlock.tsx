@@ -57,11 +57,8 @@ export const CodeBlock: FC<CodeBlockProps> = ({
       )}
       <GlowingBox
         classNames={{
-          background: cn(
-            'grid rounded-md overflow-hidden border border-default-100 h-fit relative group/buttons code-block__wrapper',
-            FontDefault.className,
-          ),
-          border: cn(className, 'bg-default-200'),
+          background: cn('grid h-fit group/buttons code-block__wrapper', FontDefault.className),
+          foreground: className,
         }}
       >
         {hideHeader ? (
@@ -71,7 +68,7 @@ export const CodeBlock: FC<CodeBlockProps> = ({
             text={text}
           />
         ) : (
-          <div className="flex items-center justify-between whitespace-normal break-all bg-default-100 px-3 py-0.5 text-center text-[0.825rem] text-default-600">
+          <div className="flex items-center justify-between whitespace-normal break-all rounded-t-md bg-default-200 px-3 py-0.5 text-center text-[0.825rem] text-default-600">
             {StackData[lang]?.icon || <TbFileUnknown size={20} />}
             {filename ? filename : StackData[lang]?.name}
             <CodeBlockButtons exampleLink={exampleLink} text={text} />
@@ -86,7 +83,7 @@ export const CodeBlock: FC<CodeBlockProps> = ({
             className: 'bg-inherit',
           }}
           customStyle={{
-            borderRadius: 0,
+            borderRadius: hideHeader ? '6px' : '0 0 6px 6px',
             margin: 0,
             textShadow: 'none',
           }}

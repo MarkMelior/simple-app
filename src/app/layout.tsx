@@ -2,44 +2,56 @@ import { Suspense } from 'react';
 
 import { FontDefault } from '@/shared/constants';
 import { Light, PageLoader } from '@/shared/ui';
+import { ScrollShadow } from '@/shared/ui/client';
 
-import { HeroUIProvider, NextThemesProvider } from './@core/providers';
+import { ScrollUp } from '@/features/ScrollUp';
+
+import { ModalRoot } from '@/core/modal-root';
+import { HeroUIProvider, NextThemesProvider } from '@/core/providers';
 
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 
 import './globals.scss';
 import '@/shared/styles/tailwind.css';
+import '@/shared/styles/animations.scss';
 
 export const metadata: Metadata = {
   description: 'Small and modern pet-projects. Hi, I\'am Mark Melior - Frontend developer.',
-  title: 'Melior | Frontend',
+  title: 'Melior :: Frontend',
 };
 
 type Props = {
   children: ReactNode
+  modal: ReactNode /* ./@modal */
 };
 
-const RootLayout = async ({ children }: Readonly<Props>) => (
+const RootLayout = async ({ children, modal }: Readonly<Props>) => (
   <html lang="ru" suppressHydrationWarning={true}>
     <body className={FontDefault.className}>
       <NextThemesProvider>
         <HeroUIProvider>
-          <Suspense
-            fallback={(
-              <>
-                <Light />
-                <PageLoader fullScreen={true} />
-              </>
-            )}
-          >
-            {children}
-          </Suspense>
-          {/* <div id="modal-root" /> */}
-          <div id="message-root" />
+          <ScrollShadow>
+            <Suspense
+              fallback={(
+                <>
+                  <Light />
+                  <PageLoader fullScreen={true} />
+                </>
+              )}
+            >
+              {children}
+            </Suspense>
+
+            {/*  */}
+            <ScrollUp />
+            <div id="message-root" />
+            {modal}
+            <ModalRoot />
+
+          </ScrollShadow>
         </HeroUIProvider>
       </NextThemesProvider>
-
     </body>
   </html>
 );

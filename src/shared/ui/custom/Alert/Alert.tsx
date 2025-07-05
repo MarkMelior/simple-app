@@ -70,7 +70,6 @@ export const Alert = ({
           className={styles.button}
           isIconOnly={true}
           onPress={onClose}
-          // variant="none"
         >
           <CrossIcon />
         </Button>

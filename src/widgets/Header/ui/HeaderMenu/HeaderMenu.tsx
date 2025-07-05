@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/shared/lib/common';
-import { AboutSection, ResourcesSection } from '@/shared/ui';
+import { AboutSection, MiniAppSection } from '@/shared/ui';
 
 import { headerSections } from '../../constants';
 import { useHeader } from '../../store';
@@ -26,8 +26,7 @@ export const HeaderMenu = () => {
     >
       <div className={styles.content}>
         <AboutSection isVisible={isVisible('about')} />
-        {/* <AppsSection isVisible={isVisible('apps')} /> */}
-        <ResourcesSection isVisible={isVisible('resources')} />
+        <MiniAppSection isVisible={isVisible('apps')} />
       </div>
     </div>
   );

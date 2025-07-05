@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { APP_NAME } from '@/shared/constants';
+import { APP_NAME, AppRouteEnum } from '@/shared/constants';
 import { Logo } from '@/shared/icons';
 import { Emoji } from '@/shared/lib/emoji';
 import { Button } from '@/shared/ui/client';
@@ -10,14 +10,20 @@ import { AboutHoverMenu } from './AboutHoverMenu';
 import { NavbarScroll } from './NavbarScroll';
 import { ThemeSwitcher } from './ThemeSwitcher';
 
-export const Navbar = () => (
+import type { FC } from 'react';
+
+interface NavbarProps {
+  className?: string
+}
+
+export const Navbar: FC<NavbarProps> = ({ className }) => (
   <>
-    <NavbarScroll>
+    <NavbarScroll className={className}>
       <Logo changeOnClick={true} className="scale-80" />
       <Button
         as={Link}
         className="ml-1 flex h-min items-center gap-0 rounded-full bg-primary-600/10 px-3 py-1 text-xs font-medium leading-5 text-primary-600 hover:bg-primary-600/20"
-        href="/"
+        href={AppRouteEnum.MAIN}
       >
         <span>
           <Emoji emoji="🚀" />
