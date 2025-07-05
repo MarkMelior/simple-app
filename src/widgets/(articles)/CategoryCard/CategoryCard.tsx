@@ -35,7 +35,7 @@ export const CategoryCard: FC<CategoryCardProps> = ({
     className,
   )}
   >
-    {articles.map(({ createdAt, description, icon, link, slug, tags, title, updatedAt }) => (
+    {articles.map(({ category, createdAt, description, icon, link, slug, tags, title, updatedAt }) => (
       <GlowingBox
         borderStrengthHover={1}
         classNames={{ background: 'h-full', foreground: 'h-full transition hover:scale-[1.01] active:scale-[0.99]' }}
@@ -45,8 +45,7 @@ export const CategoryCard: FC<CategoryCardProps> = ({
       >
         <Link
           className="flex h-full flex-col gap-2 px-6 py-4"
-          href={link ?? '#'}
-          isHardOpen={openWithoutModal}
+          href={openWithoutModal ? link ?? '' : `?category=${category}&name=${slug}`}
           scroll={false}
           variant="default"
         >

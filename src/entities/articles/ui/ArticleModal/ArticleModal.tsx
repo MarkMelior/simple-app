@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { FaWindowRestore } from 'react-icons/fa6';
 
@@ -9,11 +10,12 @@ import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from
 
 import type { FC, ReactNode } from 'react';
 
-interface ModalClientProps {
+interface ArticleModalProps {
   children: ReactNode
+  link: string
 }
 
-export const ModalClient: FC<ModalClientProps> = ({ children }) => {
+export const ArticleModal: FC<ArticleModalProps> = ({ children, link }) => {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -21,7 +23,7 @@ export const ModalClient: FC<ModalClientProps> = ({ children }) => {
     <Modal
       hideCloseButton={true}
       isOpen={true}
-      onClose={() => router.back()}
+      onClose={() => router.replace(pathname, { scroll: false })}
       scrollBehavior="outside"
       size="5xl"
     >
@@ -30,9 +32,9 @@ export const ModalClient: FC<ModalClientProps> = ({ children }) => {
           <>
             <ModalHeader className="flex gap-2">
               <Button
-                as="a"
+                as={Link}
                 color="primary"
-                href={pathname}
+                href={link}
                 startContent={<FaWindowRestore />}
                 variant="shadow"
               >

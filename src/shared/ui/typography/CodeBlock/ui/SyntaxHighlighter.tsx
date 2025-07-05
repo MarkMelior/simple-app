@@ -1,5 +1,6 @@
 import { PrismLight } from 'react-syntax-highlighter';
 import bash from 'react-syntax-highlighter/dist/esm/languages/prism/bash';
+import diff from 'react-syntax-highlighter/dist/esm/languages/prism/diff';
 import markdown from 'react-syntax-highlighter/dist/esm/languages/prism/markdown';
 import tsx from 'react-syntax-highlighter/dist/esm/languages/prism/tsx';
 import typescript from 'react-syntax-highlighter/dist/esm/languages/prism/typescript';
@@ -11,6 +12,7 @@ PrismLight.registerLanguage('tsx', tsx);
 PrismLight.registerLanguage('bash', bash);
 PrismLight.registerLanguage('typescript', typescript);
 PrismLight.registerLanguage('markdown', markdown);
+PrismLight.registerLanguage('diff', diff);
 
 export const SyntaxHighlighter: FC<SyntaxHighlighterProps> = ({
   children,

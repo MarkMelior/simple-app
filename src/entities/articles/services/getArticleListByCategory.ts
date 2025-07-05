@@ -38,6 +38,7 @@ export async function getArticleListByCategory(
 
         return {
           ...articleMetadata,
+          category: category,
           link: `/articles/${category}/${dirent.name}`,
           slug: dirent.name,
         };

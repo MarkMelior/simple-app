@@ -8,4 +8,6 @@ interface ScrollShadowProps {
   children: ReactNode
 }
 
-export const ScrollShadow: FC<ScrollShadowProps> = ({ children }) => <ScrollShadowNext>{children}</ScrollShadowNext>;
+export const ScrollShadow: FC<ScrollShadowProps> = ({ children }) => (
+  <ScrollShadowNext className="overflow-visible">{children}</ScrollShadowNext>
+);

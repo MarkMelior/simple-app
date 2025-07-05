@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { FaWindowRestore } from 'react-icons/fa';
 import { FaFilter, FaSort } from 'react-icons/fa6';
 import { TbSettings } from 'react-icons/tb';
@@ -59,7 +60,7 @@ export const CategoriesArticleModal: FC<CategoriesArticleModalProps> = ({ childr
                   </Text>
                 </Button>
                 <Button
-                  as="a"
+                  as={Link}
                   className="ml-auto"
                   color="primary"
                   endContent={<FaWindowRestore size={14} />}

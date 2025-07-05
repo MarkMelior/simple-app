@@ -41,9 +41,9 @@ const blockquoteColors: Record<
     icon: 'text-success-500',
   },
   warning: {
-    background: 'from-warning-600/10',
-    divider: 'bg-warning-500',
-    icon: 'text-warning-500',
+    background: 'from-orange-400/10',
+    divider: 'bg-orange-300',
+    icon: 'text-orange-300',
   },
 };
 

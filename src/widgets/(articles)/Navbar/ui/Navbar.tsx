@@ -13,12 +13,12 @@ import { ThemeSwitcher } from './ThemeSwitcher';
 import type { FC } from 'react';
 
 interface NavbarProps {
-  className?: string
+  maxWidth?: string
 }
 
-export const Navbar: FC<NavbarProps> = ({ className }) => (
+export const Navbar: FC<NavbarProps> = ({ maxWidth = 'max-w-8xl' }) => (
   <>
-    <NavbarScroll className={className}>
+    <NavbarScroll className={maxWidth}>
       <Logo changeOnClick={true} className="scale-80" />
       <Button
         as={Link}
@@ -46,6 +46,6 @@ export const Navbar: FC<NavbarProps> = ({ className }) => (
         <AboutHoverButton />
       </div>
     </NavbarScroll>
-    <AboutHoverMenu />
+    <AboutHoverMenu className={maxWidth} />
   </>
 );
