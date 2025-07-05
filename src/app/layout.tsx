@@ -23,10 +23,9 @@ export const metadata: Metadata = {
 
 type Props = {
   children: ReactNode
-  modal: ReactNode /* ./@modal */
 };
 
-const RootLayout = async ({ children, modal }: Readonly<Props>) => (
+const RootLayout = async ({ children }: Readonly<Props>) => (
   <html lang="ru" suppressHydrationWarning={true}>
     <body className={FontDefault.className}>
       <NextThemesProvider>
@@ -43,10 +42,8 @@ const RootLayout = async ({ children, modal }: Readonly<Props>) => (
               {children}
             </Suspense>
 
-            {/*  */}
             <ScrollUp />
             <div id="message-root" />
-            {modal}
             <ModalRoot />
 
           </ScrollShadow>

@@ -21,7 +21,7 @@ interface CategoriesArticleModalProps {
 
 export const CategoriesArticleModal: FC<CategoriesArticleModalProps> = ({ children }) => {
   const { sort: { field } } = useArticles();
-  const { isOpen, toggle } = useModals('articles');
+  const { isOpen, toggle } = useModals('articlesCategories');
 
   return (
     <Modal

@@ -54,7 +54,7 @@ export const HeaderAlert: FC<HeaderAlertProps> = ({
       id = setTimeout(() => {
         setIsVisible(true);
         setIsClosing(false);
-      }, 30);
+      }, 100);
     } else if (isScrolled && isAlertClosed) {
       handleClose();
     }

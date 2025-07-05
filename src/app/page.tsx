@@ -82,7 +82,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
             Мои статьи
             <LongArrowRightIcon className="-mb-1" />
           </Text>
-          <CategoryCard articles={articles.slice(0, 4)} />
+          <CategoryCard articles={articles.slice(0, 4)} openInsideModal={true} />
         </Flex>
         <MDXRemote components={components} source={content} />
       </div>

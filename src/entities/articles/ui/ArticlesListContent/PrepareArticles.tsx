@@ -4,6 +4,8 @@ import { type FC, useMemo } from 'react';
 
 import { CategoryCard } from '@/widgets/(articles)/CategoryCard';
 
+import { useModals } from '@/shared/lib/common';
+
 import { type ArticleData, useArticles } from '@/entities/articles';
 
 interface PrepareArticlesProps {
@@ -13,6 +15,7 @@ interface PrepareArticlesProps {
 
 export const PrepareArticles: FC<PrepareArticlesProps> = ({ articles, isFullPage }) => {
   const { filters, settings, sort } = useArticles();
+  const { close } = useModals('articlesCategories');
 
   const prepareArticlesData = useMemo(() => {
     const test = '';
@@ -24,7 +27,7 @@ export const PrepareArticles: FC<PrepareArticlesProps> = ({ articles, isFullPage
     <CategoryCard
       articles={prepareArticlesData}
       cols={isFullPage ? '3' : '2'}
-      openWithoutModal={isFullPage}
+      {...(isFullPage ? {} : { onClick: close })}
     />
   );
 };

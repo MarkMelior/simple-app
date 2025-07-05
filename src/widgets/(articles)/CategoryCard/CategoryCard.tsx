@@ -16,7 +16,8 @@ interface CategoryCardProps {
   className?: string
   cols?: '2' | '3'
   glowingSize?: number
-  openWithoutModal?: boolean
+  onClick?: () => void
+  openInsideModal?: boolean
 }
 
 export const CategoryCard: FC<CategoryCardProps> = ({
@@ -24,7 +25,8 @@ export const CategoryCard: FC<CategoryCardProps> = ({
   className,
   cols = '2',
   glowingSize,
-  openWithoutModal,
+  onClick,
+  openInsideModal,
 }) => (
   <div className={cn(
     'grid gap-4',
@@ -45,7 +47,8 @@ export const CategoryCard: FC<CategoryCardProps> = ({
       >
         <Link
           className="flex h-full flex-col gap-2 px-6 py-4"
-          href={openWithoutModal ? link ?? '' : `?category=${category}&name=${slug}`}
+          href={openInsideModal ? `?category=${category}&name=${slug}` : link ?? ''}
+          onClick={onClick}
           scroll={false}
           variant="default"
         >

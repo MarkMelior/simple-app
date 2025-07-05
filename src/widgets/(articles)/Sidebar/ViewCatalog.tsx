@@ -6,7 +6,7 @@ import { useModals } from '@/shared/lib/common';
 import { Button } from '@/shared/ui/client';
 
 export const ViewCatalog = () => {
-  const { toggle } = useModals('articles');
+  const { toggle } = useModals('articlesCategories');
 
   return (
     <Button
