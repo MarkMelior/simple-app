@@ -4,8 +4,7 @@ import { create } from 'zustand';
 
 import type { ModalOptions } from './types';
 
-// articles больше не используется. Хук useModals сейчас просто для примера
-type ModalKey = 'articles';
+type ModalKey = 'articlesCategories';
 
 type ModalState = {
   isOpen: boolean
@@ -15,9 +14,11 @@ type ModalState = {
 type ModalStore = {
   modals: Record<ModalKey, ModalState>
   toggle: (key: ModalKey, opts?: ModalOptions) => void
+  close: (key: ModalKey) => void
 };
 
 const useModalsStore = create<ModalStore>((set) => ({
+  close: (key) => set((state) => ({ modals: { ...state.modals, [key]: { isOpen: false, options: {} } } })),
   modals: {} as ModalStore['modals'],
   toggle: (key, options = {}) =>
     set((state) => {
@@ -37,10 +38,12 @@ const useModalsStore = create<ModalStore>((set) => ({
 export function useModals(key: ModalKey) {
   const modals = useModalsStore((state) => state.modals);
   const toggleModal = useModalsStore((state) => state.toggle);
+  const closeModal = useModalsStore((state) => state.close);
 
   const { isOpen, options } = modals[key] ?? { isOpen: false, options: {} };
 
   return {
+    close: () => closeModal(key),
     isOpen,
     options,
     toggle: (options?: ModalOptions) => toggleModal(key, options),

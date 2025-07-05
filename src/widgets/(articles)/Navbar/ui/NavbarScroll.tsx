@@ -19,7 +19,7 @@ export const NavbarScroll: FC<NavbarScrollProps> = ({ children, className }) => 
   return (
     <Flex
       align="items-center"
-      className={cn(styles.wrapper, 'max-w-8xl', className)}
+      className={cn(styles.wrapper, className)}
       justify="justify-end"
     >
       <div className={cn(styles.navbar, { [styles.navbarOpen]: isScrolled })}>

@@ -42,9 +42,9 @@ export async function generateMetadata({ params }: ArticleCategoryPageProps): Pr
   const { articles, category } = await getArticleListByCategory(categoryParams);
 
   return {
-    description: `Категория: ${category.title}. Статьи: ${articles
+    description: `Статьи по теме "${category.title}" — практические гайды, рекомендации и разборы: ${articles
       .map((article) => article.title)
-      .join(', ')}.`,
+      .join(', ')}. Изучайте современные подходы, улучшайте навыки и находите решения для своих проектов.`,
     title: getMetadataTitle(category.title),
   };
 }

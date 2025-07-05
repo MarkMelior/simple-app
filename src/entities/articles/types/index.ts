@@ -9,6 +9,7 @@ export interface ArticleResponse {
 }
 
 export interface ArticleData extends ArticleMetadata {
+  category: ArticlesCategoryEnum
   link: string
   slug: string
 }

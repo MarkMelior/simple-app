@@ -40,7 +40,7 @@
   }
 
   &::before {
-    z-index: 9999;
+    z-index: 10;
 
     // background: radial-gradient(var(--spotlight-bg-size) circle at var(--mouse-x) var(--mouse-y), theme('colors.blue.500'), transparent 40%);
     opacity: var(--spotlight-bg-strength);

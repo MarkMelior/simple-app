@@ -1,5 +1,5 @@
-import { Emoji } from '@/shared/lib/emoji';
 import { GithubEditLink } from '@/shared/lib/github';
+import { FooterContent } from '@/shared/ui';
 
 import { getArticlesList } from '@/entities/articles';
 
@@ -14,13 +14,7 @@ export const Footer = async () => {
     <footer className="mt-12 text-sm leading-6">
       <FooterNavigation articleList={articleList} />
       <div className={styles.content}>
-        <div className="sm:flex">
-          <p>Копирайт © 2025 Mark Melior</p>
-          <p className="dark:border-default-100 sm:ml-4 sm:border-l sm:border-default-200 sm:pl-4">
-            Сделано с&nbsp;
-            <Emoji emoji="❤️" />
-          </p>
-        </div>
+        <FooterContent />
         <GithubEditLink />
       </div>
     </footer>

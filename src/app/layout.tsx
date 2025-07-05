@@ -17,16 +17,15 @@ import '@/shared/styles/tailwind.css';
 import '@/shared/styles/animations.scss';
 
 export const metadata: Metadata = {
-  description: 'Small and modern pet-projects. Hi, I\'am Mark Melior - Frontend developer.',
+  description: '❤️ Лучший сайт-портфолио, мини-приложения, блог на mdx. Я Frontend-разработчик из Сбер, здесь я делюсь своим опытом из разных сфер и вдохновляю людей на новые идеи (:',
   title: 'Melior :: Frontend',
 };
 
 type Props = {
   children: ReactNode
-  modal: ReactNode /* ./@modal */
 };
 
-const RootLayout = async ({ children, modal }: Readonly<Props>) => (
+const RootLayout = async ({ children }: Readonly<Props>) => (
   <html lang="ru" suppressHydrationWarning={true}>
     <body className={FontDefault.className}>
       <NextThemesProvider>
@@ -43,10 +42,8 @@ const RootLayout = async ({ children, modal }: Readonly<Props>) => (
               {children}
             </Suspense>
 
-            {/*  */}
             <ScrollUp />
             <div id="message-root" />
-            {modal}
             <ModalRoot />
 
           </ScrollShadow>
