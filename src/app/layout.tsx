@@ -17,7 +17,7 @@ import '@/shared/styles/tailwind.css';
 import '@/shared/styles/animations.scss';
 
 export const metadata: Metadata = {
-  description: 'Small and modern pet-projects. Hi, I\'am Mark Melior - Frontend developer.',
+  description: '❤️ Лучший сайт-портфолио, мини-приложения, блог на mdx. Я Frontend-разработчик из Сбер, здесь я делюсь своим опытом из разных сфер и вдохновляю людей на новые идеи (:',
   title: 'Melior :: Frontend',
 };
 

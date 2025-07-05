@@ -18,19 +18,22 @@ import ArticlePage from './articles/[category]/[name]/page';
 
 import type { MDXComponents } from 'mdx/types';
 
-export default async function Home({ searchParams }: { searchParams: Promise<{ category: string, name: string }> }) {
+interface HomeProps {
+  searchParams?: Promise<{ category?: string, name?: string }>
+}
+
+export default async function Home({ searchParams }: HomeProps) {
   const dir = path.join(process.cwd(), 'src', 'app', 'index.mdx');
   const { content } = await getMdx(dir);
+  const { articles } = await getArticleListByCategory(ArticlesCategoryEnum.FRONTEND);
 
-  const params = await searchParams;
+  const search = await searchParams;
 
   const components: MDXComponents = {
     StackButtons: dynamic(() =>
       import('@/shared/ui').then((mod) => mod.StackButtons),
     ),
   };
-
-  const { articles } = await getArticleListByCategory(ArticlesCategoryEnum.FRONTEND);
 
   return (
     <MainLayout>
@@ -86,10 +89,10 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
         </Flex>
         <MDXRemote components={components} source={content} />
       </div>
-
-      {params?.category && params?.name ? (
-        <ArticleModal link={`${AppRouteEnum.ARTICLES}/${params.category}/${params.name}`}>
-          <ArticlePage params={Promise.resolve({ category: params.category, name: params.name })} />
+      {/* TODO: Может вынести в Layout? Проблема в то, что в Layout нет searchParams */}
+      {search?.category && search?.name ? (
+        <ArticleModal link={`${AppRouteEnum.ARTICLES}/${search.category}/${search.name}`}>
+          <ArticlePage params={Promise.resolve({ category: search.category, name: search.name })} />
         </ArticleModal>
       ) : null}
     </MainLayout>

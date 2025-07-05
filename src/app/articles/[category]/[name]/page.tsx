@@ -65,9 +65,7 @@ export async function generateMetadata({
   const { metadata } = await getArticle(category, name);
 
   return {
-    description: `${metadata.description}. Технологии: ${metadata.tags?.join(
-      ', ',
-    )}`,
+    description: `${metadata.title} — ${metadata.description}. В статье используются технологии: ${metadata.tags?.join(', ')}. Подробный разбор, практические примеры и советы для разработчиков.`,
     title: getMetadataTitle(metadata.title),
   };
 }
