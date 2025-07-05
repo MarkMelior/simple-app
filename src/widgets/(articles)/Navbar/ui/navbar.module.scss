@@ -3,15 +3,14 @@
 .wrapper {
   position: fixed;
   top: 0;
+  right: 50%;
   z-index: theme('zIndex.header');
   width: 100%;
   height: theme('spacing.heightArticlesNavbar');
 
-  @apply pointer-events-none;
-}
+  transform: translateX(50%);
 
-.navbarWrapper {
-  @apply px-4 sm:px-6 md:px-8 max-w-8xl mx-auto h-full flex justify-end items-center;
+  @apply px-4 sm:px-6 md:px-8;
 }
 
 .navbar {

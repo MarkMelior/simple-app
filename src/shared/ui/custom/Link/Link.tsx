@@ -33,8 +33,8 @@ export const Link: FC<LinkProps> = ({
     <Component
       className={cn({ [styles.link]: variant === 'hovered' }, className)}
       href={href ?? '#'}
-      scroll={scroll}
       target={isExternal ? '_blank' : undefined}
+      {...(isHardOpen ? {} : { scroll })}
     >
       {isExternal ? (
         <Flex>

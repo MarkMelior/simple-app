@@ -32,13 +32,13 @@
 
   margin-left: calc(-1 * theme('spacing.4') + 1px);
 
-  background: theme('backgroundColor.default-400');
+  background: theme('backgroundColor.default-700');
   border-radius: 1.5px;
 
   animation: blink 1s steps(1) infinite;
 
-  [class="dark"] & {
-    background: theme('backgroundColor.default-700');
+  [class="light"] & {
+    background: theme('backgroundColor.default-400');
   }
 }
 

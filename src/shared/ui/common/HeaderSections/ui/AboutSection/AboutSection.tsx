@@ -64,12 +64,13 @@ const aboutServices = [
 ];
 
 interface AboutSectionProps {
+  className?: string
   isVisible: boolean
 }
 
-export const AboutSection: FC<AboutSectionProps> = ({ isVisible }) => (
+export const AboutSection: FC<AboutSectionProps> = ({ className, isVisible }) => (
   <div
-    className={cn(styles.wrapper, { [styles.visible]: isVisible })}
+    className={cn(styles.wrapper, { [styles.visible]: isVisible }, className)}
     style={{ display: isVisible ? 'flex' : 'none' }}
   >
     <Flex full={true} vertical={true}>

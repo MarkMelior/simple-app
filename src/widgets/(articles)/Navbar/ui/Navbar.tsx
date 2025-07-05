@@ -10,9 +10,15 @@ import { AboutHoverMenu } from './AboutHoverMenu';
 import { NavbarScroll } from './NavbarScroll';
 import { ThemeSwitcher } from './ThemeSwitcher';
 
-export const Navbar = () => (
+import type { FC } from 'react';
+
+interface NavbarProps {
+  className?: string
+}
+
+export const Navbar: FC<NavbarProps> = ({ className }) => (
   <>
-    <NavbarScroll>
+    <NavbarScroll className={className}>
       <Logo changeOnClick={true} className="scale-80" />
       <Button
         as={Link}

@@ -56,10 +56,10 @@
         font-size: 15px;
         font-weight: 500;
 
-        color: theme('colors.default-800');
+        color: theme('colors.default-900');
 
-        [class="dark"] & {
-            color: theme('colors.default-900');
+        [class="light"] & {
+            color: theme('colors.default-800');
         }
 
         span {
@@ -82,12 +82,12 @@
 }
 
 @mixin alert-color($color) {
-    background: linear-gradient(0deg, theme('colors.#{$color}-50/0.9') 0%, theme('colors.secondary-300/0.5') 100%);
-    border: 2px solid theme('colors.#{$color}-200');
+    background: linear-gradient(0deg, theme('colors.#{$color}-300/0.3') 0%, theme('colors.#{$color}-500/0.3') 100%);
+    border: 1.5px solid theme('colors.#{$color}-500');
 
-    [class="dark"] & {
-        background: linear-gradient(0deg, theme('colors.#{$color}-300/0.3') 0%, theme('colors.#{$color}-500/0.3') 100%);
-        border: 1.5px solid theme('colors.#{$color}-500');
+    [class="light"] & {
+        background: linear-gradient(0deg, theme('colors.#{$color}-50/0.9') 0%, theme('colors.secondary-300/0.5') 100%);
+        border: 2px solid theme('colors.#{$color}-200');
     }
 }
 

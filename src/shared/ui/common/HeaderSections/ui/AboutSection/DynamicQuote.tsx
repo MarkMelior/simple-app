@@ -1,5 +1,6 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { useMemo } from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -21,7 +22,7 @@ const QUOTES: { text: string, image: PublicImagePath }[] = [
   { image: Diamond, text: 'Удача заключается в количестве попыток.' },
 ];
 
-export const DynamicQuote = () => {
+const DynamicQuoteComponent = () => {
   const { inView, ref } = useInView({ threshold: 0 });
 
   const shuffledQuotes = useMemo(() => QUOTES.sort(() => Math.random() - 0.5), []);
@@ -50,3 +51,5 @@ export const DynamicQuote = () => {
     </Blockquote>
   );
 };
+
+export const DynamicQuote = dynamic(() => Promise.resolve(DynamicQuoteComponent), { ssr: false });
