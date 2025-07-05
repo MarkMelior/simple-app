@@ -7,14 +7,20 @@ import { useArticleNavbar } from '../store';
 
 import styles from './aboutHoverMenu.module.scss';
 
-export const AboutHoverMenu = () => {
+import type { FC } from 'react';
+
+interface AboutHoverMenuProps {
+  className?: string
+}
+
+export const AboutHoverMenu: FC<AboutHoverMenuProps> = ({ className }) => {
   const { isHoveredButton, isHoveredMenu, setIsHoveredMenu } = useArticleNavbar();
 
   const isVisible = isHoveredButton || isHoveredMenu;
 
   return (
     <div
-      className={cn(styles.menu, { [styles.opened]: isVisible })}
+      className={cn(styles.menu, { [styles.opened]: isVisible }, className)}
       onMouseEnter={() => setIsHoveredMenu(true)}
       onMouseLeave={() => setIsHoveredMenu(false)}
     >

@@ -3,7 +3,7 @@ import { ArticlesListContent, CategoriesArticleModal } from '@/entities/articles
 /**
  * Регистрируем все будущие клиентские модалки здесь
  */
-export const ModalRoot = async () => (
+export const ModalRoot = () => (
   <>
     <CategoriesArticleModal>
       <ArticlesListContent />

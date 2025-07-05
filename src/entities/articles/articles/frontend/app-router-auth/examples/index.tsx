@@ -30,9 +30,7 @@ export const AuthExample = async () => {
           className="my-0 w-full"
           hideHeader={true}
           lang="markdown"
-          text={
-            '# Administrator:\n- Username: admin\n- Password: pass\n\n# User:\n- Username: user\n- Password: pass'
-          }
+          text={'# Administrator:\n- Username: admin\n- Password: pass\n\n# User:\n- Username: user\n- Password: pass'}
         />
       </div>
     </>

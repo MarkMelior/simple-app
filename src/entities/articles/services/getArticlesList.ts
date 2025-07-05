@@ -42,6 +42,7 @@ export async function getArticlesList(): Promise<ArticlesListResponse[]> {
 
           articleList.push({
             ...articleMetadata,
+            category: dirent.name,
             link: `/articles/${dirent.name}/${articleDirent.name}`,
             slug: articleDirent.name,
           });

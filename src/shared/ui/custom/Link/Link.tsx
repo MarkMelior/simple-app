@@ -6,14 +6,14 @@ import { Flex } from '../Layout';
 
 import styles from './link.module.scss';
 
-import type { FC, ReactNode } from 'react';
+import type { FC, MouseEventHandler, ReactNode } from 'react';
 
 interface LinkProps {
   children: ReactNode
   className?: string
   href?: string
   isExternal?: boolean
-  isHardOpen?: boolean
+  onClick?: MouseEventHandler<HTMLAnchorElement>
   scroll?: boolean
   variant?: 'default' | 'hovered'
 }
@@ -23,25 +23,22 @@ export const Link: FC<LinkProps> = ({
   className,
   href,
   isExternal,
-  isHardOpen,
+  onClick,
   scroll,
   variant = 'hovered',
-}) => {
-  const Component = isHardOpen ? 'a' : NextLink;
-
-  return (
-    <Component
-      className={cn({ [styles.link]: variant === 'hovered' }, className)}
-      href={href ?? '#'}
-      target={isExternal ? '_blank' : undefined}
-      {...(isHardOpen ? {} : { scroll })}
-    >
-      {isExternal ? (
-        <Flex>
-          {children}
-          <MdArrowOutward size={12} />
-        </Flex>
-      ) : children}
-    </Component>
-  );
-};
+}) => (
+  <NextLink
+    className={cn({ [styles.link]: variant === 'hovered' }, className)}
+    href={href ?? '#'}
+    onClick={onClick}
+    scroll={scroll}
+    target={isExternal ? '_blank' : undefined}
+  >
+    {isExternal ? (
+      <Flex>
+        {children}
+        <MdArrowOutward size={12} />
+      </Flex>
+    ) : children}
+  </NextLink>
+);

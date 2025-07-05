@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { FaWindowRestore } from 'react-icons/fa';
 import { FaFilter, FaSort } from 'react-icons/fa6';
 import { TbSettings } from 'react-icons/tb';
@@ -20,7 +21,7 @@ interface CategoriesArticleModalProps {
 
 export const CategoriesArticleModal: FC<CategoriesArticleModalProps> = ({ children }) => {
   const { sort: { field } } = useArticles();
-  const { isOpen, toggle } = useModals('articles');
+  const { isOpen, toggle } = useModals('articlesCategories');
 
   return (
     <Modal
@@ -59,7 +60,7 @@ export const CategoriesArticleModal: FC<CategoriesArticleModalProps> = ({ childr
                   </Text>
                 </Button>
                 <Button
-                  as="a"
+                  as={Link}
                   className="ml-auto"
                   color="primary"
                   endContent={<FaWindowRestore size={14} />}

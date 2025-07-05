@@ -25,7 +25,7 @@ interface HeaderLinksProps {
 export const HeaderLinks: FC<HeaderLinksProps> = ({ color = 'primary' }) => {
   const isScrolled = useScrolled(ScrollThresholdEnum.MAIN_HEADER);
   const { isAlertClosed, isVisible, setActiveSection, setIsAlertClosed } = useHeader();
-  const { toggle } = useModals('articles');
+  const { toggle } = useModals('articlesCategories');
 
   const { Icon, toggleTheme } = useTheme();
 

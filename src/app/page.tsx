@@ -4,21 +4,25 @@ import path from 'path';
 import { CategoryCard } from '@/widgets/(articles)/CategoryCard';
 import { Header } from '@/widgets/(articles)/Header';
 
-import { PublicImages } from '@/shared/constants';
+import { AppRouteEnum, PublicImages } from '@/shared/constants';
 import { LongArrowRightIcon } from '@/shared/icons';
 import { Emoji } from '@/shared/lib/emoji';
 import { MDXRemote, getMdx } from '@/shared/lib/mdx';
 import { Flex, Text } from '@/shared/ui';
 
-import { ArticlesCategoryEnum, getArticleListByCategory } from '@/entities/articles';
+import { ArticleModal, ArticlesCategoryEnum, getArticleListByCategory } from '@/entities/articles';
 
 import { MainLayout } from '@/core/layouts/main';
 
+import ArticlePage from './articles/[category]/[name]/page';
+
 import type { MDXComponents } from 'mdx/types';
 
-export default async function Home() {
+export default async function Home({ searchParams }: { searchParams: Promise<{ category: string, name: string }> }) {
   const dir = path.join(process.cwd(), 'src', 'app', 'index.mdx');
   const { content } = await getMdx(dir);
+
+  const params = await searchParams;
 
   const components: MDXComponents = {
     StackButtons: dynamic(() =>
@@ -30,7 +34,7 @@ export default async function Home() {
 
   return (
     <MainLayout>
-      <div className="pointer-events-none relative z-30 mb-4 mt-[158px] select-none">
+      <div className="pointer-events-none relative mb-4 mt-[158px] select-none">
         <img
           alt="Banner"
           className="min-h-32 min-w-full object-cover xl:h-full"
@@ -39,7 +43,7 @@ export default async function Home() {
       </div>
       <div className="mx-auto max-w-4xl">
         <Flex
-          className="relative z-40 md:flex-row"
+          className="relative md:flex-row"
           gap="gap-8"
           justify="justify-between"
           vertical={true}
@@ -64,7 +68,7 @@ export default async function Home() {
           />
           <img
             alt="3д модель сердца"
-            className="pointer-events-none z-20 mx-16 -mt-16 max-w-56 select-none"
+            className="pointer-events-none mx-16 -mt-16 max-w-56 select-none"
             src={PublicImages.misc.Heart}
           />
         </Flex>
@@ -78,10 +82,16 @@ export default async function Home() {
             Мои статьи
             <LongArrowRightIcon className="-mb-1" />
           </Text>
-          <CategoryCard articles={articles.slice(0, 4)} />
+          <CategoryCard articles={articles.slice(0, 4)} openInsideModal={true} />
         </Flex>
         <MDXRemote components={components} source={content} />
       </div>
+
+      {params?.category && params?.name ? (
+        <ArticleModal link={`${AppRouteEnum.ARTICLES}/${params.category}/${params.name}`}>
+          <ArticlePage params={Promise.resolve({ category: params.category, name: params.name })} />
+        </ArticleModal>
+      ) : null}
     </MainLayout>
   );
 }
