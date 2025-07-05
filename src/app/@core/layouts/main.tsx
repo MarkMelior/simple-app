@@ -1,18 +1,19 @@
+import { Footer } from '@/widgets/Footer';
 import { Header } from '@/widgets/Header';
 
 import { Light } from '@/shared/ui';
 
 import type { ReactNode } from 'react';
 
-interface BaseLayoutProps {
+interface MainLayoutProps {
   children: ReactNode
 }
 
-export const BaseLayout = ({ children }: BaseLayoutProps) => (
+export const MainLayout = ({ children }: MainLayoutProps) => (
   <>
     <Light />
     <Header />
     {children}
-    {/* <Footer /> */}
+    <Footer />
   </>
 );

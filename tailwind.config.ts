@@ -20,6 +20,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      animation: {
+        'fade-in-opacity': 'fade-in-opacity 0.15s ease-out forwards',
+      },
       backgroundImage: {
         noise: 'url(\'/images/interface/noise.png\')',
       },

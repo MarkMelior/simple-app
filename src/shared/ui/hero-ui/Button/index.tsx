@@ -2,6 +2,8 @@
 
 import { Button as HeroButton } from '@heroui/react';
 
+import { cn } from '@/shared/lib/common';
+
 import type { ButtonProps as HeroButtonProps } from '@heroui/react';
 import type { FC } from 'react';
 
@@ -19,7 +21,6 @@ export type ButtonProps = Pick<HeroButtonProps,
   | 'isLoading'
   | 'onPress'
   | 'radius'
-  | 'size'
   | 'startContent'
   | 'target'
   | 'type'
@@ -31,6 +32,8 @@ export type ButtonProps = Pick<HeroButtonProps,
   'download'?: string
   'data-copied'?: boolean
   'data-menu'?: string
+  'scroll'?: boolean
+  'size'?: HeroButtonProps['size'] | 'xs'
 };
 
 export const Button: FC<ButtonProps> = ({
@@ -51,6 +54,7 @@ export const Button: FC<ButtonProps> = ({
   onMouseLeave,
   onPress,
   radius,
+  scroll,
   size,
   startContent,
   target,
@@ -60,7 +64,10 @@ export const Button: FC<ButtonProps> = ({
 }) => (
   <HeroButton
     as={as}
-    className={className}
+    className={cn(
+      className,
+      { 'text-[0.685rem] px-1.5 py-1 h-6 [&>svg]:max-w-[theme(spacing.4)] rounded-md gap-1.5': size === 'xs' },
+    )}
     color={color}
     data-copied={props['data-copied']}
     disabled={disabled}
@@ -76,7 +83,8 @@ export const Button: FC<ButtonProps> = ({
     onMouseLeave={onMouseLeave}
     onPress={onPress}
     radius={radius}
-    size={size}
+    scroll={scroll}
+    size={size === 'xs' ? 'sm' : size}
     startContent={startContent}
     target={target}
     type={type}

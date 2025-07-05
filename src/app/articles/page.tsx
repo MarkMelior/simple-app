@@ -1,7 +1,11 @@
-import { ArticleListContent } from './content';
+import { ArticlesListContent } from '@/entities/articles';
+
+import { ArticlesBaseLayout } from '@/core/layouts/articles-base';
 
 export default async function ArticlePage() {
   return (
-    <ArticleListContent />
+    <ArticlesBaseLayout>
+      <ArticlesListContent isFullPage={true} />
+    </ArticlesBaseLayout>
   );
 }

@@ -3,6 +3,7 @@
 }
 
 .alert {
+    display: none;
     position: absolute;
     z-index: theme('zIndex.headerAlert');
     min-height: 120px;
@@ -118,8 +119,8 @@
   animation: fade-out-alert 0.6s ease-out forwards;
 }
 
-.closed {
-  display: none;
+.opened {
+  display: flex;
 }
 
 @keyframes fade-in-alert {

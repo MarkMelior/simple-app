@@ -5,13 +5,14 @@ import { CategoryCard } from '@/widgets/(articles)/CategoryCard';
 import { Header } from '@/widgets/(articles)/Header';
 
 import { PublicImages } from '@/shared/constants';
+import { LongArrowRightIcon } from '@/shared/icons';
 import { Emoji } from '@/shared/lib/emoji';
 import { MDXRemote, getMdx } from '@/shared/lib/mdx';
 import { Flex, Text } from '@/shared/ui';
 
 import { ArticlesCategoryEnum, getArticleListByCategory } from '@/entities/articles';
 
-import { BaseLayout } from './@core/layouts/base';
+import { MainLayout } from '@/core/layouts/main';
 
 import type { MDXComponents } from 'mdx/types';
 
@@ -28,7 +29,7 @@ export default async function Home() {
   const { articles } = await getArticleListByCategory(ArticlesCategoryEnum.FRONTEND);
 
   return (
-    <BaseLayout>
+    <MainLayout>
       <div className="pointer-events-none relative z-30 mb-4 mt-[158px] select-none">
         <img
           alt="Banner"
@@ -69,16 +70,18 @@ export default async function Home() {
         </Flex>
         <Flex className="mt-16" gap="gap-8" vertical={true}>
           <Text
+            className="flex items-center gap-2"
             color="text-default-400"
             size="text-3xl"
             weight="font-extralight"
           >
-            Мои статьи →
+            Мои статьи
+            <LongArrowRightIcon className="-mb-1" />
           </Text>
           <CategoryCard articles={articles.slice(0, 4)} />
         </Flex>
         <MDXRemote components={components} source={content} />
       </div>
-    </BaseLayout>
+    </MainLayout>
   );
 }

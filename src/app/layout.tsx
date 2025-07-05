@@ -6,14 +6,15 @@ import { ScrollShadow } from '@/shared/ui/client';
 
 import { ScrollUp } from '@/features/ScrollUp';
 
-import { ModalRoot } from './@core/ModalRoot';
-import { HeroUIProvider, NextThemesProvider } from './@core/providers';
+import { ModalRoot } from '@/core/modal-root';
+import { HeroUIProvider, NextThemesProvider } from '@/core/providers';
 
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 
 import './globals.scss';
 import '@/shared/styles/tailwind.css';
+import '@/shared/styles/animations.scss';
 
 export const metadata: Metadata = {
   description: 'Small and modern pet-projects. Hi, I\'am Mark Melior - Frontend developer.',

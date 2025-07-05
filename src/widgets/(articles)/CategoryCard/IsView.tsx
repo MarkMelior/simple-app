@@ -17,7 +17,7 @@ export const IsView: FC<IsViewProps> = ({ slug }) => {
 
   return (
     viewedArticleSlugs.includes(slug) ? (
-      <Flex align="items-center" className="text-default-500" gap="gap-0.5">
+      <Flex align="items-center" className="animate-fade-in-opacity text-default-500" gap="gap-0.5">
         <VscEye size={16} />
         <Text size="text-xs">
           просмотрено

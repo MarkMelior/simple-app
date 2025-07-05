@@ -6,7 +6,8 @@ import { TbMessageCircleUp } from 'react-icons/tb';
 
 import { AppRouteEnum } from '@/shared/constants';
 import { DownIcon } from '@/shared/icons';
-import { cn, typedEntries } from '@/shared/lib/common';
+import { cn, typedEntries, useModals } from '@/shared/lib/common';
+import { ScrollThresholdEnum, useScrolled } from '@/shared/lib/react';
 import { useTheme } from '@/shared/lib/theme';
 import type { SemanticColors } from '@/shared/types';
 import { Card, Flex } from '@/shared/ui';
@@ -17,23 +18,14 @@ import { useHeader } from '../../store';
 
 import styles from './headerLinks.module.scss';
 
-const headerLinks = [
-  {
-    href: AppRouteEnum.ARTICLES,
-    label: 'Статьи',
-  },
-  {
-    href: AppRouteEnum.HELP,
-    label: 'Помощь',
-  },
-];
-
 interface HeaderLinksProps {
   color?: SemanticColors
 }
 
 export const HeaderLinks: FC<HeaderLinksProps> = ({ color = 'primary' }) => {
+  const isScrolled = useScrolled(ScrollThresholdEnum.MAIN_HEADER);
   const { isAlertClosed, isVisible, setActiveSection, setIsAlertClosed } = useHeader();
+  const { toggle } = useModals('articles');
 
   const { Icon, toggleTheme } = useTheme();
 
@@ -60,17 +52,23 @@ export const HeaderLinks: FC<HeaderLinksProps> = ({ color = 'primary' }) => {
             </Button>
           );
         })}
-        {headerLinks.map(({ href, label }) => (
-          <Button
-            as={Link}
-            className={styles.link}
-            href={href}
-            key={label}
-            onMouseEnter={handleClose}
-          >
-            {label}
-          </Button>
-        ))}
+        <Button
+          className={styles.link}
+          onMouseEnter={handleClose}
+          onPress={() => toggle()}
+          scroll={false}
+        >
+          Статьи
+        </Button>
+        <Button
+          as={Link}
+          className={styles.link}
+          href={AppRouteEnum.HELP}
+          onMouseEnter={handleClose}
+          scroll={false}
+        >
+          Помощь
+        </Button>
       </Card>
       <Flex align="items-center" className={styles.action}>
         <Button
@@ -82,7 +80,7 @@ export const HeaderLinks: FC<HeaderLinksProps> = ({ color = 'primary' }) => {
         >
           <Icon size={24} />
         </Button>
-        {isAlertClosed ? (
+        {isAlertClosed && isScrolled ? (
           <Button
             className={styles.button}
             color={color}

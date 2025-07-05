@@ -6,12 +6,14 @@ import { Button } from '@/shared/ui/client';
 interface StackButtonsProps {
   className?: string
   isColored?: boolean
+  size?: 'xs' | 'sm'
   tags?: StackVariants[]
 }
 
 export const StackButtons = ({
   className,
   isColored,
+  size = 'sm',
   tags,
 }: StackButtonsProps) => {
   if (!tags) {
@@ -19,7 +21,7 @@ export const StackButtons = ({
   }
 
   return (
-    <div className={cn('flex gap-2 flex-wrap', className)}>
+    <div className={cn('flex gap-1 flex-wrap', className)}>
       {tags.map((tag) => (
         <Button
           className={`${
@@ -29,7 +31,7 @@ export const StackButtons = ({
           } cursor-default`}
           disableRipple={true}
           key={StackData[tag]?.name}
-          size="sm"
+          size={size}
           startContent={StackData[tag]?.icon}
           variant="flat"
         >

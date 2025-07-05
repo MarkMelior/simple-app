@@ -8,9 +8,10 @@ import { type ArticleData, useArticles } from '@/entities/articles';
 
 interface PrepareArticlesProps {
   articles: ArticleData[]
+  isFullPage?: boolean
 }
 
-export const PrepareArticles: FC<PrepareArticlesProps> = ({ articles }) => {
+export const PrepareArticles: FC<PrepareArticlesProps> = ({ articles, isFullPage }) => {
   const { filters, settings, sort } = useArticles();
 
   const prepareArticlesData = useMemo(() => {
@@ -20,6 +21,10 @@ export const PrepareArticles: FC<PrepareArticlesProps> = ({ articles }) => {
   }, [articles]);
 
   return (
-    <CategoryCard articles={prepareArticlesData} variant="small" />
+    <CategoryCard
+      articles={prepareArticlesData}
+      cols={isFullPage ? '3' : '2'}
+      openWithoutModal={isFullPage}
+    />
   );
 };

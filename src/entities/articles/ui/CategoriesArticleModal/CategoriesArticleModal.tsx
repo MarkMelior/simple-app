@@ -1,11 +1,11 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { FaWindowRestore } from 'react-icons/fa';
 import { FaFilter, FaSort } from 'react-icons/fa6';
 import { TbSettings } from 'react-icons/tb';
 
 import { AppRouteEnum } from '@/shared/constants';
+import { useModals } from '@/shared/lib/common';
 import { Emoji } from '@/shared/lib/emoji';
 import { Flex, Text } from '@/shared/ui';
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@/shared/ui/client';
@@ -14,19 +14,19 @@ import { articlesSortName, useArticles } from '@/entities/articles';
 
 import type { FC, ReactNode } from 'react';
 
-interface ModalClientProps {
+interface CategoriesArticleModalProps {
   children: ReactNode
 }
 
-export const ModalClient: FC<ModalClientProps> = ({ children }) => {
-  const router = useRouter();
+export const CategoriesArticleModal: FC<CategoriesArticleModalProps> = ({ children }) => {
   const { sort: { field } } = useArticles();
+  const { isOpen, toggle } = useModals('articles');
 
   return (
     <Modal
       hideCloseButton={true}
-      isOpen={true}
-      onClose={() => router.back()}
+      isOpen={isOpen}
+      onClose={toggle}
       size="5xl"
     >
       <ModalContent>
