@@ -6,6 +6,7 @@ import monitor from './monitor.json';
 import rocket from './rocket.json';
 import sber from './sber.json';
 import smile from './smile.webp';
+import stop from './stop.webp';
 
 export const emojiData = {
   '❇️': sber,
@@ -15,6 +16,7 @@ export const emojiData = {
   '💻': monitor,
   '😃': smile,
   '😎': cool,
+  '😔': stop,
   '🚀': rocket,
 } satisfies Record<string, object>;
 

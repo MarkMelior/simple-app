@@ -25,6 +25,15 @@ const PublicImagesData = {
     Banner: 'banner.jpg',
     Heart: 'heart.png',
   },
+  sticker: {
+    catCursor: 'cat-cursor.webm',
+    catShake: 'cat-shake.webm',
+    displeased: 'displeased.webp',
+    Ryan: 'ryan.webp',
+    sausage: 'sausage.webm',
+    shrek: 'shrek.webm',
+    twoCats: 'two-cats.webm',
+  },
 } as const;
 
 type PublicImageNamesType = typeof PublicImagesData;

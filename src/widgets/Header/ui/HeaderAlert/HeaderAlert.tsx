@@ -20,7 +20,7 @@ interface HeaderAlertProps {
     href: string
     text: string
   }
-  title?: string
+  title?: ReactNode
 }
 
 export const HeaderAlert: FC<HeaderAlertProps> = ({

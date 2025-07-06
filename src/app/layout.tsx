@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 
-import { FontDefault } from '@/shared/constants';
+import { Fonts } from '@/shared/constants';
 import { Light, PageLoader } from '@/shared/ui';
 import { ScrollShadow } from '@/shared/ui/client';
 
@@ -27,7 +27,7 @@ type Props = {
 
 const RootLayout = async ({ children }: Readonly<Props>) => (
   <html lang="ru" suppressHydrationWarning={true}>
-    <body className={FontDefault.className}>
+    <body className={Fonts.default}>
       <NextThemesProvider>
         <HeroUIProvider>
           <ScrollShadow>

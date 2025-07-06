@@ -68,6 +68,8 @@ export const Emoji: FC<EmojiProps> = memo(({ className, emoji, size = '1.1em' })
       style={{
         fontSize: size,
         height: size,
+        minHeight: size,
+        minWidth: size,
         width: size,
       }}
     >

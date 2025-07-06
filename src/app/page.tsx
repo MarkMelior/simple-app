@@ -2,13 +2,13 @@ import dynamic from 'next/dynamic';
 import path from 'path';
 
 import { CategoryCard } from '@/widgets/(articles)/CategoryCard';
-import { Header } from '@/widgets/(articles)/Header';
 
 import { AppRouteEnum, PublicImages } from '@/shared/constants';
 import { LongArrowRightIcon } from '@/shared/icons';
 import { Emoji } from '@/shared/lib/emoji';
 import { MDXRemote, getMdx } from '@/shared/lib/mdx';
 import { Flex, Text } from '@/shared/ui';
+import { RandomSticker } from '@/shared/ui/client';
 
 import { ArticleModal, ArticlesCategoryEnum, getArticleListByCategory } from '@/entities/articles';
 
@@ -44,36 +44,30 @@ export default async function Home({ searchParams }: HomeProps) {
           src={PublicImages.misc.Banner}
         />
       </div>
-      <div className="mx-auto max-w-4xl">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 md:px-8">
         <Flex
-          className="relative md:flex-row"
-          gap="gap-8"
+          align="items-center"
+          className="relative sm:flex-row"
+          gap="gap-6"
           justify="justify-between"
           vertical={true}
         >
-          <Header
-            className="mb-0 mt-5"
-            classNames={{ description: 'text-[1.075rem] font-light' }}
-            description={(
-              <Text className="leading-8">
-                Я Frontend-разработчик из Сбер&nbsp;
-                <Emoji emoji="❇️" />
-                . Здесь я делюсь своим опытом из разных сфер и вдохновляю людей на новые идеи
-              </Text>
-            )}
-            isCenter="md"
-            title={(
-              <Flex align="items-center" gap="gap-2">
-                <Emoji emoji="👋" />
-                Привет, меня зовут Марк (:
-              </Flex>
-            )}
-          />
-          <img
-            alt="3д модель сердца"
-            className="pointer-events-none mx-16 -mt-16 max-w-56 select-none"
-            src={PublicImages.misc.Heart}
-          />
+          <Flex className="max-w-lg" gap="gap-4" vertical={true}>
+            <Text font="tiny5" size="text-4xl">
+              <Emoji className="mr-2" emoji="👋" />
+              Привет, меня зовут Марк (:
+            </Text>
+            <Text
+              className="text-[1.075rem] leading-8"
+              color="text-default-500"
+              weight="font-light"
+            >
+              Я Frontend-разработчик из Сбер&nbsp;
+              <Emoji emoji="❇️" />
+              . Здесь я делюсь своим опытом из разных сфер и вдохновляю людей на новые идеи
+            </Text>
+          </Flex>
+          <RandomSticker className="mr-6" rounded="rounded-lg" size={200} />
         </Flex>
         <Flex className="mt-16" gap="gap-8" vertical={true}>
           <Text
