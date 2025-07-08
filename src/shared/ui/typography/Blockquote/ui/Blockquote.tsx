@@ -3,6 +3,7 @@ import { CiStickyNote } from 'react-icons/ci';
 import { FaRegLightbulb } from 'react-icons/fa6';
 import { IoMdInformationCircle } from 'react-icons/io';
 
+import { ErrorIcon } from '@/shared/icons';
 import { cn } from '@/shared/lib/common';
 import type { SemanticColors } from '@/shared/types';
 import { Flex } from '@/shared/ui/custom';
@@ -47,14 +48,23 @@ const blockquoteColors: Record<
   },
 };
 
+const variantDefaultColors: Record<Variants, SemanticColors> = {
+  exclamation: 'danger',
+  idea: 'warning',
+  info: 'primary',
+  note: 'warning',
+  quote: 'default',
+};
+
 const iconsBlockquote: Record<Variants, JSX.Element> = {
+  exclamation: <ErrorIcon height={22} width={22} />,
   idea: <FaRegLightbulb size={24} />,
   info: <IoMdInformationCircle size={24} />,
   note: <CiStickyNote size={24} />,
   quote: <BiSolidQuoteRight size={22} />,
 };
 
-type Variants = 'idea' | 'info' | 'note' | 'quote';
+type Variants = 'idea' | 'info' | 'note' | 'quote' | 'exclamation';
 
 interface BlockquoteProps {
   children: ReactNode
@@ -68,12 +78,12 @@ interface BlockquoteProps {
 export const Blockquote: FC<BlockquoteProps> = ({
   children,
   className,
-  color = 'warning',
+  color,
   icon,
   ref,
   variant = 'note',
 }) => {
-  const { background, divider, icon: iconColor } = blockquoteColors[color];
+  const { background, divider, icon: iconColor } = blockquoteColors[color ?? variantDefaultColors[variant]];
 
   return (
     <Flex

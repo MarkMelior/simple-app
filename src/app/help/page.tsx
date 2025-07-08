@@ -2,15 +2,19 @@ import { NotFound as NotFoundContent } from '@/widgets/NotFound';
 
 import { APP_NAME } from '@/shared/constants';
 
+import { MinimalLayout } from '@/core/layouts/minimal';
+
 import type { Metadata } from 'next';
 
 export default function Help() {
   return (
-    <NotFoundContent
-      description="Ждите, скоро я сделаю эту страницу"
-      emoji="😎"
-      title="Страница в разработке"
-    />
+    <MinimalLayout>
+      <NotFoundContent
+        description="Ждите, скоро я сделаю эту страницу"
+        emoji="😎"
+        title="Страница в разработке"
+      />
+    </MinimalLayout>
   );
 }
 

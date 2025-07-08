@@ -4,7 +4,6 @@ import path from 'path';
 import { CategoryCard } from '@/widgets/(articles)/CategoryCard';
 
 import { AppRouteEnum, PublicImages } from '@/shared/constants';
-import { LongArrowRightIcon } from '@/shared/icons';
 import { Emoji } from '@/shared/lib/emoji';
 import { MDXRemote, getMdx } from '@/shared/lib/mdx';
 import { Flex, Text } from '@/shared/ui';
@@ -14,7 +13,8 @@ import { ArticleModal, ArticlesCategoryEnum, getArticleListByCategory } from '@/
 
 import { MainLayout } from '@/core/layouts/main';
 
-import ArticlePage from './articles/[category]/[name]/page';
+import { MyArticlesButton } from './ui/MyArticlesButton';
+import ArticlePage from '../articles/[category]/[name]/page';
 
 import type { MDXComponents } from 'mdx/types';
 
@@ -70,15 +70,7 @@ export default async function Home({ searchParams }: HomeProps) {
           <RandomSticker className="mr-6" rounded="rounded-lg" size={200} />
         </Flex>
         <Flex className="mt-16" gap="gap-8" vertical={true}>
-          <Text
-            className="flex items-center gap-2"
-            color="text-default-400"
-            size="text-3xl"
-            weight="font-extralight"
-          >
-            Мои статьи
-            <LongArrowRightIcon className="-mb-1" />
-          </Text>
+          <MyArticlesButton />
           <CategoryCard articles={articles.slice(0, 4)} openInsideModal={true} />
         </Flex>
         <MDXRemote components={components} source={content} />

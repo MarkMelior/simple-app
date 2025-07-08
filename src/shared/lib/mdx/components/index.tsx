@@ -3,6 +3,7 @@ import { Heading } from '@/shared/ui';
 import { BlockquoteMDX } from './Blockquote';
 import { CodeMDX } from './Code';
 import { LinkMDX } from './Link';
+import { TableMDX } from './Table';
 import { cn } from '../../common';
 import { Emoji } from '../../emoji';
 
@@ -12,6 +13,7 @@ import type { ComponentPropsWithoutRef } from 'react';
 export const MDXComponentsData: MDXComponents = {
   a: LinkMDX,
   blockquote: BlockquoteMDX,
+  BlockquoteMDX, // TODO: Посмотреть как можно убрать. Без этого remarkBlockquoteVariant не хочет работать как нужно
   code: CodeMDX,
   Emoji,
   h2: ({ children, ...props }: ComponentPropsWithoutRef<'h2'>) => (
@@ -74,6 +76,7 @@ export const MDXComponentsData: MDXComponents = {
       {children}
     </strong>
   ),
+  table: TableMDX,
   ul: ({ children, className }: ComponentPropsWithoutRef<'ul'>) => (
     <ul
       className={cn(

@@ -2,10 +2,16 @@ import { NotFound as NotFoundContent } from '@/widgets/NotFound';
 
 import { APP_NAME } from '@/shared/constants';
 
+import { MinimalLayout } from '@/core/layouts/minimal';
+
 import type { Metadata } from 'next';
 
 export default async function NotFound() {
-  return <NotFoundContent emoji="😔" />;
+  return (
+    <MinimalLayout>
+      <NotFoundContent emoji="😔" />
+    </MinimalLayout>
+  );
 }
 
 export const metadata: Metadata = {

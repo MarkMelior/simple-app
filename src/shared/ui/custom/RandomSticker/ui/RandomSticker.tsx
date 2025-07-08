@@ -6,6 +6,8 @@ import { PublicImages } from '@/shared/constants';
 import { cn } from '@/shared/lib/common';
 import type { TwRounded } from '@/shared/types';
 
+import styles from './randomSticker.module.scss';
+
 interface RandomStickerProps {
   className?: string
   rounded?: TwRounded
@@ -26,7 +28,7 @@ export const RandomSticker: FC<RandomStickerProps> = ({ className, rounded = 'ro
   return src.endsWith('.webm') ? (
     <video
       autoPlay={true}
-      className={cn('pointer-events-none select-none', rounded, className)}
+      className={cn(styles.sticker, rounded, className)}
       height={size}
       loop={true}
       muted={true}
@@ -37,7 +39,7 @@ export const RandomSticker: FC<RandomStickerProps> = ({ className, rounded = 'ro
   ) : (
     <img
       alt="Рандомный стикер"
-      className={cn('pointer-events-none select-none', rounded, className)}
+      className={cn(styles.sticker, rounded, className)}
       height={size}
       src={src}
       width={size}

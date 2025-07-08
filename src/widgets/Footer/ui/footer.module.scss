@@ -1,7 +1,7 @@
 @use '@/shared/styles/mixin' as *;
 
 .footer {
-  @apply text-sm py-4 px-8 mt-10 text-default-500 border-t border-default-300/15 hover:border-default-300/30 transition-colors;
+  @apply text-sm py-6 px-8 mt-16 text-default-500 border-t border-default-300/15 hover:border-default-300/30 transition-colors;
 
   position: relative;
   background-color: theme('colors.default-50');

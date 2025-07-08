@@ -1,3 +1,5 @@
+import coding from './coding.json';
+import coffee from './coffee.json';
 import cool from './cool.json';
 import eye from './eye.json';
 import heart from './heart.json';
@@ -9,6 +11,8 @@ import smile from './smile.webp';
 import stop from './stop.webp';
 
 export const emojiData = {
+  '⌨️': coding,
+  '☕️': coffee,
   '❇️': sber,
   '❤️': heart,
   '👀': eye,
