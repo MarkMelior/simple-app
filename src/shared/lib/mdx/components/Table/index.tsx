@@ -75,8 +75,8 @@ export const TableMDX: FC<TableMDXProps> = ({ children }) => {
   });
 
   const [sortConfig, setSortConfig] = useState<SortDescriptor>({
-    column: '',
-    direction: 'ascending',
+    column: headers[0].column,
+    direction: 'descending',
   });
 
   const sortedRows = useMemo<TableRowData[]>(() => {
