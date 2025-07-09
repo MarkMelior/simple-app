@@ -1,17 +1,20 @@
 'use client';
 
 import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@heroui/react';
-import { Children, isValidElement, useCallback, useMemo, useState } from 'react';
+import { Children, isValidElement, useMemo, useState } from 'react';
 
-import type { Sort } from '@/shared/types';
+import { formatDate, formatDuration } from '@/shared/lib/text';
 
+import type { SortDescriptor } from '@heroui/react';
 import type { FC, ReactElement, ReactNode } from 'react';
 
+type TimeType = 'date' | 'time';
+
 interface HeaderDescriptor {
-  allowsSorting?: boolean
-  field: string
+  column: string
+  disableSorting?: boolean
   label: ReactNode
-  type?: string
+  type?: TimeType
   width?: number | string
 }
 
@@ -20,16 +23,6 @@ type TableRowData = Record<string, ReactNode> & { key: string };
 interface TableMDXProps {
   children: ReactNode
 }
-
-const formatDuration = (seconds: number): string => {
-  const totalMinutes = Math.floor(seconds / 60);
-  const hours = Math.floor(totalMinutes / 60);
-  const minutes = totalMinutes % 60;
-
-  if (minutes === 0) return `${hours} часов`;
-
-  return `${hours} часов ${minutes} минут`;
-};
 
 export const TableMDX: FC<TableMDXProps> = ({ children }) => {
   const headers: HeaderDescriptor[] = [];
@@ -45,15 +38,15 @@ export const TableMDX: FC<TableMDXProps> = ({ children }) => {
         Children.forEach((tr as ReactElement<{ children: ReactNode }>).props.children, (th, idx) => {
           if (!isValidElement(th)) return;
           const props = th.props as {
-            allowsSorting?: boolean
-            type?: string
+            disableSorting?: boolean
+            type?: TimeType
             width?: number | string
             children: ReactNode
           };
 
           headers.push({
-            allowsSorting: props.allowsSorting,
-            field: `c${idx}`,
+            column: `c${idx}`,
+            disableSorting: props.disableSorting,
             label: props.children,
             type: props.type,
             width: props.width,
@@ -81,54 +74,46 @@ export const TableMDX: FC<TableMDXProps> = ({ children }) => {
     }
   });
 
-  const [sortConfig, setSortConfig] = useState<Sort | null>(null);
+  const [sortConfig, setSortConfig] = useState<SortDescriptor>({
+    column: '',
+    direction: 'ascending',
+  });
 
   const sortedRows = useMemo<TableRowData[]>(() => {
     if (!sortConfig) return rows;
-    const { field, order } = sortConfig;
+    const { column, direction } = sortConfig;
 
     return [...rows].sort((a, b) => {
-      const valA = a[field];
-      const valB = b[field];
+      const valA = a[column];
+      const valB = b[column];
 
       const numA = (typeof valA === 'string' ? parseInt(valA.replace(/\D/g, ''), 10) || valA : valA) as number;
       const numB = (typeof valB === 'string' ? parseInt(valB.replace(/\D/g, ''), 10) || valB : valB) as number;
 
-      if (numA < numB) return order === 'asc' ? -1 : 1;
-      if (numA > numB) return order === 'asc' ? 1 : -1;
+      if (numA < numB) return direction === 'ascending' ? -1 : 1;
+      if (numA > numB) return direction === 'ascending' ? 1 : -1;
 
       return 0;
     });
   }, [rows, sortConfig]);
 
-  const onSort = useCallback((field: string) => {
-    const col = headers.find((h) => h.field === field);
-
-    if (!col?.allowsSorting) return;
-
-    setSortConfig((current) => {
-      const isSame = current?.field === field && current.order === 'asc';
-
-      return { field, order: isSame ? 'desc' : 'asc' };
-    });
-  }, [headers]);
-
   return (
     <Table
       className="mb-6 mt-4"
       classNames={{ th: 'bg-default-200' }}
+      isHeaderSticky={true}
       layout="fixed"
+      onSortChange={setSortConfig}
       radius="lg"
       shadow="sm"
+      sortDescriptor={sortConfig}
     >
       <TableHeader columns={headers}>
         {(col) => (
           <TableColumn
-            allowsSorting={col.allowsSorting}
-            key={col.field}
-            onClick={() => onSort(col.field)}
-            // @ts-expect-error ColumnSize = string
-            width={col.width}
+            allowsSorting={!col.disableSorting}
+            key={col.column}
+            width={col.width as never}
           >
             {col.label}
           </TableColumn>
@@ -138,25 +123,32 @@ export const TableMDX: FC<TableMDXProps> = ({ children }) => {
       <TableBody items={sortedRows}>
         {(item) => (
           <TableRow key={item.key}>
-            {headers.map((col) => {
-              const raw = item[col.field];
-              let display: ReactNode = raw;
-
-              if (col.type === 'time') {
-                const secs = typeof raw === 'string' ? parseInt(raw, 10) : Number(raw);
-
-                if (!isNaN(secs)) {
-                  display = formatDuration(secs);
-                }
-              }
-
-              return (
-                <TableCell key={col.field}>{display}</TableCell>
-              );
-            })}
+            {headers.map((col) => (
+              <TableCell key={col.column}>
+                {getDisplayValue(item[col.column], col.type)}
+              </TableCell>
+            ))}
           </TableRow>
         )}
       </TableBody>
     </Table>
   );
+};
+
+const getDisplayValue = (raw: ReactNode, type: TimeType | undefined) => {
+  switch (type) {
+    case 'date': {
+      const date = typeof raw === 'string' ? new Date(raw) : raw;
+
+      return date instanceof Date && !isNaN(date.getTime()) ? formatDate(date) : raw;
+    }
+    case 'time': {
+      const secs
+        = typeof raw === 'string' ? parseInt(raw, 10) : Number(raw);
+
+      return !isNaN(secs) ? formatDuration(secs) : raw;
+    }
+    default:
+      return raw;
+  }
 };
