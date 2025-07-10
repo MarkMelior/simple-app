@@ -112,6 +112,7 @@ export const TableMDX: FC<TableMDXProps> = ({ children }) => {
         {(col) => (
           <TableColumn
             allowsSorting={!col.disableSorting}
+            className="bg-default-200/30 dark:bg-default-200"
             key={col.column}
             width={col.width as never}
           >

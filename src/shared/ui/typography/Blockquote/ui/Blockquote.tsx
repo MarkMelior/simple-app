@@ -23,8 +23,8 @@ const blockquoteColors: Record<
   },
   default: {
     background: 'from-default-400/15',
-    divider: 'dark:bg-default-700 bg-default-400',
-    icon: 'dark:text-default-700 text-default-400',
+    divider: 'dark:bg-default-700 bg-default-500',
+    icon: 'dark:text-default-700 text-default-500',
   },
   primary: {
     background: 'from-primary-600/10',

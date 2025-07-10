@@ -13,7 +13,7 @@ import type { ComponentPropsWithoutRef } from 'react';
 export const MDXComponentsData: MDXComponents = {
   a: LinkMDX,
   blockquote: BlockquoteMDX,
-  BlockquoteMDX, // TODO: Посмотреть как можно убрать. Без этого remarkBlockquoteVariant не хочет работать как нужно
+  BlockquoteMDX, // TODO: Посмотреть как можно убрать. Без этого - remarkBlockquoteVariant не хочет работать как нужно
   code: CodeMDX,
   Emoji,
   h2: ({ children, ...props }: ComponentPropsWithoutRef<'h2'>) => (
@@ -80,7 +80,7 @@ export const MDXComponentsData: MDXComponents = {
   ul: ({ children, className }: ComponentPropsWithoutRef<'ul'>) => (
     <ul
       className={cn(
-        'text-default-600 my-5 leading-7 list-disc marker:text-default-200 list-inside',
+        'text-default-600 my-5 leading-7 list-disc marker:text-default-400 ml-4 list-inside',
         className,
       )}
     >

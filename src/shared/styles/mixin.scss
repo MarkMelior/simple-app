@@ -9,10 +9,14 @@
 
   background: linear-gradient(
     90deg,
-    rgb(56 189 248 / 0%) 20%,
-    rgb(144 163 187 / 20%) 50%,
-    rgb(236 72 153 / 0%) 80%
+    theme('colors.default-50/0') 20%,
+    theme('colors.default-600/0.2') 50%,
+    theme('colors.default-50/0') 80%
   );
+
+  [class="light"] & {
+    display: none;
+  }
 
   animation: fade-in-opacity 0.15s linear forwards;
 

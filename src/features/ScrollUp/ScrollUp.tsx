@@ -42,7 +42,7 @@ export const ScrollUp = () => {
     <Button
       className={cn(
         styles.wrapper,
-        'bg-default-100 hover:bg-primary-500 fixed bottom-8 right-8 text-default-500 dark:hover:text-default-900 z-50 hover:text-default-100',
+        'bg-default-50 dark:bg-default-100 hover:bg-primary-500 fixed bottom-8 right-8 text-default-500 dark:hover:text-default-900 z-50 hover:text-default-100',
         {
           'opacity-0 pointer-events-none': !isScrolled,
         },
