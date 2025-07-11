@@ -7,7 +7,7 @@ import { AppRouteEnum, PublicImages } from '@/shared/constants';
 import { Emoji } from '@/shared/lib/emoji';
 import { MDXRemote, getMdx } from '@/shared/lib/mdx';
 import { Flex, Text, Underline } from '@/shared/ui';
-import { RandomSticker } from '@/shared/ui/client';
+import { Image, RandomSticker } from '@/shared/ui/client';
 
 import { ArticleModal, ArticlesCategoryEnum, getArticleListByCategory } from '@/entities/articles';
 
@@ -38,16 +38,16 @@ export default async function Home({ searchParams }: HomeProps) {
   return (
     <MainLayout>
       <div className="pointer-events-none relative z-20 mb-4 mt-[158px] select-none">
-        <img
+        <Image
           alt="Banner"
-          className="min-h-32 min-w-full object-cover xl:h-full"
+          className="min-h-40 min-w-full object-cover lg:min-h-0"
           src={PublicImages.misc.Banner}
         />
       </div>
       <div className="mx-auto max-w-4xl px-4 sm:px-6 md:px-8">
         <Flex
           align="items-center"
-          className="relative min-h-[200px] sm:flex-row"
+          className="relative min-h-[200px] text-center sm:flex-row sm:text-start"
           gap="gap-6"
           justify="justify-between"
           vertical={true}
@@ -55,7 +55,6 @@ export default async function Home({ searchParams }: HomeProps) {
           <Flex className="max-w-lg" gap="gap-4" vertical={true}>
             <Text font="tiny5" size="text-4xl">
               <Emoji className="mr-2" emoji="👋" />
-              {/* Привет, меня зовут Марк (: */}
               Привет, меня&nbsp;
               <Underline>зовут Марк (:</Underline>
             </Text>

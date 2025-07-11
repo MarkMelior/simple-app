@@ -5,6 +5,7 @@ import { type FC, useMemo } from 'react';
 import { PublicImages } from '@/shared/constants';
 import { cn } from '@/shared/lib/common';
 import type { TwRounded } from '@/shared/types';
+import { Image } from '@/shared/ui/client';
 
 import styles from './randomSticker.module.scss';
 
@@ -16,7 +17,7 @@ interface RandomStickerProps {
 
 export const RandomSticker: FC<RandomStickerProps> = ({ className, rounded = 'rounded-md', size = 180 }) => {
   const stickerList = useMemo(
-    () => Object.values(PublicImages.sticker) as string[],
+    () => Object.values(PublicImages.sticker),
     [],
   );
 
@@ -37,10 +38,11 @@ export const RandomSticker: FC<RandomStickerProps> = ({ className, rounded = 'ro
       width={size}
     />
   ) : (
-    <img
+    <Image
       alt="Рандомный стикер"
       className={cn(styles.sticker, rounded, className)}
       height={size}
+      radius="md"
       src={src}
       width={size}
     />

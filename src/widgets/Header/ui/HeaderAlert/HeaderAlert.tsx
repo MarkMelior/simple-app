@@ -76,7 +76,7 @@ export const HeaderAlert: FC<HeaderAlertProps> = ({
       >
         <div className={styles.alertRow}>
           <div className={cn(styles.alertWrapper, 'gap-1')}>
-            <FlaskIcon className={`text-${color}`} />
+            <FlaskIcon className={cn(styles.icon, `text-${color}`)} />
             <div className={styles.alertTitle}>
               {title}
             </div>

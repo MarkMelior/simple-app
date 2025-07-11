@@ -220,6 +220,7 @@ export const StackData: Record<StackVariants, StackProps> = {
   },
   'nextjs': {
     color: 'black',
+    description: 'Этот сайт написан на Next.js. SSG имба',
     icon: <RiNextjsFill size={20} />,
     name: 'Next.js',
   },
@@ -314,6 +315,7 @@ export const StackData: Record<StackVariants, StackProps> = {
   },
   'typescript': {
     color: '#007ACC',
+    description: 'С самого начала обучения фронту - я пишу на TypeScript. Сначала не понимал зачем он нужен, а сейчас не могу без него жить',
     icon: <BiLogoTypescript size={20} />,
     name: 'TypeScript',
   },

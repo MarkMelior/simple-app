@@ -14,19 +14,19 @@
     backdrop-filter: blur(theme('backdropBlur.lg'));
     inset: -6px;
 
-    @media (width <= 1179px) {
+    @media (max-width: theme('screens.lg')) {
         position: static;
         min-height: auto;
     }
 
-    @media (width <= 770px) {
+    @media (max-width: theme('screens.md')) {
         align-items: center;
-        position: absolute;
+        position: fixed;
+        top: 72px;
         width: fit-content;
         max-width: calc(100% - 32px);
-        min-height: 44px;
+        height: max-content;
         margin: 0 auto;
-        inset: auto 0 -42px;
     }
 
     &Row {
@@ -37,13 +37,9 @@
         width: 100%;
         padding: 0 20px 16px;
 
-        @media (width <= 1179px) {
-            padding: 5px 10px;
-        }
-
-        @media (width <= 600px) {
-            flex-direction: column;
+        @media (max-width: theme('screens.lg')) {
             gap: 5px;
+            padding: 5px 10px;
         }
     }
 
@@ -121,6 +117,13 @@
 
 .opened {
   display: flex;
+}
+
+.icon {
+    min-width: 24px;
+    max-width: 24px;
+    min-height: 24px;
+    max-height: 24px;
 }
 
 @keyframes fade-in-alert {

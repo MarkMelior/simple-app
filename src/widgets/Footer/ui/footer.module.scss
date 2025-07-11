@@ -18,7 +18,7 @@
   }
 
   [class="light"] & {
-    border-color: theme('colors.default-200');
+    border-color: theme('colors.default-200/0.5');
   }
 
   &::before {

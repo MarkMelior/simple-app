@@ -20,10 +20,6 @@
     pointer-events: all;
   }
 
-  @media (width <= 1179px) {
-    display: none;
-  }
-
   &:not(.opened) .content {
     border: none;
   }

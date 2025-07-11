@@ -116,11 +116,7 @@ export const AboutSection: FC<AboutSectionProps> = ({ className, isVisible }) =>
               >
                 {title}
               </Text>
-              <Text
-                className={styles.linkDescription}
-                color="text-default-500"
-                size="text-xs"
-              >
+              <Text color="text-default-500" size="text-xs">
                 {description}
               </Text>
             </Flex>

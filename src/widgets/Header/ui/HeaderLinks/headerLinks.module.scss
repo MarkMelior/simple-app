@@ -4,7 +4,7 @@
   position: relative;
   z-index: theme('zIndex.header');
 
-  @media (width <= 1179px) {
+  @media (max-width: theme('screens.lg')) {
     display: none;
   }
 }

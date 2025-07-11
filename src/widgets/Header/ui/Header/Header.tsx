@@ -38,7 +38,7 @@ export const Header = () => (
       color="secondary"
       title={(
         <>
-          <Text className="mr-1 decoration-transparent opacity-50">
+          <Text className="mr-1 decoration-transparent" color="text-secondary">
             [
             {process.env.NEXT_PUBLIC_APP_VERSION}
             ]

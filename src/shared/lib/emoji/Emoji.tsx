@@ -5,6 +5,7 @@ import { type FC, memo, useMemo } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import { cn } from '@/shared/lib/common';
+import { Image } from '@/shared/ui/client';
 
 import { type EmojiType, emojiData } from './data';
 
@@ -94,9 +95,8 @@ export const Emoji: FC<EmojiProps> = memo(({ className, emoji, size = '1.1em' })
         </>
       )}
       {type === 'image' && (
-        <img
+        <Image
           alt={emoji}
-          loading="lazy"
           src={src}
           style={{ height: '100%', width: '100%' }}
         />

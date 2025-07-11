@@ -8,6 +8,7 @@ import type { PublicImagePath } from '@/shared/constants';
 import { PublicImages } from '@/shared/constants';
 import { useTyping } from '@/shared/lib/text';
 import { Blockquote } from '@/shared/ui';
+import { Image } from '@/shared/ui/client';
 
 import styles from './dynamicQuote.module.scss';
 
@@ -36,7 +37,7 @@ const DynamicQuoteComponent = () => {
       className={styles.blockquote}
       color="default"
       icon={(
-        <img
+        <Image
           alt={image}
           className={styles.icon}
           key={image}
