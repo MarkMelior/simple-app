@@ -1,9 +1,8 @@
-import { BiSolidQuoteRight } from 'react-icons/bi';
+import { BiSolidMessageAltError, BiSolidQuoteRight } from 'react-icons/bi';
 import { CiStickyNote } from 'react-icons/ci';
 import { FaRegLightbulb } from 'react-icons/fa6';
 import { IoMdInformationCircle } from 'react-icons/io';
 
-import { ErrorIcon } from '@/shared/icons';
 import { cn } from '@/shared/lib/common';
 import type { SemanticColors } from '@/shared/types';
 import { Flex } from '@/shared/ui/custom';
@@ -57,7 +56,7 @@ const variantDefaultColors: Record<Variants, SemanticColors> = {
 };
 
 const iconsBlockquote: Record<Variants, JSX.Element> = {
-  exclamation: <ErrorIcon height={22} width={22} />,
+  exclamation: <BiSolidMessageAltError size={24} />,
   idea: <FaRegLightbulb size={24} />,
   info: <IoMdInformationCircle size={24} />,
   note: <CiStickyNote size={24} />,

@@ -70,12 +70,16 @@ export const StackButtons = ({
         hideCloseButton={true}
         isOpen={!!selectedData}
         onClose={() => setSelectedData(undefined)}
+        placement="center"
       >
         <ModalContent>
           {(onClose) => (
             <>
               <ModalHeader className="flex items-center gap-4">
-                <span className="scale-150" style={{ color: selectedData?.color === 'black' ? 'white' : selectedData?.color }}>
+                <span
+                  className={cn('scale-150', { 'text-default-950': selectedData?.color === 'black' })}
+                  style={{ color: selectedData?.color === 'black' ? undefined : selectedData?.color }}
+                >
                   {selectedData?.icon}
                 </span>
                 Опыт работы с

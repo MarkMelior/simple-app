@@ -22,7 +22,7 @@ const PublicImagesData = {
     NetherStar: 'NetherStar.webp',
   },
   misc: {
-    Banner: 'banner.jpg',
+    Banner: 'banner.webp',
     Heart: 'heart.png',
   },
   sticker: {

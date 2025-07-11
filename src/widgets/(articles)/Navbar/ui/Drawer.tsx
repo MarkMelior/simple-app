@@ -6,12 +6,9 @@ import { Button } from '@/shared/ui/client';
 
 import { Burger, useBurger } from '@/features/Burger';
 
-import { useHeader } from '../../store';
-
 import styles from './drawer.module.scss';
 
 export const Drawer = () => {
-  const { isAlertClosed, setIsAlertClosed } = useHeader();
   const { setIsOpen } = useBurger();
 
   return (
@@ -21,11 +18,11 @@ export const Drawer = () => {
         color="primary"
         isIconOnly={true}
         onPress={() => setIsOpen(true)}
-        variant="shadow"
+        variant="light"
       >
         <RxHamburgerMenu size={20} />
       </Button>
-      <Burger isAlertClosed={isAlertClosed} setIsAlertClosed={setIsAlertClosed} />
+      <Burger page="articles" />
     </>
   );
 };

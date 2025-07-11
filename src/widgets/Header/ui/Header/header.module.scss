@@ -12,4 +12,10 @@
   font-family: Inter, Manrope, sans-serif;
   box-sizing: border-box;
   grid-template-columns: 1fr max-content 1fr;
+
+  @media (max-width: theme('screens.xl')) {
+    display: flex;
+    justify-content: space-between;
+    grid-template-columns: auto;
+  }
 }

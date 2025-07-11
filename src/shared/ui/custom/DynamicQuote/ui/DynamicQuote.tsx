@@ -1,6 +1,5 @@
 'use client';
 
-import dynamic from 'next/dynamic';
 import { useMemo } from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -17,13 +16,13 @@ const { AmethystShard, Cake, Diamond, IronSword, LeatherTunic, NetherStar } = Pu
 const QUOTES: { text: string, image: PublicImagePath }[] = [
   { image: NetherStar, text: 'Сила в маленьких шагах.' },
   { image: Cake, text: 'Идеи ничего не стоят без реализации.' },
-  { image: AmethystShard, text: 'Стремись к звёздам, чтобы приземлиться на Луну' },
-  { image: IronSword, text: '5% людей создают 90% ценности, остальные - 10' },
+  { image: AmethystShard, text: 'Стремись к звёздам, чтобы приземлиться на Луну.' },
+  { image: IronSword, text: '5% людей создают 90% ценности, остальные - 10.' },
   { image: LeatherTunic, text: 'Несправедливость была, есть и будет всегда.' },
   { image: Diamond, text: 'Удача заключается в количестве попыток.' },
 ];
 
-const DynamicQuoteComponent = () => {
+export const DynamicQuote = () => {
   const { inView, ref } = useInView({ threshold: 0 });
 
   const shuffledQuotes = useMemo(() => QUOTES.sort(() => Math.random() - 0.5), []);
@@ -47,10 +46,10 @@ const DynamicQuoteComponent = () => {
       ref={ref}
       variant="quote"
     >
-      {text}
-      <span className={styles.cursor}> </span>
+      <span>
+        {text}
+        <span className={styles.cursor} />
+      </span>
     </Blockquote>
   );
 };
-
-export const DynamicQuote = dynamic(() => Promise.resolve(DynamicQuoteComponent), { ssr: false });

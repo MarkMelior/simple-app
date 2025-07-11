@@ -7,8 +7,8 @@ import { Button } from '@/shared/ui/client';
 
 import { AboutHoverButton } from './AboutHoverButton';
 import { AboutHoverMenu } from './AboutHoverMenu';
+import { Drawer } from './Drawer';
 import { NavbarScroll } from './NavbarScroll';
-import { ThemeSwitcher } from './ThemeSwitcher';
 
 import type { FC } from 'react';
 
@@ -42,7 +42,7 @@ export const Navbar: FC<NavbarProps> = ({ maxWidth = 'max-w-8xl' }) => (
         <span className="inline">На главную</span>
       </Button>
       <div className="ml-auto flex items-center gap-2">
-        <ThemeSwitcher />
+        <Drawer />
         <AboutHoverButton />
       </div>
     </NavbarScroll>

@@ -1,5 +1,3 @@
-@use '@/shared/styles/keyframes' as *;
-
 .wrapper {
   gap: 8px;
   width: 704px; // Зависит от ширины в headerSections. Они должны быть одинаковые
@@ -8,46 +6,6 @@
 
 .links {
   margin-top: 20px;
-}
-
-.link {
-  // ! BUG: Tailwind is a priority
-  justify-content: start !important;
-  gap: .5rem !important;
-  padding-left: 8px !important;
-
-  $root: &;
-
-  // startContent
-  & > svg {
-    width: 20px;
-    margin-bottom: 15px;
-  }
-
-  &:hover {
-    background: theme('colors.default-400/0.15');
-  }
-
-  &Title {
-    transition: 0.15s ease all;
-    #{$root}:hover & {
-      color: theme('colors.primary-500');
-    }
-  }
-
-  &External {
-    position: absolute;
-    top: 7px;
-    right: 4px;
-
-    color: theme('colors.default-300');
-
-    transition: 0.2s ease all;
-
-    #{$root}:hover & {
-      color: theme('colors.primary-500');
-    }
-  }
 }
 
 .socials {
@@ -59,67 +17,4 @@
   align-items: flex-start;
   grid-gap: 8px;
   grid-template-columns: 220px 220px;
-}
-
-@mixin service($color, $bg) {
-  border: 1.5px solid theme('colors.#{$color}-600');
-
-  transition: all 0.2s ease-in-out;
-  background-color: theme('colors.#{$color}');
-  background-image: url('/images/header/#{$bg}');
-  background-position: right bottom;
-  background-repeat: no-repeat;
-
-  [class="light"] & {
-    border: 2.5px solid theme('colors.#{$color}-100');
-  }
-
-  &:hover {
-    transform: scale(1.02);
-    
-    [class="dark"] & {
-      background-color: theme('colors.#{$color}/0.4');
-    }
-  }
-}
-
-.service {
-  display: flex;
-  flex-direction: column;
-  min-height: 140px;
-  padding: 12px;
-
-  color: theme('colors.default-950');
-
-  border-radius: 8px;
-  background-position: bottom right;
-  background-repeat: no-repeat;
-
-  $root: &;
-
-  [class="light"] & {
-    color: theme('colors.default-50');
-  }
-
-  &.youtube {
-    @include service('danger', '1.png');
-  }
-
-  &.instagram {
-    @include service('warning', '4.svg');
-  }
-
-  &Arrow {
-    opacity: 0.5;
-
-    transition: 0.2s ease all;
-
-    #{$root}:hover & {
-      opacity: 1;
-    }
-  }
-
-  &Description {
-    opacity: 0.6;
-  }
 }

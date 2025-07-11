@@ -1,0 +1,39 @@
+.link {
+  // ! BUG: Tailwind is a priority
+  justify-content: start !important;
+  gap: .5rem !important;
+  padding-left: 8px !important;
+
+  $root: &;
+
+  // startContent
+  & > svg {
+    width: 20px;
+    margin-bottom: 15px;
+  }
+
+  &:hover {
+    background: theme('colors.default-400/0.15');
+  }
+
+  &Title {
+    transition: 0.15s ease all;
+    #{$root}:hover & {
+      color: theme('colors.primary-500');
+    }
+  }
+
+  &External {
+    position: absolute;
+    top: 7px;
+    right: 4px;
+
+    color: theme('colors.default-300');
+
+    transition: 0.2s ease all;
+
+    #{$root}:hover & {
+      color: theme('colors.primary-500');
+    }
+  }
+}
