@@ -22,5 +22,5 @@ export default async function ArticleLoading() {
 export const metadata: Metadata = {
   description:
     `Загрузка статьи на ${APP_NAME}: скоро вы получите доступ к подробному гайду, практическим примерам и обзорам современных технологий. Подождите немного — контент уже в пути!`,
-  title: `Загрузка статьи — ${APP_NAME}`,
+  title: `Загрузка статьи :: ${APP_NAME}`,
 };

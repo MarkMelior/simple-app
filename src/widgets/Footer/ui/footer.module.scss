@@ -1,16 +1,24 @@
 @use '@/shared/styles/mixin' as *;
 
 .footer {
-  @apply text-sm py-4 px-8 mt-10 text-default-500 border-t border-default-300/15 hover:border-default-300/30 transition-colors;
+  @apply text-sm py-6 px-8 mt-16 transition-colors;
 
   position: relative;
   background-color: theme('colors.default-50');
 
   background-image: theme('backgroundImage.noise');
   background-repeat: repeat;
+  border-color: theme('colors.default-300/0.15');
+  border-style: solid;
+
+  border-width: 1px 0 0;
+
+  &:hover {
+    border-color: theme('colors.default-300/0.3');
+  }
 
   [class="light"] & {
-    background-color: theme('colors.default-100');
+    border-color: theme('colors.default-200/0.5');
   }
 
   &::before {

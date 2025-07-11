@@ -32,7 +32,7 @@ export const useTheme = (): UseThemeProps => {
       Icon: CiDark,
       setTheme: () => { /* void */ },
       theme: ThemeEnum.DARK,
-      themeName: 'Темная',
+      themeName: 'Тёмная',
       toggleTheme: () => { /* void */ },
     };
   };
@@ -41,10 +41,10 @@ export const useTheme = (): UseThemeProps => {
   const setTheme = setThemeNext as SetTheme;
 
   return {
-    Icon: theme === ThemeEnum.DARK ? CiLight : CiDark,
+    Icon: theme === ThemeEnum.DARK ? CiDark : CiLight,
     setTheme,
     theme,
-    themeName: theme === ThemeEnum.DARK ? 'Темная' : 'Светлая',
+    themeName: theme === ThemeEnum.DARK ? 'Тёмная' : 'Светлая',
     toggleTheme: () => setTheme(theme === ThemeEnum.DARK ? ThemeEnum.LIGHT : ThemeEnum.DARK),
   };
 };

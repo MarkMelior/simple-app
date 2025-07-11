@@ -3,11 +3,12 @@ import { IoIosCode } from 'react-icons/io';
 import { TbFileUnknown } from 'react-icons/tb';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-import { FontDefault } from '@/shared/constants/fonts';
+import { Fonts } from '@/shared/constants/fonts';
 import { StackData } from '@/shared/constants/stack-data';
 import type { StackVariants } from '@/shared/constants/stack-data';
 import { cn } from '@/shared/lib/common';
 import { GlowingBox } from '@/shared/ui/client';
+import { Text } from '@/shared/ui/custom';
 
 import { CodeBlockButtons } from './CodeBlockButtons';
 import { SyntaxHighlighter } from './SyntaxHighlighter';
@@ -45,21 +46,22 @@ export const CodeBlock: FC<CodeBlockProps> = ({
             <IoIosCode size={18} />
             <div className="absolute left-[0.46875rem] top-full mt-1 h-[1.375rem] w-px rounded-full bg-primary-600/30" />
           </div>
-          <p
-            className={cn(
-              'm-0 flex-1 font-semibold text-default-800',
-              FontDefault.className,
-            )}
+          <Text
+            className="m-0 flex-1"
+            color="text-default-800"
+            font="default"
+            weight="font-semibold"
           >
             {signature}
-          </p>
+          </Text>
         </div>
       )}
       <GlowingBox
         classNames={{
-          background: cn('grid h-fit group/buttons code-block__wrapper', FontDefault.className),
+          background: cn('grid h-fit group/buttons code-block__wrapper', Fonts.default),
           foreground: className,
         }}
+        rounded="rounded-none"
       >
         {hideHeader ? (
           <CodeBlockButtons
@@ -68,7 +70,7 @@ export const CodeBlock: FC<CodeBlockProps> = ({
             text={text}
           />
         ) : (
-          <div className="sticky top-0 flex items-center justify-between whitespace-normal break-all rounded-t-md bg-default-200 px-3 py-0.5 text-center text-[0.825rem] text-default-600">
+          <div className="sticky top-0 flex items-center justify-between gap-3 whitespace-normal break-all bg-default-200 px-3 py-0.5 text-[0.825rem] text-default-600">
             {StackData[lang]?.icon || <TbFileUnknown size={20} />}
             {filename ? filename : StackData[lang]?.name}
             <CodeBlockButtons exampleLink={exampleLink} text={text} />
@@ -83,7 +85,6 @@ export const CodeBlock: FC<CodeBlockProps> = ({
             className: 'bg-inherit',
           }}
           customStyle={{
-            borderRadius: hideHeader ? '6px' : '0 0 6px 6px',
             margin: 0,
             textShadow: 'none',
           }}

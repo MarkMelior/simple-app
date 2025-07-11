@@ -1,4 +1,4 @@
-import { BiSolidQuoteRight } from 'react-icons/bi';
+import { BiSolidMessageAltError, BiSolidQuoteRight } from 'react-icons/bi';
 import { CiStickyNote } from 'react-icons/ci';
 import { FaRegLightbulb } from 'react-icons/fa6';
 import { IoMdInformationCircle } from 'react-icons/io';
@@ -22,8 +22,8 @@ const blockquoteColors: Record<
   },
   default: {
     background: 'from-default-400/15',
-    divider: 'dark:bg-default-700 bg-default-400',
-    icon: 'dark:text-default-700 text-default-400',
+    divider: 'dark:bg-default-700 bg-default-500',
+    icon: 'dark:text-default-700 text-default-500',
   },
   primary: {
     background: 'from-primary-600/10',
@@ -47,14 +47,23 @@ const blockquoteColors: Record<
   },
 };
 
+const variantDefaultColors: Record<Variants, SemanticColors> = {
+  exclamation: 'danger',
+  idea: 'warning',
+  info: 'primary',
+  note: 'warning',
+  quote: 'default',
+};
+
 const iconsBlockquote: Record<Variants, JSX.Element> = {
+  exclamation: <BiSolidMessageAltError size={24} />,
   idea: <FaRegLightbulb size={24} />,
   info: <IoMdInformationCircle size={24} />,
   note: <CiStickyNote size={24} />,
   quote: <BiSolidQuoteRight size={22} />,
 };
 
-type Variants = 'idea' | 'info' | 'note' | 'quote';
+type Variants = 'idea' | 'info' | 'note' | 'quote' | 'exclamation';
 
 interface BlockquoteProps {
   children: ReactNode
@@ -68,12 +77,12 @@ interface BlockquoteProps {
 export const Blockquote: FC<BlockquoteProps> = ({
   children,
   className,
-  color = 'warning',
+  color,
   icon,
   ref,
   variant = 'note',
 }) => {
-  const { background, divider, icon: iconColor } = blockquoteColors[color];
+  const { background, divider, icon: iconColor } = blockquoteColors[color ?? variantDefaultColors[variant]];
 
   return (
     <Flex

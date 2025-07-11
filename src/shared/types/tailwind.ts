@@ -74,7 +74,7 @@ type TwColor = `${Colors}-${Luminance}`;
 export type TwTextColor = `text-${TwColor}`;
 export type TwBackgroundColor = `bg-${TwColor}`;
 
-export type TwRounded = `rounded-${Direction}-${Size4Xl}` | `rounded-${Size4Xl}`;
+export type TwRounded = `rounded-${Direction}-${Size4Xl}` | `rounded-${Size4Xl}` | 'rounded-none' | 'rounded-full';
 
 export type TwGap = `gap-${TwSize}`;
 export type TwAlignItems = 'items-center' | 'items-start' | 'items-end' | 'items-stretch';

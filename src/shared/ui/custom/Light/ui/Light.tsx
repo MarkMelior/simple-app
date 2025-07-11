@@ -6,15 +6,20 @@ import styles from './light.module.scss';
 import type { FC } from 'react';
 
 interface LightProps {
+  classNames?: {
+    background?: string
+    blink?: string
+  }
   variant?: 'first' | 'second' | 'two'
 }
 
-export const Light: FC<LightProps> = () => (
-  <div>
+export const Light: FC<LightProps> = ({ classNames }) => (
+  <div className="pointer-events-none z-light select-none">
     <div
       className={cn(
-        'absolute z-light top-0 inset-x-0 flex justify-center overflow-hidden pointer-events-none select-none max-h-screen',
+        'absolute top-0 inset-x-0 flex justify-center overflow-hidden max-h-screen',
         styles.fadeIn,
+        classNames?.blink,
       )}
     >
       <div className="flex w-[108rem] flex-none justify-end">
@@ -39,7 +44,7 @@ export const Light: FC<LightProps> = () => (
         </picture>
       </div>
     </div>
-    <div className={styles.light}>
+    <div className={classNames?.background}>
       <span className={styles.ellipse1} />
       <span className={styles.ellipse2} />
       <span className={styles.ellipse3} />

@@ -1,0 +1,5 @@
+.button {
+  @media (min-width: theme('screens.lg')) {
+    display: none;
+  }
+}

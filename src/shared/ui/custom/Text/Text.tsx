@@ -1,5 +1,6 @@
 import { clsx } from 'clsx';
 
+import { type FontType, Fonts } from '@/shared/constants';
 import type {
   AsComponent,
   HeroTextColor,
@@ -17,6 +18,8 @@ interface TextProps {
   color?: HeroTextColor
   customColor?: string
   decoration?: 'line-through'
+  font?: FontType
+  onClick?: () => void
   /**
    * Размер шрифта
    *
@@ -41,22 +44,26 @@ export const Text = ({
   color,
   customColor,
   decoration,
+  font,
+  onClick,
   size,
   uppercase,
   weight,
 }: TextProps) => (
   <Component
     className={clsx(
+      align,
+      color,
+      decoration,
+      weight,
       {
-        [`${align}`]: align,
-        [`${color}`]: color,
-        [`${decoration}`]: decoration,
         [`${size}`]: typeof size === 'string',
-        [`${weight}`]: weight,
+        [Fonts[font!]]: font,
         ['uppercase']: uppercase,
       },
       className,
     )}
+    onClick={onClick}
     style={{
       color: customColor,
       fontSize: typeof size === 'number' ? `${size}px` : undefined,

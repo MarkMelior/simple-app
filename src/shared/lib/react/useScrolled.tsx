@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import { isClient } from '../next';
+
 const scrollStates = new Map<string, { offset: number, listeners: Set<() => void> }>();
 
 // Генерация уникального ключа для target
@@ -42,7 +44,7 @@ export enum ScrollThresholdEnum {
 
 export function useScrolled(
   threshold: number = ScrollThresholdEnum.ARTICLES_NAVBAR,
-  target: Window | HTMLElement | null = typeof window !== 'undefined' ? window : null,
+  target: Window | HTMLElement | null = isClient() ? window : null,
 ): boolean {
   const [isScrolled, setIsScrolled] = useState(false);
   const targetKey = getTargetKey(target);

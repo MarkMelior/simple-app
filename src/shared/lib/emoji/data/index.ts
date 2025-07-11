@@ -1,3 +1,5 @@
+import coding from './coding.json';
+import coffee from './coffee.json';
 import cool from './cool.json';
 import eye from './eye.json';
 import heart from './heart.json';
@@ -6,8 +8,11 @@ import monitor from './monitor.json';
 import rocket from './rocket.json';
 import sber from './sber.json';
 import smile from './smile.webp';
+import stop from './stop.webp';
 
 export const emojiData = {
+  '⌨️': coding,
+  '☕️': coffee,
   '❇️': sber,
   '❤️': heart,
   '👀': eye,
@@ -15,6 +20,7 @@ export const emojiData = {
   '💻': monitor,
   '😃': smile,
   '😎': cool,
+  '😔': stop,
   '🚀': rocket,
 } satisfies Record<string, object>;
 
