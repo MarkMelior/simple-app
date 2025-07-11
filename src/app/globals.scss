@@ -1,3 +1,7 @@
+html, body {
+  overscroll-behavior: none;
+}
+
 html {
   font-size: 16px;
 
@@ -5,14 +9,12 @@ html {
   background-size: 16px 16px;
   scroll-behavior: smooth;
 
-  @media (max-width: theme('screens.sm')) {
-    font-size: 15px;
-  }
-}
-
-body {
   [class="light"] & {
     background: linear-gradient(90deg, theme('colors.default-100') 15px, transparent 1%) 50%, linear-gradient(theme('colors.default-100') 15px, theme('colors.default-300') 1%) 0, hsl(0deg 0% 100% / 16%);
     background-size: 16px 16px;
+  }
+
+  @media (max-width: theme('screens.sm')) {
+    font-size: 15px;
   }
 }

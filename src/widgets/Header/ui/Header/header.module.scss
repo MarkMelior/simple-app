@@ -13,7 +13,7 @@
   box-sizing: border-box;
   grid-template-columns: 1fr max-content 1fr;
 
-  @media (width <= 1280px) {
+  @media (max-width: theme('screens.xl')) {
     display: flex;
     justify-content: space-between;
     grid-template-columns: auto;

@@ -9,4 +9,9 @@
   &:active {
     transform: scale(0.95);
   }
+
+  @media (max-width: theme('screens.sm')) {
+    width: 38px;
+    height: 38px;
+  }
 }

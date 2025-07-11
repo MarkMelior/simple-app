@@ -15,7 +15,7 @@ interface FooterNavigationProps {
 }
 
 type Page = { link: string, title: string };
-const initialPage: Page = { link: '/', title: 'Главная' };
+const initialPage: Page = { link: '/articles', title: 'Каталог' };
 
 export const FooterNavigation: FC<FooterNavigationProps> = ({ articleList }) => {
   const pathname = usePathname();

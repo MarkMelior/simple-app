@@ -1,3 +1,5 @@
+@use '@/shared/styles/animations' as *;
+
 @mixin gradient-line-before($placement: 'bottom') {
   display: block;
   position: absolute;
@@ -7,10 +9,17 @@
 
   background: linear-gradient(
     90deg,
-    rgb(56 189 248 / 0%) 20%,
-    rgb(144 163 187 / 20%) 50%,
-    rgb(236 72 153 / 0%) 80%
+    theme('colors.default-50/0') 20%,
+    theme('colors.default-600/0.2') 50%,
+    theme('colors.default-50/0') 80%
   );
+
+  [class="light"] & {
+    display: none;
+  }
+
+  animation: fade-in-opacity 0.15s linear forwards;
+
   content: '';
 
   @if $placement == 'bottom' {
@@ -22,11 +31,12 @@
 
 @mixin header-background($hover: true) {
   background: theme('colors.default-50/0.4');
-  border: solid;
 
-  // transition: all 0.15s ease-in-out; // ! BUG: Border flash
+  transition: all 0.15s ease-in-out;
   backdrop-filter: blur(theme('backdropBlur.lg'));
-    border-color: theme('colors.default-900/0.05');
+  border-color: theme('colors.default-900/0.05');
+  border-style: solid;
+  border-width: 1px;
 
   [class="light"] & {
     background: theme('colors.default-50/0.8');

@@ -4,10 +4,18 @@ import { useState } from 'react';
 
 import { openMessage } from '../common';
 
+interface CopyOptions {
+  content?: string
+  duration?: number
+}
+
 export const useCopy = () => {
   const [copied, setCopied] = useState(false);
 
-  const handleCopy = (text: string) => {
+  const handleCopy = (
+    text: string,
+    options?: CopyOptions,
+  ) => {
     if (copied) {
       return;
     }
@@ -16,8 +24,8 @@ export const useCopy = () => {
       navigator.clipboard.writeText(text);
 
       openMessage({
-        content: 'Скопировано в буфер обмена',
-        duration: 2.5,
+        content: options?.content ?? 'Скопировано в буфер обмена',
+        duration: options?.duration ?? 2.5,
         type: 'success',
       });
     } catch {
@@ -35,5 +43,5 @@ export const useCopy = () => {
     }, 2500);
   };
 
-  return { copied, handleCopy };
+  return { copy: handleCopy, isCopied: copied };
 };

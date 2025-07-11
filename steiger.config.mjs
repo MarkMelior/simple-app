@@ -21,7 +21,7 @@ export default defineConfig([
     },
   },
   {
-    files: ['src/shared/ui/**', 'src/entities/articles/**'],
+    files: ['src/shared/ui/**', 'src/entities/articles/**', 'src/app/**'],
     rules: {
       'fsd/no-reserved-folder-names': 'off',
     },

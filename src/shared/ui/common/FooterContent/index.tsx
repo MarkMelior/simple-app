@@ -21,7 +21,7 @@ export const FooterContent: FC<FooterContentProps> = ({ as, className }) => (
     gap="gap-1"
     justify="justify-center"
   >
-    <Text color="text-default-200" size="text-xs">Подпишись →</Text>
+    <Text className="hidden sm:inline" color="text-default-300" size="text-xs">Подпишись →</Text>
     <Button
       as={Link}
       color="warning"
@@ -44,6 +44,6 @@ export const FooterContent: FC<FooterContentProps> = ({ as, className }) => (
     >
       YouTube
     </Button>
-    <Text color="text-default-200" size="text-xs">← И сюда</Text>
+    <Text className="hidden sm:inline" color="text-default-300" size="text-xs">← И сюда</Text>
   </Flex>
 );

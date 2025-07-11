@@ -1,0 +1,24 @@
+.button {
+  display: flex;
+  align-items: center;
+  gap: theme('spacing.2');
+  width: fit-content;
+
+  transition: color 0.3s ease-in-out;
+  cursor: pointer;
+  
+  svg {
+    position: relative;
+    left: 0;
+
+    transition: left 0.3s ease-in-out;
+  }
+
+  &:hover {
+    color: theme('colors.primary-500');
+
+    svg {
+      left: 10px;
+    }
+  }
+}

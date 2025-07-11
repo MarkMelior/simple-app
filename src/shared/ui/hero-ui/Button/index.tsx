@@ -28,6 +28,7 @@ export type ButtonProps = Pick<HeroButtonProps,
   | 'onMouseEnter'
   | 'onMouseLeave'
   | 'endContent'
+  | 'style'
 > & {
   'download'?: string
   'data-copied'?: boolean
@@ -57,6 +58,7 @@ export const Button: FC<ButtonProps> = ({
   scroll,
   size,
   startContent,
+  style,
   target,
   type,
   variant,
@@ -86,6 +88,7 @@ export const Button: FC<ButtonProps> = ({
     scroll={scroll}
     size={size === 'xs' ? 'sm' : size}
     startContent={startContent}
+    style={style}
     target={target}
     type={type}
     variant={variant}

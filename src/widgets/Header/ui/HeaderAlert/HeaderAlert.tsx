@@ -20,7 +20,7 @@ interface HeaderAlertProps {
     href: string
     text: string
   }
-  title?: string
+  title?: ReactNode
 }
 
 export const HeaderAlert: FC<HeaderAlertProps> = ({
@@ -76,7 +76,7 @@ export const HeaderAlert: FC<HeaderAlertProps> = ({
       >
         <div className={styles.alertRow}>
           <div className={cn(styles.alertWrapper, 'gap-1')}>
-            <FlaskIcon className={`text-${color}`} />
+            <FlaskIcon className={cn(styles.icon, `text-${color}`)} />
             <div className={styles.alertTitle}>
               {title}
             </div>

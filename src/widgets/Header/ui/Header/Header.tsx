@@ -1,3 +1,5 @@
+import { Text } from '@/shared/ui';
+
 import { HeaderAlert } from '../HeaderAlert/HeaderAlert';
 import { HeaderButtons } from '../HeaderButtons/HeaderButtons';
 import { HeaderLinks } from '../HeaderLinks/HeaderLinks';
@@ -34,8 +36,16 @@ export const Header = () => (
     <HeaderLogo />
     <HeaderAlert
       color="secondary"
-      // link={{ href: '#', text: 'Какие новости? 👀' }}
-      title={`[${process.env.NEXT_PUBLIC_APP_VERSION}] Сайт в разработке...`}
+      title={(
+        <>
+          <Text className="mr-1 decoration-transparent" color="text-secondary">
+            [
+            {process.env.NEXT_PUBLIC_APP_VERSION}
+            ]
+          </Text>
+          Сайт в разработке, пока так 👀
+        </>
+      )}
     >
       <HeaderLinks color="secondary" />
     </HeaderAlert>

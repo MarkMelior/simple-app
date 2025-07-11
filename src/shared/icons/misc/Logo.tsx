@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { useState } from 'react';
 
 import { cn } from '../../lib/common';
@@ -10,7 +9,7 @@ import type { FC } from 'react';
 interface LogoProps {
   changeOnClick?: boolean
   className?: string
-  variant?: 'default' | 'graffiti' | 'text'
+  variant?: 'default' | 'text'
 }
 
 const variants: LogoProps['variant'][] = ['default', 'text'];
@@ -61,16 +60,6 @@ export const Logo: FC<LogoProps> = ({
               </clipPath>
             </defs>
           </svg>
-        );
-      case 'graffiti':
-        return (
-          <Image
-            alt="logo"
-            className="max-h-[48px] max-w-[48px] object-contain"
-            height={128}
-            src="/images/melior-graffiti.png"
-            width={128}
-          />
         );
       case 'default':
         return (

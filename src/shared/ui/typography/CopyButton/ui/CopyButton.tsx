@@ -12,16 +12,16 @@ interface CopyButtonProps {
 }
 
 export const CopyButton: FC<CopyButtonProps> = ({ text }) => {
-  const { copied, handleCopy } = useCopy();
+  const { copy, isCopied } = useCopy();
 
   return (
     <Tooltip content="Скопировать код" placement="top">
       <Button
         className="text-default-400 hover:text-default-200"
-        data-copied={copied}
-        isDisabled={copied}
+        data-copied={isCopied}
+        isDisabled={isCopied}
         isIconOnly={true}
-        onPress={() => handleCopy(text)}
+        onPress={() => copy(text, { content: 'Код скопирован' })}
         radius="sm"
         size="sm"
         variant="light"
