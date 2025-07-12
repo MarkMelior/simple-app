@@ -4,7 +4,7 @@ import { create } from 'zustand';
 
 import type { ModalOptions } from './types';
 
-type ModalKey = 'articlesCategories';
+type ModalKey = 'articlesCategories' | 'support';
 
 type ModalState = {
   isOpen: boolean

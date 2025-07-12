@@ -7,12 +7,15 @@ import type { FC } from 'react';
 
 type SkeletonProps = Pick<HeroSkeletonProps,
   | 'className'
+  | 'style'
 >;
 
 export const Skeleton: FC<SkeletonProps> = ({
   className,
+  style,
 }) => (
   <HeroSkeleton
     className={className}
+    style={style}
   />
 );

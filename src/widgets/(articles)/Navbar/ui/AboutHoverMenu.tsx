@@ -24,7 +24,7 @@ export const AboutHoverMenu: FC<AboutHoverMenuProps> = ({ className }) => {
       onMouseEnter={() => setIsHoveredMenu(true)}
       onMouseLeave={() => setIsHoveredMenu(false)}
     >
-      <AboutSection className={styles.content} isVisible={isVisible} />
+      <AboutSection className={styles.content} isSupportMe={true} isVisible={isVisible} />
     </div>
   );
 };

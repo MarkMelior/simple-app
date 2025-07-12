@@ -40,7 +40,7 @@ export const useCopy = () => {
 
     setTimeout(() => {
       setCopied(false);
-    }, 2500);
+    }, options?.duration ? options.duration * 1000 : 2500);
   };
 
   return { copy: handleCopy, isCopied: copied };

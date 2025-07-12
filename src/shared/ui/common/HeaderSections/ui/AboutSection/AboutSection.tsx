@@ -9,6 +9,7 @@ import { Button, DynamicQuote } from '@/shared/ui/client';
 
 import { AboutLinks } from './AboutLinks';
 import { AboutServices } from './AboutServices';
+import { SupportButton } from './SupportButton';
 
 import styles from './aboutSection.module.scss';
 
@@ -23,10 +24,11 @@ const aboutSocials = [
 
 interface AboutSectionProps {
   className?: string
+  isSupportMe?: boolean
   isVisible: boolean
 }
 
-export const AboutSection: FC<AboutSectionProps> = ({ className, isVisible }) => (
+export const AboutSection: FC<AboutSectionProps> = ({ className, isSupportMe, isVisible }) => (
   <div
     className={cn(styles.wrapper, { [styles.visible]: isVisible }, className)}
     style={{ display: isVisible ? 'flex' : 'none' }}
@@ -69,6 +71,7 @@ export const AboutSection: FC<AboutSectionProps> = ({ className, isVisible }) =>
     <div className={styles.services}>
       <AboutServices />
       <DynamicQuote />
+      {isSupportMe ? <SupportButton /> : null}
     </div>
   </div>
 );

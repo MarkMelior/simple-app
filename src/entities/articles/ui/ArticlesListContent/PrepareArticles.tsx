@@ -18,14 +18,10 @@ interface PrepareArticlesProps {
 }
 
 export const PrepareArticles: FC<PrepareArticlesProps> = ({ articles, isFullPage, link, title }) => {
-  const { filters, settings, sort } = useArticles();
+  const { } = useArticles();
   const { close } = useModals('articlesCategories');
 
-  const prepareArticlesData = useMemo(() => {
-    const test = '';
-
-    return articles;
-  }, [articles]);
+  const prepareArticlesData = useMemo(() => articles, [articles]);
 
   const handleClick = useCallback(() => {
     if (isFullPage) return;

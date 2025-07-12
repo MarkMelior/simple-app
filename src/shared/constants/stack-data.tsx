@@ -54,7 +54,7 @@ export type StackVariants =
   | 'markdown'
   | 'prisma'
   | 'react'
-  | 'redux-toolkit'
+  | 'redux'
   | 'rtk-query'
   | 'scss'
   | 'tailwind'
@@ -87,6 +87,7 @@ export type StackVariants =
   | 'react-router'
   | 'fsd'
   | 'express'
+  | 'react-native'
   | 'postgres'
   | 'json'
   | 'seo'
@@ -163,6 +164,7 @@ export const StackData: Record<StackVariants, StackProps> = {
   },
   'fsd': {
     color: '#3481FE',
+    description: 'Хорошо понимаю принципы архитектурной методологии и умею адаптировать её под конкретные задачи. Этот сайт написан с использованием FSD.',
     icon: <LuCakeSlice size={18} />,
     name: 'FSD',
   },
@@ -205,6 +207,7 @@ export const StackData: Record<StackVariants, StackProps> = {
   },
   'mobx': {
     color: '#FF9955',
+    description: 'Основной инструмент для управления состоянием в проектах Сбера. Уверенно работаю с observable, computed, action и makeAutoObservable. Но слишком большая свобода требует строгой архитектуры.',
     icon: <SiMobx size={18} />,
     name: 'MobX',
   },
@@ -220,7 +223,7 @@ export const StackData: Record<StackVariants, StackProps> = {
   },
   'nextjs': {
     color: 'black',
-    description: 'Этот сайт написан на Next.js. SSG имба',
+    description: 'Владею CSR, SSR, SSG, ISR, PPR. Знаю все тонкости работы с серверными компонентами. Как пример, этот сайт написан на Next.js.',
     icon: <RiNextjsFill size={20} />,
     name: 'Next.js',
   },
@@ -259,26 +262,36 @@ export const StackData: Record<StackVariants, StackProps> = {
   },
   'react': {
     color: '#61DAFB',
+    description: 'Основной инструмент интерфейсной разработки. Если сайт строго защищен авторизацией, SEO не важно или нужна мобильная версия - то пишу на React.',
     icon: <FaReact size={20} />,
     isDarkText: true,
     name: 'React',
+  },
+  'react-native': {
+    color: '#61DAFB',
+    icon: <FaReact size={20} />,
+    isDarkText: true,
+    name: 'React Native',
   },
   'react-router': {
     color: '#CA4245',
     icon: <SiReactrouter size={18} />,
     name: 'React Router',
   },
-  'redux-toolkit': {
+  'redux': {
     color: '#593D88',
+    description: 'Используем в Сбер, но как легаси (перешли на MobX). Хорошо знаю createSlice, configureStore, createAsyncThunk. Умею строить масштабируемую структуру хранилища, разбивать логику по фичам (особенно в связке с FSD).',
     icon: <SiRedux size={18} />,
-    name: 'Redux Toolkit',
+    name: 'Redux',
   },
   'rtk-query': {
+    color: '#FF4154',
     icon: <SiReactquery size={18} />,
     name: 'RTK Query',
   },
   'scss': {
     color: '#CC6699',
+    description: 'Имею опыт работы с переменными, @mixin, @include, вложенностью. Использую SCSS во всех проектах, особенно когда нужна гибкость и расширяемость стилей.',
     icon: <FaSass size={20} />,
     name: 'Scss',
   },
@@ -315,12 +328,13 @@ export const StackData: Record<StackVariants, StackProps> = {
   },
   'typescript': {
     color: '#007ACC',
-    description: 'С самого начала обучения фронту - я пишу на TypeScript. Сначала не понимал зачем он нужен, а сейчас не могу без него жить',
+    description: 'С самого начала обучения фронту - я пишу на TypeScript. Сначала не понимал зачем он нужен, а сейчас не могу без него жить. Имею большой опыт миграции проектов с JavaScript на TypeScript.',
     icon: <BiLogoTypescript size={20} />,
     name: 'TypeScript',
   },
   'webpack': {
     color: '#8DD6F9',
+    description: 'Имею опыт глубокой настройки и оптимизации сборки. В рамках задач в Сбере - оптимизировал конфигурацию так, что удалось: Уменьшить вес фронтенд-бандлов на ~32% и ускорить загрузку страниц за счёт разбивки на чанки.',
     icon: <SiWebpack size={18} />,
     isDarkText: true,
     name: 'Webpack',
@@ -332,6 +346,7 @@ export const StackData: Record<StackVariants, StackProps> = {
   },
   'zustand': {
     color: '#FFB441',
+    description: 'Нравится децентрализованность и простота. На каждый строр - свой хук :) Использую во всех своих пет-проектах.',
     icon: <FaGuitar size={18} />,
     name: 'Zustand',
   },

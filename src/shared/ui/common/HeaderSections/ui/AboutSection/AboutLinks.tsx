@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { BiLogoTypescript } from 'react-icons/bi';
-import { LuGraduationCap } from 'react-icons/lu';
+import { LuFlame, LuGraduationCap } from 'react-icons/lu';
 import { MdArrowOutward } from 'react-icons/md';
 import { TbCube3dSphere } from 'react-icons/tb';
 
@@ -24,6 +24,12 @@ const aboutLinks = [
     href: '/#пройденные-курсы',
     icon: <LuGraduationCap className="text-primary" size={16} />,
     title: 'Пройденные курсы',
+  },
+  {
+    description: 'Мои достижения',
+    href: '/#мои-достижения',
+    icon: <LuFlame className="text-primary" size={16} />,
+    title: 'Достижения',
   },
   {
     description: 'Мои старые работы',
