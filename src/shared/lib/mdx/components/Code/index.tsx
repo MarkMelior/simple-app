@@ -1,22 +1,27 @@
 import { cn } from '@/shared/lib/common';
+import type { SemanticColors } from '@/shared/types';
 import { Code, CodeBlock } from '@/shared/ui';
+
+import styles from './code.module.scss';
 
 import type { HTMLAttributes } from 'react';
 
 interface ExtendedCodeProps extends HTMLAttributes<HTMLElement> {
+  color?: SemanticColors | 'gray'
   exampleLink?: string
   filename?: string
   hideHeader?: boolean
 }
 
-export const CodeMDX = async ({ children, className, exampleLink, ...props }: ExtendedCodeProps) => {
+export const CodeMDX = async ({ children, className, color = 'default', exampleLink, ...props }: ExtendedCodeProps) => {
   const match = /language-(\w+)/.exec(className || '');
 
   if (!match) {
     return (
       <Code
         className={cn(
-          'bg-default-200/50 text-[0.8rem] py-[0.075rem] px-1 h-fit rounded-md select-text min-w-fit border border-default-200 text-default-700 !leading-5 break-all whitespace-normal top-[-0.0825rem] relative',
+          'relative top-[-0.0825rem] h-fit min-w-fit select-text whitespace-normal break-all rounded-md border border-default-200 bg-default-200/50 px-1 py-[0.075rem] text-[0.8rem] !leading-5',
+          { [styles[color!]]: color },
         )}
       >
         {children}

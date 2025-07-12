@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import path from 'path';
 
 import { CategoryCard } from '@/widgets/(articles)/CategoryCard';
@@ -7,14 +8,14 @@ import { AppRouteEnum, PublicImages } from '@/shared/constants';
 import { Emoji } from '@/shared/lib/emoji';
 import { MDXRemote, getMdx } from '@/shared/lib/mdx';
 import { Flex, Text, Underline } from '@/shared/ui';
-import { Image, RandomSticker } from '@/shared/ui/client';
+import { RandomSticker } from '@/shared/ui/client';
 
 import { ArticleModal, ArticlesCategoryEnum, getArticleListByCategory } from '@/entities/articles';
 
 import { MainLayout } from '@/core/layouts/main';
 
-import { MyArticlesButton } from './ui/MyArticlesButton';
-import ArticlePage from '../articles/[category]/[name]/page';
+import { MyArticlesButton } from './(page)/MyArticlesButton';
+import ArticlePage from './articles/[category]/[name]/page';
 
 import type { MDXComponents } from 'mdx/types';
 
@@ -41,7 +42,9 @@ export default async function Home({ searchParams }: HomeProps) {
         <Image
           alt="Banner"
           className="min-h-40 min-w-full object-cover lg:min-h-0"
+          height={636}
           src={PublicImages.misc.Banner}
+          width={3840}
         />
       </div>
       <div className="mx-auto max-w-4xl px-4 sm:px-6 md:px-8">
@@ -55,7 +58,7 @@ export default async function Home({ searchParams }: HomeProps) {
           <Flex className="max-w-lg" gap="gap-4" vertical={true}>
             <Text font="tiny5" size="text-4xl">
               <Emoji className="mr-2" emoji="👋" />
-              &nbsp;Привет, меня&nbsp;
+              Привет, меня&nbsp;
               <Underline>зовут Марк (:</Underline>
             </Text>
             <Text

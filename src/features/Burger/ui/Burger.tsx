@@ -8,6 +8,7 @@ import { TbMessageCircleUp } from 'react-icons/tb';
 import { AppRouteEnum } from '@/shared/constants';
 import { CrossIcon } from '@/shared/icons';
 import { useModals } from '@/shared/lib/common';
+import { Emoji } from '@/shared/lib/emoji';
 import { useTheme } from '@/shared/lib/theme';
 import { AboutLinks, AboutServices, Flex } from '@/shared/ui';
 import { Button, DynamicQuote } from '@/shared/ui/client';
@@ -31,7 +32,8 @@ export const Burger: FC<BurgerProps> = ({
 }) => {
   const { Icon, themeName, toggleTheme } = useTheme();
   const { isOpen, setIsOpen } = useBurger();
-  const { toggle } = useModals('articlesCategories');
+  const { toggle: toggleArticlesCategories } = useModals('articlesCategories');
+  const { toggle: toggleSupport } = useModals('support');
 
   const isMainPage = page === 'main';
 
@@ -75,7 +77,7 @@ export const Burger: FC<BurgerProps> = ({
                     color="primary"
                     onPress={() => {
                       onClose();
-                      toggle();
+                      toggleArticlesCategories();
                     }}
                     radius="md"
                     startContent={<LuFolderTree size={16} />}
@@ -104,7 +106,7 @@ export const Burger: FC<BurgerProps> = ({
                       className="w-full"
                       onPress={() => {
                         onClose();
-                        toggle();
+                        toggleArticlesCategories();
                       }}
                       radius="sm"
                       variant="flat"
@@ -124,13 +126,15 @@ export const Burger: FC<BurgerProps> = ({
                     </Button>
                   )}
                   <Button
-                    as={Link}
                     className="w-full"
-                    href={AppRouteEnum.HELP}
-                    radius="sm"
+                    onPress={() => {
+                      onClose();
+                      toggleSupport();
+                    }}
                     variant="flat"
                   >
-                    Помощь
+                    <Emoji emoji="💕" size={20} />
+                    Поддержать
                   </Button>
                 </Flex>
                 <Flex

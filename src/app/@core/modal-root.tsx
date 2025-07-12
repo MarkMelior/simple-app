@@ -1,3 +1,5 @@
+import { SupportMeContent, SupportMeModal } from '@/features/SupportMe';
+
 import { ArticlesListContent, CategoriesArticleModal } from '@/entities/articles';
 
 /**
@@ -8,5 +10,8 @@ export const ModalRoot = () => (
     <CategoriesArticleModal>
       <ArticlesListContent />
     </CategoriesArticleModal>
+    <SupportMeModal>
+      <SupportMeContent />
+    </SupportMeModal>
   </>
 );

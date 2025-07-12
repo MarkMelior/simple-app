@@ -2,13 +2,14 @@
 
 import { useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
-import { FaCheckCircle } from 'react-icons/fa';
 import { FaCircleInfo } from 'react-icons/fa6';
 import { IoWarning } from 'react-icons/io5';
 import { MdError } from 'react-icons/md';
 
 import { CrossIcon } from '@/shared/icons';
 import { Button, Progress } from '@/shared/ui/client';
+
+import { Emoji } from '../../emoji';
 
 import styles from './openMessage.module.scss';
 
@@ -27,7 +28,7 @@ const getIcon = (type: MessageType) => {
     case 'info':
       return <FaCircleInfo className="text-info" size={16} />;
     case 'success':
-      return <FaCheckCircle className="text-success" size={18} />;
+      return <Emoji emoji="✅" size={20} />;
     case 'error':
       return <MdError className="text-error" size={20} />;
     case 'warning':

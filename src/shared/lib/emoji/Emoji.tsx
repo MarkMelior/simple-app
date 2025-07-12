@@ -1,14 +1,12 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import { type FC, memo, useMemo } from 'react';
-import { useInView } from 'react-intersection-observer';
 
 import { cn } from '@/shared/lib/common';
-import { Image, Skeleton } from '@/shared/ui/client';
 
 import { type EmojiType } from './data';
-import { isClient } from '../next';
 import { usePerformance } from '../performance';
 import { getEmojiData } from './getEmojiData';
 
@@ -21,8 +19,6 @@ interface EmojiProps {
 }
 
 const EmojiComponent: FC<EmojiProps> = ({ className, emoji, size = '1.1em' }) => {
-  const { inView, ref } = useInView({ rootMargin: '200px', triggerOnce: true });
-
   const { src, type } = useMemo(() => getEmojiData(emoji), [emoji]);
 
   if (!src) return emoji;
@@ -31,7 +27,6 @@ const EmojiComponent: FC<EmojiProps> = ({ className, emoji, size = '1.1em' }) =>
     <span
       aria-label={emoji}
       className={cn('inline-flex align-text-bottom relative', className)}
-      ref={ref}
       style={{
         fontSize: size,
         height: size,
@@ -40,38 +35,34 @@ const EmojiComponent: FC<EmojiProps> = ({ className, emoji, size = '1.1em' }) =>
         width: size,
       }}
     >
-      {(type === 'animation' || type === 'image') ? (
-        isClient() && inView ? (
-          type === 'animation' ? (
-            <>
-              <Lottie
-                animationData={src}
-                autoplay={true}
-                loop={true}
-                rendererSettings={{
-                  preserveAspectRatio: 'xMidYMid slice',
-                  progressiveLoad: true,
-                }}
-                style={{ height: '100%', width: '100%' }}
-              />
-              <span
-                aria-hidden={true}
-                className="absolute inset-0 select-text text-transparent"
-              >
-                {emoji}
-              </span>
-            </>
-          ) : (
-            <Image
-              alt={emoji}
-              src={src}
-              style={{ height: '100%', width: '100%' }}
-            />
-          )
-        ) : (
-          <Skeleton className="size-[1em] rounded-md" />
-        )
-      ) : null}
+      {type === 'animation' ? (
+        <>
+          <Lottie
+            animationData={src}
+            autoplay={true}
+            loop={true}
+            rendererSettings={{
+              preserveAspectRatio: 'xMidYMid slice',
+              progressiveLoad: true,
+            }}
+            style={{ height: '100%', width: '100%' }}
+          />
+          <span
+            aria-hidden={true}
+            className="absolute inset-0 select-text text-transparent"
+          >
+            {emoji}
+          </span>
+        </>
+      ) : (
+        <Image
+          alt={emoji}
+          height={100}
+          src={src}
+          style={{ height: '100%', width: '100%' }}
+          width={100}
+        />
+      )}
     </span>
   );
 };

@@ -1,0 +1,28 @@
+.copy {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  margin: -2px -8px;
+  padding: 2px 8px;
+  padding-right: 32px;
+
+  background: transparent;
+  border-radius: 8px;
+
+  transition: 0.15s ease all;
+  border-color: transparent;
+  border-style: dashed;
+  border-width: 1px;
+  cursor: pointer;
+  white-space: nowrap;
+
+  &[data-copied='false']:hover {
+    background: theme('colors.default-400/0.2');
+    border-color: theme('colors.default-600/0.5');
+  }
+}
+
+.copied {
+  background: theme('colors.success-400/0.3');
+  border-color: theme('colors.success-600');
+}

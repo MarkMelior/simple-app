@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useMemo } from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -7,7 +8,6 @@ import type { PublicImagePath } from '@/shared/constants';
 import { PublicImages } from '@/shared/constants';
 import { useTyping } from '@/shared/lib/text';
 import { Blockquote } from '@/shared/ui';
-import { Image } from '@/shared/ui/client';
 
 import styles from './dynamicQuote.module.scss';
 
@@ -39,14 +39,16 @@ export const DynamicQuote = () => {
         <Image
           alt={image}
           className={styles.icon}
+          height={160}
           key={image}
           src={image}
+          width={160}
         />
       )}
       ref={ref}
       variant="quote"
     >
-      <span>
+      <span className={styles.textWrapper}>
         {text}
         <span className={styles.cursor} />
       </span>
