@@ -1,19 +1,23 @@
 'use client';
 
-import { type FC, useMemo } from 'react';
+import Link from 'next/link';
+import { type FC, useCallback, useMemo } from 'react';
 
 import { CategoryCard } from '@/widgets/(articles)/CategoryCard';
 
 import { useModals } from '@/shared/lib/common';
+import { Text } from '@/shared/ui';
 
 import { type ArticleData, useArticles } from '@/entities/articles';
 
 interface PrepareArticlesProps {
   articles: ArticleData[]
   isFullPage?: boolean
+  link: string
+  title: string
 }
 
-export const PrepareArticles: FC<PrepareArticlesProps> = ({ articles, isFullPage }) => {
+export const PrepareArticles: FC<PrepareArticlesProps> = ({ articles, isFullPage, link, title }) => {
   const { filters, settings, sort } = useArticles();
   const { close } = useModals('articlesCategories');
 
@@ -23,11 +27,27 @@ export const PrepareArticles: FC<PrepareArticlesProps> = ({ articles, isFullPage
     return articles;
   }, [articles]);
 
+  const handleClick = useCallback(() => {
+    if (isFullPage) return;
+    close();
+  }, []);
+
   return (
-    <CategoryCard
-      articles={prepareArticlesData}
-      cols={isFullPage ? '3' : '2'}
-      {...(isFullPage ? {} : { onClick: close })}
-    />
+    <>
+      <Text
+        as={Link}
+        href={link ?? ''}
+        onClick={handleClick}
+        size={isFullPage ? 'text-2xl' : 'text-lg'}
+        weight="font-bold"
+      >
+        {title}
+      </Text>
+      <CategoryCard
+        articles={prepareArticlesData}
+        cols={isFullPage ? '3' : '2'}
+        onClick={handleClick}
+      />
+    </>
   );
 };

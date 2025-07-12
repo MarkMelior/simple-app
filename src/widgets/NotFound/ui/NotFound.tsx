@@ -9,11 +9,11 @@ import { Button, RandomSticker } from '@/shared/ui/client';
 
 import styles from './notFound.module.scss';
 
-import type { FC } from 'react';
+import type { FC, ReactNode } from 'react';
 
 interface NotFoundProps {
   buttonText?: string
-  description?: string
+  description?: ReactNode
   emoji?: EmojiType
   title?: string
 }

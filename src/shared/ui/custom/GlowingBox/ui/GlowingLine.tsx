@@ -11,6 +11,9 @@ interface GlowingBoxProps {
   className?: string
 }
 
+/**
+ * @deprecated
+ */
 export const GlowingLine: FC<GlowingBoxProps> = ({ className }) => {
   const [mousePosition, ref] = useMouse();
 

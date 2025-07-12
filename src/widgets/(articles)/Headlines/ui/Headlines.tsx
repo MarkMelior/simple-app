@@ -167,16 +167,6 @@ export const Headlines: FC<HeadlinesProps> = ({ headlines }) => {
                 )}
               </React.Fragment>
             ))}
-            {/* TODO */}
-            {/* <hr className='mt-4 mb-2 border-default-100' />
-            <li className='text-default-500 hover:text-default-600 transition-colors'>
-              <Link
-                target='_blank'
-                href={gitHubRepoLink({ path: `/app/home-${lang}.mdx` })}
-              >
-                Редактировать страницу на GitHub
-              </Link>
-            </li> */}
           </ul>
         </div>
       </div>

@@ -18,6 +18,7 @@ export interface ArticleMetadata {
 }
 
 export interface CategoryMetadata {
+  description: string
   link: string
   title: string
 }

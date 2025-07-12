@@ -7,25 +7,12 @@ import { useInView } from 'react-intersection-observer';
 import { cn } from '@/shared/lib/common';
 import { Image, Skeleton } from '@/shared/ui/client';
 
-import { type EmojiType, emojiData } from './data';
+import { type EmojiType } from './data';
 import { isClient } from '../next';
+import { usePerformance } from '../performance';
+import { getEmojiData } from './getEmojiData';
 
 const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
-
-const animationCache = new Map<string, unknown>();
-const imageCache = new Map<string, string>();
-
-const isLottieJson = (value: unknown): value is Record<string, unknown> =>
-  typeof value === 'object'
-  && value !== null
-  && 'v' in value
-  && 'layers' in value;
-
-const isImageModule = (value: unknown): value is { src: string } =>
-  typeof value === 'object'
-  && value !== null
-  && 'src' in value
-  && typeof value.src === 'string';
 
 interface EmojiProps {
   className?: string
@@ -33,27 +20,7 @@ interface EmojiProps {
   size?: number | string
 }
 
-const getEmojiData = (emoji: EmojiType) => {
-  const entry = emojiData[emoji];
-
-  if (!entry) return { src: null, type: null };
-
-  if (isLottieJson(entry)) {
-    if (!animationCache.has(emoji)) animationCache.set(emoji, entry);
-
-    return { src: animationCache.get(emoji)!, type: 'animation' as const };
-  }
-
-  if (isImageModule(entry)) {
-    if (!imageCache.has(emoji)) imageCache.set(emoji, entry.src);
-
-    return { src: imageCache.get(emoji)!, type: 'image' as const };
-  }
-
-  return { src: null, type: null };
-};
-
-export const Emoji: FC<EmojiProps> = memo(({ className, emoji, size = '1.1em' }) => {
+const EmojiComponent: FC<EmojiProps> = ({ className, emoji, size = '1.1em' }) => {
   const { inView, ref } = useInView({ rootMargin: '200px', triggerOnce: true });
 
   const { src, type } = useMemo(() => getEmojiData(emoji), [emoji]);
@@ -107,6 +74,16 @@ export const Emoji: FC<EmojiProps> = memo(({ className, emoji, size = '1.1em' })
       ) : null}
     </span>
   );
+};
+
+export const Emoji: FC<EmojiProps> = memo((props) => {
+  const { isDisabledAnimEmoji } = usePerformance();
+
+  if (isDisabledAnimEmoji) {
+    return props.emoji;
+  }
+
+  return <EmojiComponent {...props} />;
 });
 
 Emoji.displayName = 'Emoji';

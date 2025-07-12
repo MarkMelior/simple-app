@@ -2,10 +2,12 @@
 
 import { DrawerBody, DrawerContent, DrawerHeader, Drawer as HeroDrawer } from '@heroui/react';
 import Link from 'next/link';
+import { LuFolderTree } from 'react-icons/lu';
 import { TbMessageCircleUp } from 'react-icons/tb';
 
 import { AppRouteEnum } from '@/shared/constants';
 import { CrossIcon } from '@/shared/icons';
+import { useModals } from '@/shared/lib/common';
 import { useTheme } from '@/shared/lib/theme';
 import { AboutLinks, AboutServices, Flex } from '@/shared/ui';
 import { Button, DynamicQuote } from '@/shared/ui/client';
@@ -29,6 +31,7 @@ export const Burger: FC<BurgerProps> = ({
 }) => {
   const { Icon, themeName, toggleTheme } = useTheme();
   const { isOpen, setIsOpen } = useBurger();
+  const { toggle } = useModals('articlesCategories');
 
   const isMainPage = page === 'main';
 
@@ -66,6 +69,21 @@ export const Burger: FC<BurgerProps> = ({
                     Уведомление
                   </Button>
                 ) : null}
+                {isMainPage ? null : (
+                  <Button
+                    className={styles.button}
+                    color="primary"
+                    onPress={() => {
+                      onClose();
+                      toggle();
+                    }}
+                    radius="md"
+                    startContent={<LuFolderTree size={16} />}
+                    variant="light"
+                  >
+                    Все статьи
+                  </Button>
+                )}
                 <Button
                   className={styles.button}
                   color="primary"
@@ -81,16 +99,30 @@ export const Burger: FC<BurgerProps> = ({
             <DrawerBody className="pt-14">
               <div className="flex flex-col gap-6 pb-8 pt-4 sm:mx-auto">
                 <Flex full={true} gap="gap-2">
-                  <Button
-                    as={Link}
-                    className="w-full"
-                    href={isMainPage ? AppRouteEnum.ARTICLES : AppRouteEnum.MAIN}
-                    onPress={onClose}
-                    radius="sm"
-                    variant="flat"
-                  >
-                    {isMainPage ? 'Мои статьи' : 'Главная'}
-                  </Button>
+                  {isMainPage ? (
+                    <Button
+                      className="w-full"
+                      onPress={() => {
+                        onClose();
+                        toggle();
+                      }}
+                      radius="sm"
+                      variant="flat"
+                    >
+                      Мои статьи
+                    </Button>
+                  ) : (
+                    <Button
+                      as={Link}
+                      className="w-full"
+                      href={AppRouteEnum.MAIN}
+                      onPress={onClose}
+                      radius="sm"
+                      variant="flat"
+                    >
+                      Главная
+                    </Button>
+                  )}
                   <Button
                     as={Link}
                     className="w-full"

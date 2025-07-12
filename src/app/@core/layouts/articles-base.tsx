@@ -12,9 +12,8 @@ export const ArticlesBaseLayout = ({ children }: ArticlesBaseLayoutProps) => (
   <>
     <Light />
     <Navbar maxWidth="max-w-6xl" />
-    {/* TODO: Что за 168px ? Нужно убрать */}
-    <div className="mx-auto min-h-[calc(100vh-168px)] max-w-6xl px-4 sm:px-6 md:px-8">
-      <Spacer y={16} />
+    <div className="mx-auto mb-4 max-w-6xl px-4 sm:px-6 md:px-8">
+      <Spacer y={20} />
       {children}
     </div>
     <FooterContent className="mb-6 mt-12" />

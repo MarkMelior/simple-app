@@ -19,7 +19,7 @@ export default async function ArticleCategoryPage({ params }: ArticleCategoryPag
   return (
     <div>
       <Header
-        description="Здесь находятся все проекты из данной категории"
+        description={category.description}
         note="Категория"
         title={category.title}
       />

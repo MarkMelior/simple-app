@@ -1,4 +1,4 @@
-import { Flex, Text } from '@/shared/ui';
+import { Flex } from '@/shared/ui';
 
 import { getArticlesList } from '@/entities/articles';
 
@@ -14,10 +14,14 @@ export const ArticlesListContent: FC<ArticlesListContentProps> = async ({ isFull
   const articlesList = await getArticlesList();
 
   return (
-    articlesList.map(({ articles, title }) => (
+    articlesList.map(({ articles, link, title }) => (
       <Flex gap="gap-6" key={title} vertical={true}>
-        <Text size={isFullPage ? 'text-2xl' : 'text-lg'} weight="font-bold">{title}</Text>
-        <PrepareArticles articles={articles} isFullPage={isFullPage} />
+        <PrepareArticles
+          articles={articles}
+          isFullPage={isFullPage}
+          link={link}
+          title={title}
+        />
       </Flex>
     ))
   );

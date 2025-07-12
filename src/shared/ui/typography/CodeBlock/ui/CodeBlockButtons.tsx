@@ -7,12 +7,14 @@ import { cn } from '@/shared/lib/common';
 import { Button, CopyButton, Tooltip } from '@/shared/ui/client';
 
 interface CodeBlockButtonsProps {
+  copiedText?: string
   exampleLink?: string
   hoverButton?: boolean
   text: string
 }
 
 export const CodeBlockButtons = ({
+  copiedText,
   exampleLink,
   hoverButton,
   text,
@@ -40,6 +42,6 @@ export const CodeBlockButtons = ({
         </Button>
       </Tooltip>
     ) : null}
-    <CopyButton text={text} />
+    <CopyButton copiedText={copiedText} text={text} />
   </div>
 );
