@@ -6,8 +6,8 @@ import { FaFilter, FaSort } from 'react-icons/fa6';
 import { TbSettings } from 'react-icons/tb';
 
 import { AppRouteEnum } from '@/shared/constants';
+import { CrossIcon } from '@/shared/icons';
 import { useModals } from '@/shared/lib/common';
-import { Emoji } from '@/shared/lib/emoji';
 import { Flex, Text } from '@/shared/ui';
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@/shared/ui/client';
 
@@ -69,26 +69,30 @@ export const CategoriesArticleModal: FC<CategoriesArticleModalProps> = ({ childr
                     </Text>
                   </Button>
                 </Flex>
-                <Button
-                  as={Link}
-                  color="primary"
-                  endContent={<FaWindowRestore size={14} />}
-                  href={AppRouteEnum.ARTICLES}
-                  onPress={onClose}
-                  variant="light"
-                >
-                  Открыть как страницу
-                </Button>
               </Flex>
             </ModalHeader>
             <ModalBody>
               {children}
             </ModalBody>
-            <ModalFooter>
-              <Text color="text-default-500" size="text-sm">
-                Конец списка&nbsp;
-                <Emoji emoji="👀" />
-              </Text>
+            <ModalFooter className="justify-end">
+              <Button
+                as={Link}
+                color="primary"
+                endContent={<FaWindowRestore size={14} />}
+                href={AppRouteEnum.ARTICLES}
+                onPress={onClose}
+                variant="light"
+              >
+                Открыть как страницу
+              </Button>
+              <Button
+                color="danger"
+                onPress={onClose}
+                startContent={<CrossIcon height={11} width={11} />}
+                variant="flat"
+              >
+                Закрыть
+              </Button>
             </ModalFooter>
           </>
         )}

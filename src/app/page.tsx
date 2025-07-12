@@ -4,31 +4,24 @@ import path from 'path';
 
 import { CategoryCard } from '@/widgets/(articles)/CategoryCard';
 
-import { AppRouteEnum, PublicImages } from '@/shared/constants';
+import { PublicImages } from '@/shared/constants';
 import { Emoji } from '@/shared/lib/emoji';
 import { MDXRemote, getMdx } from '@/shared/lib/mdx';
 import { Flex, Text, Underline } from '@/shared/ui';
 import { RandomSticker } from '@/shared/ui/client';
 
-import { ArticleModal, ArticlesCategoryEnum, getArticleListByCategory } from '@/entities/articles';
+import { ArticlesCategoryEnum, getArticleListByCategory } from '@/entities/articles';
 
 import { MainLayout } from '@/core/layouts/main';
 
 import { MyArticlesButton } from './(page)/MyArticlesButton';
-import ArticlePage from './articles/[category]/[name]/page';
 
 import type { MDXComponents } from 'mdx/types';
 
-interface HomeProps {
-  searchParams?: Promise<{ category?: string, name?: string }>
-}
-
-export default async function Home({ searchParams }: HomeProps) {
+export default async function Home() {
   const dir = path.join(process.cwd(), 'src', 'app', 'index.mdx');
   const { content } = await getMdx(dir);
   const { articles } = await getArticleListByCategory(ArticlesCategoryEnum.FRONTEND);
-
-  const search = await searchParams;
 
   const components: MDXComponents = {
     Images: dynamic(() => import('./(page)/Images').then((mod) => mod.Images)),
@@ -79,11 +72,11 @@ export default async function Home({ searchParams }: HomeProps) {
         <MDXRemote components={components} source={content} />
       </div>
       {/* TODO: Может вынести в Layout? Проблема в то, что в Layout нет searchParams */}
-      {search?.category && search?.name ? (
+      {/* {search?.category && search?.name ? (
         <ArticleModal link={`${AppRouteEnum.ARTICLES}/${search.category}/${search.name}`}>
           <ArticlePage params={Promise.resolve({ category: search.category, name: search.name })} />
         </ArticleModal>
-      ) : null}
+      ) : null} */}
     </MainLayout>
   );
 }

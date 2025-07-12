@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { useMemo } from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -36,13 +35,11 @@ export const DynamicQuote = () => {
       className={styles.blockquote}
       color="default"
       icon={(
-        <Image
+        <img
           alt={image}
           className={styles.icon}
-          height={160}
           key={image}
           src={image}
-          width={160}
         />
       )}
       ref={ref}

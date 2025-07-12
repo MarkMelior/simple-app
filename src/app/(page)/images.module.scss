@@ -2,19 +2,17 @@
   display: grid;
   gap: 8px;
   margin: 32px 0;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
 
-  @media (max-width: theme('screens.sm')) {
-    grid-template-columns: 1fr;
+  @media (max-width: theme('screens.md')) {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
 .image {
-  width: 100%;
-  height: auto;
-
   border-radius: 12px;
   border: 1px solid theme('colors.default-200');
+  overflow: hidden;
 
   transition: all 0.2s ease-in-out;
   user-select: none;
@@ -22,4 +20,18 @@
   &:hover {
     transform: scale(1.02);
   }
+}
+
+.arrow {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 20;
+  min-width: 20px;
+  min-height: 20px;
+  padding: 4px;
+
+  border-radius: 6px;
+  border: 1px solid theme('colors.default-300');
+  background-color: theme('colors.default-100');
 }

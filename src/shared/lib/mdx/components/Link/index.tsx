@@ -26,7 +26,7 @@ export const LinkMDX = ({ children, href, isTitle, ...props }: ComponentPropsWit
 
   return (
     <Link
-      className="text-primary-600"
+      className="text-primary-600 [&_*]:!text-primary-600"
       href={href || ''}
       isExternal={true}
       {...props}
