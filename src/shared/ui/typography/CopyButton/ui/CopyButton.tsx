@@ -8,10 +8,11 @@ import { Button, Tooltip } from '@/shared/ui/client';
 import type { FC } from 'react';
 
 interface CopyButtonProps {
+  copiedText?: string
   text: string
 }
 
-export const CopyButton: FC<CopyButtonProps> = ({ text }) => {
+export const CopyButton: FC<CopyButtonProps> = ({ copiedText = 'Код скопирован', text }) => {
   const { copy, isCopied } = useCopy();
 
   return (
@@ -21,7 +22,7 @@ export const CopyButton: FC<CopyButtonProps> = ({ text }) => {
         data-copied={isCopied}
         isDisabled={isCopied}
         isIconOnly={true}
-        onPress={() => copy(text, { content: 'Код скопирован' })}
+        onPress={() => copy(text, { content: copiedText })}
         radius="sm"
         size="sm"
         variant="light"

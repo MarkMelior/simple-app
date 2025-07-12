@@ -3,6 +3,7 @@
 import { Button as HeroButton } from '@heroui/react';
 
 import { cn } from '@/shared/lib/common';
+import { usePerformance } from '@/shared/lib/performance';
 
 import type { ButtonProps as HeroButtonProps } from '@heroui/react';
 import type { FC } from 'react';
@@ -63,36 +64,40 @@ export const Button: FC<ButtonProps> = ({
   type,
   variant,
   ...props
-}) => (
-  <HeroButton
-    as={as}
-    className={cn(
-      className,
-      { 'text-[0.685rem] px-1.5 py-1 h-6 [&>svg]:max-w-[theme(spacing.4)] rounded-md gap-1.5': size === 'xs' },
-    )}
-    color={color}
-    data-copied={props['data-copied']}
-    disabled={disabled}
-    disableRipple={disableRipple}
-    download={download}
-    endContent={endContent}
-    fullWidth={fullWidth}
-    href={href}
-    isDisabled={isDisabled}
-    isIconOnly={isIconOnly}
-    isLoading={isLoading}
-    onMouseEnter={onMouseEnter}
-    onMouseLeave={onMouseLeave}
-    onPress={onPress}
-    radius={radius}
-    scroll={scroll}
-    size={size === 'xs' ? 'sm' : size}
-    startContent={startContent}
-    style={style}
-    target={target}
-    type={type}
-    variant={variant}
-  >
-    {children}
-  </HeroButton>
-);
+}) => {
+  const { isDisabledAnimation } = usePerformance();
+
+  return (
+    <HeroButton
+      as={as}
+      className={cn(
+        className,
+        { 'text-[0.685rem] px-1.5 py-1 h-6 [&>svg]:max-w-[theme(spacing.4)] rounded-md gap-1.5': size === 'xs' },
+      )}
+      color={color}
+      data-copied={props['data-copied']}
+      disabled={disabled}
+      disableRipple={isDisabledAnimation || disableRipple}
+      download={download}
+      endContent={endContent}
+      fullWidth={fullWidth}
+      href={href}
+      isDisabled={isDisabled}
+      isIconOnly={isIconOnly}
+      isLoading={isLoading}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      onPress={onPress}
+      radius={radius}
+      scroll={scroll}
+      size={size === 'xs' ? 'sm' : size}
+      startContent={startContent}
+      style={style}
+      target={target}
+      type={type}
+      variant={variant}
+    >
+      {children}
+    </HeroButton>
+  );
+};

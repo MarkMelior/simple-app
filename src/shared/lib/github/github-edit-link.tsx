@@ -18,7 +18,7 @@ export const GithubEditLink: FC<GithubEditLinkProps> = ({ className }) => {
 
   return (
     <Link
-      className={cn('hover:text-default-600 transition', className)}
+      className={cn('hover:text-default-600 transition font-light', className)}
       href={hrefGithub}
       target="_blank"
     >

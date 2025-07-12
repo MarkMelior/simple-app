@@ -19,6 +19,7 @@ interface TextProps {
   customColor?: string
   decoration?: 'line-through'
   font?: FontType
+  href?: string
   onClick?: () => void
   /**
    * Размер шрифта
@@ -45,6 +46,7 @@ export const Text = ({
   customColor,
   decoration,
   font,
+  href,
   onClick,
   size,
   uppercase,
@@ -63,6 +65,7 @@ export const Text = ({
       },
       className,
     )}
+    href={href}
     onClick={onClick}
     style={{
       color: customColor,

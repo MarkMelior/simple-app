@@ -1,23 +1,30 @@
 'use client';
 
-import { LuPointer } from 'react-icons/lu';
+import { RxHamburgerMenu } from 'react-icons/rx';
 
 import { Button } from '@/shared/ui/client';
 
 import { useArticleNavbar } from '../store';
 
-export const AboutHoverButton = () => {
+import type { FC } from 'react';
+
+interface AboutHoverButtonProps {
+  className?: string
+}
+
+export const AboutHoverButton: FC<AboutHoverButtonProps> = ({ className }) => {
   const { setIsHoveredButton } = useArticleNavbar();
 
   return (
     <Button
-      className="hidden text-default-500 hover:text-default-600 lg:flex"
+      className={className}
+      color="primary"
       isIconOnly={true}
       onMouseEnter={() => setIsHoveredButton(true)}
       onMouseLeave={() => setIsHoveredButton(false)}
       variant="light"
     >
-      <LuPointer size={20} strokeWidth={1.5} />
+      <RxHamburgerMenu size={20} />
     </Button>
   );
 };

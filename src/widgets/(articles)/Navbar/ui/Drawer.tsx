@@ -6,15 +6,19 @@ import { Button } from '@/shared/ui/client';
 
 import { Burger, useBurger } from '@/features/Burger';
 
-import styles from './drawer.module.scss';
+import type { FC } from 'react';
 
-export const Drawer = () => {
+interface DrawerProps {
+  className?: string
+}
+
+export const Drawer: FC<DrawerProps> = ({ className }) => {
   const { setIsOpen } = useBurger();
 
   return (
     <>
       <Button
-        className={styles.button}
+        className={className}
         color="primary"
         isIconOnly={true}
         onPress={() => setIsOpen(true)}

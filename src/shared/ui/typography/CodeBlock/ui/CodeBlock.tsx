@@ -17,10 +17,12 @@ import './codeBlock.scss';
 
 export interface CodeBlockProps {
   className?: string
+  copiedText?: string
   disableLineNumbers?: boolean
   exampleLink?: string
   filename?: string
   hideHeader?: boolean
+  hideLangIcon?: boolean
   lang?: StackVariants
   signature?: string
   text: string
@@ -28,10 +30,12 @@ export interface CodeBlockProps {
 
 export const CodeBlock: FC<CodeBlockProps> = ({
   className,
+  copiedText,
   disableLineNumbers,
   exampleLink,
   filename,
   hideHeader,
+  hideLangIcon,
   lang = 'typescript',
   signature,
   text,
@@ -65,20 +69,25 @@ export const CodeBlock: FC<CodeBlockProps> = ({
       >
         {hideHeader ? (
           <CodeBlockButtons
+            copiedText={copiedText}
             exampleLink={exampleLink}
             hoverButton={true}
             text={text}
           />
         ) : (
           <div className="sticky top-0 flex items-center justify-between gap-3 whitespace-normal break-all bg-default-200 px-3 py-0.5 text-[0.825rem] text-default-600">
-            {StackData[lang]?.icon || <TbFileUnknown size={20} />}
+            {hideLangIcon ? null : (StackData[lang]?.icon || <TbFileUnknown size={20} />)}
             {filename ? filename : StackData[lang]?.name}
-            <CodeBlockButtons exampleLink={exampleLink} text={text} />
+            <CodeBlockButtons
+              copiedText={copiedText}
+              exampleLink={exampleLink}
+              text={text}
+            />
           </div>
         )}
         <SyntaxHighlighter
           className={cn(
-            'border-t-1 border-default-200 max-h-[28rem] text-sm overflow-auto !bg-default-100 !text-default-700',
+            'max-h-[28rem] text-sm overflow-auto !bg-default-100 !text-default-700',
             { 'border-0': hideHeader },
           )}
           codeTagProps={{

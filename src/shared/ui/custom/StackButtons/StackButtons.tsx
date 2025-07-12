@@ -47,7 +47,7 @@ export const StackButtons = ({
               'cursor-default bg-default-500/10 text-default-700',
               {
                 'cursor-pointer': isClickable,
-                [styles.dot]: !!stack?.description,
+                [styles.dot]: isClickable && !!stack?.description,
               },
               rounded,
             )}
@@ -66,45 +66,47 @@ export const StackButtons = ({
           </Button>
         );
       })}
-      <Modal
-        hideCloseButton={true}
-        isOpen={!!selectedData}
-        onClose={() => setSelectedData(undefined)}
-        placement="center"
-      >
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex items-center gap-4">
-                <span
-                  className={cn('scale-150', { 'text-default-950': selectedData?.color === 'black' })}
-                  style={{ color: selectedData?.color === 'black' ? undefined : selectedData?.color }}
-                >
-                  {selectedData?.icon}
-                </span>
-                Опыт работы с
-                {' '}
-                {selectedData?.name}
-              </ModalHeader>
-              <ModalBody>
-                <Text color="text-default-600" weight="font-light">
-                  {selectedData?.description ?? 'Описание отсутствует'}
-                </Text>
-              </ModalBody>
-              <ModalFooter className="justify-end">
-                <Button
-                  color="danger"
-                  onPress={onClose}
-                  startContent={<CrossIcon height={11} width={11} />}
-                  variant="flat"
-                >
-                  Закрыть
-                </Button>
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
+      {isClickable ? (
+        <Modal
+          hideCloseButton={true}
+          isOpen={!!selectedData}
+          onClose={() => setSelectedData(undefined)}
+          placement="center"
+        >
+          <ModalContent>
+            {(onClose) => (
+              <>
+                <ModalHeader className="flex items-center gap-4">
+                  <span
+                    className={cn('scale-150', { 'text-default-950': selectedData?.color === 'black' })}
+                    style={{ color: selectedData?.color === 'black' ? undefined : selectedData?.color }}
+                  >
+                    {selectedData?.icon}
+                  </span>
+                  Опыт работы с
+                  {' '}
+                  {selectedData?.name}
+                </ModalHeader>
+                <ModalBody>
+                  <Text color="text-default-600" weight="font-light">
+                    {selectedData?.description ?? 'Описание отсутствует'}
+                  </Text>
+                </ModalBody>
+                <ModalFooter className="justify-end">
+                  <Button
+                    color="danger"
+                    onPress={onClose}
+                    startContent={<CrossIcon height={11} width={11} />}
+                    variant="flat"
+                  >
+                    Закрыть
+                  </Button>
+                </ModalFooter>
+              </>
+            )}
+          </ModalContent>
+        </Modal>
+      ) : null}
     </div>
   );
 };

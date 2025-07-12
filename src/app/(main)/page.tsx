@@ -55,7 +55,7 @@ export default async function Home({ searchParams }: HomeProps) {
           <Flex className="max-w-lg" gap="gap-4" vertical={true}>
             <Text font="tiny5" size="text-4xl">
               <Emoji className="mr-2" emoji="👋" />
-              Привет, меня&nbsp;
+              &nbsp;Привет, меня&nbsp;
               <Underline>зовут Марк (:</Underline>
             </Text>
             <Text

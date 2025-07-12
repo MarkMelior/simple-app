@@ -20,12 +20,17 @@ interface MdxResponse<T> {
 export async function getMdx<T = ArticleMetadata>(
   filePath: string,
 ): Promise<MdxResponse<T>> {
-  const fileContents = await fs.readFile(filePath, 'utf8');
+  let fileContents: string | null = null;
 
-  // TODO: Обработка пустого файла. Редкий кейс, но сделать нужно
-  // if (!fileContents) {
-  // throw new Error('File not found');
-  // }
+  try {
+    fileContents = await fs.readFile(filePath, 'utf8');
+  } catch (error) {
+    throw new Error(error instanceof Error ? error.message : 'Unable to read file');
+  }
+
+  if (!fileContents) {
+    throw new Error('File not found');
+  }
 
   const matterData = matter(fileContents);
   const metadata = matterData.data as T;
