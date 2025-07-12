@@ -1,12 +1,11 @@
 'use client';
 
-import Link from 'next/link';
 import { type FC } from 'react';
 import { TbMessageCircleUp } from 'react-icons/tb';
 
-import { AppRouteEnum } from '@/shared/constants';
 import { DownIcon } from '@/shared/icons';
 import { cn, typedEntries, useModals } from '@/shared/lib/common';
+import { Emoji } from '@/shared/lib/emoji';
 import { ScrollThresholdEnum, useScrolled } from '@/shared/lib/react';
 import { useTheme } from '@/shared/lib/theme';
 import type { SemanticColors } from '@/shared/types';
@@ -25,7 +24,8 @@ interface HeaderLinksProps {
 export const HeaderLinks: FC<HeaderLinksProps> = ({ color = 'primary' }) => {
   const isScrolled = useScrolled(ScrollThresholdEnum.MAIN_HEADER);
   const { isAlertClosed, isVisible, setActiveSection, setIsAlertClosed } = useHeader();
-  const { toggle } = useModals('articlesCategories');
+  const { toggle: toggleArticlesCategories } = useModals('articlesCategories');
+  const { toggle: toggleSupport } = useModals('support');
 
   const { Icon, toggleTheme } = useTheme();
 
@@ -36,7 +36,7 @@ export const HeaderLinks: FC<HeaderLinksProps> = ({ color = 'primary' }) => {
   return (
     <div className={styles.wrapper}>
       <Card className={styles.header}>
-        {typedEntries(headerSections).map(([key, { label }]) => {
+        {typedEntries(headerSections).map(([key, { disabled, label }]) => {
           const isOpened = isVisible(key);
 
           return (
@@ -44,6 +44,7 @@ export const HeaderLinks: FC<HeaderLinksProps> = ({ color = 'primary' }) => {
               className={cn(styles.link, { [styles.opened]: isOpened })}
               data-menu={key}
               endContent={<DownIcon className="opacity-50" isActive={isOpened} />}
+              isDisabled={disabled}
               key={key}
               onMouseEnter={() => setActiveSection(key)}
               onMouseLeave={handleClose}
@@ -55,19 +56,18 @@ export const HeaderLinks: FC<HeaderLinksProps> = ({ color = 'primary' }) => {
         <Button
           className={styles.link}
           onMouseEnter={handleClose}
-          onPress={() => toggle()}
+          onPress={() => toggleArticlesCategories()}
           scroll={false}
         >
           Статьи
         </Button>
         <Button
-          as={Link}
           className={styles.link}
-          href={AppRouteEnum.HELP}
           onMouseEnter={handleClose}
-          scroll={false}
+          onPress={() => toggleSupport()}
         >
-          Помощь
+          <Emoji emoji="💕" />
+          &nbsp;Поддержать
         </Button>
       </Card>
       <Flex align="items-center" className={styles.action}>

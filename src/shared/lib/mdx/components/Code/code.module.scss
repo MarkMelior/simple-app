@@ -1,0 +1,31 @@
+.secondary {
+  color: theme('colors.secondary') !important;
+}
+
+.primary {
+  color: theme('colors.primary') !important;
+}
+
+.success {
+  color: theme('colors.success') !important;
+}
+
+.warning {
+  color: theme('colors.warning') !important;
+}
+
+.danger {
+  color: theme('colors.danger') !important;
+}
+
+.default {
+  color: theme('colors.default-700') !important;
+}
+
+.gray {
+  color: theme('colors.default-500') !important;
+
+  [class="light"] & {
+    color: theme('colors.default-400') !important;
+  }
+}

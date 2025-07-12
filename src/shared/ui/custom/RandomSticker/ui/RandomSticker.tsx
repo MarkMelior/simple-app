@@ -1,11 +1,12 @@
 'use client';
 
-import { type FC, useMemo } from 'react';
+import Image from 'next/image';
+import { type FC, useEffect, useMemo, useState } from 'react';
 
 import { PublicImages } from '@/shared/constants';
 import { cn } from '@/shared/lib/common';
 import type { TwRounded } from '@/shared/types';
-import { Image } from '@/shared/ui/client';
+import { Skeleton } from '@/shared/ui/client';
 
 import styles from './randomSticker.module.scss';
 
@@ -16,6 +17,12 @@ interface RandomStickerProps {
 }
 
 export const RandomSticker: FC<RandomStickerProps> = ({ className, rounded = 'rounded-md', size = 180 }) => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const stickerList = useMemo(
     () => Object.values(PublicImages.sticker),
     [],
@@ -25,6 +32,8 @@ export const RandomSticker: FC<RandomStickerProps> = ({ className, rounded = 'ro
     () => stickerList[Math.floor(Math.random() * stickerList.length)],
     [stickerList],
   );
+
+  if (!mounted) return <Skeleton className={rounded} style={{ height: size, width: size }} />;
 
   return src.endsWith('.webm') ? (
     <video
@@ -42,7 +51,6 @@ export const RandomSticker: FC<RandomStickerProps> = ({ className, rounded = 'ro
       alt="Рандомный стикер"
       className={cn(styles.sticker, rounded, className)}
       height={size}
-      radius="md"
       src={src}
       width={size}
     />

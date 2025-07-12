@@ -7,6 +7,7 @@ import { rehypeExtractCodeProps } from './plugins/rehype-extract-code-props';
 import { remarkBlockquoteVariant } from './plugins/remark-blockqueue-variant';
 import remarkEmoji from './plugins/remark-emoji';
 import { remarkTableProps } from './plugins/remark-table-props';
+import { remarkInlineColoredCode } from './plugins/remarkInlineColoredCode';
 
 import type { MDXRemoteProps } from 'next-mdx-remote/rsc';
 import type { FC } from 'react';
@@ -21,7 +22,13 @@ export const MDXRemote: FC<MDXRemoteProps> = ({
     options={{
       mdxOptions: {
         rehypePlugins: [rehypeExtractCodeProps, rehypeAutoHeading],
-        remarkPlugins: [remarkGfm, remarkEmoji, remarkTableProps, remarkBlockquoteVariant],
+        remarkPlugins: [
+          remarkGfm,
+          remarkEmoji,
+          remarkTableProps,
+          remarkBlockquoteVariant,
+          remarkInlineColoredCode,
+        ],
       },
       ...options,
     }}

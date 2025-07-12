@@ -2,6 +2,7 @@ import { BiSolidMessageAltError, BiSolidQuoteRight } from 'react-icons/bi';
 import { CiStickyNote } from 'react-icons/ci';
 import { FaRegLightbulb } from 'react-icons/fa6';
 import { IoMdInformationCircle } from 'react-icons/io';
+import { IoWarning } from 'react-icons/io5';
 
 import { cn } from '@/shared/lib/common';
 import type { SemanticColors } from '@/shared/types';
@@ -11,8 +12,10 @@ import styles from './blockquote.module.scss';
 
 import type { FC, JSX, ReactNode, Ref } from 'react';
 
+type Colors = SemanticColors | 'orange';
+
 const blockquoteColors: Record<
-  SemanticColors,
+  Colors,
   { divider: string, background: string, icon: string }
 > = {
   danger: {
@@ -24,6 +27,11 @@ const blockquoteColors: Record<
     background: 'from-default-400/15',
     divider: 'dark:bg-default-700 bg-default-500',
     icon: 'dark:text-default-700 text-default-500',
+  },
+  orange: {
+    background: 'from-orange-400/10',
+    divider: 'bg-orange-300',
+    icon: 'text-orange-300',
   },
   primary: {
     background: 'from-primary-600/10',
@@ -41,18 +49,19 @@ const blockquoteColors: Record<
     icon: 'text-success-500',
   },
   warning: {
-    background: 'from-orange-400/10',
-    divider: 'bg-orange-300',
-    icon: 'text-orange-300',
+    background: 'from-warning-600/10',
+    divider: 'bg-warning-500',
+    icon: 'text-warning-500',
   },
 };
 
-const variantDefaultColors: Record<Variants, SemanticColors> = {
+const variantDefaultColors: Record<Variants, Colors> = {
   exclamation: 'danger',
-  idea: 'warning',
+  idea: 'orange',
   info: 'primary',
-  note: 'warning',
+  note: 'orange',
   quote: 'default',
+  warning: 'warning',
 };
 
 const iconsBlockquote: Record<Variants, JSX.Element> = {
@@ -61,9 +70,10 @@ const iconsBlockquote: Record<Variants, JSX.Element> = {
   info: <IoMdInformationCircle size={24} />,
   note: <CiStickyNote size={24} />,
   quote: <BiSolidQuoteRight size={22} />,
+  warning: <IoWarning size={24} />,
 };
 
-type Variants = 'idea' | 'info' | 'note' | 'quote' | 'exclamation';
+type Variants = 'idea' | 'info' | 'note' | 'quote' | 'exclamation' | 'warning';
 
 interface BlockquoteProps {
   children: ReactNode

@@ -1,5 +1,4 @@
 import { Heading } from '@/shared/ui';
-import { Image } from '@/shared/ui/client';
 
 import { BlockquoteMDX } from './Blockquote';
 import { CodeMDX } from './Code';
@@ -46,8 +45,7 @@ export const MDXComponentsData: MDXComponents = {
   ),
   hr: () => <hr className="mx-8 my-7 border-default-200/80" />,
   img: ({ alt, className, src, ...props }: ComponentPropsWithoutRef<'img'>) => (
-
-    <Image
+    <img
       alt={alt}
       className={cn(
         'rounded-md select-none pointer-events-none w-full object-cover mt-4 mb-10',
@@ -73,7 +71,7 @@ export const MDXComponentsData: MDXComponents = {
     </div>
   ),
   strong: ({ children, ...props }: ComponentPropsWithoutRef<'strong'>) => (
-    <strong className="text-default-800" {...props}>
+    <strong className="text-default-800 [&_*]:!font-bold" {...props}>
       {children}
     </strong>
   ),

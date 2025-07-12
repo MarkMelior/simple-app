@@ -4,7 +4,7 @@ import type { StackVariants } from '@/shared/constants';
 import type { IconNames } from '@/shared/icons/types';
 import { cn } from '@/shared/lib/common';
 import { formatDate } from '@/shared/lib/text';
-import { Flex, IconComponent, StackButtons } from '@/shared/ui';
+import { Blockquote, Flex, IconComponent, StackButtons } from '@/shared/ui';
 import { Skeleton } from '@/shared/ui/client';
 
 import type { FC, ReactNode } from 'react';
@@ -29,6 +29,20 @@ interface HeaderProps {
   updatedAt?: string
 }
 
+const isStale = (dateStr?: string): boolean => {
+  if (!dateStr) return false;
+  const date = new Date(dateStr);
+
+  if (isNaN(date.getTime())) return false;
+
+  const now = new Date();
+  const sixMonthsAgo = new Date();
+
+  sixMonthsAgo.setMonth(now.getMonth() - 12);
+
+  return date < sixMonthsAgo;
+};
+
 export const Header: FC<HeaderProps> = ({
   className,
   classNames,
@@ -51,6 +65,8 @@ export const Header: FC<HeaderProps> = ({
   const formattedUpdatedAt = formatDate(updatedAt);
   const formattedCreatedAtWithTime = formatDate(createdAt, { hasTime: true });
   const formattedUpdatedAtWithTime = formatDate(updatedAt, { hasTime: true });
+
+  const showWarning = isStale(createdAt) || isStale(updatedAt);
 
   return (
     <header
@@ -112,6 +128,14 @@ export const Header: FC<HeaderProps> = ({
         />
       </Flex>
       <StackButtons className={cn('mt-6', classNames?.tags)} tags={tags} />
+      {showWarning ? (
+        <Blockquote className="mt-6" variant="warning">
+          <strong>Осторожно:</strong>
+          Статья была обновлена более года назад -&nbsp;
+          {formattedCreatedAt || formattedUpdatedAt}
+          . Информация может быть не актуальной.
+        </Blockquote>
+      ) : null}
     </header>
   );
 };
