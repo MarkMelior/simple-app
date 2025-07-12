@@ -4,10 +4,11 @@ import { Fonts } from '@/shared/constants';
 import { Light, PageLoader } from '@/shared/ui';
 import { ScrollShadow } from '@/shared/ui/client';
 
+import { ClientLoader } from '@/features/ClientLoader';
 import { ScrollUp } from '@/features/ScrollUp';
 
 import { ModalRoot } from '@/core/modal-root';
-import { HeroUIProvider, NextThemesProvider } from '@/core/providers';
+import { AppInitProvider, HeroUIProvider, NextThemesProvider } from '@/core/providers';
 
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
@@ -30,23 +31,26 @@ const RootLayout = async ({ children }: Readonly<Props>) => (
     <body className={Fonts.default}>
       <NextThemesProvider>
         <HeroUIProvider>
-          <ScrollShadow>
-            <Suspense
-              fallback={(
-                <>
-                  <Light />
-                  <PageLoader fullScreen={true} />
-                </>
-              )}
-            >
-              {children}
-            </Suspense>
+          <AppInitProvider>
+            <ScrollShadow>
+              <Suspense
+                fallback={(
+                  <>
+                    <Light />
+                    <PageLoader fullScreen={true} />
+                  </>
+                )}
+              >
+                {children}
+              </Suspense>
 
-            <ScrollUp />
-            <div id="message-root" />
-            <ModalRoot />
+              <ScrollUp />
+              <div id="message-root" />
+              <ModalRoot />
+              <ClientLoader />
 
-          </ScrollShadow>
+            </ScrollShadow>
+          </AppInitProvider>
         </HeroUIProvider>
       </NextThemesProvider>
     </body>

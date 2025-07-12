@@ -28,40 +28,49 @@ export const CategoriesArticleModal: FC<CategoriesArticleModalProps> = ({ childr
       hideCloseButton={true}
       isOpen={isOpen}
       onClose={toggle}
+      placement="center"
+      scrollBehavior="inside"
       size="5xl"
     >
       <ModalContent>
         {(onClose) => (
           <>
             <ModalHeader className="flex flex-col gap-1">
-              <Flex align="items-center" gap="gap-2">
-                <Button
-                  color="primary"
-                  isDisabled={true}
-                  isIconOnly={true}
-                  startContent={<TbSettings size={26} strokeWidth={1} />}
-                  variant="light"
-                />
-                <Button
-                  isDisabled={true}
-                  startContent={<FaFilter />}
-                  variant="flat"
-                >
-                  Фильтры
-                </Button>
-                <Button
-                  isDisabled={true}
-                  startContent={<FaSort size={14} />}
-                  variant="flat"
-                >
-                  <Text>Сортировка:</Text>
-                  <Text color="text-default-500">
-                    {articlesSortName[field]}
-                  </Text>
-                </Button>
+              <Flex
+                align="items-center"
+                className="sm:flex-row"
+                gap="gap-3"
+                justify="justify-between"
+                vertical={true}
+              >
+                <Flex align="items-center" gap="gap-2">
+                  <Button
+                    color="primary"
+                    isDisabled={true}
+                    isIconOnly={true}
+                    startContent={<TbSettings size={26} strokeWidth={1} />}
+                    variant="light"
+                  />
+                  <Button
+                    isDisabled={true}
+                    startContent={<FaFilter />}
+                    variant="flat"
+                  >
+                    Фильтры
+                  </Button>
+                  <Button
+                    isDisabled={true}
+                    startContent={<FaSort size={14} />}
+                    variant="flat"
+                  >
+                    <Text>Сортировка:</Text>
+                    <Text color="text-default-500">
+                      {articlesSortName[field]}
+                    </Text>
+                  </Button>
+                </Flex>
                 <Button
                   as={Link}
-                  className="ml-auto"
                   color="primary"
                   endContent={<FaWindowRestore size={14} />}
                   href={AppRouteEnum.ARTICLES}

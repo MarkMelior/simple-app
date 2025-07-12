@@ -9,7 +9,7 @@ interface MouseState {
   y: number
 }
 
-export const useMouse = (): [
+export const useMouse = (disabled: boolean = false): [
   MouseState,
   MutableRefObject<HTMLDivElement | null>,
 ] => {
@@ -19,6 +19,8 @@ export const useMouse = (): [
   const frame = useRef<number | null>(null);
 
   useEffect(() => {
+    if (disabled) return;
+
     const element = ref.current;
 
     if (!element) return;
@@ -45,7 +47,7 @@ export const useMouse = (): [
         cancelAnimationFrame(frame.current);
       }
     };
-  }, []);
+  }, [disabled]);
 
   return [state, ref];
 };

@@ -1,6 +1,6 @@
 'use client';
 
-import { LuPointer } from 'react-icons/lu';
+import { RxHamburgerMenu } from 'react-icons/rx';
 
 import { Button } from '@/shared/ui/client';
 
@@ -11,13 +11,14 @@ export const AboutHoverButton = () => {
 
   return (
     <Button
-      className="hidden text-default-500 hover:text-default-600 lg:flex"
+      className="hidden lg:flex"
+      color="primary"
       isIconOnly={true}
       onMouseEnter={() => setIsHoveredButton(true)}
       onMouseLeave={() => setIsHoveredButton(false)}
       variant="light"
     >
-      <LuPointer size={20} strokeWidth={1.5} />
+      <RxHamburgerMenu size={20} />
     </Button>
   );
 };

@@ -7,50 +7,6 @@
   pointer-events: none;
 }
 
-.ellipse1,
-.ellipse2,
-.ellipse3 {
-  --light-color-ellipse-1: rgb(90 186 255 / 10%);
-  --light-blur-ellipse-1: blur(35vh);
-  --light-color-ellipse-2: rgb(255 90 209 / 10%);
-  --light-blur-ellipse-2: blur(45vh);
-  --light-color-ellipse-3: rgb(255 90 209 / 10%);
-  --light-blur-ellipse-3: blur(25vh);
-}
-
-.ellipse1 {
-  position: absolute;
-  top: 3vh;
-  left: -22vw;
-  width: 45vw;
-  height: 80vh;
-
-  background: var(--light-color-ellipse-1);
-  filter: var(--light-blur-ellipse-1);
-}
-
-.ellipse2 {
-  position: absolute;
-  top: 40vh;
-  right: 0;
-  width: 38vw;
-  height: 60vh;
-
-  background: var(--light-color-ellipse-2);
-  filter: var(--light-blur-ellipse-2);
-}
-
-.ellipse3 {
-  position: absolute;
-  top: -17vh;
-  left: 15vw;
-  width: 25vw;
-  height: 44vh;
-
-  background: var(--light-color-ellipse-3);
-  filter: var(--light-blur-ellipse-3);
-}
-
 .fadeIn {
   animation: fade-in 1s ease-in-out;
 }
@@ -64,4 +20,3 @@
     opacity: 1;
   }
 }
-

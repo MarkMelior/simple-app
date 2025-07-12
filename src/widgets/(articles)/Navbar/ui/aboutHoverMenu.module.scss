@@ -4,12 +4,12 @@
   display: flex;
   justify-content: end;
   position: fixed;
-  top: 48px;
+  top: 52px;
   right: 32px;
   left: 0;
   z-index: theme('zIndex.header');
   margin: 0 auto;
-  padding-top: 15px;
+  padding-top: 10px;
 
   opacity: 0;
   pointer-events: none;

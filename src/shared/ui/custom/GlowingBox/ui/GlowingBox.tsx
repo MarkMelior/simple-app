@@ -1,6 +1,7 @@
 'use client';
 
 import { cn } from '@/shared/lib/common';
+import { usePerformance } from '@/shared/lib/performance';
 import { useMouse } from '@/shared/lib/react';
 import type { HeroBackgroundColor, TwBackgroundColor, TwRounded } from '@/shared/types';
 
@@ -37,11 +38,12 @@ export const GlowingBox: FC<GlowingBoxProps> = ({
   size = 100,
   variant = 'purple-gradient',
 }) => {
-  const [mousePosition, ref] = useMouse();
+  const { isDisabledAnimation } = usePerformance();
+  const [mousePosition, ref] = useMouse(isDisabledAnimation);
 
   const style = {
-    '--mouse-x': `${mousePosition.x}px`,
-    '--mouse-y': `${mousePosition.y}px`,
+    '--mouse-x': isDisabledAnimation ? '0px' : `${mousePosition.x}px`,
+    '--mouse-y': isDisabledAnimation ? '0px' : `${mousePosition.y}px`,
     '--spotlight-bg-size': `${size * 15}px`,
     '--spotlight-bg-strength': 0,
     '--spotlight-bg-strength-hover': 0.04,
@@ -60,7 +62,7 @@ export const GlowingBox: FC<GlowingBoxProps> = ({
         borderColor,
         classNames?.foreground,
       )}
-      ref={ref}
+      ref={isDisabledAnimation ? undefined : ref}
       style={style}
     >
       <div
