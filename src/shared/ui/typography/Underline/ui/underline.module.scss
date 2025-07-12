@@ -28,9 +28,4 @@
       border-color: theme('colors.primary-500/0.8');
     }
   }
-
-  &:hover::before {
-    top: 0.5em;
-    left: -0.5rem;
-  }
 }

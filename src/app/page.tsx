@@ -31,9 +31,8 @@ export default async function Home({ searchParams }: HomeProps) {
   const search = await searchParams;
 
   const components: MDXComponents = {
-    StackButtons: dynamic(() =>
-      import('@/shared/ui').then((mod) => mod.StackButtons),
-    ),
+    Images: dynamic(() => import('./(page)/Images').then((mod) => mod.Images)),
+    StackButtons: dynamic(() => import('@/shared/ui').then((mod) => mod.StackButtons)),
   };
 
   return (
@@ -56,7 +55,7 @@ export default async function Home({ searchParams }: HomeProps) {
           vertical={true}
         >
           <Flex className="max-w-lg" gap="gap-4" vertical={true}>
-            <Text font="tiny5" size="text-4xl">
+            <Text className="text-[2.5rem] leading-[3rem] sm:text-4xl" font="tiny5">
               <Emoji className="mr-2" emoji="👋" />
               Привет, меня&nbsp;
               <Underline>зовут Марк (:</Underline>

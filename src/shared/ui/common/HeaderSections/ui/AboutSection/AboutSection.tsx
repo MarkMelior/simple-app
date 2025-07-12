@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FaGithub } from 'react-icons/fa';
+import { FaArtstation, FaGithub } from 'react-icons/fa';
 
 import { LinksMediaEnum } from '@/shared/constants';
 import { cn } from '@/shared/lib/common';
@@ -19,6 +19,10 @@ const aboutSocials = [
   {
     href: LinksMediaEnum.GitHubCurrentRepo,
     icon: <FaGithub size={18} />,
+  },
+  {
+    href: LinksMediaEnum.ArtStation,
+    icon: <FaArtstation size={18} />,
   },
 ];
 

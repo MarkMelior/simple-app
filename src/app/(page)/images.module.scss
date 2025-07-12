@@ -1,0 +1,25 @@
+.wrapper {
+  display: grid;
+  gap: 8px;
+  margin: 32px 0;
+  grid-template-columns: 1fr 1fr;
+
+  @media (max-width: theme('screens.sm')) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.image {
+  width: 100%;
+  height: auto;
+
+  border-radius: 12px;
+  border: 1px solid theme('colors.default-200');
+
+  transition: all 0.2s ease-in-out;
+  user-select: none;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+}

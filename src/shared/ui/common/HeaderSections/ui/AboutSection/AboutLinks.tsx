@@ -1,10 +1,8 @@
 import Link from 'next/link';
 import { BiLogoTypescript } from 'react-icons/bi';
 import { LuFlame, LuGraduationCap } from 'react-icons/lu';
-import { MdArrowOutward } from 'react-icons/md';
 import { TbCube3dSphere } from 'react-icons/tb';
 
-import { LinksMediaEnum } from '@/shared/constants';
 import { Flex, Text } from '@/shared/ui';
 import { Button } from '@/shared/ui/client';
 
@@ -26,17 +24,16 @@ const aboutLinks = [
     title: 'Пройденные курсы',
   },
   {
+    description: 'Мои старые работы',
+    href: '/#3d-графика',
+    icon: <TbCube3dSphere className="text-primary" size={18} />,
+    title: '3D Графика',
+  },
+  {
     description: 'Мои достижения',
     href: '/#мои-достижения',
     icon: <LuFlame className="text-primary" size={16} />,
     title: 'Достижения',
-  },
-  {
-    description: 'Мои старые работы',
-    external: true,
-    href: LinksMediaEnum.ArtStation,
-    icon: <TbCube3dSphere className="text-primary" size={18} />,
-    title: '3D Графика',
   },
 ];
 
@@ -45,7 +42,7 @@ interface AboutLinksProps {
 }
 
 export const AboutLinks: FC<AboutLinksProps> = ({ onClick }) => (
-  aboutLinks.map(({ description, external, href, icon, title }) => (
+  aboutLinks.map(({ description, href, icon, title }) => (
     <Button
       as={Link}
       className={styles.link}
@@ -55,15 +52,8 @@ export const AboutLinks: FC<AboutLinksProps> = ({ onClick }) => (
       radius="sm"
       size="lg"
       startContent={icon}
-      target={external ? '_blank' : '_self'}
       variant="light"
     >
-      {external ? (
-        <MdArrowOutward
-          className={styles.linkExternal}
-          size={12}
-        />
-      ) : null}
       <Flex align="items-start" vertical={true}>
         <Text
           className={styles.linkTitle}

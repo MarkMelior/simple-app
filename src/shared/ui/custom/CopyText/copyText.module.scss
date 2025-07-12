@@ -6,19 +6,20 @@
   padding: 2px 8px;
   padding-right: 32px;
 
-  background: transparent;
+  background: theme('colors.default-400/0.15');
+
   border-radius: 8px;
 
   transition: 0.15s ease all;
-  border-color: transparent;
+  border-color: theme('colors.default-600/0.4');
   border-style: dashed;
   border-width: 1px;
   cursor: pointer;
   white-space: nowrap;
 
   &[data-copied='false']:hover {
-    background: theme('colors.default-400/0.2');
-    border-color: theme('colors.default-600/0.5');
+    background: theme('colors.default-400/0.3');
+    border-color: theme('colors.default-500');
   }
 }
 

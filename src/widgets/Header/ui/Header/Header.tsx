@@ -39,11 +39,9 @@ export const Header = () => (
       title={(
         <>
           <Text className="mr-1 decoration-transparent" color="text-secondary">
-            [
-            {process.env.NEXT_PUBLIC_APP_VERSION}
-            ]
+            {`[v${process.env.NEXT_PUBLIC_APP_VERSION}]`}
           </Text>
-          Сайт в разработке, пока так 👀
+          Сайт в разработке - уже почти готово 👀
         </>
       )}
     >

@@ -12,6 +12,7 @@ import monitor from './monitor.json';
 import rocket from './rocket.json';
 import sber from './sber.json';
 import smile from './smile.webp';
+import star from './star.json';
 import stop from './stop.webp';
 
 export const emojiData = {
@@ -21,6 +22,7 @@ export const emojiData = {
   '❇️': sber,
   '❤️': heart,
   '❤️‍🔥': heartFire,
+  '⭐️': star,
   '👀': eye,
   '👋': hi,
   '💎': crystal,

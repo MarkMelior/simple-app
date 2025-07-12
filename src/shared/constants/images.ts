@@ -22,8 +22,14 @@ const PublicImagesData = {
     NetherStar: 'NetherStar.webp',
   },
   misc: {
+    AllWorks: 'all-works.png',
     Banner: 'banner.webp',
     Heart: 'heart.png',
+    Mech: 'mech.jpg',
+    Organic: 'organic.jpg',
+    Riffle: 'riffle.jpg',
+    Scope: 'scope.jpg',
+    Videocard: 'videocard.jpg',
   },
   sticker: {
     catCursor: 'cat-cursor.webm',
