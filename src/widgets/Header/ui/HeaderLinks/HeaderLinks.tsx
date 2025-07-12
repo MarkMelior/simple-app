@@ -36,7 +36,7 @@ export const HeaderLinks: FC<HeaderLinksProps> = ({ color = 'primary' }) => {
   return (
     <div className={styles.wrapper}>
       <Card className={styles.header}>
-        {typedEntries(headerSections).map(([key, { label }]) => {
+        {typedEntries(headerSections).map(([key, { disabled, label }]) => {
           const isOpened = isVisible(key);
 
           return (
@@ -44,6 +44,7 @@ export const HeaderLinks: FC<HeaderLinksProps> = ({ color = 'primary' }) => {
               className={cn(styles.link, { [styles.opened]: isOpened })}
               data-menu={key}
               endContent={<DownIcon className="opacity-50" isActive={isOpened} />}
+              isDisabled={disabled}
               key={key}
               onMouseEnter={() => setActiveSection(key)}
               onMouseLeave={handleClose}
