@@ -1,8 +1,6 @@
 import { PublicImages } from '@/shared/constants';
 import { cn } from '@/shared/lib/common';
 
-import { BluredLight } from './BluredLight';
-
 import styles from './light.module.scss';
 
 import type { FC } from 'react';
@@ -41,6 +39,6 @@ export const Light: FC<LightProps> = () => (
         </picture>
       </div>
     </div>
-    <BluredLight />
+    {/* <BluredLight /> */}
   </div>
 );

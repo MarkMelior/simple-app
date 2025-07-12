@@ -6,12 +6,18 @@ import { Button } from '@/shared/ui/client';
 
 import { useArticleNavbar } from '../store';
 
-export const AboutHoverButton = () => {
+import type { FC } from 'react';
+
+interface AboutHoverButtonProps {
+  className?: string
+}
+
+export const AboutHoverButton: FC<AboutHoverButtonProps> = ({ className }) => {
   const { setIsHoveredButton } = useArticleNavbar();
 
   return (
     <Button
-      className="hidden lg:flex"
+      className={className}
       color="primary"
       isIconOnly={true}
       onMouseEnter={() => setIsHoveredButton(true)}

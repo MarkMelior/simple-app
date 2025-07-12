@@ -77,9 +77,9 @@ const EmojiComponent: FC<EmojiProps> = ({ className, emoji, size = '1.1em' }) =>
 };
 
 export const Emoji: FC<EmojiProps> = memo((props) => {
-  const { isDisabledAnimation } = usePerformance();
+  const { isDisabledAnimEmoji } = usePerformance();
 
-  if (isDisabledAnimation) {
+  if (isDisabledAnimEmoji) {
     return props.emoji;
   }
 
